@@ -106,6 +106,41 @@
           </ul>
         </nav>
 
+        <!-- 底部功能按钮区域 -->
+        <div class="aside-footer-area p-4 border-t bg-gray-50">
+          <div class="flex flex-col gap-2">
+            <!-- 语言切换按钮 -->
+            <button
+              @click="toggleLanguage"
+              :class="[
+                'flex items-center rounded-lg text-left w-full transition-all duration-200 ease-in-out',
+                'text-base font-medium',
+                isCollapsed ? 'justify-center p-3' : 'px-4 py-3',
+                'text-gray-700 hover:bg-gray-100'
+              ]"
+              :title="isCollapsed ? $t('home.common.selectLanguage') : $t('home.common.selectLanguage')"
+            >
+              <Globe class="w-5 h-5 flex-shrink-0" :class="[isCollapsed ? '' : 'mr-3', 'text-gray-500']" />
+              <span v-if="!isCollapsed">{{ $t('home.common.selectLanguage') }}</span>
+            </button>
+
+            <!-- 主题切换按钮 -->
+            <button
+              @click="toggleTheme"
+              :class="[
+                'flex items-center rounded-lg text-left w-full transition-all duration-200 ease-in-out',
+                'text-base font-medium',
+                isCollapsed ? 'justify-center p-3' : 'px-4 py-3',
+                'text-gray-700 hover:bg-gray-100'
+              ]"
+              :title="isCollapsed ? $t('center.menu.theme') : $t('center.menu.theme')"
+            >
+              <component :is="currentThemeIcon" class="w-5 h-5 flex-shrink-0" :class="[isCollapsed ? '' : 'mr-3', 'text-gray-500']" />
+              <span v-if="!isCollapsed">{{ $t('center.menu.theme') }}</span>
+            </button>
+          </div>
+        </div>
+
         <!-- 底部用户信息区域 -->
         <div class="aside-user-area p-4 border-t mt-auto bg-gray-50">
           <div class="flex items-center" :class="isCollapsed ? 'justify-center' : 'space-x-3'">
@@ -138,7 +173,10 @@ import {
   Home,
   FileText,
   Languages,
-  Wrench
+  Wrench,
+  Sun,
+  Moon,
+  Globe
 } from 'lucide-vue-next'
 
 // Props定义
@@ -160,10 +198,11 @@ const emit = defineEmits<{
   'open-sidebar': []
   'close-sidebar': []
   'toggle-collapse': [collapsed: boolean]
+  'switch-language': [locale: string]
 }>()
 
 // 初始化i18n
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // 类型定义
 interface MenuItem {
@@ -175,6 +214,12 @@ interface MenuItem {
 // 状态
 const isMobile = ref(false) // 初始为false，在客户端挂载时设置
 const isCollapsed = ref(false) // 侧边栏收缩状态
+const currentTheme = ref<'light' | 'dark'>('light')
+
+// 当前主题图标
+const currentThemeIcon = computed(() => {
+  return currentTheme.value === 'light' ? Moon : Sun
+})
 
 // 菜单项 - 添加仪表盘作为第一个选项
 const menuItems: MenuItem[] = [
@@ -204,6 +249,23 @@ const toggleCollapse = () => {
   emit('toggle-collapse', isCollapsed.value)
 }
 
+// 切换语言
+const toggleLanguage = () => {
+  // 这里可以添加语言切换逻辑，或者触发事件让父组件处理
+  const locales = ['en-US', 'zh-CN', 'zh-TW', 'JP', 'KO']
+  const currentIndex = locales.indexOf(locale.value)
+  const nextIndex = (currentIndex + 1) % locales.length
+  emit('switch-language', locales[nextIndex])
+}
+
+// 切换主题
+const toggleTheme = () => {
+  currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light'
+  // 可以在这里添加设置主题的逻辑，例如更新CSS类
+  document.documentElement.classList.toggle('dark', currentTheme.value === 'dark')
+  localStorage.setItem('theme', currentTheme.value)
+}
+
 // 监听窗口大小变化
 onMounted(() => {
   // 客户端挂载后再设置窗口大小
@@ -214,6 +276,15 @@ onMounted(() => {
     const savedCollapseState = localStorage.getItem('sidebarCollapsed')
     if (savedCollapseState !== null) {
       isCollapsed.value = savedCollapseState === 'true'
+    }
+    
+    // 从localStorage恢复主题设置
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+      currentTheme.value = savedTheme
+      if (currentTheme.value === 'dark') {
+        document.documentElement.classList.add('dark')
+      }
     }
     
     window.addEventListener('resize', handleResize)
@@ -257,6 +328,11 @@ aside {
 .aside-menu-area::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 20px;
+}
+
+/* 底部功能区域样式 */
+.aside-footer-area {
+  transition: all 0.3s ease;
 }
 
 /* 底部用户区域样式 */

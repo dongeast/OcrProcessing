@@ -530,7 +530,8 @@ export default {
         settings: '設定',
         ocrAnalysis: 'OCR分析',
         translation: '翻訳',
-        tools: 'ツール'
+        tools: 'ツール',
+        theme: 'テーマ切替'
       },
       dashboard: {
         title: 'ダッシュボード',

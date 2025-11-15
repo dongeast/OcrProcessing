@@ -1,5 +1,16 @@
 export default {
     center: {
+        menu: {
+            dashboard: '仪表盘',
+            profile: '个人资料',
+            account: '账户',
+            billing: '账单',
+            settings: '设置',
+            ocrAnalysis: 'OCR分析',
+            translation: '智能翻译',
+            tools: '实用工具',
+            theme: '切换主题'
+        },
         dashboard: {
             title: '仪表盘',
             subtitle: '管理您的OCR文档并监控处理活动',
@@ -70,16 +81,6 @@ export default {
             sortNameAsc: '名称（A-Z）',
             sortNameDesc: '名称（Z-A）'
         },
-        menu: {
-            dashboard: '仪表盘',
-            profile: '个人资料',
-            account: '账户',
-            billing: '账单',
-            settings: '设置',
-            ocrAnalysis: 'OCR分析',
-            translation: '智能翻译',
-            tools: '实用工具'
-        }
     },
     home: {
         title: 'NuxtPro',
@@ -708,7 +709,7 @@ export default {
           description: '将图像转换为PDF文档',
           input: '输入',
           dragDrop: '拖拽图像到此处',
-          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
           browseFiles: '浏览图像',
           output: '输出设置',
           fileName: '文件名',

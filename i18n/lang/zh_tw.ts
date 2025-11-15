@@ -132,13 +132,6 @@ export default {
         },
         common:{
             selectLanguage: '選擇語言',
-            languages: {
-                chinese: '简体中文',
-                traditionalChinese: '繁體中文',
-                english: 'English',
-                japanese: '日本語',
-                korean: '한국어'
-            }
         },
         bottomPopup:{
             title: '限時優惠：在NuxtPro服務上節省高達60%！🎁',
@@ -537,7 +530,8 @@ export default {
             settings: '設定',
             ocrAnalysis: 'OCR分析',
             translation: '翻譯',
-            tools: '工具'
+            tools: '工具',
+            theme: '切換主題'
         },
         dashboard: {
             title: '儀表板',

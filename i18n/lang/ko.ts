@@ -132,13 +132,6 @@ export default {
         },
         common:{
             selectLanguage: '언어 선택',
-            languages: {
-                chinese: '简体中文',
-                traditionalChinese: '繁體中文',
-                english: 'English',
-                japanese: '日本語',
-                korean: '한국어'
-            }
         },
         bottomPopup:{
             title: '한정 특가: NuxtPro 서비스에서 최대 60% 할인! 🎁',
@@ -529,86 +522,87 @@ export default {
       selectLoginMethodDescription: 'NuxtPro의 출해 여정을 시작하세요. 빠르게, 더 빠르게.',
     },
     center: {
-      menu: {
-        dashboard: '대시보드',
-        profile: '프로필',
-        account: '계정',
-        billing: '청구',
-        settings: '설정',
-        ocrAnalysis: 'OCR 분석',
-        translation: '번역',
-        tools: '도구'
-      },
-      dashboard: {
-        title: '대시보드',
-        subtitle: 'OCR 문서를 관리하고 처리 활동을 모니터링하세요',
-        welcome: '다시 오신 것을 환영합니다',
-        quickActions: {
-          addNew: '새로 추가',
-          uploadDocument: '문서 업로드'
+        menu: {
+            dashboard: '대시보드',
+            profile: '프로필',
+            account: '계정',
+            billing: '결제',
+            settings: '설정',
+            ocrAnalysis: 'OCR 분석',
+            translation: '번역',
+            tools: '도구',
+            theme: '테마 전환'
         },
-        uploadButton: '문서 업로드',
-        uploadCard: {
-          title: '새 문서 업로드',
-          description: 'OCR 처리를 위해 파일 업로드'
-        },
-        resources: {
-          usage: '리소스 사용량',
-          files: '파일',
-          storage: '저장소',
-          apiCalls: 'API 호출'
-        },
-        viewDetails: '세부 정보 보기',
-        table: {
-          searchPlaceholder: '문서 검색...',
-          columns: {
-            name: '이름',
-            type: '유형',
-            size: '크기',
-            status: '상태',
-            date: '날짜',
-            actions: '작업'
+        dashboard: {
+            title: '대시보드',
+            subtitle: 'OCR 문서를 관리하고 처리 활동을 모니터링하세요',
+            welcome: '다시 오신 것을 환영합니다',
+            quickActions: {
+              addNew: '새로 추가',
+              uploadDocument: '문서 업로드'
+            },
+            uploadButton: '문서 업로드',
+            uploadCard: {
+              title: '새 문서 업로드',
+              description: 'OCR 처리를 위해 파일 업로드'
+            },
+            resources: {
+              usage: '리소스 사용량',
+              files: '파일',
+              storage: '저장소',
+              apiCalls: 'API 호출'
+            },
+            viewDetails: '세부 정보 보기',
+            table: {
+              searchPlaceholder: '문서 검색...',
+              columns: {
+                name: '이름',
+                type: '유형',
+                size: '크기',
+                status: '상태',
+                date: '날짜',
+                actions: '작업'
+              },
+              actions: {
+                view: '문서 보기',
+                download: '문서 다운로드',
+                delete: '문서 삭제'
+              },
+              empty: '문서를 찾을 수 없습니다',
+              showing: '{total}개 중 {count}개 표시'
+            },
+            recentActivity: '최근 활동',
+            recentDocuments: '최근 문서',
+            viewAll: '모두 보기',
+            activities: {
+              uploaded: '파일이 업로드됨',
+              processed: '문서가 성공적으로 처리됨',
+              deleted: '파일이 삭제됨',
+              failed: '처리 실패'
+            },
+            cards: {
+              documents: {
+                label: '문서',
+                subText: '총 문서 수'
+              },
+              processed: {
+                label: '처리됨',
+                subText: '성공적으로 처리됨'
+              },
+              accuracy: {
+                label: '정확도',
+                subText: '성공률'
+              },
+              processingTime: {
+                label: '처리 시간',
+                subText: '문서당 평균 시간'
+              }
+            },
+            sortNewest: '최신순',
+            sortOldest: '오래된순',
+            sortNameAsc: '이름 (A-Z)',
+            sortNameDesc: '이름 (Z-A)'
           },
-          actions: {
-            view: '문서 보기',
-            download: '문서 다운로드',
-            delete: '문서 삭제'
-          },
-          empty: '문서를 찾을 수 없습니다',
-          showing: '{total}개 중 {count}개 표시'
-        },
-        recentActivity: '최근 활동',
-        recentDocuments: '최근 문서',
-        viewAll: '모두 보기',
-        activities: {
-          uploaded: '파일이 업로드됨',
-          processed: '문서가 성공적으로 처리됨',
-          deleted: '파일이 삭제됨',
-          failed: '처리 실패'
-        },
-        cards: {
-          documents: {
-            label: '문서',
-            subText: '총 문서 수'
-          },
-          processed: {
-            label: '처리됨',
-            subText: '성공적으로 처리됨'
-          },
-          accuracy: {
-            label: '정확도',
-            subText: '성공률'
-          },
-          processingTime: {
-            label: '처리 시간',
-            subText: '문서당 평균 시간'
-          }
-        },
-        sortNewest: '최신순',
-        sortOldest: '오래된순',
-        sortNameAsc: '이름 (A-Z)',
-        sortNameDesc: '이름 (Z-A)'
-      },
       tabs: {
         profile: {
           title: '프로필',

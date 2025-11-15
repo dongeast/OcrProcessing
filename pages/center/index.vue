@@ -9,6 +9,7 @@
       @close-sidebar="sidebarOpen = false"
       @switch-tab="switchTab"
       @toggle-collapse="handleToggleCollapse"
+      @switch-language="switchLanguage"
     />
 
     <!-- 移动端汉堡菜单按钮 -->
