@@ -192,9 +192,11 @@ const activeMenuItem = ref('')
 
 // 定义语言选项
 const localeOptions = [
-  { value: 'zh-CN', label: '简体中文' },
   { value: 'en-US', label: 'English' },
-  { value: 'JP', label: '日本語' }
+  { value: 'zh-CN', label: '简体中文' },
+  { value: 'zh-TW', label: '繁體中文' },
+  { value: 'JP', label: '日本語' },
+  { value: 'KO', label: '한국어' }
 ]
 
 // 切换语言方法
