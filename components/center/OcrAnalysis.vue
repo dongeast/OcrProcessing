@@ -41,13 +41,15 @@
         <!-- Step 1: Upload File -->
         <div class="flex flex-col items-center w-full md:w-auto z-10 mb-4 md:mb-0">
           <div 
-            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform cursor-pointer"
             :class="{
-              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 1,
-              'bg-muted text-muted-foreground': currentStep < 1
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 1 && selectedStep !== 1,
+              'bg-muted text-muted-foreground': currentStep < 1,
+              'border-2 border-black bg-white text-black': selectedStep === 1
             }"
+            @click="selectStep(1)"
           >
-            <span v-if="currentStep > 1">✓</span>
+            <span v-if="currentStep > 1 && selectedStep !== 1">✓</span>
             <span v-else>1</span>
           </div>
           <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.upload') }}</span>
@@ -56,13 +58,15 @@
         <!-- Step 2: OCR Analysis -->
         <div class="flex flex-col items-center w-full md:w-auto z-10 mb-4 md:mb-0">
           <div 
-            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform cursor-pointer"
             :class="{
-              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 2,
-              'bg-muted text-muted-foreground': currentStep < 2
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 2 && selectedStep !== 2,
+              'bg-muted text-muted-foreground': currentStep < 2,
+              'border-2 border-black bg-white text-black': selectedStep === 2
             }"
+            @click="selectStep(2)"
           >
-            <span v-if="currentStep > 2">✓</span>
+            <span v-if="currentStep > 2 && selectedStep !== 2">✓</span>
             <span v-else>2</span>
           </div>
           <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.analysis') }}</span>
@@ -71,13 +75,15 @@
         <!-- Step 3: MD Editing -->
         <div class="flex flex-col items-center w-full md:w-auto z-10 mb-4 md:mb-0">
           <div 
-            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform cursor-pointer"
             :class="{
-              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 3,
-              'bg-muted text-muted-foreground': currentStep < 3
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 3 && selectedStep !== 3,
+              'bg-muted text-muted-foreground': currentStep < 3,
+              'border-2 border-black bg-white text-black': selectedStep === 3
             }"
+            @click="selectStep(3)"
           >
-            <span v-if="currentStep > 3">✓</span>
+            <span v-if="currentStep > 3 && selectedStep !== 3">✓</span>
             <span v-else>3</span>
           </div>
           <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.edit') }}</span>
@@ -86,13 +92,15 @@
         <!-- Step 4: Preview & Export -->
         <div class="flex flex-col items-center w-full md:w-auto z-10">
           <div 
-            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform cursor-pointer"
             :class="{
-              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 4,
-              'bg-muted text-muted-foreground': currentStep < 4
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 4 && selectedStep !== 4,
+              'bg-muted text-muted-foreground': currentStep < 4,
+              'border-2 border-black bg-white text-black': selectedStep === 4
             }"
+            @click="selectStep(4)"
           >
-            <span v-if="currentStep > 4">✓</span>
+            <span v-if="currentStep > 4 && selectedStep !== 4">✓</span>
             <span v-else>4</span>
           </div>
           <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.export') }}</span>
@@ -285,6 +293,22 @@ const { t, locale } = useI18n()
 
 // 当前步骤状态 (1-4)
 const currentStep = ref(2) // 默认设置为第2步以便查看效果
+
+// 选中步骤状态 (1-4)
+const selectedStep = ref(2) // 默认选中当前步骤
+
+// 选中步骤的方法
+const selectStep = (step: number) => {
+  // 只允许选中已完成或当前步骤
+  if (step <= currentStep.value) {
+    selectedStep.value = selectedStep.value === step ? 0 : step
+  }
+}
+
+// 监听当前步骤变化，自动更新选中节点
+watch(currentStep, (newStep) => {
+  selectedStep.value = newStep
+})
 
 // 计算进度条宽度
 const progressBarWidth = computed(() => {
