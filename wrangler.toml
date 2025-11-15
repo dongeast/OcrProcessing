@@ -1,0 +1,42 @@
+name = "ocr-processing-d1"
+
+# D1数据库配置
+# 生产环境配置示例
+# 需要替换为您的实际Cloudflare账户ID和数据库ID
+d1_databases = [
+  # 本地开发环境
+  { binding = "DB", database_name = "test-db", database_id = "test-db-id", preview_database_id = "test-db-id" },
+  # 生产环境 (在部署时使用)
+  # { binding = "DB", database_name = "your-production-db", database_id = "your-production-db-id" }
+]
+
+# 本地开发服务器配置
+[dev]
+port = 8787
+local_protocol = "http"
+# 启用本地模拟Cloudflare Pages环境
+persist = true
+
+# 环境变量配置 - 本地开发
+[vars]
+NODE_ENV = "development"
+DATABASE_TYPE = "d1"
+
+# 生产环境变量 (部署时配置)
+# 这些将在Cloudflare Pages控制台中设置
+# 1. DATABASE_TYPE = d1
+# 2. DB绑定指向您的D1数据库
+
+# 部署配置示例
+# [env.production]
+# workers_dev = false
+# routes = ["your-domain.com/*"]
+# d1_databases = [
+#   { binding = "DB", database_name = "your-production-db", database_id = "your-production-db-id" }
+# ]
+
+# 部署前执行的命令示例
+# [build]
+# command = "npm run build"
+# upload.format = "service-worker"
+# directory = ".output/server"

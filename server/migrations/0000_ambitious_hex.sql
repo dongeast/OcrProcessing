@@ -43,7 +43,9 @@ CREATE TABLE `user` (
 
 CREATE TABLE `verification` (
 	`id` varchar(36) NOT NULL,
+	`email` varchar(255) NOT NULL DEFAULT '',
 	`identifier` text NOT NULL,
+	`token` text NOT NULL DEFAULT '',
 	`value` text NOT NULL,
 	`expires_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`created_at` timestamp DEFAULT CURRENT_TIMESTAMP,

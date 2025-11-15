@@ -86,7 +86,7 @@
           <!-- 移动语言切换器到这里 -->
           <div class="hidden sm:block border-l pl-4">
             <Select v-model="currentLocale" :options="localeOptions" @update:model-value="switchLanguage">
-              <SelectTrigger class="w-[120px]">
+              <SelectTrigger class="w-[140px]">
                 <SelectValue :placeholder="$t('common.selectLanguage')" />
               </SelectTrigger>
               <SelectContent>
