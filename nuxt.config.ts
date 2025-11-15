@@ -64,9 +64,14 @@ export default defineNuxtConfig({
   },
   i18n: {
     strategy: 'prefix_except_default',
-    locales: ['en-US', 'zh-CN','JP'],
+    locales: ['en-US', 'zh-CN', 'zh-TW', 'JP', 'KO'],
     defaultLocale: 'en-US',
     vueI18n: '@@/i18n/config.ts',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
   },
   llms: {
     domain: 'https://nuxtpro.com',

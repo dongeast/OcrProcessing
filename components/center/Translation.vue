@@ -69,10 +69,10 @@
             v-model="sourceLanguage" 
             class="rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <option value="en">{{ t('center.translation.languages.en') }}</option>
-            <option value="zh">{{ t('center.translation.languages.zh') }}</option>
-            <option value="ja">{{ t('center.translation.languages.ja') }}</option>
-            <option value="ko">{{ t('center.translation.languages.ko') }}</option>
+            <option value="en-US">{{ t('center.translation.languages.en') }}</option>
+            <option value="zh-CN">{{ t('center.translation.languages.zh') }}</option>
+            <option value="JP">{{ t('center.translation.languages.ja') }}</option>
+            <option value="KO">{{ t('center.translation.languages.ko') }}</option>
           </select>
         </div>
         <textarea
@@ -90,10 +90,10 @@
             v-model="targetLanguage" 
             class="rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <option value="en">{{ t('center.translation.languages.en') }}</option>
-            <option value="zh">{{ t('center.translation.languages.zh') }}</option>
-            <option value="ja">{{ t('center.translation.languages.ja') }}</option>
-            <option value="ko">{{ t('center.translation.languages.ko') }}</option>
+            <option value="en-US">{{ t('center.translation.languages.en') }}</option>
+            <option value="zh-CN">{{ t('center.translation.languages.zh') }}</option>
+            <option value="JP">{{ t('center.translation.languages.ja') }}</option>
+            <option value="KO">{{ t('center.translation.languages.ko') }}</option>
           </select>
         </div>
         <div class="w-full h-64 rounded-md border border-input bg-background p-3 text-sm overflow-y-auto">
@@ -179,13 +179,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 
 // Props定义
 interface Props {
   user: any
-  currentLocale: string
+  currentLocale?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -198,45 +199,89 @@ const emit = defineEmits<{
   'switch-language': [locale: string]
 }>()
 
-// 获取i18n实例
-const { t, locale } = useI18n()
+// 获取i18n实例、路由
+const { t, locale: i18nLocale, setLocale } = useI18n()
+const route = useRoute()
 
-// 监听语言变化
-watch(() => props.currentLocale, (newLocale) => {
-  // @ts-ignore 忽略类型检查，因为 locale.value 需要特定类型但我们在运行时处理
-  locale.value = newLocale
-})
+// 语言选项定义
+const languageOptions = [
+  { value: 'en-US', label: 'en' },
+  { value: 'zh-CN', label: 'zh' },
+  { value: 'zh-TW', label: 'zh' },
+  { value: 'JP', label: 'ja' },
+  { value: 'KO', label: 'ko' }
+]
 
-// 监听语言变化并更新状态文本
-watch(() => props.currentLocale, () => {
-  recentItems.value = recentItems.value.map(item => {
-    return {
-      ...item,
-      source: getSourceLanguageText(item.source),
-      target: getTargetLanguageText(item.target)
+// 状态
+const sourceLanguage = ref('en-US')
+const targetLanguage = ref('zh-CN')
+const sourceText = ref('')
+const translatedText = ref('')
+
+// 初始化组件，确保语言同步
+onMounted(async () => {
+  // 优先从路由获取语言参数
+  const routeLocale = route.params.locale as string || route.query.locale as string
+  const effectiveLocale = routeLocale || props.currentLocale
+  
+  // 确保使用有效的语言代码
+  if (effectiveLocale && ['en-US', 'zh-CN', 'zh-TW', 'JP', 'KO'].includes(effectiveLocale)) {
+    try {
+      await setLocale(effectiveLocale)
+      // 确保组件内部语言状态同步
+      updateLanguageDisplay(effectiveLocale)
+    } catch (error) {
+      console.error('Failed to set locale:', error)
     }
-  })
+  }
 })
 
-// 语言文本映射函数
-const getSourceLanguageText = (langCode: string) => {
-  switch (langCode) {
-    case 'English': return t('center.translation.languages.en')
-    case 'Chinese': return t('center.translation.languages.zh')
-    case 'Japanese': return t('center.translation.languages.ja')
-    case 'Korean': return t('center.translation.languages.ko')
-    default: return langCode
+// 监听全局语言变化
+watch(() => props.currentLocale, async (newLocale) => {
+  if (newLocale && ['en-US', 'zh-CN', 'zh-TW', 'JP', 'KO'].includes(newLocale)) {
+    try {
+      await setLocale(newLocale)
+      updateLanguageDisplay(newLocale)
+    } catch (error) {
+      console.error('Failed to update locale:', error)
+    }
   }
+}, { immediate: true })
+
+// 更新语言显示
+const updateLanguageDisplay = (currentLang: string) => {
+  // 验证语言代码
+  if (!languageOptions.some(option => option.value === currentLang)) {
+    console.warn(`不支持的语言: ${currentLang}`);
+    return;
+  }
+  
+  // 确保至少有一个语言选项与当前语言匹配
+  if (![sourceLanguage.value, targetLanguage.value].includes(currentLang)) {
+    // 如果源语言不是默认语言，设置源语言为默认；否则设置目标语言为当前语言
+    if (sourceLanguage.value !== 'en-US') {
+      targetLanguage.value = currentLang
+    } else {
+      sourceLanguage.value = currentLang
+    }
+  }
+  
+  // 如果有源文本，重新翻译
+  if (sourceText.value.trim()) {
+    handleTranslate()
+  }
+  
+  console.log(`语言已更新为: ${currentLang}`);
 }
 
-const getTargetLanguageText = (langCode: string) => {
-  switch (langCode) {
-    case 'English': return t('center.translation.languages.en')
-    case 'Chinese': return t('center.translation.languages.zh')
-    case 'Japanese': return t('center.translation.languages.ja')
-    case 'Korean': return t('center.translation.languages.ko')
-    default: return langCode
-  }
+// 语言文本映射函数
+const getLanguageText = (langCode: string) => {
+  // 获取语言显示名称
+  if (langCode === 'en-US') return t('center.translation.languages.en') || 'English'
+  if (langCode === 'zh-CN' || langCode === 'zh-TW') return t('center.translation.languages.zh') || '中文'
+  if (langCode === 'JP') return t('center.translation.languages.ja') || '日本語'
+  if (langCode === 'KO') return t('center.translation.languages.ko') || '한국어'
+  return langCode
 }
 
 // 类型定义
@@ -249,55 +294,118 @@ interface RecentItem {
   date: string
 }
 
-// 状态
-const sourceLanguage = ref('en')
-const targetLanguage = ref('zh')
-const sourceText = ref('')
-const translatedText = ref('')
-
 // 模拟数据
 const recentItems = ref<RecentItem[]>([
   { 
     id: '1', 
-    source: t('center.translation.languages.en'), 
-    target: t('center.translation.languages.zh'), 
+    source: getLanguageText('en-US'), 
+    target: getLanguageText('zh-CN'), 
     sourceText: 'Hello, how are you today?', 
     translatedText: '你好，今天怎么样？', 
     date: '2023-12-15' 
   },
   { 
     id: '2', 
-    source: t('center.translation.languages.zh'), 
-    target: t('center.translation.languages.en'), 
+    source: getLanguageText('zh-CN'), 
+    target: getLanguageText('en-US'), 
     sourceText: '这是一个测试文本', 
     translatedText: 'This is a test text', 
     date: '2023-12-14' 
   },
 ])
 
-// 方法
+// 更新最近项目的语言显示
+const updateRecentItemsLanguage = () => {
+  recentItems.value = recentItems.value.map(item => {
+    return {
+      ...item,
+      source: getLanguageText(item.source.includes('English') ? 'en-US' : 
+                           item.source.includes('中文') ? 'zh-CN' : 
+                           item.source.includes('日本語') ? 'JP' : 
+                           item.source.includes('한국어') ? 'KO' : 'en-US'),
+      target: getLanguageText(item.target.includes('English') ? 'en-US' : 
+                           item.target.includes('中文') ? 'zh-CN' : 
+                           item.target.includes('日本語') ? 'JP' : 
+                           item.target.includes('한국어') ? 'KO' : 'zh-CN')
+    }
+  })
+}
+
+// 方法：处理翻译
 const handleTranslate = () => {
-  // 模拟翻译过程
+  // 模拟翻译过程，但考虑不同语言对
   if (sourceText.value.trim()) {
-    translatedText.value = t('center.translation.result.translating')
+    translatedText.value = t('center.translation.result.translating') || '翻译中...'
+    
     setTimeout(() => {
-      translatedText.value = `${sourceText.value} (${t('center.translation.result.translated')})`
-    }, 1000)
+      // 确保t函数正常工作，添加默认值
+      const defaultTranslation = t('center.translation.result.translated') || '已翻译'
+      
+      // 根据语言对模拟不同的翻译结果
+      if (sourceLanguage.value === 'en-US') {
+        // 英文到其他语言
+        if (targetLanguage.value === 'zh-CN' || targetLanguage.value === 'zh-TW') {
+          // 英文到中文
+          if (sourceText.value.toLowerCase().includes('hello')) {
+            translatedText.value = '你好！' + sourceText.value.replace(/hello/i, '').trim()
+          } else if (sourceText.value.toLowerCase().includes('thank')) {
+            translatedText.value = '谢谢！' + sourceText.value.replace(/thank you/i, '').trim()
+          } else {
+            translatedText.value = '这是从英文翻译过来的: ' + sourceText.value
+          }
+        } else if (targetLanguage.value === 'JP') {
+          translatedText.value = '日本語翻訳: ' + sourceText.value
+        } else if (targetLanguage.value === 'KO') {
+          translatedText.value = '한국어 번역: ' + sourceText.value
+        } else {
+          translatedText.value = sourceText.value
+        }
+      } else if (sourceLanguage.value === 'zh-CN' || sourceLanguage.value === 'zh-TW') {
+        // 中文到其他语言
+        if (targetLanguage.value === 'en-US') {
+          if (sourceText.value.includes('你好')) {
+            translatedText.value = 'Hello! ' + sourceText.value.replace('你好', '').trim()
+          } else if (sourceText.value.includes('谢谢')) {
+            translatedText.value = 'Thank you! ' + sourceText.value.replace('谢谢', '').trim()
+          } else {
+            translatedText.value = 'Translated from Chinese: ' + sourceText.value
+          }
+        } else if (targetLanguage.value === 'JP') {
+          translatedText.value = '日本語翻訳（中国語から）: ' + sourceText.value
+        } else if (targetLanguage.value === 'KO') {
+          translatedText.value = '중국어에서 한국어로 번역: ' + sourceText.value
+        } else {
+          translatedText.value = sourceText.value
+        }
+      } else {
+        // 其他语言对
+        translatedText.value = `${sourceText.value} (${defaultTranslation})`
+      }
+    }, 800)
   }
 }
 
+// 方法：查看翻译记录
 const viewItem = (id: string) => {
   console.log('View item:', id)
+  // 在实际应用中，这里应该加载并显示完整的翻译记录
 }
 
+// 方法：下载翻译记录
 const downloadItem = (id: string) => {
   console.log('Download item:', id)
+  // 在实际应用中，这里应该提供下载功能
 }
 
-// 监听语言变化
+// 监听语言选择变化
 watch([sourceLanguage, targetLanguage], () => {
-  if (sourceText.value) {
+  if (sourceText.value.trim()) {
     handleTranslate()
   }
 })
+
+// 监听全局语言变化，更新最近项目显示
+watch(() => props.currentLocale, () => {
+  updateRecentItemsLanguage()
+}, { immediate: true })
 </script>
