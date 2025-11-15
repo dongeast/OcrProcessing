@@ -1,4 +1,65 @@
 export default {
+    center: {
+        dashboard: {
+            title: '仪表盘',
+            subtitle: '管理您的OCR文档并监控处理活动',
+            welcome: '欢迎回来',
+            quickActions: {
+                addNew: '添加新内容',
+                uploadDocument: '上传文档'
+            },
+            uploadButton: '上传文档',
+            resources: {
+                usage: '资源使用情况',
+                files: '文件',
+                storage: '存储空间',
+                apiCalls: 'API调用'
+            },
+            viewDetails: '查看详情',
+            table: {
+                columns: {
+                    name: '名称',
+                    type: '类型',
+                    status: '状态',
+                    date: '日期',
+                    actions: '操作'
+                }
+            },
+            recentActivity: '最近活动',
+            viewAll: '查看全部',
+            activities: {
+                uploaded: '文件已上传',
+                processed: '文档处理成功',
+                deleted: '文件已删除',
+                failed: '处理失败'
+            },
+            cards: {
+                documents: {
+                    label: '文档',
+                    subText: '文档总数'
+                },
+                processed: {
+                    label: '已处理',
+                    subText: '成功处理'
+                },
+                accuracy: {
+                    label: '准确率',
+                    subText: '成功率'
+                },
+                processingTime: {
+                    label: '处理时间',
+                    subText: '每文档平均时间'
+                }
+            }
+        },
+        menu: {
+            dashboard: '仪表盘',
+            profile: '个人资料',
+            account: '账户',
+            billing: '账单',
+            settings: '设置'
+        }
+    },
     home: {
         title: 'NuxtPro',
         description: '基于Nuxt3的企业级SaaS出海模板，预集成Stripe/Cream支付、谷歌登录、多语言路由和SEO工具。快速构建SSR的全球化Web应用，开箱即用',
@@ -519,109 +580,6 @@ export default {
     },
     auth: {
       selectLoginMethod: '授权登录',
-      selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.',
-    },
-    center: {
-    menu: {
-      dashboard: '仪表盘',
-      profile: '个人资料',
-      account: '账户',
-      billing: '账单',
-      settings: '设置'
-    },
-    dashboard: {
-      welcome: '欢迎回来',
-      subtitle: '管理您的OCR文档并监控处理活动',
-      quickActions: {
-        addNew: '新增',
-        uploadDocument: '上传文档'
-      },
-      usageStats: '使用统计',
-      stats: {
-        documents: '文档数量',
-        storage: '存储空间',
-        totalDocuments: '总文档数',
-        processingTime: '平均处理时间',
-        accuracyRate: '准确率',
-        storageUsed: '已用存储',
-        comparedToLastMonth: '相比上月',
-        fasterThanAverage: '快于平均值',
-        improvedThisMonth: '本月有所提升',
-        ofLimit: '的限额'
-      },
-      recentDocuments: '最近文档',
-      recentDocumentsDesc: '查看和管理您最近处理的文档',
-      viewAll: '查看全部',
-      table: {
-        name: '名称',
-        type: '类型',
-        status: '状态',
-        date: '日期',
-        actions: '操作'
-      },
-      status: {
-        completed: '已完成',
-        processing: '处理中',
-        failed: '失败'
-      },
-      features: {
-        uploadNew: '上传新文档',
-        uploadNewDesc: '上传文件进行OCR处理',
-        uploadDragDrop: '拖放文件到此处或点击浏览',
-        uploadSelectFiles: '选择文件',
-        uploadSupportedFormats: '支持格式：PDF、JPG、PNG、DOCX、XLSX',
-        recentActivity: '最近活动',
-        recentActivityDesc: '您最近的处理和账户活动'
-      }
-    },
-      tabs: {
-        profile: {
-          title: '个人资料',
-          description: '管理您的个人资料信息'
-        },
-        account: {
-          title: '账户',
-          description: '管理您的账户设置'
-        },
-        billing: {
-          title: '账单',
-          description: '管理您的账单信息和支付方式'
-        },
-        settings: {
-          title: '设置',
-          description: '管理您的应用设置'
-        }
-      },
-      profile: {
-        name: '姓名',
-        email: '邮箱',
-        bio: '个人简介',
-        updateProfile: '更新个人资料'
-      },
-      account: {
-        changePassword: '修改密码',
-        currentPassword: '当前密码',
-        newPassword: '新密码',
-        confirmPassword: '确认新密码',
-        updatePassword: '更新密码',
-        deleteAccount: '删除账户',
-        deleteAccountDescription: '一旦您删除账户，将无法恢复，请确认。'
-      },
-      billing: {
-        currentPlan: '当前套餐',
-        upgradePlan: '升级套餐',
-        paymentMethods: '支付方式',
-        edit: '编辑',
-        addPaymentMethod: '添加支付方式',
-        billingHistory: '账单历史'
-      },
-      settings: {
-        language: '语言',
-        selectLanguage: '选择语言',
-        emailNotifications: '邮件通知',
-        newsletter: '新闻通讯',
-        productUpdates: '产品更新',
-        securityAlerts: '安全警报'
-      }
-    }
+      selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.'
+     }
 }

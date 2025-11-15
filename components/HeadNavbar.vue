@@ -52,11 +52,10 @@
                 class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 @click="toggleDropdown"
               >
-                <img
-                  class="h-8 w-8 rounded-full object-cover"
-                  :src="session.data?.user.image || '/default-avatar.png'"
-                  alt="User avatar"
-                />
+                <div class="h-8 w-8 rounded-full flex items-center justify-center bg-primary/10 text-primary">
+                  <User v-if="!session.data?.user.image" class="h-5 w-5" />
+                  <img v-else :src="session.data.user.image" alt="User avatar" class="h-8 w-8 rounded-full object-cover" />
+                </div>
               </button>
               <button
                 v-else
@@ -175,6 +174,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useSwitchLocalePath } from '#imports'
+import { User } from 'lucide-vue-next'
 
 const session  = useSession()
 const user = ref(null);

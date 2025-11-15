@@ -537,13 +537,13 @@ export default {
       selectLoginMethodDescription: 'Start your NuxtPro journey. Shipping fast, shipping more.',
     },
     center: {
-    menu: {
-      dashboard: 'Dashboard',
-      profile: 'Profile',
-      account: 'Account',
-      billing: 'Billing',
-      settings: 'Settings'
-    },
+      menu: {
+        dashboard: 'Dashboard',
+        profile: 'Profile',
+        account: 'Account',
+        billing: 'Billing',
+        settings: 'Settings'
+      },
     dashboard: {
       welcome: 'Welcome back',
       subtitle: 'Manage your OCR documents and monitor processing activities',

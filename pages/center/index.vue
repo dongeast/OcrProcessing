@@ -1,5 +1,16 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex">
+    <!-- 侧边栏组件 -->
+    <Sidebar 
+      :user="user"
+      :menu-items="menuItems"
+      :active-tab="activeTab"
+      :is-mobile="isMobile"
+      :sidebar-open="sidebarOpen"
+      @toggle-sidebar="sidebarOpen = !sidebarOpen"
+      @switch-tab="switchTab"
+    />
+
     <!-- 移动端汉堡菜单按钮 -->
     <button 
       @click="sidebarOpen = true" 
@@ -10,79 +21,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
-
-    <!-- 侧边栏遮罩层 -->
-    <div 
-      v-if="sidebarOpen && isMobile"
-      @click="sidebarOpen = false"
-      class="fixed inset-0 bg-black/50 z-20 md:hidden"
-    ></div>
-
-    <!-- 左侧固定菜单栏 -->
-    <aside 
-      :class="[
-        'h-screen bg-white border-r border-gray-200 fixed left-0 top-0 z-30 shadow-sm overflow-y-auto',
-        isMobile ? (sidebarOpen ? 'w-64' : '-translate-x-full') : 'w-64',
-        'transition-all duration-300 ease-in-out md:translate-x-0 md:translate-none'
-      ]"
-    >
-      <div class="flex flex-col h-full">
-        <!-- 关闭按钮（仅移动端显示） -->
-        <button 
-          v-if="isMobile"
-          @click="sidebarOpen = false"
-          class="absolute top-4 right-4 p-1 rounded-md hover:bg-gray-100 md:hidden"
-          aria-label="Close menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <!-- 顶部Logo区域 -->
-        <div class="aside-logo-area p-4 border-b flex items-center justify-center">
-          <div class="flex items-center space-x-2">
-            <img src="/favicon.ico" alt="Logo" class="w-8 h-8" />
-            <h1 class="text-xl font-bold text-primary">OCR Processing</h1>
-          </div>
-        </div>
-
-        <!-- 中间菜单区域 -->
-        <nav class="aside-menu-area flex-1 py-4 overflow-y-auto">
-          <ul class="space-y-1 px-2">
-            <li v-for="item in menuItems" :key="item.key">
-              <button
-                @click="switchTab(item.key)"
-                :class="[
-                  'flex items-center px-3 py-2 rounded-md text-left w-full transition-colors',
-                  activeTab === item.key
-                    ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary pl-2'
-                    : 'hover:bg-muted'
-                ]"
-              >
-                <component :is="item.icon" class="w-5 h-5 mr-3" />
-                {{ $t(item.label) }}
-              </button>
-            </li>
-          </ul>
-        </nav>
-
-        <!-- 底部用户信息区域 -->
-        <div class="aside-user-area p-4 border-t mt-auto bg-gray-50">
-          <div class="flex items-center space-x-3">
-            <img
-              :src="user && user.image ? user.image : '/default-avatar.png'"
-              :alt="user && user.name ? user.name : 'User'"
-              class="w-10 h-10 rounded-full object-cover"
-            />
-            <div>
-              <h2 class="font-medium">{{ user && user.name ? user.name : $t('center.menu.profile') }}</h2>
-              <p class="text-xs text-muted-foreground">{{ user && user.email ? user.email : '' }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
 
     <!-- 主内容区 -->
     <main :class="['flex-1 p-6 overflow-y-auto min-h-screen transition-all duration-300', isMobile ? '' : 'ml-64']">
@@ -106,385 +44,51 @@
         </div>
       </Card>
 
-          <div class="max-w-7xl mx-auto">
-          <!-- 仪表盘标签页 -->
-          <div v-if="activeTab === 'dashboard'">
-            <!-- 数据概览卡片 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              <Card class="p-4">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <p class="text-sm font-medium text-muted-foreground">{{ $t('center.dashboard.stats.totalDocuments') }}</p>
-                    <h3 class="text-2xl font-bold mt-1">{{ overviewStats.totalDocuments }}</h3>
-                  </div>
-                  <div class="p-2 rounded-full bg-blue-100 text-blue-600">
-                    <File class="w-5 h-5" />
-                  </div>
-                </div>
-                <div class="mt-2 flex items-center text-sm">
-                  <span class="text-green-600 flex items-center">
-                    <ChevronUp class="w-3 h-3 mr-1" />
-                    12%
-                  </span>
-                  <span class="text-muted-foreground ml-2">{{ $t('center.dashboard.stats.comparedToLastMonth') }}</span>
-                </div>
-              </Card>
-              <Card class="p-4">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <p class="text-sm font-medium text-muted-foreground">{{ $t('center.dashboard.stats.processingTime') }}</p>
-                    <h3 class="text-2xl font-bold mt-1">{{ overviewStats.avgProcessingTime }}s</h3>
-                  </div>
-                  <div class="p-2 rounded-full bg-green-100 text-green-600">
-                    <Clock class="w-5 h-5" />
-                  </div>
-                </div>
-                <div class="mt-2 flex items-center text-sm">
-                  <span class="text-green-600 flex items-center">
-                    <ChevronUp class="w-3 h-3 mr-1" />
-                    5%
-                  </span>
-                  <span class="text-muted-foreground ml-2">{{ $t('center.dashboard.stats.fasterThanAverage') }}</span>
-                </div>
-              </Card>
-              <Card class="p-4">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <p class="text-sm font-medium text-muted-foreground">{{ $t('center.dashboard.stats.accuracyRate') }}</p>
-                    <h3 class="text-2xl font-bold mt-1">{{ overviewStats.accuracyRate }}%</h3>
-                  </div>
-                  <div class="p-2 rounded-full bg-purple-100 text-purple-600">
-                    <CheckCircle class="w-5 h-5" />
-                  </div>
-                </div>
-                <div class="mt-2 flex items-center text-sm">
-                  <span class="text-green-600 flex items-center">
-                    <ChevronUp class="w-3 h-3 mr-1" />
-                    2%
-                  </span>
-                  <span class="text-muted-foreground ml-2">{{ $t('center.dashboard.stats.improvedThisMonth') }}</span>
-                </div>
-              </Card>
-              <Card class="p-4">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <p class="text-sm font-medium text-muted-foreground">{{ $t('center.dashboard.stats.storageUsed') }}</p>
-                    <h3 class="text-2xl font-bold mt-1">{{ overviewStats.storageUsed }}</h3>
-                  </div>
-                  <div class="p-2 rounded-full bg-amber-100 text-amber-600">
-                    <Database class="w-5 h-5" />
-                  </div>
-                </div>
-                <div class="mt-2 flex items-center text-sm">
-                  <span class="text-gray-600">{{ overviewStats.storagePercent }}% {{ $t('center.dashboard.stats.ofLimit') }}</span>
-                </div>
-              </Card>
-            </div>
-
-            <!-- 最近文档 -->
-            <Card class="mb-6">
-              <CardHeader>
-                <div class="flex justify-between items-center">
-                  <CardTitle>{{ $t('center.dashboard.recentDocuments') }}</CardTitle>
-                  <Button variant="ghost" class="text-sm">{{ $t('center.dashboard.viewAll') }}</Button>
-                </div>
-                <CardDescription>{{ $t('center.dashboard.recentDocumentsDesc') }}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div class="overflow-x-auto">
-                  <table class="w-full">
-                    <thead>
-                      <tr class="border-b">
-                        <th class="text-left py-3 px-4 font-medium text-sm">{{ $t('center.dashboard.table.name') }}</th>
-                        <th class="text-left py-3 px-4 font-medium text-sm">{{ $t('center.dashboard.table.type') }}</th>
-                        <th class="text-left py-3 px-4 font-medium text-sm">{{ $t('center.dashboard.table.status') }}</th>
-                        <th class="text-left py-3 px-4 font-medium text-sm">{{ $t('center.dashboard.table.date') }}</th>
-                        <th class="text-right py-3 px-4 font-medium text-sm">{{ $t('center.dashboard.table.actions') }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="document in recentDocuments" :key="document.id" class="border-b hover:bg-muted/50">
-                        <td class="py-3 px-4">
-                          <div class="flex items-center space-x-2">
-                            <div class="p-1.5 rounded bg-primary/10 text-primary">
-                              <FileText class="w-4 h-4" />
-                            </div>
-                            <span class="font-medium">{{ document.name }}</span>
-                          </div>
-                        </td>
-                        <td class="py-3 px-4 text-muted-foreground">{{ document.type }}</td>
-                        <td class="py-3 px-4">
-                          <span 
-                            class="px-2 py-1 text-xs rounded-full"
-                            :class="{
-                              'bg-green-100 text-green-800': document.status === 'completed',
-                              'bg-blue-100 text-blue-800': document.status === 'processing',
-                              'bg-red-100 text-red-800': document.status === 'failed'
-                            }"
-                          >
-                            {{ $t(`center.dashboard.status.${document.status}`) }}
-                          </span>
-                        </td>
-                        <td class="py-3 px-4 text-muted-foreground">{{ document.date }}</td>
-                        <td class="py-3 px-4 text-right">
-                          <div class="flex items-center justify-end space-x-2">
-                            <Button variant="ghost" size="sm" class="h-8 w-8 p-0">
-                              <Eye class="w-4 h-4" />
-                            </Button>
-                            <Button variant="ghost" size="sm" class="h-8 w-8 p-0">
-                              <Download class="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-
-            <!-- 功能卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle class="flex items-center">
-                    <Upload class="w-5 h-5 mr-2 text-primary" />
-                    {{ $t('center.dashboard.features.uploadNew') }}
-                  </CardTitle>
-                  <CardDescription>{{ $t('center.dashboard.features.uploadNewDesc') }}</CardDescription>
-                </CardHeader>
-                <CardContent class="flex flex-col items-center justify-center py-8 text-center">
-                  <div class="p-4 rounded-full bg-primary/10 mb-4">
-                    <Upload class="w-10 h-10 text-primary" />
-                  </div>
-                  <p class="mb-4 text-muted-foreground">{{ $t('center.dashboard.features.uploadDragDrop') }}</p>
-                  <div class="w-full">
-                    <Button class="w-full">
-                      {{ $t('center.dashboard.features.uploadSelectFiles') }}
-                    </Button>
-                    <p class="mt-2 text-xs text-muted-foreground">{{ $t('center.dashboard.features.uploadSupportedFormats') }}</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle class="flex items-center">
-                    <History class="w-5 h-5 mr-2 text-primary" />
-                    {{ $t('center.dashboard.features.recentActivity') }}
-                  </CardTitle>
-                  <CardDescription>{{ $t('center.dashboard.features.recentActivityDesc') }}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div class="space-y-4">
-                    <div v-for="activity in recentActivities" :key="activity.id" class="flex">
-                      <div class="mr-3">
-                        <div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
-                        <div class="w-0.5 h-full bg-gray-200 ml-0.75"></div>
-                      </div>
-                      <div>
-                        <p class="font-medium">{{ activity.description }}</p>
-                        <p class="text-sm text-muted-foreground">{{ activity.time }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          <!-- 个人资料标签页 -->
-          <Card v-else-if="activeTab === 'profile'" class="shadow-sm">
-            <CardHeader>
-              <CardTitle class="text-2xl">{{ $t('center.tabs.profile.title') }}</CardTitle>
-              <CardDescription>{{ $t('center.tabs.profile.description') }}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('center.profile.name') }}</label>
-                    <input id="name" v-model="profileData.name" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" />
-                  </div>
-                  <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('center.profile.email') }}</label>
-                    <input id="email" v-model="profileData.email" type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" disabled />
-                  </div>
-                  <div class="md:col-span-2">
-                    <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('center.profile.bio') }}</label>
-                    <textarea id="bio" v-model="profileData.bio" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" rows="4" />
-                  </div>
-                </div>
-                <div class="flex justify-end">
-                  <Button @click="updateProfile">{{ $t('center.profile.updateProfile') }}</Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <!-- 账户标签页 -->
-          <Card v-else-if="activeTab === 'account'" class="shadow-sm">
-            <CardHeader>
-              <CardTitle class="text-2xl">{{ $t('center.tabs.account.title') }}</CardTitle>
-              <CardDescription>{{ $t('center.tabs.account.description') }}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-6">
-                <div class="border rounded-lg p-4">
-                  <h3 class="font-medium text-lg mb-4">{{ $t('center.account.changePassword') }}</h3>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label for="current-password" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('center.account.currentPassword') }}</label>
-                      <input id="current-password" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" />
-                    </div>
-                    <div>
-                      <label for="new-password" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('center.account.newPassword') }}</label>
-                      <input id="new-password" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" />
-                    </div>
-                    <div>
-                      <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('center.account.confirmPassword') }}</label>
-                      <input id="confirm-password" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary" />
-                    </div>
-                  </div>
-                  <div class="mt-4 flex justify-end">
-                    <Button>{{ $t('center.account.updatePassword') }}</Button>
-                  </div>
-                </div>
-
-                <div class="border rounded-lg p-4">
-                  <h3 class="font-medium text-lg mb-4">{{ $t('center.account.deleteAccount') }}</h3>
-                  <p class="text-muted-foreground mb-4">{{ $t('center.account.deleteAccountDescription') }}</p>
-                  <Button variant="destructive">{{ $t('center.account.deleteAccount') }}</Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <!-- 账单标签页 -->
-          <Card v-else-if="activeTab === 'billing'" class="shadow-sm">
-            <CardHeader>
-              <CardTitle class="text-2xl">{{ $t('center.tabs.billing.title') }}</CardTitle>
-              <CardDescription>{{ $t('center.tabs.billing.description') }}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{{ $t('center.billing.currentPlan') }}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="flex items-center justify-between">
-                      <div>
-                        <h3 class="font-medium text-lg">Starter Plan</h3>
-                        <p class="text-muted-foreground">$9/month</p>
-                      </div>
-                      <Button>{{ $t('center.billing.upgradePlan') }}</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{{ $t('center.billing.paymentMethods') }}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="space-y-4">
-                      <div class="flex items-center justify-between p-3 border rounded-lg">
-                        <div class="flex items-center">
-                          <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
-                          <div class="ml-4">
-                            <p class="font-medium">Visa ending in 1234</p>
-                            <p class="text-sm text-muted-foreground">Expires 12/2026</p>
-                          </div>
-                        </div>
-                        <Button variant="outline">{{ $t('center.billing.edit') }}</Button>
-                      </div>
-                      <Button variant="outline" class="w-full">
-                        {{ $t('center.billing.addPaymentMethod') }}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{{ $t('center.billing.billingHistory') }}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="space-y-4">
-                      <div v-for="invoice in billingHistory" :key="invoice.id" class="flex items-center justify-between py-2 border-b last:border-0">
-                        <div>
-                          <p class="font-medium">{{ invoice.description }}</p>
-                          <p class="text-sm text-muted-foreground">{{ invoice.date }}</p>
-                        </div>
-                        <div class="text-right">
-                          <p class="font-medium">{{ invoice.amount }}</p>
-                          <p class="text-sm text-muted-foreground">{{ invoice.status }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CardContent>
-          </Card>
-
-          <!-- 设置标签页 -->
-          <Card v-else-if="activeTab === 'settings'" class="shadow-sm">
-            <CardHeader>
-              <CardTitle class="text-2xl">{{ $t('center.tabs.settings.title') }}</CardTitle>
-              <CardDescription>{{ $t('center.tabs.settings.description') }}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-6">
-                <div class="border rounded-lg p-4">
-                  <h3 class="font-medium text-lg mb-4">{{ $t('center.settings.language') }}</h3>
-                  <div class="flex items-center space-x-4">
-                    <label for="language" class="block text-sm font-medium text-gray-700">{{ $t('center.settings.selectLanguage') }}</label>
-                    <Select v-model="currentLocale" @update:model-value="switchLanguage">
-                      <SelectTrigger id="language" class="w-[180px]">
-                        <SelectValue :placeholder="$t('common.selectLanguage')" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem v-for="locale in localeOptions" :key="locale.value" :value="locale.value">
-                          {{ locale.label }}
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div class="border rounded-lg p-4">
-                  <h3 class="font-medium text-lg mb-4">{{ $t('center.settings.emailNotifications') }}</h3>
-                  <div class="space-y-4">
-                    <div v-for="notification in emailNotifications" :key="notification.key" class="flex items-center justify-between">
-                      <label :for="notification.key">{{ $t(notification.label) }}</label>
-                      <!-- 使用简单的开关替代 -->
-                      <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                        <input 
-                          type="checkbox" 
-                          :id="notification.key" 
-                          class="sr-only" 
-                          v-model="notification.enabled"
-                        />
-                        <div 
-                          class="block w-10 h-6 rounded-full" 
-                          :class="notification.enabled ? 'bg-primary' : 'bg-gray-300'"
-                        ></div>
-                        <div 
-                          class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform"
-                          :class="notification.enabled ? 'transform translate-x-4' : ''"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          </div>
-        </main>
+      <div class="max-w-7xl mx-auto">
+        <!-- 动态加载相应标签页组件 -->
+        <Dashboard 
+          v-if="activeTab === 'dashboard'"
+          :documents="[]"
+          :overview-stats="overviewStats"
+          :recent-documents="recentDocuments"
+          :recent-activities="recentActivities"
+          @upload-document="handleUploadDocument"
+          @view-all-documents="handleViewAllDocuments"
+        />
+        
+        <Profile 
+          v-else-if="activeTab === 'profile'" 
+          :user="user"
+          :profile-data="profileData"
+          @update-profile="updateProfile"
+          @cancel="handleProfileCancel"
+        />
+        
+        <Account 
+          v-else-if="activeTab === 'account'"
+          @change-password="handleChangePassword"
+          @delete-account="handleDeleteAccount"
+        />
+        
+        <Billing 
+          v-else-if="activeTab === 'billing'"
+          :billing-history="billingHistory"
+          @upgrade-plan="handleUpgradePlan"
+          @add-payment-method="handleAddPaymentMethod"
+          @edit-payment-method="handleEditPaymentMethod"
+        />
+        
+        <Settings 
+          v-else-if="activeTab === 'settings'"
+          :user="user"
+          :current-locale="currentLocale"
+          @update:settings="handleUpdateSettings"
+          @cancel="handleSettingsCancel"
+          @switch-language="switchLanguage"
+        />
       </div>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -492,39 +96,19 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useSession } from '~/lib/auth/auth-client'
-import { 
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from '@/components/ui/select'
-import { 
-  User, 
-  CreditCard, 
-  Settings, 
-  Lock, 
-  Home, 
-  File,
-  Clock, 
-  CheckCircle, 
-  Database,
-  ChevronUp,
-  FileText,
-  Eye,
-  Download,
-  Upload,
-  History
-} from 'lucide-vue-next'
+import Sidebar from '@/components/center/Sidebar.vue'
+import Dashboard from '@/components/center/Dashboard.vue'
+import Profile from '@/components/center/Profile.vue'
+import Account from '@/components/center/Account.vue'
+import Billing from '@/components/center/Billing.vue'
+import Settings from '@/components/center/Settings.vue'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { User, CreditCard, Settings as SettingsIcon, Lock, Home } from 'lucide-vue-next'
 import { useSwitchLocalePath } from '#imports'
+
+// 组件已在上方导入
 
 // 类型定义
 interface MenuItem {
@@ -623,13 +207,13 @@ const { data: session } = useSession()
     }
   }
 
-// 菜单项 - 添加仪表盘作为第一个选项
-const menuItems: MenuItem[] = [
+// 菜单数据
+const menuItems = [
   { key: 'dashboard', label: 'center.menu.dashboard', icon: Home },
   { key: 'profile', label: 'center.menu.profile', icon: User },
   { key: 'account', label: 'center.menu.account', icon: Lock },
   { key: 'billing', label: 'center.menu.billing', icon: CreditCard },
-  { key: 'settings', label: 'center.menu.settings', icon: Settings }
+  { key: 'settings', label: 'center.menu.settings', icon: SettingsIcon }
 ]
 
 // 语言选项
@@ -714,6 +298,57 @@ const switchLanguage = async (newLocale: string) => {
   }
 }
 
+// 组件事件处理函数
+const handleUploadDocument = () => {
+  console.log('Upload document clicked')
+  // 处理文档上传逻辑
+}
+
+const handleViewAllDocuments = () => {
+  console.log('View all documents clicked')
+  // 处理查看所有文档逻辑
+}
+
+const handleProfileCancel = () => {
+  console.log('Profile edit cancelled')
+  // 重置表单或执行其他取消逻辑
+}
+
+const handleChangePassword = (passwordData: any) => {
+  console.log('Change password:', passwordData)
+  // 处理密码更改逻辑
+}
+
+const handleDeleteAccount = () => {
+  console.log('Delete account requested')
+  // 处理账户删除逻辑
+}
+
+const handleUpgradePlan = () => {
+  console.log('Upgrade plan clicked')
+  // 处理升级计划逻辑
+}
+
+const handleAddPaymentMethod = () => {
+  console.log('Add payment method clicked')
+  // 处理添加支付方式逻辑
+}
+
+const handleEditPaymentMethod = (paymentId: string) => {
+  console.log('Edit payment method:', paymentId)
+  // 处理编辑支付方式逻辑
+}
+
+const handleUpdateSettings = (settings: any) => {
+  console.log('Update settings:', settings)
+  // 处理设置更新逻辑
+}
+
+const handleSettingsCancel = () => {
+  console.log('Settings edit cancelled')
+  // 重置设置表单或执行其他取消逻辑
+}
+
 // 标签页切换函数，同时更新URL
 const switchTab = (tabKey: string) => {
   activeTab.value = tabKey
@@ -777,64 +412,15 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 侧边栏整体样式优化 */
-aside {
-  display: flex;
-  flex-direction: column;
+/* 主页面布局样式 */
+main {
+  transition: all 0.3s ease-in-out;
 }
 
-/* 顶部Logo区域样式 */
-.aside-logo-area {
-  transition: all 0.3s ease;
-}
-
-/* 中间菜单区域样式 */
-.aside-menu-area {
-  transition: all 0.3s ease;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
-}
-
-.aside-menu-area::-webkit-scrollbar {
-  width: 4px;
-}
-
-.aside-menu-area::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.aside-menu-area::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-}
-
-/* 底部用户区域样式 */
-.aside-user-area {
-  transition: all 0.3s ease;
-}
-
-/* 响应式调整 */
+/* 移动端适配 */
 @media (max-width: 767px) {
-  .aside-logo-area {
+  main {
     padding: 1rem;
   }
-  
-  .aside-logo-area h1 {
-    font-size: 1.1rem;
-  }
-  
-  .aside-logo-area img {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-}
-
-/* 高亮菜单悬停效果优化 */
-button[class*="border-l-4"] {
-  transition: all 0.2s ease-in-out;
-}
-
-button[class*="hover:bg-muted"]:hover {
-  transform: translateX(2px);
 }
 </style>
