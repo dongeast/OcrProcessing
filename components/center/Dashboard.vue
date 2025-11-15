@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 py-6">
+  <div class="space-y-6 py-0">
     <!-- 欢迎横幅 -->
     <Card class="mb-8 overflow-hidden">
       <div class="bg-gradient-to-br from-gray-800 via-gray-700 to-gray-100 p-6 md:p-8">

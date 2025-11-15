@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 py-6">
+  <div class="space-y-6 py-0">
     <!-- 页面标题 -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
       <div>

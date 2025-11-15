@@ -1,10 +1,102 @@
 <template>
-  <div class="space-y-6 py-6">
+  <div class="space-y-6 py-0">
     <!-- 页面标题 -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
       <div>
         <h1 class="text-2xl font-bold tracking-tight">{{ t('center.ocrAnalysis.title') }}</h1>
         <p class="text-muted-foreground mt-1">{{ t('center.ocrAnalysis.subtitle') }}</p>
+      </div>
+    </div>
+
+    <!-- 步骤进度条 -->
+    <div class="rounded-lg bg-card border p-6 shadow-sm">
+      <!-- Steps component -->
+      <div class="flex flex-col md:flex-row justify-between relative pt-6 pb-6">
+        <!-- Connector lines -->
+        <div class="absolute top-11 left-7 right-7 h-0.5 hidden md:block bg-gray-200"></div>
+        
+        <!-- 已完成部分的实线 -->
+        <div 
+          v-if="currentStep > 1"
+          class="absolute top-11 left-7 h-0.5 hidden md:block bg-primary transition-all duration-500 ease-in-out"
+          :style="{ width: progressBarWidth }"
+        ></div>
+        
+        <!-- 未完成部分的虚线 -->
+        <div 
+          v-if="currentStep < 4"
+          class="absolute top-11 right-7 h-0.5 hidden md:block border-dashed border-t border-gray-300 transition-all duration-500 ease-in-out"
+          :style="{ width: incompleteWidth }"
+        ></div>
+        
+        <!-- 流动虚线动画层 -->
+        <div 
+          v-if="currentStep > 1 && currentStep < 4"
+          class="absolute top-11 h-0.5 hidden md:block"
+          :style="flowingLineStyle"
+        >
+          <div class="flowing-dashed-line"></div>
+        </div>
+        
+        <!-- Step 1: Upload File -->
+        <div class="flex flex-col items-center w-full md:w-auto z-10 mb-4 md:mb-0">
+          <div 
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            :class="{
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 1,
+              'bg-muted text-muted-foreground': currentStep < 1
+            }"
+          >
+            <span v-if="currentStep > 1">✓</span>
+            <span v-else>1</span>
+          </div>
+          <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.upload') }}</span>
+        </div>
+        
+        <!-- Step 2: OCR Analysis -->
+        <div class="flex flex-col items-center w-full md:w-auto z-10 mb-4 md:mb-0">
+          <div 
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            :class="{
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 2,
+              'bg-muted text-muted-foreground': currentStep < 2
+            }"
+          >
+            <span v-if="currentStep > 2">✓</span>
+            <span v-else>2</span>
+          </div>
+          <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.analysis') }}</span>
+        </div>
+        
+        <!-- Step 3: MD Editing -->
+        <div class="flex flex-col items-center w-full md:w-auto z-10 mb-4 md:mb-0">
+          <div 
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            :class="{
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 3,
+              'bg-muted text-muted-foreground': currentStep < 3
+            }"
+          >
+            <span v-if="currentStep > 3">✓</span>
+            <span v-else>3</span>
+          </div>
+          <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.edit') }}</span>
+        </div>
+        
+        <!-- Step 4: Preview & Export -->
+        <div class="flex flex-col items-center w-full md:w-auto z-10">
+          <div 
+            class="flex items-center justify-center w-10 h-10 rounded-full mb-2 transition-all duration-300 transform"
+            :class="{
+              'bg-primary text-primary-foreground shadow-lg scale-110': currentStep >= 4,
+              'bg-muted text-muted-foreground': currentStep < 4
+            }"
+          >
+            <span v-if="currentStep > 4">✓</span>
+            <span v-else>4</span>
+          </div>
+          <span class="text-sm font-medium text-center">{{ t('center.ocrAnalysis.steps.export') }}</span>
+        </div>
       </div>
     </div>
 
@@ -169,7 +261,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 // Props定义
@@ -190,6 +282,61 @@ const emit = defineEmits<{
 
 // 获取i18n实例
 const { t, locale } = useI18n()
+
+// 当前步骤状态 (1-4)
+const currentStep = ref(2) // 默认设置为第2步以便查看效果
+
+// 计算进度条宽度
+const progressBarWidth = computed(() => {
+  switch (currentStep.value) {
+    case 1:
+      return '0%'
+    case 2:
+      return 'calc(33.333333% - 20px)'
+    case 3:
+      return 'calc(66.666667% - 20px)'
+    case 4:
+      return 'calc(100% - 40px)'
+    default:
+      return '0%'
+  }
+})
+
+// 计算未完成部分的宽度
+const incompleteWidth = computed(() => {
+  switch (currentStep.value) {
+    case 1:
+      return 'calc(100% - 40px)'
+    case 2:
+      return 'calc(66.666667% - 20px)'
+    case 3:
+      return 'calc(33.333333% - 20px)'
+    case 4:
+      return '0%'
+    default:
+      return 'calc(100% - 40px)'
+  }
+})
+
+// 计算流动虚线的样式
+const flowingLineStyle = computed(() => {
+  switch (currentStep.value) {
+    case 2:
+      return {
+        left: 'calc(7px + 33.333333% - 20px)',
+        width: 'calc(33.333333% + 20px)'
+      }
+    case 3:
+      return {
+        left: 'calc(7px + 66.666667% - 20px)',
+        width: 'calc(33.333333% + 20px)'
+      }
+    default:
+      return {
+        display: 'none'
+      }
+  }
+})
 
 // 监听语言变化
 watch(() => props.currentLocale, (newLocale) => {
@@ -266,3 +413,23 @@ const getStatusClass = (status: string) => {
   }
 }
 </script>
+
+<style scoped>
+.flowing-dashed-line {
+  width: 100%;
+  height: 100%;
+  border-top: 2px dashed #000;
+  background: linear-gradient(90deg, transparent 50%, #000 50%);
+  background-size: 20px 100%;
+  animation: flow 1s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 0;
+  }
+}
+</style>

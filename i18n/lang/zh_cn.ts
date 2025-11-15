@@ -614,6 +614,13 @@ export default {
         title: 'OCR分析',
         subtitle: '从图像和文档中提取文本',
         uploadButton: '上传文件',
+        steps: {
+          title: '处理步骤',
+          upload: '上传文件',
+          analysis: '光学分析',
+          edit: '文档编辑',
+          export: '预览导出'
+        },
         features: {
           title: 'OCR功能',
           document: {

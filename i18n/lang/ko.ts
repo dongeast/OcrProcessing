@@ -654,6 +654,13 @@ export default {
         title: 'OCR 분석',
         subtitle: '이미지와 문서에서 텍스트 추출',
         uploadButton: '파일 업로드',
+        steps: {
+          title: '처리 단계',
+          upload: '파일 업로드',
+          analysis: '광학 분석',
+          edit: '문서 편집',
+          export: '미리보기 및 내보내기'
+        },
         features: {
           title: 'OCR 기능',
           document: {

@@ -654,6 +654,13 @@ export default {
         title: 'OCR解析',
         subtitle: '画像や文書からテキストを抽出する',
         uploadButton: 'ファイルをアップロード',
+        steps: {
+          title: '処理ステップ',
+          upload: 'ファイルアップロード',
+          analysis: '光学解析',
+          edit: '文書編集',
+          export: 'プレビューとエクスポート'
+        },
         features: {
           title: 'OCR機能',
           document: {

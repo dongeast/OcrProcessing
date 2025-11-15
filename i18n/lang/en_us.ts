@@ -278,6 +278,13 @@ export default {
         title: 'OCR Analysis',
         subtitle: 'Extract text from images and documents',
         uploadButton: 'Upload Files',
+        steps: {
+          title: 'Processing Steps',
+          upload: 'Upload File',
+          analysis: 'OCR Analysis',
+          edit: 'MD Editing',
+          export: 'Preview & Export'
+        },
         features: {
           title: 'OCR Features',
           document: {
