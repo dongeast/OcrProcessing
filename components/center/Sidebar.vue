@@ -21,11 +21,11 @@
     <aside 
       :class="[
         'h-screen bg-white border-r border-gray-200 fixed left-0 top-0 z-30 shadow-sm overflow-y-auto',
-        isMobile ? (sidebarOpen ? 'w-64' : '-translate-x-full') : 'w-64',
-        'transition-all duration-300 ease-in-out md:translate-x-0 md:translate-none'
+        isMobile ? (sidebarOpen ? (isCollapsed ? 'w-20' : 'w-60') : '-translate-x-full') : (isCollapsed ? 'w-20' : 'w-60'),
+        'transition-all duration-300 ease-in-out md:translate-x-0'
       ]"
     >
-      <div class="flex flex-col h-full">
+      <div class="flex flex-col h-full relative">
         <!-- 关闭按钮（仅移动端显示） -->
         <button 
           v-if="isMobile"
@@ -37,36 +37,70 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
+        
+        <!-- 收缩按钮（仅在桌面端显示） -->
+        <button 
+          v-if="!isMobile"
+          @click="toggleCollapse"
+          class="absolute top-2/3 -translate-y-1/2 -right-2 p-2 rounded-md bg-white border border-gray-200 shadow-lg hidden md:block z-50"
+          :aria-label="isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="h-4 w-4 text-gray-500" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              v-if="isCollapsed" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M9 5l7 7-7 7" 
+            />
+            <path 
+              v-else 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M15 19l-7-7 7-7" 
+            />
+          </svg>
+        </button>
 
         <!-- 顶部Logo区域 -->
-        <div class="aside-logo-area p-4 border-b flex items-center justify-center">
-          <div class="flex items-center space-x-2">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+        <div class="aside-logo-area p-5 border-b flex items-center" :class="isCollapsed ? 'justify-center' : 'justify-between'">
+          <div class="flex items-center" :class="isCollapsed ? 'space-x-0' : 'space-x-3'">
+            <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 flex-shrink-0">
               <rect width="32" height="32" rx="4" fill="#4F46E5"/>
               <path d="M8 10L16 16L8 22V10Z" fill="white" stroke="white" stroke-width="1"/>
               <path d="M16 10L24 16L16 22V10Z" fill="white" stroke="white" stroke-width="1"/>
               <path d="M10 8H22" stroke="white" stroke-width="2" stroke-linecap="round"/>
               <path d="M10 24H22" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            <h1 class="text-xl font-bold text-primary">OCR Processing</h1>
+            <h1 v-if="!isCollapsed" class="text-xl font-bold text-primary whitespace-nowrap overflow-hidden">OCR Processing</h1>
           </div>
         </div>
 
         <!-- 中间菜单区域 -->
-        <nav class="aside-menu-area flex-1 py-4 overflow-y-auto">
-          <ul class="space-y-1 px-2">
+        <nav class="aside-menu-area flex-1 py-5 overflow-y-auto">
+          <ul class="space-y-2 px-3">
             <li v-for="item in menuItems" :key="item.key">
               <button
                 @click="$emit('switch-tab', item.key)"
                 :class="[
-                  'flex items-center px-3 py-2 rounded-md text-left w-full transition-colors',
+                  'flex items-center rounded-lg text-left w-full transition-all duration-200 ease-in-out',
+                  'text-base font-medium',
+                  isCollapsed ? 'justify-center p-3' : 'px-4 py-3',
                   activeTab === item.key
-                    ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary pl-2'
-                    : 'hover:bg-muted'
+                    ? 'bg-primary/10 text-primary shadow-sm'
+                    : 'text-gray-700 hover:bg-gray-100'
                 ]"
+                :title="isCollapsed ? $t(item.label) : ''"
               >
-                <component :is="item.icon" class="w-5 h-5 mr-3" />
-                {{ $t(item.label) }}
+                <component :is="item.icon" class="w-5 h-5 flex-shrink-0" :class="[isCollapsed ? '' : 'mr-3', activeTab === item.key ? 'text-primary' : 'text-gray-500']" />
+                <span v-if="!isCollapsed" class="truncate">{{ $t(item.label) }}</span>
               </button>
             </li>
           </ul>
@@ -74,8 +108,8 @@
 
         <!-- 底部用户信息区域 -->
         <div class="aside-user-area p-4 border-t mt-auto bg-gray-50">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary/10">
+          <div class="flex items-center" :class="isCollapsed ? 'justify-center' : 'space-x-3'">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary/10 flex-shrink-0">
               <User v-if="!user || !user.image" class="w-5 h-5 text-primary" />
               <img v-else 
                 :src="user.image"
@@ -83,9 +117,9 @@
                 class="w-10 h-10 rounded-full object-cover"
               />
             </div>
-            <div>
-              <h2 class="font-medium">{{ user && user.name ? user.name : $t('center.menu.profile') }}</h2>
-              <p class="text-xs text-muted-foreground">{{ user && user.email ? user.email : '' }}</p>
+            <div v-if="!isCollapsed" class="min-w-0 flex-1">
+              <h2 class="font-semibold text-base truncate">{{ user && user.name ? user.name : $t('center.menu.profile') }}</h2>
+              <p class="text-xs text-muted-foreground truncate">{{ user && user.email ? user.email : '' }}</p>
             </div>
           </div>
         </div>
@@ -101,7 +135,10 @@ import {
   CreditCard, 
   Settings, 
   Lock, 
-  Home
+  Home,
+  FileText,
+  Languages,
+  Wrench
 } from 'lucide-vue-next'
 
 // Props定义
@@ -122,6 +159,7 @@ const emit = defineEmits<{
   'switch-tab': [tabKey: string]
   'open-sidebar': []
   'close-sidebar': []
+  'toggle-collapse': [collapsed: boolean]
 }>()
 
 // 初始化i18n
@@ -136,14 +174,14 @@ interface MenuItem {
 
 // 状态
 const isMobile = ref(false) // 初始为false，在客户端挂载时设置
+const isCollapsed = ref(false) // 侧边栏收缩状态
 
 // 菜单项 - 添加仪表盘作为第一个选项
 const menuItems: MenuItem[] = [
   { key: 'dashboard', label: 'center.menu.dashboard', icon: Home },
-  { key: 'profile', label: 'center.menu.profile', icon: User },
-  { key: 'account', label: 'center.menu.account', icon: Lock },
-  { key: 'billing', label: 'center.menu.billing', icon: CreditCard },
-  { key: 'settings', label: 'center.menu.settings', icon: Settings }
+  { key: 'ocrAnalysis', label: 'center.menu.ocrAnalysis', icon: FileText },
+  { key: 'translation', label: 'center.menu.translation', icon: Languages },
+  { key: 'tools', label: 'center.menu.tools', icon: Wrench }
 ]
 
 // 处理窗口大小变化的函数
@@ -157,11 +195,27 @@ const handleResize = () => {
   }
 }
 
+// 切换侧边栏收缩状态
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value
+  // 保存状态到localStorage
+  localStorage.setItem('sidebarCollapsed', isCollapsed.value.toString())
+  // 发送事件通知父组件侧边栏状态已更改
+  emit('toggle-collapse', isCollapsed.value)
+}
+
 // 监听窗口大小变化
 onMounted(() => {
   // 客户端挂载后再设置窗口大小
   if (typeof window !== 'undefined') {
     isMobile.value = window.innerWidth < 768
+    
+    // 从localStorage恢复收缩状态
+    const savedCollapseState = localStorage.getItem('sidebarCollapsed')
+    if (savedCollapseState !== null) {
+      isCollapsed.value = savedCollapseState === 'true'
+    }
+    
     window.addEventListener('resize', handleResize)
   }
 })
@@ -226,12 +280,21 @@ aside {
   }
 }
 
-/* 高亮菜单悬停效果优化 */
-button[class*="border-l-4"] {
+/* 菜单按钮悬停效果优化 */
+button[class*="bg-primary"] {
   transition: all 0.2s ease-in-out;
 }
 
-button[class*="hover:bg-muted"]:hover {
+button[class*="hover:bg-gray-100"]:hover {
   transform: translateX(2px);
+}
+
+/* 收缩按钮旋转动画 */
+.aside-logo-area button svg {
+  transition: transform 0.3s ease;
+}
+
+.aside-logo-area button:hover svg {
+  transform: scale(1.1);
 }
 </style>

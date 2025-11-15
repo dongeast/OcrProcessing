@@ -1,5 +1,25 @@
 <template>
   <div class="space-y-6 py-6">
+    <!-- 欢迎横幅 -->
+    <Card class="mb-8 overflow-hidden">
+      <div class="bg-gradient-to-br from-gray-800 via-gray-700 to-gray-100 p-6 md:p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div>
+            <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">
+              {{ t('center.dashboard.welcome') }}, {{ user && user.name ? user.name : t('center.menu.profile') }}!
+            </h1>
+            <p class="text-gray-200">
+              {{ t('center.dashboard.subtitle') }}
+            </p>
+          </div>
+          <div class="mt-4 md:mt-0 flex gap-4">
+            <Button variant="outline">{{ t('center.dashboard.quickActions.addNew') }}</Button>
+            <Button>{{ t('center.dashboard.quickActions.uploadDocument') }}</Button>
+          </div>
+        </div>
+      </div>
+    </Card>
+
     <!-- 页面标题 -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
       <div>
@@ -114,7 +134,7 @@
             </div>
             <div>
               <h3 class="font-medium">{{ t('center.dashboard.uploadCard.title') }}</h3>
-          <p class="text-sm text-muted-foreground">{{ t('center.dashboard.uploadCard.description') }}</p>
+              <p class="text-sm text-muted-foreground">{{ t('center.dashboard.uploadCard.description') }}</p>
             </div>
           </div>
         </div>
@@ -123,9 +143,9 @@
         <div class="rounded-lg bg-card border p-5 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-semibold">{{ t('center.dashboard.recentActivity') }}</h3>
-        <button class="text-xs text-primary hover:text-primary/80">
-          {{ t('center.dashboard.viewAll') }}
-        </button>
+            <button class="text-xs text-primary hover:text-primary/80">
+              {{ t('center.dashboard.viewAll') }}
+            </button>
           </div>
           <div class="space-y-3">
             <div v-for="activity in recentActivities" :key="activity.id" class="flex items-start space-x-3">
@@ -159,7 +179,7 @@
               <input 
                 type="search" 
                 v-model="searchQuery" 
-                placeholder="Search documents..." 
+                :placeholder="t('center.dashboard.table.searchPlaceholder')" 
                 class="pl-9 h-9 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full sm:w-auto"
               />
             </div>
@@ -178,27 +198,27 @@
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead>
-              <tr class="border-b hover:bg-muted/50 transition-colors">
-                <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                  {{ t('center.dashboard.table.columns.name') }}
-                </th>
-                <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                  {{ t('center.dashboard.table.columns.type') }}
-                </th>
-                <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                  {{ t('center.dashboard.table.columns.size') }}
-                </th>
-                <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                  {{ t('center.dashboard.table.columns.status') }}
-                </th>
-                <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                  {{ t('center.dashboard.table.columns.date') }}
-                </th>
-                <th class="whitespace-nowrap py-4 px-4 text-right font-medium text-muted-foreground">
-                  {{ t('center.dashboard.table.columns.actions') }}
-                </th>
-              </tr>
-            </thead>
+            <tr class="border-b hover:bg-muted/50 transition-colors">
+              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
+                {{ t('center.dashboard.table.columns.name') }}
+              </th>
+              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
+                {{ t('center.dashboard.table.columns.type') }}
+              </th>
+              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
+                {{ t('center.dashboard.table.columns.size') }}
+              </th>
+              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
+                {{ t('center.dashboard.table.columns.status') }}
+              </th>
+              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
+                {{ t('center.dashboard.table.columns.date') }}
+              </th>
+              <th class="whitespace-nowrap py-4 px-4 text-right font-medium text-muted-foreground">
+                {{ t('center.dashboard.table.columns.actions') }}
+              </th>
+            </tr>
+          </thead>
           <tbody>
             <tr 
               v-for="document in filteredDocuments" 
@@ -236,7 +256,7 @@
                   <button 
                     @click="emit('view-document', document.id)"
                     class="p-1 text-muted-foreground hover:text-primary rounded-full hover:bg-primary/10 transition-colors"
-                    aria-label="View document"
+                    :aria-label="t('center.dashboard.table.actions.view')"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -246,7 +266,7 @@
                   <button 
                     @click="emit('download-document', document.id)"
                     class="p-1 text-muted-foreground hover:text-primary rounded-full hover:bg-primary/10 transition-colors"
-                    aria-label="Download document"
+                    :aria-label="t('center.dashboard.table.actions.download')"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -255,7 +275,7 @@
                   <button 
                     @click="emit('delete-document', document.id)"
                     class="p-1 text-muted-foreground hover:text-destructive rounded-full hover:bg-destructive/10 transition-colors"
-                    aria-label="Delete document"
+                    :aria-label="t('center.dashboard.table.actions.delete')"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -305,9 +325,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 // 获取i18n实例
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Props定义
 interface Props {
@@ -347,6 +369,12 @@ interface Props {
     description: string
     time: string
   }>
+  user?: {
+    name?: string
+    email?: string
+    image?: string
+    bio?: string
+  }
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -362,7 +390,8 @@ const props = withDefaults(defineProps<Props>(), {
     storage: { used: '456MB', total: '2GB', percentage: 23 },
     apiCalls: { used: 342, total: 1000, percentage: 34 }
   }),
-  activities: () => []
+  activities: () => [],
+  user: undefined
 })
 
 // 活动列表作为computed属性

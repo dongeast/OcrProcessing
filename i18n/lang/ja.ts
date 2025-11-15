@@ -19,8 +19,7 @@ export default {
         features: {
             title: '最も人気のあるオープンソーステクノロジースタックを統合して、起業家としての旅を一瞬で実現しましょう',
             sutTitle_1: 'NuxtJs3',
-            // Start of Selection  
-            subDescription_1: '本番環境向けのオープンソースのフルスタックNuxt.jsフレームワーク。',  
+            subDescription_1: '本番環境向けのオープンソースのフルスタックNuxt.jsフレームワーク。',
             sutTitle_2: 'Vue 3',
             subDescription_2: 'ウェブおよびネイティブユーザーインターフェースのためのオープンソースライブラリ。',
             sutTitle_3: 'BetterAuth',
@@ -524,10 +523,84 @@ export default {
     },
     center: {
       menu: {
+        dashboard: 'ダッシュボード',
         profile: 'プロフィール',
         account: 'アカウント',
         billing: '請求',
-        settings: '設定'
+        settings: '設定',
+        ocrAnalysis: 'OCR分析',
+        translation: '翻訳',
+        tools: 'ツール'
+      },
+      dashboard: {
+        title: 'ダッシュボード',
+        subtitle: 'OCRドキュメントを管理し、処理活動を監視する',
+        welcome: 'お帰りなさい',
+        quickActions: {
+          addNew: '新規追加',
+          uploadDocument: 'ドキュメントをアップロード'
+        },
+        uploadButton: 'ドキュメントをアップロード',
+        uploadCard: {
+          title: '新しいファイルをアップロード',
+          description: 'OCR処理のためにファイルをアップロード'
+        },
+        resources: {
+          usage: 'リソース使用量',
+          files: 'ファイル',
+          storage: 'ストレージ',
+          apiCalls: 'APIコール'
+        },
+        viewDetails: '詳細を見る',
+        table: {
+          searchPlaceholder: 'ドキュメントを検索...',
+          columns: {
+            name: '名前',
+            type: 'タイプ',
+            size: 'サイズ',
+            status: 'ステータス',
+            date: '日付',
+            actions: 'アクション'
+          },
+          actions: {
+            view: 'ドキュメントを表示',
+            download: 'ドキュメントをダウンロード',
+            delete: 'ドキュメントを削除'
+          },
+          empty: 'ドキュメントが見つかりません',
+          showing: '{total}件中{count}件を表示'
+        },
+        recentActivity: '最近の活動',
+        recentDocuments: '最近のドキュメント',
+        viewAll: 'すべて表示',
+        activities: {
+          uploaded: 'ファイルがアップロードされました',
+          processed: 'ドキュメントが正常に処理されました',
+          deleted: 'ファイルが削除されました',
+          failed: '処理に失敗しました'
+        },
+        cards: {
+          documents: {
+            label: 'ドキュメント',
+            subText: 'ドキュメント総数'
+          },
+          processed: {
+            label: '処理済み',
+            subText: '正常に処理済み'
+          },
+          accuracy: {
+            label: '精度',
+            subText: '成功率'
+          },
+          processingTime: {
+            label: '処理時間',
+            subText: 'ドキュメントあたりの平均時間'
+          }
+        },
+        sortNewest: '新しい順',
+        sortOldest: '古い順',
+        sortNameAsc: '名前（A-Z）',
+        sortNameDesc: '名前（Z-A）'
       },
       tabs: {
         profile: {
@@ -577,6 +650,172 @@ export default {
         newsletter: 'ニュースレター',
         productUpdates: '製品アップデート',
         securityAlerts: 'セキュリティアラート'
+      },
+      ocrAnalysis: {
+        title: 'OCR解析',
+        subtitle: '画像や文書からテキストを抽出する',
+        uploadButton: 'ファイルをアップロード',
+        features: {
+          title: 'OCR機能',
+          document: {
+            title: '文書処理',
+            description: 'PDF、DOCX、画像など様々な文書形式を処理'
+          },
+          accuracy: {
+            title: '高精度',
+            description: '最先端のAIアルゴリズムによる業界トップクラスのOCR精度'
+          },
+          export: {
+            title: '複数のエクスポートオプション',
+            description: 'TXT、DOCX、PDFなど様々な形式で結果をエクスポート'
+          }
+        },
+        upload: {
+          title: '文書をアップロード',
+          dragDrop: 'ここにファイルをドラッグ＆ドロップ',
+          supportedFormats: 'JPG、PNG、PDF、TIFF、BMPをサポート',
+          browseFiles: 'ファイルを参照'
+        },
+        recent: {
+          title: '最近のOCR処理',
+          table: {
+            name: '名前',
+            date: '日付',
+            status: 'ステータス',
+            actions: 'アクション'
+          },
+          actions: {
+            view: '表示',
+            download: 'ダウンロード'
+          },
+          empty: 'OCR処理記録が見つかりません'
+        },
+        status: {
+          completed: '完了',
+          processing: '処理中',
+          failed: '失敗'
+        }
+      },
+      translation: {
+        title: '翻訳',
+        subtitle: '複数言語間でテキストを翻訳',
+        translateButton: '翻訳',
+        features: {
+          title: '翻訳機能',
+          multiLanguage: {
+            title: '多言語サポート',
+            description: '100以上の言語と方言をサポート'
+          },
+          document: {
+            title: '文書翻訳',
+            description: 'フォーマットを保持したまま文書全体を翻訳'
+          },
+          accuracy: {
+            title: '正確な翻訳',
+            description: 'より自然で正確な結果のためのニューラル機械翻訳'
+          }
+        },
+        source: {
+          title: 'ソーステキスト',
+          placeholder: '翻訳するテキストを入力...'
+        },
+        result: {
+          title: '翻訳結果',
+          translating: '翻訳中...',
+          translated: '翻訳済み'
+        },
+        recent: {
+          title: '最近の翻訳',
+          table: {
+            source: 'ソース',
+            target: 'ターゲット',
+            date: '日付',
+            actions: 'アクション'
+          },
+          actions: {
+            view: '表示',
+            download: 'ダウンロード'
+          },
+          empty: '翻訳記録が見つかりません'
+        },
+        languages: {
+          en: '英語',
+          zh: '中国語',
+          ja: '日本語',
+          ko: '韓国語'
+        }
+      },
+      tools: {
+        title: 'ツール',
+        subtitle: '文書処理のための各種ユーティリティツール',
+        features: {
+          title: '利用可能なツール'
+        },
+        pdfConverter: {
+          title: 'PDFコンバーター',
+          description: '画像をPDF文書に変換',
+          input: '入力',
+          dragDrop: 'ここに画像をドラッグ＆ドロップ',
+          supportedFormats: 'JPG、PNG、TIFF、BMPをサポート',
+          browseFiles: '画像を参照',
+          output: '出力設定',
+          fileName: 'ファイル名',
+          fileNamePlaceholder: 'ファイル名を入力',
+          quality: '品質',
+          qualityHigh: '高',
+          qualityMedium: '中',
+          qualityLow: '低',
+          convertButton: 'PDFに変換'
+        },
+        imageCompressor: {
+          title: '画像圧縮ツール',
+          description: '品質を維持しながら画像ファイルサイズを削減',
+          input: '入力',
+          dragDrop: 'ここに画像をドラッグ＆ドロップ',
+          supportedFormats: 'JPG、PNG、TIFF、BMPをサポート',
+          browseFiles: '画像を参照',
+          output: '出力設定',
+          compression: '圧縮レベル',
+          format: '出力形式',
+          compressButton: '画像を圧縮'
+        },
+        imageCropper: {
+          title: '画像トリミングツール',
+          description: '画像を希望のサイズにトリミング'
+        },
+        imageRotator: {
+          title: '画像回転ツール',
+          description: '画像を正しい方向に回転'
+        },
+        batchProcessor: {
+          title: 'バッチプロセッサー',
+          description: '複数のファイルを一度に処理'
+        },
+        fileDownloader: {
+          title: 'ファイルダウンローダー',
+          description: 'URLからファイルをダウンロード'
+        },
+        selectTool: 'ツールを選択',
+        selectToolDescription: '開始するには上記のリストからツールを選択してください',
+        recent: {
+          title: '最近のツール使用',
+          table: {
+            tool: 'ツール',
+            date: '日付',
+            status: 'ステータス',
+            actions: 'アクション'
+          },
+          actions: {
+            view: '表示',
+            download: 'ダウンロード'
+          },
+          empty: 'ツール使用記録が見つかりません'
+        },
+        status: {
+          completed: '完了',
+          processing: '処理中',
+          failed: '失敗'
+        }
       }
     }
 }

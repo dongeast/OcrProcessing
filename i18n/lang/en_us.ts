@@ -542,53 +542,81 @@ export default {
         profile: 'Profile',
         account: 'Account',
         billing: 'Billing',
-        settings: 'Settings'
+        settings: 'Settings',
+        ocrAnalysis: 'OCR Analysis',
+        translation: 'Translation',
+        tools: 'Tools'
       },
-    dashboard: {
-      welcome: 'Welcome back',
-      subtitle: 'Manage your OCR documents and monitor processing activities',
-      quickActions: {
-        addNew: 'Add New',
-        uploadDocument: 'Upload Document'
-      },
-      usageStats: 'Usage Statistics',
-      stats: {
-        documents: 'Documents',
-        storage: 'Storage',
-        totalDocuments: 'Total Documents',
-        processingTime: 'Avg. Processing Time',
-        accuracyRate: 'Accuracy Rate',
-        storageUsed: 'Storage Used',
-        comparedToLastMonth: 'compared to last month',
-        fasterThanAverage: 'faster than average',
-        improvedThisMonth: 'improved this month',
-        ofLimit: 'of limit'
-      },
-      recentDocuments: 'Recent Documents',
-      recentDocumentsDesc: 'View and manage your recently processed documents',
-      viewAll: 'View All',
-      table: {
-        name: 'Name',
-        type: 'Type',
-        status: 'Status',
-        date: 'Date',
-        actions: 'Actions'
-      },
-      status: {
-        completed: 'Completed',
-        processing: 'Processing',
-        failed: 'Failed'
-      },
-      features: {
-        uploadNew: 'Upload New Document',
-        uploadNewDesc: 'Upload files for OCR processing',
-        uploadDragDrop: 'Drag and drop files here or click to browse',
-        uploadSelectFiles: 'Select Files',
-        uploadSupportedFormats: 'Supported formats: PDF, JPG, PNG, DOCX, XLSX',
+      dashboard: {
+        title: 'Dashboard',
+        subtitle: 'Manage your OCR documents and monitor processing activities',
+        welcome: 'Welcome back',
+        quickActions: {
+          addNew: 'Add New',
+          uploadDocument: 'Upload Document'
+        },
+        uploadButton: 'Upload Document',
+        uploadCard: {
+          title: 'Upload New Document',
+          description: 'Upload files for OCR processing'
+        },
+        resources: {
+          usage: 'Resource Usage',
+          files: 'Files',
+          storage: 'Storage',
+          apiCalls: 'API Calls'
+        },
+        viewDetails: 'View Details',
+        table: {
+          searchPlaceholder: 'Search documents...',
+          columns: {
+            name: 'Name',
+            type: 'Type',
+            size: 'Size',
+            status: 'Status',
+            date: 'Date',
+            actions: 'Actions'
+          },
+          actions: {
+            view: 'View document',
+            download: 'Download document',
+            delete: 'Delete document'
+          },
+          empty: 'No documents found',
+          showing: 'Showing {count} of {total} documents'
+        },
         recentActivity: 'Recent Activity',
-        recentActivityDesc: 'Your recent processing and account activities'
-      }
-    },
+        recentDocuments: 'Recent Documents',
+        viewAll: 'View All',
+        activities: {
+          uploaded: 'File uploaded',
+          processed: 'Document processed successfully',
+          deleted: 'File deleted',
+          failed: 'Processing failed'
+        },
+        cards: {
+          documents: {
+            label: 'Documents',
+            subText: 'Total documents'
+          },
+          processed: {
+            label: 'Processed',
+            subText: 'Successfully processed'
+          },
+          accuracy: {
+            label: 'Accuracy',
+            subText: 'Success rate'
+          },
+          processingTime: {
+            label: 'Processing Time',
+            subText: 'Average time per document'
+          }
+        },
+        sortNewest: 'Newest first',
+        sortOldest: 'Oldest first',
+        sortNameAsc: 'Name (A-Z)',
+        sortNameDesc: 'Name (Z-A)'
+      },
       tabs: {
         profile: {
           title: 'Profile',
@@ -637,6 +665,172 @@ export default {
         newsletter: 'Newsletter',
         productUpdates: 'Product Updates',
         securityAlerts: 'Security Alerts'
+      },
+      ocrAnalysis: {
+        title: 'OCR Analysis',
+        subtitle: 'Extract text from images and documents',
+        uploadButton: 'Upload Files',
+        features: {
+          title: 'OCR Features',
+          document: {
+            title: 'Document Processing',
+            description: 'Process various document formats including PDF, DOCX, and images'
+          },
+          accuracy: {
+            title: 'High Accuracy',
+            description: 'Industry-leading OCR accuracy with advanced AI algorithms'
+          },
+          export: {
+            title: 'Multiple Export Options',
+            description: 'Export results in various formats including TXT, DOCX, and PDF'
+          }
+        },
+        upload: {
+          title: 'Upload Documents',
+          dragDrop: 'Drag and drop files here',
+          supportedFormats: 'Supports JPG, PNG, PDF, TIFF, BMP',
+          browseFiles: 'Browse Files'
+        },
+        recent: {
+          title: 'Recent OCR Processing',
+          table: {
+            name: 'Name',
+            date: 'Date',
+            status: 'Status',
+            actions: 'Actions'
+          },
+          actions: {
+            view: 'View',
+            download: 'Download'
+          },
+          empty: 'No OCR processing records found'
+        },
+        status: {
+          completed: 'Completed',
+          processing: 'Processing',
+          failed: 'Failed'
+        }
+      },
+      translation: {
+        title: 'Translation',
+        subtitle: 'Translate text between multiple languages',
+        translateButton: 'Translate',
+        features: {
+          title: 'Translation Features',
+          multiLanguage: {
+            title: 'Multi-language Support',
+            description: 'Support for 100+ languages and dialects'
+          },
+          document: {
+            title: 'Document Translation',
+            description: 'Translate entire documents while preserving formatting'
+          },
+          accuracy: {
+            title: 'Accurate Translation',
+            description: 'Neural machine translation for more natural and accurate results'
+          }
+        },
+        source: {
+          title: 'Source Text',
+          placeholder: 'Enter text to translate...'
+        },
+        result: {
+          title: 'Translation Result',
+          translating: 'Translating...',
+          translated: 'Translated'
+        },
+        recent: {
+          title: 'Recent Translations',
+          table: {
+            source: 'Source',
+            target: 'Target',
+            date: 'Date',
+            actions: 'Actions'
+          },
+          actions: {
+            view: 'View',
+            download: 'Download'
+          },
+          empty: 'No translation records found'
+        },
+        languages: {
+          en: 'English',
+          zh: 'Chinese',
+          ja: 'Japanese',
+          ko: 'Korean'
+        }
+      },
+      tools: {
+        title: 'Tools',
+        subtitle: 'Various utility tools for document processing',
+        features: {
+          title: 'Available Tools'
+        },
+        pdfConverter: {
+          title: 'PDF Converter',
+          description: 'Convert images to PDF documents',
+          input: 'Input',
+          dragDrop: 'Drag and drop images here',
+          supportedFormats: 'Supports JPG, PNG, TIFF, BMP',
+          browseFiles: 'Browse Images',
+          output: 'Output Settings',
+          fileName: 'File Name',
+          fileNamePlaceholder: 'Enter file name',
+          quality: 'Quality',
+          qualityHigh: 'High',
+          qualityMedium: 'Medium',
+          qualityLow: 'Low',
+          convertButton: 'Convert to PDF'
+        },
+        imageCompressor: {
+          title: 'Image Compressor',
+          description: 'Reduce image file size while maintaining quality',
+          input: 'Input',
+          dragDrop: 'Drag and drop images here',
+          supportedFormats: 'Supports JPG, PNG, TIFF, BMP',
+          browseFiles: 'Browse Images',
+          output: 'Output Settings',
+          compression: 'Compression Level',
+          format: 'Output Format',
+          compressButton: 'Compress Image'
+        },
+        imageCropper: {
+          title: 'Image Cropper',
+          description: 'Crop images to desired dimensions'
+        },
+        imageRotator: {
+          title: 'Image Rotator',
+          description: 'Rotate images to correct orientation'
+        },
+        batchProcessor: {
+          title: 'Batch Processor',
+          description: 'Process multiple files at once'
+        },
+        fileDownloader: {
+          title: 'File Downloader',
+          description: 'Download files from URLs'
+        },
+        selectTool: 'Select a Tool',
+        selectToolDescription: 'Choose a tool from the list above to get started',
+        recent: {
+          title: 'Recent Tool Usage',
+          table: {
+            tool: 'Tool',
+            date: 'Date',
+            status: 'Status',
+            actions: 'Actions'
+          },
+          actions: {
+            view: 'View',
+            download: 'Download'
+          },
+          empty: 'No tool usage records found'
+        },
+        status: {
+          completed: 'Completed',
+          processing: 'Processing',
+          failed: 'Failed'
+        }
       }
     }
 }

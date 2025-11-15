@@ -529,60 +529,300 @@ export default {
       selectLoginMethodDescription: '即刻開啟屬於你在NuxtPro的出海之旅.',
     },
     center: {
-      menu: {
-        profile: '個人資料',
-        account: '帳戶',
-        billing: '帳單',
-        settings: '設定'
-      },
-      tabs: {
+        menu: {
+            dashboard: '儀表板',
+            profile: '個人資料',
+            account: '帳戶',
+            billing: '帳單',
+            settings: '設定',
+            ocrAnalysis: 'OCR分析',
+            translation: '翻譯',
+            tools: '工具'
+        },
+        dashboard: {
+            title: '儀表板',
+            subtitle: '管理您的OCR文件並監控處理活動',
+            welcome: '歡迎回來',
+            quickActions: {
+                addNew: '新增',
+                uploadDocument: '上傳文件'
+            },
+            uploadButton: '上傳文件',
+            uploadCard: {
+                title: '上傳新文件',
+                description: '上傳文件進行OCR處理'
+            },
+            resources: {
+                usage: '資源使用情況',
+                files: '文件',
+                storage: '存儲空間',
+                apiCalls: 'API調用'
+            },
+            viewDetails: '查看詳情',
+            table: {
+                searchPlaceholder: '搜尋文件...',
+                columns: {
+                    name: '名稱',
+                    type: '類型',
+                    size: '大小',
+                    status: '狀態',
+                    date: '日期',
+                    actions: '操作'
+                },
+                actions: {
+                    view: '查看文件',
+                    download: '下載文件',
+                    delete: '刪除文件'
+                },
+                empty: '未找到文件',
+                showing: '顯示 {count} 個，共 {total} 個文件'
+            },
+            recentActivity: '最近活動',
+            recentDocuments: '最近文件',
+            viewAll: '查看全部',
+            activities: {
+                uploaded: '文件已上傳',
+                processed: '文件處理成功',
+                deleted: '文件已刪除',
+                failed: '處理失敗'
+            },
+            cards: {
+                documents: {
+                    label: '文件',
+                    subText: '文件總數'
+                },
+                processed: {
+                    label: '已處理',
+                    subText: '成功處理'
+                },
+                accuracy: {
+                    label: '準確率',
+                    subText: '成功率'
+                },
+                processingTime: {
+                    label: '處理時間',
+                    subText: '每文件平均時間'
+                }
+            },
+            sortNewest: '最新優先',
+            sortOldest: '最舊優先',
+            sortNameAsc: '名稱（A-Z）',
+            sortNameDesc: '名稱（Z-A）'
+        },
+        tabs: {
+            profile: {
+                title: '個人資料',
+                description: '管理您的個人資料信息'
+            },
+            account: {
+                title: '帳戶',
+                description: '管理您的帳戶設置'
+            },
+            billing: {
+                title: '帳單',
+                description: '管理您的帳單信息和付款方式'
+            },
+            settings: {
+                title: '設定',
+                description: '管理您的應用程序設置'
+            }
+        },
         profile: {
-          title: '個人資料',
-          description: '管理您的個人資料資訊'
+            name: '姓名',
+            email: '電子郵箱',
+            bio: '個人簡介',
+            updateProfile: '更新個人資料'
         },
         account: {
-          title: '帳戶',
-          description: '管理您的帳戶設定'
+            changePassword: '更改密碼',
+            currentPassword: '當前密碼',
+            newPassword: '新密碼',
+            confirmPassword: '確認新密碼',
+            updatePassword: '更新密碼',
+            deleteAccount: '刪除帳戶',
+            deleteAccountDescription: '一旦您刪除帳戶，將無法恢復。請確認。'
         },
         billing: {
-          title: '帳單',
-          description: '管理您的帳單資訊和付款方式'
+            currentPlan: '當前計劃',
+            upgradePlan: '升級計劃',
+            paymentMethods: '付款方式',
+            edit: '編輯',
+            addPaymentMethod: '添加付款方式',
+            billingHistory: '帳單歷史'
         },
         settings: {
-          title: '設定',
-          description: '管理您的應用程式設定'
+            language: '語言',
+            selectLanguage: '選擇語言',
+            emailNotifications: '郵件通知',
+            newsletter: '新聞通訊',
+            productUpdates: '產品更新',
+            securityAlerts: '安全警報'
+        },
+        ocrAnalysis: {
+            title: 'OCR分析',
+            subtitle: '從圖像和文件中提取文字',
+            uploadButton: '上傳文件',
+            features: {
+                title: 'OCR功能',
+                document: {
+                    title: '文件處理',
+                    description: '處理各種文件格式，包括PDF、DOCX和圖像'
+                },
+                accuracy: {
+                    title: '高精度',
+                    description: '行業領先的OCR精度，採用先進的AI算法'
+                },
+                export: {
+                    title: '多種導出選項',
+                    description: '將結果導出為各種格式，包括TXT、DOCX和PDF'
+                }
+            },
+            upload: {
+                title: '上傳文件',
+                dragDrop: '拖拽文件到此處',
+                supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+                browseFiles: '瀏覽文件'
+            },
+            recent: {
+                title: '最近OCR處理',
+                table: {
+                    name: '名稱',
+                    date: '日期',
+                    status: '狀態',
+                    actions: '操作'
+                },
+                actions: {
+                    view: '查看',
+                    download: '下載'
+                },
+                empty: '未找到OCR處理記錄'
+            },
+            status: {
+                completed: '已完成',
+                processing: '處理中',
+                failed: '失敗'
+            }
+        },
+        translation: {
+            title: '翻譯',
+            subtitle: '在多種語言之間翻譯文字',
+            translateButton: '翻譯',
+            features: {
+                title: '翻譯功能',
+                multiLanguage: {
+                    title: '多語言支持',
+                    description: '支持100多種語言和方言'
+                },
+                document: {
+                    title: '文件翻譯',
+                    description: '翻譯整個文件並保留格式'
+                },
+                accuracy: {
+                    title: '精準翻譯',
+                    description: '神經機器翻譯，結果更自然準確'
+                }
+            },
+            source: {
+                title: '原文',
+                placeholder: '輸入要翻譯的文字...'
+            },
+            result: {
+                title: '翻譯結果',
+                translating: '翻譯中...',
+                translated: '已翻譯'
+            },
+            recent: {
+                title: '最近翻譯',
+                table: {
+                    source: '原文',
+                    target: '目標語言',
+                    date: '日期',
+                    actions: '操作'
+                },
+                actions: {
+                    view: '查看',
+                    download: '下載'
+                },
+                empty: '未找到翻譯記錄'
+            },
+            languages: {
+                en: '英語',
+                zh: '中文',
+                ja: '日語',
+                ko: '韓語'
+            }
+        },
+        tools: {
+            title: '工具',
+            subtitle: '各種文件處理實用工具',
+            features: {
+                title: '可用工具'
+            },
+            pdfConverter: {
+                title: 'PDF轉換器',
+                description: '將圖像轉換為PDF文件',
+                input: '輸入',
+                dragDrop: '拖拽圖像到此處',
+                supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+                browseFiles: '瀏覽圖像',
+                output: '輸出設置',
+                fileName: '文件名',
+                fileNamePlaceholder: '輸入文件名',
+                quality: '質量',
+                qualityHigh: '高',
+                qualityMedium: '中',
+                qualityLow: '低',
+                convertButton: '轉換為PDF'
+            },
+            imageCompressor: {
+                title: '圖像壓縮器',
+                description: '在保持質量的同時減小圖像文件大小',
+                input: '輸入',
+                dragDrop: '拖拽圖像到此處',
+                supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+                browseFiles: '瀏覽圖像',
+                output: '輸出設置',
+                compression: '壓縮級別',
+                format: '輸出格式',
+                compressButton: '壓縮圖像'
+            },
+            imageCropper: {
+                title: '圖像裁剪器',
+                description: '將圖像裁剪為所需尺寸'
+            },
+            imageRotator: {
+                title: '圖像旋轉器',
+                description: '旋轉圖像以校正方向'
+            },
+            batchProcessor: {
+                title: '批量處理器',
+                description: '一次處理多個文件'
+            },
+            fileDownloader: {
+                title: '文件下載器',
+                description: '從URL下載文件'
+            },
+            selectTool: '選擇工具',
+            selectToolDescription: '從上面的列表中選擇一個工具開始使用',
+            recent: {
+                title: '最近工具使用',
+                table: {
+                    tool: '工具',
+                    date: '日期',
+                    status: '狀態',
+                    actions: '操作'
+                },
+                actions: {
+                    view: '查看',
+                    download: '下載'
+                },
+                empty: '未找到工具使用記錄'
+            },
+            status: {
+                completed: '已完成',
+                processing: '處理中',
+                failed: '失敗'
+            }
         }
-      },
-      profile: {
-        name: '姓名',
-        email: '電郵',
-        bio: '個人簡介',
-        updateProfile: '更新個人資料'
-      },
-      account: {
-        changePassword: '修改密碼',
-        currentPassword: '目前密碼',
-        newPassword: '新密碼',
-        confirmPassword: '確認新密碼',
-        updatePassword: '更新密碼',
-        deleteAccount: '刪除帳戶',
-        deleteAccountDescription: '一旦您刪除帳戶，將無法復原，請確認。'
-      },
-      billing: {
-        currentPlan: '目前方案',
-        upgradePlan: '升級方案',
-        paymentMethods: '付款方式',
-        edit: '編輯',
-        addPaymentMethod: '新增付款方式',
-        billingHistory: '帳單歷史'
-      },
-      settings: {
-        language: '語言',
-        selectLanguage: '選擇語言',
-        emailNotifications: '電郵通知',
-        newsletter: '新聞通訊',
-        productUpdates: '產品更新',
-        securityAlerts: '安全警報'
-      }
     }
 }

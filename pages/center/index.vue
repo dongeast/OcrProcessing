@@ -3,12 +3,12 @@
     <!-- 侧边栏组件 -->
     <Sidebar 
       :user="user"
-      :menu-items="menuItems"
       :active-tab="activeTab"
-      :is-mobile="isMobile"
       :sidebar-open="sidebarOpen"
-      @toggle-sidebar="sidebarOpen = !sidebarOpen"
+      @open-sidebar="sidebarOpen = true"
+      @close-sidebar="sidebarOpen = false"
       @switch-tab="switchTab"
+      @toggle-collapse="handleToggleCollapse"
     />
 
     <!-- 移动端汉堡菜单按钮 -->
@@ -23,27 +23,7 @@
     </button>
 
     <!-- 主内容区 -->
-    <main :class="['flex-1 p-6 overflow-y-auto min-h-screen transition-all duration-300', isMobile ? '' : 'ml-64']">
-      <!-- 欢迎横幅 -->
-      <Card class="mb-8 overflow-hidden">
-        <div class="bg-gradient-to-r from-primary/10 to-primary/5 p-6 md:p-8">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <div>
-              <h1 class="text-2xl md:text-3xl font-bold text-primary-foreground mb-2">
-                {{ $t('center.dashboard.welcome') }}, {{ user && user.name ? user.name : $t('center.menu.profile') }}!
-              </h1>
-              <p class="text-muted-foreground">
-                {{ $t('center.dashboard.subtitle') }}
-              </p>
-            </div>
-            <div class="mt-4 md:mt-0 flex gap-4">
-              <Button variant="outline">{{ $t('center.dashboard.quickActions.addNew') }}</Button>
-              <Button>{{ $t('center.dashboard.quickActions.uploadDocument') }}</Button>
-            </div>
-          </div>
-        </div>
-      </Card>
-
+    <main :class="['flex-1 p-6 overflow-y-auto min-h-screen transition-all duration-300', isMobile ? '' : (isSidebarCollapsed ? 'ml-20' : 'ml-60')]">
       <div class="max-w-7xl mx-auto">
         <!-- 动态加载相应标签页组件 -->
         <Dashboard 
@@ -52,6 +32,7 @@
           :overview-stats="overviewStats"
           :recent-documents="recentDocuments"
           :recent-activities="recentActivities"
+          :user="user"
           @upload-document="handleUploadDocument"
           @view-all-documents="handleViewAllDocuments"
         />
@@ -86,6 +67,28 @@
           @cancel="handleSettingsCancel"
           @switch-language="switchLanguage"
         />
+        
+        <!-- 新增的组件 -->
+        <OcrAnalysis 
+          v-else-if="activeTab === 'ocrAnalysis'"
+          :user="user"
+          :current-locale="currentLocale"
+          @switch-language="switchLanguage"
+        />
+        
+        <Translation 
+          v-else-if="activeTab === 'translation'"
+          :user="user"
+          :current-locale="currentLocale"
+          @switch-language="switchLanguage"
+        />
+        
+        <Tools 
+          v-else-if="activeTab === 'tools'"
+          :user="user"
+          :current-locale="currentLocale"
+          @switch-language="switchLanguage"
+        />
       </div>
     </main>
   </div>
@@ -104,8 +107,11 @@ import Profile from '@/components/center/Profile.vue'
 import Account from '@/components/center/Account.vue'
 import Billing from '@/components/center/Billing.vue'
 import Settings from '@/components/center/Settings.vue'
+import OcrAnalysis from '@/components/center/OcrAnalysis.vue'
+import Translation from '@/components/center/Translation.vue'
+import Tools from '@/components/center/Tools.vue'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { User, CreditCard, Settings as SettingsIcon, Lock, Home } from 'lucide-vue-next'
+import { User, CreditCard, Settings as SettingsIcon, Lock, Home, FileText, Languages, Wrench } from 'lucide-vue-next'
 import { useSwitchLocalePath } from '#imports'
 
 // 组件已在上方导入
@@ -149,63 +155,86 @@ interface RecentActivity {
 const { t, locale } = useI18n()
 const router = useRouter()
 const switchLocalePath = useSwitchLocalePath()
-const { data: session } = useSession()
+const session: any = useSession()
 
 // 安全地访问用户数据，添加模拟数据作为备用
-  const user = computed(() => {
-    if (session && session.value && session.value.user) {
-      return session.value.user
-    }
-    // 返回模拟用户数据作为临时解决方案
-    return {
-      name: 'Demo User',
-      email: 'demo@example.com',
-      image: null,
-      bio: 'This is a demo user account'
-    }
-  })
+const user = computed(() => {
+  if (session && session.data && session.data.user) {
+    return session.data.user
+  }
+  // 返回模拟用户数据作为临时解决方案
+  return {
+    name: 'Demo User',
+    email: 'demo@example.com',
+    image: null,
+    bio: 'This is a demo user account'
+  }
+})
 
-  // 状态
-  const activeTab = ref('dashboard') // 默认显示仪表盘
-  const currentLocale = ref(locale.value)
-  const sidebarOpen = ref(false) // 移动端侧边栏开关
-  const isMobile = ref(false) // 初始为false，在客户端挂载时设置
-  
-  // 处理窗口大小变化的函数
-  const handleResize = () => {
-    if (typeof window !== 'undefined') {
-      isMobile.value = window.innerWidth < 768
-      // 在大屏幕上自动关闭侧边栏
-      if (!isMobile.value) {
-        sidebarOpen.value = false
-      }
+// 状态
+const activeTab = ref('dashboard') // 默认显示仪表盘
+const currentLocale = ref(locale.value)
+const sidebarOpen = ref(false) // 移动端侧边栏开关
+const isMobile = ref(false) // 初始为false，在客户端挂载时设置
+const isSidebarCollapsed = ref(false) // 侧边栏折叠状态
+
+// 处理窗口大小变化的函数
+const handleResize = () => {
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 768
+    // 在大屏幕上自动关闭侧边栏
+    if (!isMobile.value) {
+      sidebarOpen.value = false
     }
   }
-  
-  // 监听窗口大小变化和其他初始化操作
-  onMounted(() => {
-    // 客户端挂载后再设置窗口大小和初始化
-    if (typeof window !== 'undefined') {
-      isMobile.value = window.innerWidth < 768
-      
-      // 添加resize事件监听器
-      window.addEventListener('resize', handleResize)
-      
-      // 初始化标签页
-      initializeTab()
-    }
-  })
-  
-  // 初始化时从URL参数读取activeTab
-  const initializeTab = () => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search)
-      const tabParam = urlParams.get('tab')
-      if (tabParam && menuItems.some(item => item.key === tabParam)) {
-        activeTab.value = tabParam
-      }
+}
+
+// 监听窗口大小变化和其他初始化操作
+onMounted(() => {
+  // 客户端挂载后再设置窗口大小和初始化
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 768
+    
+    // 添加resize事件监听器
+    window.addEventListener('resize', handleResize)
+    
+    // 初始化标签页
+    initializeTab()
+    
+    // 从localStorage恢复侧边栏折叠状态
+    const savedCollapseState = localStorage.getItem('sidebarCollapsed')
+    if (savedCollapseState !== null) {
+      isSidebarCollapsed.value = savedCollapseState === 'true'
     }
   }
+})
+
+// 监听localStorage变化以同步侧边栏折叠状态
+const handleStorageChange = (e: StorageEvent) => {
+  if (e.key === 'sidebarCollapsed') {
+    isSidebarCollapsed.value = e.newValue === 'true'
+  }
+}
+
+// 添加存储事件监听器
+onMounted(() => {
+  window.addEventListener('storage', handleStorageChange)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('storage', handleStorageChange)
+})
+
+// 初始化时从URL参数读取activeTab
+const initializeTab = () => {
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search)
+    const tabParam = urlParams.get('tab')
+    if (tabParam && menuItems.some(item => item.key === tabParam)) {
+      activeTab.value = tabParam
+    }
+  }
+}
 
 // 菜单数据
 const menuItems = [
@@ -213,7 +242,11 @@ const menuItems = [
   { key: 'profile', label: 'center.menu.profile', icon: User },
   { key: 'account', label: 'center.menu.account', icon: Lock },
   { key: 'billing', label: 'center.menu.billing', icon: CreditCard },
-  { key: 'settings', label: 'center.menu.settings', icon: SettingsIcon }
+  { key: 'settings', label: 'center.menu.settings', icon: SettingsIcon },
+  // 新增的菜单项
+  { key: 'ocrAnalysis', label: 'center.menu.ocrAnalysis', icon: FileText },
+  { key: 'translation', label: 'center.menu.translation', icon: Languages },
+  { key: 'tools', label: 'center.menu.tools', icon: Wrench }
 ]
 
 // 语言选项
@@ -285,10 +318,13 @@ const updateProfile = () => {
 }
 
 const switchLanguage = async (newLocale: string) => {
+  // @ts-ignore
   currentLocale.value = newLocale
+  // @ts-ignore
   locale.value = newLocale
   localStorage.setItem('userLocale', newLocale)
   
+  // @ts-ignore
   const path = switchLocalePath(newLocale)
   if (path) {
     await router.push({
@@ -378,6 +414,11 @@ const handlePopState = () => {
   }
 }
 
+// 处理侧边栏折叠/展开状态改变
+const handleToggleCollapse = (collapsed: boolean) => {
+  isSidebarCollapsed.value = collapsed;
+}
+
 // 挂载时初始化
 onMounted(() => {
   // 为开发/演示目的，暂时注释掉登录检查
@@ -400,7 +441,9 @@ onMounted(() => {
   // 从 localStorage 恢复语言设置
   const savedLocale = localStorage.getItem('userLocale') || locale.value
   if (savedLocale) {
+    // @ts-ignore
     currentLocale.value = savedLocale
+    // @ts-ignore
     locale.value = savedLocale
   }
 })

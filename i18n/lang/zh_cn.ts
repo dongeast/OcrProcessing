@@ -9,6 +9,10 @@ export default {
                 uploadDocument: '上传文档'
             },
             uploadButton: '上传文档',
+            uploadCard: {
+                title: '上传新文件',
+                description: '上传文件进行OCR处理'
+            },
             resources: {
                 usage: '资源使用情况',
                 files: '文件',
@@ -17,15 +21,25 @@ export default {
             },
             viewDetails: '查看详情',
             table: {
+                searchPlaceholder: '搜索文档...',
                 columns: {
                     name: '名称',
                     type: '类型',
+                    size: '大小',
                     status: '状态',
                     date: '日期',
                     actions: '操作'
-                }
+                },
+                actions: {
+                    view: '查看文档',
+                    download: '下载文档',
+                    delete: '删除文档'
+                },
+                empty: '未找到文档',
+                showing: '显示 {count} 个，共 {total} 个文档'
             },
             recentActivity: '最近活动',
+            recentDocuments: '最近文档',
             viewAll: '查看全部',
             activities: {
                 uploaded: '文件已上传',
@@ -50,14 +64,21 @@ export default {
                     label: '处理时间',
                     subText: '每文档平均时间'
                 }
-            }
+            },
+            sortNewest: '最新优先',
+            sortOldest: '最旧优先',
+            sortNameAsc: '名称（A-Z）',
+            sortNameDesc: '名称（Z-A）'
         },
         menu: {
             dashboard: '仪表盘',
             profile: '个人资料',
             account: '账户',
             billing: '账单',
-            settings: '设置'
+            settings: '设置',
+            ocrAnalysis: 'OCR分析',
+            translation: '智能翻译',
+            tools: '实用工具'
         }
     },
     home: {
@@ -581,5 +602,171 @@ export default {
     auth: {
       selectLoginMethod: '授权登录',
       selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.'
-     }
+     },
+      ocrAnalysis: {
+        title: 'OCR分析',
+        subtitle: '从图像和文档中提取文本',
+        uploadButton: '上传文件',
+        features: {
+          title: 'OCR功能',
+          document: {
+            title: '文档处理',
+            description: '处理各种文档格式，包括PDF、DOCX和图像'
+          },
+          accuracy: {
+            title: '高精度',
+            description: '行业领先的OCR精度，采用先进的AI算法'
+          },
+          export: {
+            title: '多种导出选项',
+            description: '将结果导出为各种格式，包括TXT、DOCX和PDF'
+          }
+        },
+        upload: {
+          title: '上传文档',
+          dragDrop: '拖拽文件到此处',
+          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+          browseFiles: '浏览文件'
+        },
+        recent: {
+          title: '最近OCR处理',
+          table: {
+            name: '名称',
+            date: '日期',
+            status: '状态',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到OCR处理记录'
+        },
+        status: {
+          completed: '已完成',
+          processing: '处理中',
+          failed: '失败'
+        }
+      },
+      translation: {
+        title: '翻译',
+        subtitle: '在多种语言之间翻译文本',
+        translateButton: '翻译',
+        features: {
+          title: '翻译功能',
+          multiLanguage: {
+            title: '多语言支持',
+            description: '支持100多种语言和方言'
+          },
+          document: {
+            title: '文档翻译',
+            description: '翻译整个文档并保留格式'
+          },
+          accuracy: {
+            title: '精准翻译',
+            description: '神经机器翻译，结果更自然准确'
+          }
+        },
+        source: {
+          title: '源文本',
+          placeholder: '输入要翻译的文本...'
+        },
+        result: {
+          title: '翻译结果',
+          translating: '翻译中...',
+          translated: '已翻译'
+        },
+        recent: {
+          title: '最近翻译',
+          table: {
+            source: '源语言',
+            target: '目标语言',
+            date: '日期',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到翻译记录'
+        },
+        languages: {
+          en: '英语',
+          zh: '中文',
+          ja: '日语',
+          ko: '韩语'
+        }
+      },
+      tools: {
+        title: '工具',
+        subtitle: '各种文档处理实用工具',
+        features: {
+          title: '可用工具'
+        },
+        pdfConverter: {
+          title: 'PDF转换器',
+          description: '将图像转换为PDF文档',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          fileName: '文件名',
+          fileNamePlaceholder: '输入文件名',
+          quality: '质量',
+          qualityHigh: '高',
+          qualityMedium: '中',
+          qualityLow: '低',
+          convertButton: '转换为PDF'
+        },
+        imageCompressor: {
+          title: '图像压缩器',
+          description: '在保持质量的同时减小图像文件大小',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          compression: '压缩级别',
+          format: '输出格式',
+          compressButton: '压缩图像'
+        },
+        imageCropper: {
+          title: '图像裁剪器',
+          description: '将图像裁剪为所需尺寸'
+        },
+        imageRotator: {
+          title: '图像旋转器',
+          description: '旋转图像以校正方向'
+        },
+        batchProcessor: {
+          title: '批量处理器',
+          description: '一次处理多个文件'
+        },
+        fileDownloader: {
+          title: '文件下载器',
+          description: '从URL下载文件'
+        },
+        selectTool: '选择工具',
+        selectToolDescription: '从上面的列表中选择一个工具开始使用',
+        recent: {
+          title: '最近工具使用',
+          table: {
+            tool: '工具',
+            date: '日期',
+            status: '状态',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到工具使用记录'
+        },
+        status: {
+          completed: '已完成',
+          processing: '处理中',
+          failed: '失败'
+        }
+      }
 }

@@ -530,10 +530,84 @@ export default {
     },
     center: {
       menu: {
+        dashboard: '대시보드',
         profile: '프로필',
         account: '계정',
-        billing: '결제',
-        settings: '설정'
+        billing: '청구',
+        settings: '설정',
+        ocrAnalysis: 'OCR 분석',
+        translation: '번역',
+        tools: '도구'
+      },
+      dashboard: {
+        title: '대시보드',
+        subtitle: 'OCR 문서를 관리하고 처리 활동을 모니터링하세요',
+        welcome: '다시 오신 것을 환영합니다',
+        quickActions: {
+          addNew: '새로 추가',
+          uploadDocument: '문서 업로드'
+        },
+        uploadButton: '문서 업로드',
+        uploadCard: {
+          title: '새 문서 업로드',
+          description: 'OCR 처리를 위해 파일 업로드'
+        },
+        resources: {
+          usage: '리소스 사용량',
+          files: '파일',
+          storage: '저장소',
+          apiCalls: 'API 호출'
+        },
+        viewDetails: '세부 정보 보기',
+        table: {
+          searchPlaceholder: '문서 검색...',
+          columns: {
+            name: '이름',
+            type: '유형',
+            size: '크기',
+            status: '상태',
+            date: '날짜',
+            actions: '작업'
+          },
+          actions: {
+            view: '문서 보기',
+            download: '문서 다운로드',
+            delete: '문서 삭제'
+          },
+          empty: '문서를 찾을 수 없습니다',
+          showing: '{total}개 중 {count}개 표시'
+        },
+        recentActivity: '최근 활동',
+        recentDocuments: '최근 문서',
+        viewAll: '모두 보기',
+        activities: {
+          uploaded: '파일이 업로드됨',
+          processed: '문서가 성공적으로 처리됨',
+          deleted: '파일이 삭제됨',
+          failed: '처리 실패'
+        },
+        cards: {
+          documents: {
+            label: '문서',
+            subText: '총 문서 수'
+          },
+          processed: {
+            label: '처리됨',
+            subText: '성공적으로 처리됨'
+          },
+          accuracy: {
+            label: '정확도',
+            subText: '성공률'
+          },
+          processingTime: {
+            label: '처리 시간',
+            subText: '문서당 평균 시간'
+          }
+        },
+        sortNewest: '최신순',
+        sortOldest: '오래된순',
+        sortNameAsc: '이름 (A-Z)',
+        sortNameDesc: '이름 (Z-A)'
       },
       tabs: {
         profile: {
@@ -583,6 +657,172 @@ export default {
         newsletter: '뉴스레터',
         productUpdates: '제품 업데이트',
         securityAlerts: '보안 알림'
+      },
+      ocrAnalysis: {
+        title: 'OCR 분석',
+        subtitle: '이미지와 문서에서 텍스트 추출',
+        uploadButton: '파일 업로드',
+        features: {
+          title: 'OCR 기능',
+          document: {
+            title: '문서 처리',
+            description: 'PDF, DOCX 및 이미지를 포함한 다양한 문서 형식 처리'
+          },
+          accuracy: {
+            title: '고정확도',
+            description: '고급 AI 알고리즘을 사용한 업계 선도적인 OCR 정확도'
+          },
+          export: {
+            title: '다양한 내보내기 옵션',
+            description: 'TXT, DOCX 및 PDF를 포함한 다양한 형식으로 결과 내보내기'
+          }
+        },
+        upload: {
+          title: '문서 업로드',
+          dragDrop: '여기에 파일을 드래그 앤 드롭',
+          supportedFormats: 'JPG, PNG, PDF, TIFF, BMP 지원',
+          browseFiles: '파일 찾아보기'
+        },
+        recent: {
+          title: '최근 OCR 처리',
+          table: {
+            name: '이름',
+            date: '날짜',
+            status: '상태',
+            actions: '작업'
+          },
+          actions: {
+            view: '보기',
+            download: '다운로드'
+          },
+          empty: 'OCR 처리 기록을 찾을 수 없습니다'
+        },
+        status: {
+          completed: '완료됨',
+          processing: '처리 중',
+          failed: '실패'
+        }
+      },
+      translation: {
+        title: '번역',
+        subtitle: '여러 언어 간 텍스트 번역',
+        translateButton: '번역',
+        features: {
+          title: '번역 기능',
+          multiLanguage: {
+            title: '다국어 지원',
+            description: '100개 이상의 언어 및 방언 지원'
+          },
+          document: {
+            title: '문서 번역',
+            description: '서식을 유지한 상태로 전체 문서 번역'
+          },
+          accuracy: {
+            title: '정확한 번역',
+            description: '더 자연스럽고 정확한 결과를 위한 신경망 기계 번역'
+          }
+        },
+        source: {
+          title: '원본 텍스트',
+          placeholder: '번역할 텍스트를 입력하세요...'
+        },
+        result: {
+          title: '번역 결과',
+          translating: '번역 중...',
+          translated: '번역됨'
+        },
+        recent: {
+          title: '최근 번역',
+          table: {
+            source: '원본',
+            target: '대상',
+            date: '날짜',
+            actions: '작업'
+          },
+          actions: {
+            view: '보기',
+            download: '다운로드'
+          },
+          empty: '번역 기록을 찾을 수 없습니다'
+        },
+        languages: {
+          en: '영어',
+          zh: '중국어',
+          ja: '일본어',
+          ko: '한국어'
+        }
+      },
+      tools: {
+        title: '도구',
+        subtitle: '문서 처리를 위한 다양한 유틸리티 도구',
+        features: {
+          title: '사용 가능한 도구'
+        },
+        pdfConverter: {
+          title: 'PDF 변환기',
+          description: '이미지를 PDF 문서로 변환',
+          input: '입력',
+          dragDrop: '여기에 이미지를 드래그 앤 드롭',
+          supportedFormats: 'JPG, PNG, TIFF, BMP 지원',
+          browseFiles: '이미지 찾아보기',
+          output: '출력 설정',
+          fileName: '파일 이름',
+          fileNamePlaceholder: '파일 이름 입력',
+          quality: '품질',
+          qualityHigh: '높음',
+          qualityMedium: '중간',
+          qualityLow: '낮음',
+          convertButton: 'PDF로 변환'
+        },
+        imageCompressor: {
+          title: '이미지 압축기',
+          description: '품질을 유지하면서 이미지 파일 크기 줄이기',
+          input: '입력',
+          dragDrop: '여기에 이미지를 드래그 앤 드롭',
+          supportedFormats: 'JPG, PNG, TIFF, BMP 지원',
+          browseFiles: '이미지 찾아보기',
+          output: '출력 설정',
+          compression: '압축 수준',
+          format: '출력 형식',
+          compressButton: '이미지 압축'
+        },
+        imageCropper: {
+          title: '이미지 자르기 도구',
+          description: '이미지를 원하는 크기로 자르기'
+        },
+        imageRotator: {
+          title: '이미지 회전 도구',
+          description: '이미지를 올바른 방향으로 회전'
+        },
+        batchProcessor: {
+          title: '일괄 처리기',
+          description: '한 번에 여러 파일 처리'
+        },
+        fileDownloader: {
+          title: '파일 다운로더',
+          description: 'URL에서 파일 다운로드'
+        },
+        selectTool: '도구 선택',
+        selectToolDescription: '시작하려면 위 목록에서 도구를 선택하세요',
+        recent: {
+          title: '최근 도구 사용',
+          table: {
+            tool: '도구',
+            date: '날짜',
+            status: '상태',
+            actions: '작업'
+          },
+          actions: {
+            view: '보기',
+            download: '다운로드'
+          },
+          empty: '도구 사용 기록을 찾을 수 없습니다'
+        },
+        status: {
+          completed: '완료됨',
+          processing: '처리 중',
+          failed: '실패'
+        }
       }
     }
 }
