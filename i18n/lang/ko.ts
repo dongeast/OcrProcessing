@@ -527,5 +527,62 @@ export default {
     auth: {
       selectLoginMethod: '로그인 허용',
       selectLoginMethodDescription: 'NuxtPro의 출해 여정을 시작하세요. 빠르게, 더 빠르게.',
+    },
+    center: {
+      menu: {
+        profile: '프로필',
+        account: '계정',
+        billing: '결제',
+        settings: '설정'
+      },
+      tabs: {
+        profile: {
+          title: '프로필',
+          description: '프로필 정보 관리'
+        },
+        account: {
+          title: '계정',
+          description: '계정 설정 관리'
+        },
+        billing: {
+          title: '결제',
+          description: '결제 정보 및 결제 수단 관리'
+        },
+        settings: {
+          title: '설정',
+          description: '애플리케이션 설정 관리'
+        }
+      },
+      profile: {
+        name: '이름',
+        email: '이메일',
+        bio: '자기소개',
+        updateProfile: '프로필 업데이트'
+      },
+      account: {
+        changePassword: '비밀번호 변경',
+        currentPassword: '현재 비밀번호',
+        newPassword: '새 비밀번호',
+        confirmPassword: '새 비밀번호 확인',
+        updatePassword: '비밀번호 업데이트',
+        deleteAccount: '계정 삭제',
+        deleteAccountDescription: '계정을 삭제하면 되돌릴 수 없습니다. 신중하게 결정해주세요.'
+      },
+      billing: {
+        currentPlan: '현재 플랜',
+        upgradePlan: '플랜 업그레이드',
+        paymentMethods: '결제 수단',
+        edit: '편집',
+        addPaymentMethod: '결제 수단 추가',
+        billingHistory: '결제 내역'
+      },
+      settings: {
+        language: '언어',
+        selectLanguage: '언어 선택',
+        emailNotifications: '이메일 알림',
+        newsletter: '뉴스레터',
+        productUpdates: '제품 업데이트',
+        securityAlerts: '보안 알림'
+      }
     }
 }

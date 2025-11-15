@@ -527,5 +527,62 @@ export default {
     auth: {
       selectLoginMethod: '授權登錄',
       selectLoginMethodDescription: '即刻開啟屬於你在NuxtPro的出海之旅.',
+    },
+    center: {
+      menu: {
+        profile: '個人資料',
+        account: '帳戶',
+        billing: '帳單',
+        settings: '設定'
+      },
+      tabs: {
+        profile: {
+          title: '個人資料',
+          description: '管理您的個人資料資訊'
+        },
+        account: {
+          title: '帳戶',
+          description: '管理您的帳戶設定'
+        },
+        billing: {
+          title: '帳單',
+          description: '管理您的帳單資訊和付款方式'
+        },
+        settings: {
+          title: '設定',
+          description: '管理您的應用程式設定'
+        }
+      },
+      profile: {
+        name: '姓名',
+        email: '電郵',
+        bio: '個人簡介',
+        updateProfile: '更新個人資料'
+      },
+      account: {
+        changePassword: '修改密碼',
+        currentPassword: '目前密碼',
+        newPassword: '新密碼',
+        confirmPassword: '確認新密碼',
+        updatePassword: '更新密碼',
+        deleteAccount: '刪除帳戶',
+        deleteAccountDescription: '一旦您刪除帳戶，將無法復原，請確認。'
+      },
+      billing: {
+        currentPlan: '目前方案',
+        upgradePlan: '升級方案',
+        paymentMethods: '付款方式',
+        edit: '編輯',
+        addPaymentMethod: '新增付款方式',
+        billingHistory: '帳單歷史'
+      },
+      settings: {
+        language: '語言',
+        selectLanguage: '選擇語言',
+        emailNotifications: '電郵通知',
+        newsletter: '新聞通訊',
+        productUpdates: '產品更新',
+        securityAlerts: '安全警報'
+      }
     }
 }

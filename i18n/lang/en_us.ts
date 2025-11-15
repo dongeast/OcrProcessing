@@ -535,5 +535,108 @@ export default {
     auth: {
       selectLoginMethod: 'Authorize Login',
       selectLoginMethodDescription: 'Start your NuxtPro journey. Shipping fast, shipping more.',
+    },
+    center: {
+    menu: {
+      dashboard: 'Dashboard',
+      profile: 'Profile',
+      account: 'Account',
+      billing: 'Billing',
+      settings: 'Settings'
+    },
+    dashboard: {
+      welcome: 'Welcome back',
+      subtitle: 'Manage your OCR documents and monitor processing activities',
+      quickActions: {
+        addNew: 'Add New',
+        uploadDocument: 'Upload Document'
+      },
+      usageStats: 'Usage Statistics',
+      stats: {
+        documents: 'Documents',
+        storage: 'Storage',
+        totalDocuments: 'Total Documents',
+        processingTime: 'Avg. Processing Time',
+        accuracyRate: 'Accuracy Rate',
+        storageUsed: 'Storage Used',
+        comparedToLastMonth: 'compared to last month',
+        fasterThanAverage: 'faster than average',
+        improvedThisMonth: 'improved this month',
+        ofLimit: 'of limit'
+      },
+      recentDocuments: 'Recent Documents',
+      recentDocumentsDesc: 'View and manage your recently processed documents',
+      viewAll: 'View All',
+      table: {
+        name: 'Name',
+        type: 'Type',
+        status: 'Status',
+        date: 'Date',
+        actions: 'Actions'
+      },
+      status: {
+        completed: 'Completed',
+        processing: 'Processing',
+        failed: 'Failed'
+      },
+      features: {
+        uploadNew: 'Upload New Document',
+        uploadNewDesc: 'Upload files for OCR processing',
+        uploadDragDrop: 'Drag and drop files here or click to browse',
+        uploadSelectFiles: 'Select Files',
+        uploadSupportedFormats: 'Supported formats: PDF, JPG, PNG, DOCX, XLSX',
+        recentActivity: 'Recent Activity',
+        recentActivityDesc: 'Your recent processing and account activities'
+      }
+    },
+      tabs: {
+        profile: {
+          title: 'Profile',
+          description: 'Manage your profile information'
+        },
+        account: {
+          title: 'Account',
+          description: 'Manage your account settings'
+        },
+        billing: {
+          title: 'Billing',
+          description: 'Manage your billing information and payment methods'
+        },
+        settings: {
+          title: 'Settings',
+          description: 'Manage your application settings'
+        }
+      },
+      profile: {
+        name: 'Name',
+        email: 'Email',
+        bio: 'Bio',
+        updateProfile: 'Update Profile'
+      },
+      account: {
+        changePassword: 'Change Password',
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        confirmPassword: 'Confirm New Password',
+        updatePassword: 'Update Password',
+        deleteAccount: 'Delete Account',
+        deleteAccountDescription: 'Once you delete your account, there is no going back. Please be certain.'
+      },
+      billing: {
+        currentPlan: 'Current Plan',
+        upgradePlan: 'Upgrade Plan',
+        paymentMethods: 'Payment Methods',
+        edit: 'Edit',
+        addPaymentMethod: 'Add Payment Method',
+        billingHistory: 'Billing History'
+      },
+      settings: {
+        language: 'Language',
+        selectLanguage: 'Select Language',
+        emailNotifications: 'Email Notifications',
+        newsletter: 'Newsletter',
+        productUpdates: 'Product Updates',
+        securityAlerts: 'Security Alerts'
+      }
     }
 }

@@ -60,7 +60,7 @@
               </button>
               <button
                 v-else
-                @click="openLoginModal"  
+                @click="goToCenter"  
                 class="text-gray-700 hover:text-gray-900 font-medium text-sm"
               >
               {{ $t('home.loginButton') }}
@@ -189,6 +189,11 @@ const switchLocalePath = useSwitchLocalePath()
 // 先声明 currentLocale
 const currentLocale = useState('locale', () => locale.value)
 const activeMenuItem = ref('')
+
+// 跳转到用户中心页面
+const goToCenter = () => {
+  router.push('/center');
+}
 
 // 定义语言选项
 const localeOptions = [

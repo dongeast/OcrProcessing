@@ -521,5 +521,62 @@ export default {
     auth: {
       selectLoginMethod: 'ログインを許可',
       selectLoginMethodDescription: 'NuxtProの出海旅を始めましょう。速く、速く、速く。',
+    },
+    center: {
+      menu: {
+        profile: 'プロフィール',
+        account: 'アカウント',
+        billing: '請求',
+        settings: '設定'
+      },
+      tabs: {
+        profile: {
+          title: 'プロフィール',
+          description: 'プロフィール情報を管理する'
+        },
+        account: {
+          title: 'アカウント',
+          description: 'アカウント設定を管理する'
+        },
+        billing: {
+          title: '請求',
+          description: '請求情報と支払い方法を管理する'
+        },
+        settings: {
+          title: '設定',
+          description: 'アプリケーション設定を管理する'
+        }
+      },
+      profile: {
+        name: '名前',
+        email: 'メール',
+        bio: '自己紹介',
+        updateProfile: 'プロフィールを更新'
+      },
+      account: {
+        changePassword: 'パスワードを変更',
+        currentPassword: '現在のパスワード',
+        newPassword: '新しいパスワード',
+        confirmPassword: '新しいパスワードを確認',
+        updatePassword: 'パスワードを更新',
+        deleteAccount: 'アカウントを削除',
+        deleteAccountDescription: 'アカウントを削除すると元に戻せません。ご確認ください。'
+      },
+      billing: {
+        currentPlan: '現在のプラン',
+        upgradePlan: 'プランをアップグレード',
+        paymentMethods: '支払い方法',
+        edit: '編集',
+        addPaymentMethod: '支払い方法を追加',
+        billingHistory: '請求履歴'
+      },
+      settings: {
+        language: '言語',
+        selectLanguage: '言語を選択',
+        emailNotifications: 'メール通知',
+        newsletter: 'ニュースレター',
+        productUpdates: '製品アップデート',
+        securityAlerts: 'セキュリティアラート'
+      }
     }
 }

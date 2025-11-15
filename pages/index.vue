@@ -14,7 +14,7 @@
               {{ displayedDescription }}
             </p>
             <div class="flex gap-4">
-              <button @click="openGithub" class="bg-black text-white px-16 py-5 rounded-full relative overflow-hidden group hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300">
+              <button @click="goToCenter" class="bg-black text-white px-16 py-5 rounded-full relative overflow-hidden group hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300">
                 <span class="absolute w-64 h-64 mt-12 group-hover:-rotate-45 group-hover:-mt-24 transition-all duration-500 ease-out bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20"></span>
                 <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.startLink') }}</span>
               </button>
@@ -633,6 +633,7 @@ import confetti from 'canvas-confetti'; // Import confetti
 import { $fetch } from 'ofetch'; // 确保导入 $fetch
 
 const {t} = useI18n()
+const router = useRouter()
 
 const config = useRuntimeConfig();
 //import Paddle from 'paddle-sdk';
@@ -844,6 +845,11 @@ const joinWaitlist = async () => { // 添加 async 关键字
     // 如果邮箱格式无效
     alert(t('home.waitlist.invalidEmailMessage') || 'Please enter a valid email address.'); // 添加一个无效邮箱的翻译
   }
+};
+
+// 跳转到用户中心页面
+const goToCenter = () => {
+  router.push('/center');
 };
 
 // 简单的邮箱验证函数 (如果需要可以在前端也加上)
