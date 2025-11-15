@@ -637,12 +637,10 @@ export default {
         deleteAccountDescription: '계정을 삭제하면 되돌릴 수 없습니다. 신중하게 결정해주세요.'
       },
       billing: {
-        currentPlan: '현재 플랜',
-        upgradePlan: '플랜 업그레이드',
-        paymentMethods: '결제 수단',
-        edit: '편집',
-        addPaymentMethod: '결제 수단 추가',
-        billingHistory: '결제 내역'
+        free: '무료',
+        pro: '프로',
+        max: '맥스',
+        ultra: '울트라'
       },
       settings: {
         language: '언어',

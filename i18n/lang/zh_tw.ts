@@ -529,7 +529,7 @@ export default {
             billing: '帳單',
             settings: '設定',
             ocrAnalysis: 'OCR分析',
-            translation: '翻譯',
+            translation: '智能翻譯',
             tools: '工具',
             theme: '切換主題'
         },
@@ -637,12 +637,10 @@ export default {
             deleteAccountDescription: '一旦您刪除帳戶，將無法恢復。請確認。'
         },
         billing: {
-            currentPlan: '當前計劃',
-            upgradePlan: '升級計劃',
-            paymentMethods: '付款方式',
-            edit: '編輯',
-            addPaymentMethod: '添加付款方式',
-            billingHistory: '帳單歷史'
+            free: '免費',
+            pro: '專業版',
+            max: '高級版',
+            ultra: '旗艦版'
         },
         settings: {
             language: '語言',

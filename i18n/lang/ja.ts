@@ -637,12 +637,10 @@ export default {
         deleteAccountDescription: 'アカウントを削除すると元に戻せません。ご確認ください。'
       },
       billing: {
-        currentPlan: '現在のプラン',
-        upgradePlan: 'プランをアップグレード',
-        paymentMethods: '支払い方法',
-        edit: '編集',
-        addPaymentMethod: '支払い方法を追加',
-        billingHistory: '請求履歴'
+        free: '無料',
+        pro: 'プロ',
+        max: 'マックス',
+        ultra: 'アルトラ'
       },
       settings: {
         language: '言語',

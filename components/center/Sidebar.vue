@@ -155,6 +155,26 @@
             <div v-if="!isCollapsed" class="min-w-0 flex-1">
               <h2 class="font-semibold text-base truncate">{{ user && user.name ? user.name : $t('center.menu.profile') }}</h2>
               <p class="text-xs text-muted-foreground truncate">{{ user && user.email ? user.email : '' }}</p>
+              <!-- 会员等级显示 -->
+              <div class="mt-1 flex items-center">
+                <span 
+                  :class="[
+                    'text-xs px-2 py-0.5 rounded-full truncate flex items-center',
+                    getUserLevelClass(user?.membership).bg,
+                    getUserLevelClass(user?.membership).text
+                  ]"
+                  v-if="user && user.membership"
+                >
+                  {{ getUserLevelText(user.membership) }}
+                </span>
+                <span 
+                  class="text-xs px-2 py-0.5 rounded-full bg-gray-200 text-gray-800 truncate flex items-center"
+                  v-else
+                >
+                  <Heart class="w-3 h-3 mr-1 flex-shrink-0" />
+                  {{ $t('center.billing.free') || 'Free' }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -176,7 +196,11 @@ import {
   Wrench,
   Sun,
   Moon,
-  Globe
+  Globe,
+  Heart,
+  Crown,
+  Star,
+  Shield
 } from 'lucide-vue-next'
 
 // Props定义
@@ -264,6 +288,54 @@ const toggleTheme = () => {
   // 可以在这里添加设置主题的逻辑，例如更新CSS类
   document.documentElement.classList.toggle('dark', currentTheme.value === 'dark')
   localStorage.setItem('theme', currentTheme.value)
+}
+
+// 获取用户等级显示类
+const getUserLevelClass = (membership: string) => {
+  switch (membership) {
+    case 'free':
+      return { bg: 'bg-gray-200', text: 'text-gray-800' }
+    case 'pro':
+      return { bg: 'bg-green-200', text: 'text-green-800' }
+    case 'max':
+      return { bg: 'bg-blue-200', text: 'text-blue-800' }
+    case 'ultra':
+      return { bg: 'bg-purple-200', text: 'text-purple-800' }
+    default:
+      return { bg: 'bg-yellow-200', text: 'text-yellow-800' }
+  }
+}
+
+// 获取用户等级图标
+const getUserLevelIcon = (membership: string) => {
+  switch (membership) {
+    case 'free':
+      return Heart
+    case 'pro':
+      return Star
+    case 'max':
+      return Crown
+    case 'ultra':
+      return Shield
+    default:
+      return Heart
+  }
+}
+
+// 获取用户等级显示文本
+const getUserLevelText = (membership: string) => {
+  switch (membership) {
+    case 'free':
+      return t('center.billing.free')
+    case 'pro':
+      return t('center.billing.pro')
+    case 'max':
+      return t('center.billing.max')
+    case 'ultra':
+      return t('center.billing.ultra')
+    default:
+      return membership
+  }
 }
 
 // 监听窗口大小变化

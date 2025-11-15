@@ -81,6 +81,12 @@ export default {
             sortNameAsc: '名称（A-Z）',
             sortNameDesc: '名称（Z-A）'
         },
+        billing: {
+            free: '免费',
+            pro: '专业版',
+            max: '高级版',
+            ultra: '旗舰版'
+        },
     },
     home: {
         title: 'NuxtPro',

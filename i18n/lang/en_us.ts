@@ -261,12 +261,10 @@ export default {
         deleteAccountDescription: 'Once you delete your account, there is no going back. Please be certain.'
       },
       billing: {
-        currentPlan: 'Current Plan',
-        upgradePlan: 'Upgrade Plan',
-        paymentMethods: 'Payment Methods',
-        edit: 'Edit',
-        addPaymentMethod: 'Add Payment Method',
-        billingHistory: 'Billing History'
+        free: 'Free',
+        pro: 'Pro',
+        max: 'Max',
+        ultra: 'Ultra'
       },
       settings: {
         language: 'Language',

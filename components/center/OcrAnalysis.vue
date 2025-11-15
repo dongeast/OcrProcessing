@@ -6,17 +6,41 @@
         <h1 class="text-2xl font-bold tracking-tight">{{ t('center.ocrAnalysis.title') }}</h1>
         <p class="text-muted-foreground mt-1">{{ t('center.ocrAnalysis.subtitle') }}</p>
       </div>
-      <button 
-        @click="handleUpload"
-        class="mt-4 md:mt-0 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-        </svg>
-        {{ t('center.ocrAnalysis.uploadButton') }}
-      </button>
     </div>
 
+    <!-- 上传区域 -->
+    <div class="rounded-lg bg-card border p-6 shadow-sm">
+      <h2 class="text-xl font-semibold mb-4">{{ t('center.ocrAnalysis.upload.title') }}</h2>
+      <div 
+        @dragover.prevent
+        @drop.prevent="handleDrop"
+        class="border-2 border-dashed border-muted-foreground/20 rounded-lg p-8 text-center cursor-pointer hover:border-primary/50 transition-colors"
+        @click="fileInputRef?.click()"
+      >
+        <div class="flex flex-col items-center justify-center">
+          <div class="rounded-full bg-primary/10 p-3 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+          </div>
+          <p class="font-medium mb-1">{{ t('center.ocrAnalysis.upload.dragDrop') }}</p>
+          <p class="text-sm text-muted-foreground mb-4">{{ t('center.ocrAnalysis.upload.supportedFormats') }}</p>
+          <button class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+            {{ t('center.ocrAnalysis.upload.browseFiles') }}
+          </button>
+        </div>
+        <input 
+          ref="fileInputRef"
+          type="file" 
+          class="hidden" 
+          @change="handleFileSelect"
+          accept=".jpg,.jpeg,.png,.pdf,.tiff,.bmp"
+          multiple
+        >
+      </div>
+    </div>
+
+    
     <!-- OCR功能介绍 -->
     <div class="rounded-lg bg-card border p-6 shadow-sm">
       <h2 class="text-xl font-semibold mb-4">{{ t('center.ocrAnalysis.features.title') }}</h2>
@@ -56,38 +80,6 @@
           </div>
           <p class="text-sm text-muted-foreground">{{ t('center.ocrAnalysis.features.export.description') }}</p>
         </div>
-      </div>
-    </div>
-
-    <!-- 上传区域 -->
-    <div class="rounded-lg bg-card border p-6 shadow-sm">
-      <h2 class="text-xl font-semibold mb-4">{{ t('center.ocrAnalysis.upload.title') }}</h2>
-      <div 
-        @dragover.prevent
-        @drop.prevent="handleDrop"
-        class="border-2 border-dashed border-muted-foreground/20 rounded-lg p-8 text-center cursor-pointer hover:border-primary/50 transition-colors"
-        @click="fileInputRef?.click()"
-      >
-        <div class="flex flex-col items-center justify-center">
-          <div class="rounded-full bg-primary/10 p-3 mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12m-9-9h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2z" />
-            </svg>
-          </div>
-          <p class="font-medium mb-1">{{ t('center.ocrAnalysis.upload.dragDrop') }}</p>
-          <p class="text-sm text-muted-foreground mb-4">{{ t('center.ocrAnalysis.upload.supportedFormats') }}</p>
-          <button class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-            {{ t('center.ocrAnalysis.upload.browseFiles') }}
-          </button>
-        </div>
-        <input 
-          ref="fileInputRef"
-          type="file" 
-          class="hidden" 
-          @change="handleFileSelect"
-          accept=".jpg,.jpeg,.png,.pdf,.tiff,.bmp"
-          multiple
-        >
       </div>
     </div>
 

@@ -26,15 +26,6 @@
         <h1 class="text-2xl font-bold tracking-tight">{{ t('center.dashboard.title') }}</h1>
         <p class="text-muted-foreground mt-1">{{ t('center.dashboard.subtitle') }}</p>
       </div>
-      <button 
-        @click="emit('upload-file')"
-        class="mt-4 md:mt-0 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-        </svg>
-        {{ t('center.dashboard.uploadButton') }}
-      </button>
     </div>
 
     <!-- 数据概览卡片区域 -->

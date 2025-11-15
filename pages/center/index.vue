@@ -98,7 +98,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useSession } from '~/lib/auth/auth-client'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -155,6 +155,7 @@ interface RecentActivity {
 // 初始化
 const { t, locale } = useI18n()
 const router = useRouter()
+const route = useRoute()
 const switchLocalePath = useSwitchLocalePath()
 const session: any = useSession()
 
@@ -172,8 +173,26 @@ const user = computed(() => {
   }
 })
 
+// 定义有效的标签页键值数组
+const validTabKeys = [
+  'dashboard', 'profile', 'account', 'billing', 'settings', 
+  'ocrAnalysis', 'translation', 'tools'
+]
+
+// 初始化activeTab，优先从URL参数获取
+const initializeActiveTab = () => {
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search)
+    const tabParam = urlParams.get('tab')
+    if (tabParam && validTabKeys.includes(tabParam)) {
+      return tabParam
+    }
+  }
+  return 'dashboard' // 默认值
+}
+
 // 状态
-const activeTab = ref('dashboard') // 默认显示仪表盘
+const activeTab = ref(initializeActiveTab()) // 初始化时就考虑URL参数
 const currentLocale = ref(locale.value)
 const sidebarOpen = ref(false) // 移动端侧边栏开关
 const isMobile = ref(false) // 初始为false，在客户端挂载时设置
@@ -319,20 +338,66 @@ const updateProfile = () => {
 }
 
 const switchLanguage = async (newLocale: string) => {
+  console.log('=== 开始切换语言 ===', { newLocale });
+  console.log('切换前的activeTab:', activeTab.value);
+  console.log('切换前的route.query:', route.query);
+  console.log('切换前的window.location.search:', window.location.search);
+  
   // @ts-ignore
   currentLocale.value = newLocale
   // @ts-ignore
   locale.value = newLocale
   localStorage.setItem('userLocale', newLocale)
   
-  // @ts-ignore
-  const path = switchLocalePath(newLocale)
-  if (path) {
-    await router.push({
-      path,
-      query: router.currentRoute.value.query
-    })
+  // 保存当前标签页，确保只使用有效的标签页键
+  const targetTab = menuItems.some(item => item.key === activeTab.value) ? activeTab.value : 'dashboard';
+  console.log('确认使用的标签页:', targetTab);
+  
+  try {
+    // 直接操作history来替换整个URL，确保完整保留查询参数结构
+    if (typeof window !== 'undefined') {
+      // 创建新的URL对象
+      const newUrl = new URL(window.location.href);
+      
+      // 更新语言路径部分
+      // 移除现有的语言前缀
+      const pathWithoutLocale = newUrl.pathname.replace(/^\/(en-US|zh-CN|zh-TW|JP|KO)\/?/, '/');
+      // 添加新的语言前缀
+      const localePath = newLocale === 'en-US' ? pathWithoutLocale : `/${newLocale}${pathWithoutLocale}`;
+      newUrl.pathname = localePath;
+      
+      // 确保设置正确的tab参数
+      newUrl.searchParams.set('tab', targetTab);
+      
+      // 使用replaceState避免在历史记录中添加新条目并立即更新URL
+      window.history.replaceState({}, '', newUrl.toString());
+      
+      console.log('更新后的完整URL:', newUrl.toString());
+      
+      // 强制更新i18n语言
+      locale.value = newLocale;
+      
+      // 确保activeTab状态保持一致
+      activeTab.value = targetTab;
+      
+      // 手动触发popstate事件，让系统重新检查URL状态
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+    console.log('语言切换完成，标签页保持在:', targetTab);
+  } catch (error) {
+    console.error('切换语言时出错，使用备用方法:', error);
+    
+    // 备用方案：如果直接URL操作失败，使用router.push
+    // @ts-ignore
+    const path = switchLocalePath(newLocale);
+    if (path) {
+      await router.push({
+        path,
+        query: { tab: targetTab }
+      });
+    }
   }
+  console.log('=== 语言切换结束 ===');
 }
 
 // 组件事件处理函数

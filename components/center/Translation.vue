@@ -6,15 +6,6 @@
         <h1 class="text-2xl font-bold tracking-tight">{{ t('center.translation.title') }}</h1>
         <p class="text-muted-foreground mt-1">{{ t('center.translation.subtitle') }}</p>
       </div>
-      <button 
-        @click="handleTranslate"
-        class="mt-4 md:mt-0 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-        </svg>
-        {{ t('center.translation.translateButton') }}
-      </button>
     </div>
 
     <!-- 翻译功能介绍 -->
@@ -102,79 +93,6 @@
       </div>
     </div>
 
-    <!-- 最近翻译记录 -->
-    <div class="rounded-lg bg-card border shadow-sm overflow-hidden">
-      <div class="p-5 border-b">
-        <h3 class="font-semibold">{{ t('center.translation.recent.title') }}</h3>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b hover:bg-muted/50 transition-colors">
-              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                {{ t('center.translation.recent.table.source') }}
-              </th>
-              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                {{ t('center.translation.recent.table.target') }}
-              </th>
-              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                {{ t('center.translation.recent.table.date') }}
-              </th>
-              <th class="whitespace-nowrap py-4 px-4 text-right font-medium text-muted-foreground">
-                {{ t('center.translation.recent.table.actions') }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr 
-              v-for="item in recentItems" 
-              :key="item.id"
-              class="border-b hover:bg-muted/50 transition-colors"
-            >
-              <td class="whitespace-nowrap py-4 px-4">
-                <div class="font-medium">{{ item.source }}</div>
-                <div class="text-sm text-muted-foreground truncate max-w-[200px]">{{ item.sourceText }}</div>
-              </td>
-              <td class="whitespace-nowrap py-4 px-4">
-                <div class="font-medium">{{ item.target }}</div>
-                <div class="text-sm text-muted-foreground truncate max-w-[200px]">{{ item.translatedText }}</div>
-              </td>
-              <td class="whitespace-nowrap py-4 px-4 text-muted-foreground">
-                {{ item.date }}
-              </td>
-              <td class="whitespace-nowrap py-4 px-4 text-right">
-                <div class="flex justify-end items-center space-x-2">
-                  <button 
-                    @click="viewItem(item.id)"
-                    class="p-1 text-muted-foreground hover:text-primary rounded-full hover:bg-primary/10 transition-colors"
-                    :aria-label="t('center.translation.recent.actions.view')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  </button>
-                  <button 
-                    @click="downloadItem(item.id)"
-                    class="p-1 text-muted-foreground hover:text-primary rounded-full hover:bg-primary/10 transition-colors"
-                    :aria-label="t('center.translation.recent.actions.download')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="recentItems.length === 0">
-              <td colspan="4" class="py-8 px-4 text-center text-muted-foreground">
-                {{ t('center.translation.recent.empty') }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
 </template>
 
