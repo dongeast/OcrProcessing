@@ -680,7 +680,15 @@ export default {
           title: '文書をアップロード',
           dragDrop: 'ここにファイルをドラッグ＆ドロップ',
           supportedFormats: 'JPG、PNG、PDF、TIFF、BMPをサポート',
-          browseFiles: 'ファイルを参照'
+          browseFiles: '画像を参照',
+          uploading: 'アップロード中',
+          analyzing: '分析中',
+          uploadComplete: 'アップロード完了',
+          uploadedFile: 'アップロードされたファイル',
+          requiredPoints: '必要ポイント',
+          points: 'ポイント',
+          reupload: '再アップロード',
+          startProcessing: '処理開始'
         },
         recent: {
           title: '最近のOCR処理',

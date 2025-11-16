@@ -31,7 +31,7 @@
         
         <!-- 流动虚线动画层 -->
         <div 
-          v-if="currentStep > 1 && currentStep < 4"
+          v-if="currentStep >= 1 && currentStep < 4"
           class="absolute top-11 h-0.5 hidden md:block"
           :style="flowingLineStyle"
         >
@@ -110,8 +110,134 @@
 
     <!-- 上传区域 -->
     <div class="rounded-lg bg-card border p-6 shadow-sm">
-      <h2 class="text-xl font-semibold mb-4">{{ t('center.ocrAnalysis.upload.title') }}</h2>
+      <h2 class="text-xl font-semibold mb-4">{{ getStepTitle() }}</h2>
+      
+      <!-- 节点2：OCR分析 - 图片预览走马灯 -->
+      <div v-if="selectedStep === 2 && ocrProgress >= 100" class="mb-4" @click.stop>
+        <!-- 图片预览走马灯 -->
+        <div class="carousel-container">
+          <div class="carousel-slide">
+            <img 
+              :src="previewImage" 
+              :alt="uploadedFile?.name || 'Preview'" 
+              class="mx-auto max-h-96 object-contain"
+              @error="handleImageError"
+            />
+          </div>
+          <div class="carousel-controls mt-4 flex justify-center space-x-2">
+            <button 
+              @click.stop="prevImage" 
+              class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+              :disabled="currentImageIndex === 0"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <button 
+              @click.stop="nextImage" 
+              class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+              :disabled="currentImageIndex === previewImages.length - 1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+          <div class="carousel-indicators mt-2 flex justify-center space-x-1">
+            <button 
+              v-for="(image, index) in previewImages" 
+              :key="index"
+              @click.stop="goToImage(index)"
+              class="h-2 w-2 rounded-full"
+              :class="index === currentImageIndex ? 'bg-primary' : 'bg-gray-300'"
+            ></button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- OCR处理状态 (仅在OCR处理中显示) -->
+      <div v-else-if="selectedStep === 2 && ocrProgress < 100" class="mb-4">
+        <div class="flex justify-between text-sm text-muted-foreground mb-1">
+          <span>{{ t('center.ocrAnalysis.upload.analyzing') }}...</span>
+          <span>{{ ocrProgress }}%</span>
+        </div>
+        <div class="w-full bg-muted rounded-full h-2">
+          <div 
+            class="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
+            :style="{ width: ocrProgress + '%' }"
+          ></div>
+        </div>
+      </div>
+      
+      <!-- 上传进度条 (仅在有文件上传时显示) -->
+      <div v-else-if="uploadProgress > 0 && uploadProgress < 100 && selectedStep === 1" class="mb-4">
+        <div class="flex justify-between text-sm text-muted-foreground mb-1">
+          <span>{{ t('center.ocrAnalysis.upload.uploading') }}...</span>
+          <span>{{ uploadProgress }}%</span>
+        </div>
+        <div class="w-full bg-muted rounded-full h-2">
+          <div 
+            class="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
+            :style="{ width: uploadProgress + '%' }"
+          ></div>
+        </div>
+      </div>
+      
+      <!-- 上传完成提示和文件信息 (仅在上传完成时显示) -->
+      <div v-else-if="uploadProgress === 100 && uploadedFile && selectedStep === 1" class="mb-4">
+        <div class="p-3 bg-green-50 border border-green-200 rounded-lg mb-4">
+          <div class="flex items-center text-green-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span>{{ t('center.ocrAnalysis.upload.uploadComplete') }}</span>
+          </div>
+        </div>
+        
+        <!-- 已上传文件信息 -->
+        <div class="border rounded-lg overflow-hidden mb-4">
+          <div class="bg-muted px-4 py-2 border-b">
+            <h3 class="font-medium">{{ t('center.ocrAnalysis.upload.uploadedFile') }}</h3>
+          </div>
+          <div class="p-4">
+            <div class="flex items-start">
+              <div class="rounded bg-muted p-3 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium">{{ uploadedFile.name }}</p>
+                <p class="text-sm text-muted-foreground">{{ formatFileSize(uploadedFile.size) }}</p>
+                <div class="mt-2 flex items-center text-sm">
+                  <span class="text-muted-foreground mr-2">{{ t('center.ocrAnalysis.upload.requiredPoints') }}:</span>
+                  <span class="font-medium">5 {{ t('center.ocrAnalysis.upload.points') }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 操作按钮 -->
+        <div class="flex justify-end space-x-3">
+          <button 
+            @click="resetUpload"
+            class="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-muted"
+          >
+            {{ t('center.ocrAnalysis.upload.reupload') }}
+          </button>
+          <button 
+            @click="startProcessing"
+            class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            {{ t('center.ocrAnalysis.upload.startProcessing') }}
+          </button>
+        </div>
+      </div>
+      
       <div 
+        v-else-if="uploadProgress === 0 && !uploadedFile && selectedStep === 1"
         @dragover.prevent
         @drop.prevent="handleDrop"
         class="border-2 border-dashed border-muted-foreground/20 rounded-lg p-8 text-center cursor-pointer hover:border-primary/50 transition-colors"
@@ -135,7 +261,6 @@
           class="hidden" 
           @change="handleFileSelect"
           accept=".jpg,.jpeg,.png,.pdf,.tiff,.bmp"
-          multiple
         >
       </div>
     </div>
@@ -292,10 +417,27 @@ const emit = defineEmits<{
 const { t, locale } = useI18n()
 
 // 当前步骤状态 (1-4)
-const currentStep = ref(2) // 默认设置为第2步以便查看效果
+const currentStep = ref(1) // 默认设置为第1步（上传文件）
 
 // 选中步骤状态 (1-4)
-const selectedStep = ref(2) // 默认选中当前步骤
+const selectedStep = ref(1) // 默认选中当前步骤
+
+// 上传进度状态
+const uploadProgress = ref(0)
+
+// OCR处理进度
+const ocrProgress = ref(0)
+
+// 已上传文件
+const uploadedFile = ref<File | null>(null)
+
+// 图片预览相关
+const previewImages = ref<string[]>([
+  'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+  'https://images.unsplash.com/photo-1547061548-4893b5d9d5d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80'
+])
+const currentImageIndex = ref(0)
 
 // 选中步骤的方法
 const selectStep = (step: number) => {
@@ -305,9 +447,30 @@ const selectStep = (step: number) => {
   }
 }
 
+// 根据选中步骤获取标题
+const getStepTitle = () => {
+  switch (selectedStep.value) {
+    case 1:
+      return t('center.ocrAnalysis.steps.upload')
+    case 2:
+      return t('center.ocrAnalysis.steps.analysis')
+    case 3:
+      return t('center.ocrAnalysis.steps.edit')
+    case 4:
+      return t('center.ocrAnalysis.steps.export')
+    default:
+      return t('center.ocrAnalysis.steps.upload')
+  }
+}
+
 // 监听当前步骤变化，自动更新选中节点
 watch(currentStep, (newStep) => {
   selectedStep.value = newStep
+  
+  // 当进入步骤2时，开始模拟OCR处理进度
+  if (newStep === 2) {
+    simulateOCRProcessing()
+  }
 })
 
 // 计算进度条宽度
@@ -345,6 +508,11 @@ const incompleteWidth = computed(() => {
 // 计算流动虚线的样式
 const flowingLineStyle = computed(() => {
   switch (currentStep.value) {
+    case 1:
+      return {
+        left: 'calc(7px + 0%)',
+        width: 'calc(33.333333% + 20px)'
+      }
     case 2:
       return {
         left: 'calc(7px + 33.333333% - 20px)',
@@ -360,6 +528,11 @@ const flowingLineStyle = computed(() => {
         display: 'none'
       }
   }
+})
+
+// 当前预览图片
+const previewImage = computed(() => {
+  return previewImages.value[currentImageIndex.value]
 })
 
 // 监听语言变化
@@ -407,7 +580,8 @@ const handleUpload = () => {
 const handleDrop = (e: DragEvent) => {
   const files = e.dataTransfer?.files
   if (files && files.length > 0) {
-    console.log('Files dropped:', files)
+    // 仅处理第一个文件（单文件上传）
+    simulateUpload(files[0])
   }
 }
 
@@ -415,8 +589,82 @@ const handleFileSelect = (e: Event) => {
   const target = e.target as HTMLInputElement
   const files = target.files
   if (files && files.length > 0) {
-    console.log('Files selected:', files)
+    // 仅处理第一个文件（单文件上传）
+    simulateUpload(files[0])
   }
+}
+
+// 模拟上传过程
+const simulateUpload = (file: File) => {
+  // 保存文件到已上传文件
+  uploadedFile.value = file
+  
+  console.log('File selected:', file)
+  uploadProgress.value = 0
+  
+  const interval = setInterval(() => {
+    uploadProgress.value += 10
+    if (uploadProgress.value >= 100) {
+      clearInterval(interval)
+      // 上传完成后不自动进入下一步
+    }
+  }, 200)
+}
+
+// 模拟OCR处理过程
+const simulateOCRProcessing = () => {
+  ocrProgress.value = 0
+  const interval = setInterval(() => {
+    ocrProgress.value += 5
+    if (ocrProgress.value >= 100) {
+      clearInterval(interval)
+      // OCR处理完成后进入下一步
+      currentStep.value = 3
+    }
+  }, 100)
+}
+
+// 重置上传状态
+const resetUpload = () => {
+  uploadedFile.value = null
+  uploadProgress.value = 0
+  // 重置步骤为第1步
+  currentStep.value = 1
+  // 重置图片索引
+  currentImageIndex.value = 0
+}
+
+// 获取状态类名
+const getStatusClass = (status: string) => {
+  switch (status) {
+    case t('center.ocrAnalysis.status.completed'):
+      return 'bg-green-100 text-green-800'
+    case t('center.ocrAnalysis.status.processing'):
+      return 'bg-yellow-100 text-yellow-800'
+    case t('center.ocrAnalysis.status.failed'):
+      return 'bg-red-100 text-red-800'
+    default:
+      return 'bg-gray-100 text-gray-800'
+  }
+}
+
+// 格式化文件大小
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 Bytes'
+  const k = 1024
+  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
+
+// 开始处理
+const startProcessing = () => {
+  console.log('Start processing file:', uploadedFile.value)
+  // 将步骤更新为第2步（OCR分析）
+  currentStep.value = 2
+  // 重置图片索引
+  currentImageIndex.value = 0
+  // 这里可以添加实际的处理逻辑
 }
 
 const viewItem = (id: string) => {
@@ -427,14 +675,29 @@ const downloadItem = (id: string) => {
   console.log('Download item:', id)
 }
 
-const getStatusClass = (status: string) => {
-  if (status === t('center.ocrAnalysis.status.completed')) {
-    return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-400'
-  } else if (status === t('center.ocrAnalysis.status.processing')) {
-    return 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-400'
-  } else {
-    return 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-400'
+// 图片预览相关方法
+const prevImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--
   }
+}
+
+const nextImage = () => {
+  if (currentImageIndex.value < previewImages.value.length - 1) {
+    currentImageIndex.value++
+  }
+}
+
+const goToImage = (index: number) => {
+  currentImageIndex.value = index
+}
+
+// 处理图片加载错误
+const handleImageError = (event: Event) => {
+  console.warn('Image failed to load:', event.target)
+  // 可以在这里设置一个默认的错误图片或者显示错误信息
+  const imgElement = event.target as HTMLImageElement
+  imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRTRFNkU3Ii8+CjxwYXRoIGQ9Ik0yNi41IDQ0LjVDMjYuNSA0Ni40MzkgMjguMDYxIDQ4IDMwIDQ4QzMyLjQ4NTMgNDggMzQuNSA0Ni40MzkgMzQuNSA0NC41QzM0LjUgNDIuNTYxIDMyLjQ4NTMgNDEgMzAgNDFDMjguMDYxIDQxIDI2LjUgNDIuNTYxIDI2LjUgNDQuNVoiIHN0cm9rZT0iI0IwQjRCNCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0yMiAyMkwyNiAyNk0yNiAyMkwyMiAyNk0yNCAyNEwzMiAyNE0yOCAxNkwyOCAzMCIgc3Ryb2tlPSIjQjBCNEI0IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K'
 }
 </script>
 

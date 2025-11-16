@@ -680,7 +680,15 @@ export default {
                 title: '上傳文件',
                 dragDrop: '拖拽文件到此處',
                 supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-                browseFiles: '瀏覽文件'
+                browseFiles: '瀏覽圖像',
+                uploading: '正在上傳',
+                analyzing: '正在分析',
+                uploadComplete: '上傳完成',
+                uploadedFile: '已上傳文件',
+                requiredPoints: '所需積分',
+                points: '積分',
+                reupload: '重新上傳',
+                startProcessing: '開始處理'
             },
             recent: {
                 title: '最近OCR處理',

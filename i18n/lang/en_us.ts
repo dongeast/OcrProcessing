@@ -308,7 +308,15 @@ export default {
           title: 'Upload Documents',
           dragDrop: 'Drag and drop files here',
           supportedFormats: 'Supports JPG, PNG, PDF, TIFF, BMP',
-          browseFiles: 'Browse Files'
+          browseFiles: 'Browse Files',
+          uploading: 'Uploading',
+          analyzing: 'Analyzing',
+          uploadComplete: 'Upload complete',
+          uploadedFile: 'Uploaded File',
+          requiredPoints: 'Required Points',
+          points: 'points',
+          reupload: 'Re-upload',
+          startProcessing: 'Start Processing'
         },
         recent: {
           title: 'Recent OCR Processing',

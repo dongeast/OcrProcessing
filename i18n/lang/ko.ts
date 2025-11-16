@@ -680,7 +680,15 @@ export default {
           title: '문서 업로드',
           dragDrop: '여기에 파일을 드래그 앤 드롭',
           supportedFormats: 'JPG, PNG, PDF, TIFF, BMP 지원',
-          browseFiles: '파일 찾아보기'
+          browseFiles: '이미지 탐색',
+          uploading: '업로드 중',
+          analyzing: '분석 중',
+          uploadComplete: '업로드 완료',
+          uploadedFile: '업로드된 파일',
+          requiredPoints: '필요 포인트',
+          points: '포인트',
+          reupload: '재업로드',
+          startProcessing: '처리 시작'
         },
         recent: {
           title: '최근 OCR 처리',

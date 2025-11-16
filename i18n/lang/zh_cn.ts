@@ -102,322 +102,608 @@ export default {
             modalTitle: '加入成功！',
             modalMessage: '感谢您对NuxtPro的认可与支持，您将第一时间收到NuxtPro的最新消息及折扣优惠！Enjoy it!',
             modalCloseButton: '关闭',
-            invalidEmailMessage: '请输入有效的邮箱地址。'
+        },
+        nav: {
+            features: '功能特性',
+            pricing: '价格方案',
+            blog: '技术博客',
+            contact: '联系我们',
+            roadmap: '产品路线',
+            waitlist: '加入等待列表',
+            login: '登录',
+        },
+        hero: {
+            title: '基于Nuxt3的企业级SaaS出海模板',
+            description: '快速构建全球化Web应用，开箱即用',
+            startButton: '立即开始免费体验',
+            githubButton: '前往Github',
         },
         features: {
-            title: '集成当下最流行的开源技术栈方案，让您的创业历程仅需片刻',
-            sutTitle_1: 'NuxtJs3',
-            subDescription_1: '开源的全栈的适用于生产环境的 NuxtJs 框架。',
-            sutTitle_2: 'Vue 3',
-            subDescription_2: '用于 Web 和原生用户界面的开源代码库。',
-            sutTitle_3: 'BetterAuth',
-            subDescription_3: '开源的认证授权框架。',
-            sutTitle_4: 'Shadcn UI',
-            subDescription_4: '用于构建现代风格界面的开源UI组件。',
-            sutTitle_5: 'Tailwindcss',
-            subDescription_5: '用于快速 UI 开发的开源 CSS 框架。',
-            sutTitle_6: 'DrizzleOrm',
-            subDescription_6: '用于 Node.js 和 TypeScript 的开源下一代数据库工具包',
-            sutTitle_7: 'Stripe',
-            subDescription_7: '最好、最安全的在线支付服务。',
-            sutTitle_8: 'Creem',
-            subDescription_8: '为 SaaS 和独立开发者提供稳定的的在线支付服务，且不会让他们破产。',
-            sutTitle_9: 'Resend',
-            subDescription_9: '为开发者们打造的现代邮件API服务。',
-            sutTitle_10: 'i18n',
-            subDescription_10: '开源且轻松地为Nuxt项目添加国际化支持。',
-            sutTitle_11: 'plausible',
-            subDescription_11: '开源且隐私友好的Google Analytics 替代品。',
-            sutTitle_12: 'vite-pwa',
-            subDescription_12: '基于vite的开源且零配置的PWA框架。',
+            title: '功能特性',
+            description: '开箱即用的功能，助你快速构建全球化Web应用',
+            sutTitle_1: 'i18n 国际化',
+            subDescription_1: '轻松为Nuxt项目添加国际化支持,再小的语种都不怕',
+            sutTitle_2: 'Stripe支付',
+            subDescription_2: '最好、最安全的在线支付服务',
+            sutTitle_3: 'BagelPay支付',
+            subDescription_3: '为 SaaS 和独立开发者提供稳定简单配置的的在线收款服务',
+            sutTitle_4: 'Creem支付',
+            subDescription_4: '为 SaaS 和独立开发者提供稳定的的在线支付服务',
+            sutTitle_5: 'Resend邮件',
+            subDescription_5: '为开发者们打造的现代邮件API服务',
+            sutTitle_6: 'SEO优化',
+            subDescription_6: '内置全面的SEO功能，提高搜索引擎排名',
+            sutTitle_7: 'PWA支持',
+            subDescription_7: '零配置的PWA框架，提供离线访问和移动设备安装支持',
+            sutTitle_8: 'Google Auth认证',
+            subDescription_8: '安全可靠的Google账户登录支持',
+            sutTitle_9: 'DrizzleORM数据库',
+            subDescription_9: '用于 Node.js 和 TypeScript 的开源下一代数据库工具包',
         },
-       
         pricing: {
-            title: '定价计划',
-            monthly: '月度',
-            annually: '年度',
-            saveDiscount: '节省',
-            oneTimePayment: '一次性付款',
-            allFeaturesIncluded: '所有开源版本功能都包含在内',
-            permanentAccess: '永久访问',
-            backgroundSupport: '后台管理系统配置化支持',
-            visualDataAnalysis: '可视化数据分析',
-            freeUpdatesForLife: '终身免费更新',
-            IntelligentEmailMarketing:'智能化邮件营销获客',
-            HighDRSiteRecommendation:'高权重站点挂载推荐名额',
-            ExclusiveHighQualityOverseasCommunity:'专属高质量出海社群服务',
-            newFeaturesExperience:'新功能/产品优先体验权',
-            unlimitedCreate:'一次付费，无限构建',
-            multiTheme:'多样化风格主题自定义',
-            seoBlog:'seo博客内容管理',
-            overboardPdf:'从零开始的一站式出海指南PDF',
-            nuxtJSTemplate: 'NuxtJs3模板',
-            seoSupports:'SEO基础功能支持',
-            stripeAndCreem: '无缝集成Stripe和Creem支付及WebHook回调',
-            authThird:'安全授权认证及第三方登录集成',
-            i18Support:'国际化配置支持',
-            zeroPWA:'零配置PWA集成',
-            buyButton: '立即购买',
-            starterPlan: '入门计划',
-            starterPlanYearPrice: '$99',
-            starterPlanMonthPrice: '$9',
-            starterYearUnit: '年',
-            starterMonthUnit: '月',
-            starterPlanYearPriceDiscountText: '9 × 12 - 20% 折扣',
-            starterPlanPermanentAccess: '永久访问',
-            starterPlanAllFeaturesIncluded: '所有功能都包含在内',
-            starterPlanFreeUpdatesForLife: '终身免费更新',
-            starterButton: '立即订阅',
+            title: '价格方案',
+            description: '为爱好者和专业人士提供的价格计划',
+            free: '免费',
+            pro: '专业版',
+            max: '高级版',
+            ultra: '旗舰版',
+            features: {
+                '5 Projects': '5 个项目',
+                '10GB Storage': '10GB 存储',
+                'Up to 10 users': '最多 10 个用户',
+                'Basic support': '基础支持',
+                'Unlimited Projects': '无限项目',
+                '100GB Storage': '100GB 存储',
+                'Up to 100 users': '最多 100 个用户',
+                'Priority support': '优先支持',
+                'Custom domain': '自定义域名',
+                'Advanced analytics': '高级分析',
+                'Unlimited users': '无限用户',
+                '24/7 dedicated support': '24/7 专属支持',
+                'White-label option': '白标选项',
+            },
+            ctaButton: '立即开始免费体验',
+            contactUs: '联系我们',
             popular: '最受欢迎',
-            professionalPlan: '专业计划',
-            professionalPlanYearPrice: '$299',
-            professionalPlanMonthPrice: '$29',
-            professionalYearUnit: '年',
-            professionalMonthUnit: '月',
-            professionalPlanYearPriceDiscountText: '9 × 12 - 20% 折扣',
-            professionalPlanPermanentAccess: '永久访问',
-            professionalPlanAllFeaturesIncluded: '所有功能都包含在内',
-            professionalPlanFreeUpdatesForLife: '终身免费更新',
-            professionalButton: '立即订阅',
-            enterprisePlan: '企业计划',
-            enterprisePlanYearPrice: '$1,999',
-            enterprisePlanMonthPrice: '$199',
-            enterpriseYearUnit: '年',
-            enterpriseMonthUnit: '月',
-            enterprisePlanYearPriceDiscountText: '9 × 12 - 20% 折扣',
-            enterprisePlanPermanentAccess: '永久访问',
-            enterprisePlanAllFeaturesIncluded: '所有功能都包含在内',
-            enterprisePlanFreeUpdatesForLife: '终身免费更新',
-            enterpriseButton: '立即订阅'
+            month: '月',
+            year: '年',
+            save20: '节省20%',
+            unlimitedProjects: '无限项目',
+            unlimitedStorage: '无限存储',
+            unlimitedUsers: '无限用户',
+            prioritySupport: '优先支持',
+            customDomain: '自定义域名',
+            advancedAnalytics: '高级分析',
+            whiteLabelOption: '白标选项',
+            dedicatedSupport: '专属支持',
+            basicSupport: '基础支持',
+            upToUsers: '最多 {count} 个用户',
+            storage: '{size} 存储',
+            projects: '{count} 个项目',
+            seoSupports: 'SEO支持',
+            stripeAndCreem: 'Stripe和Creem支付支持',
+            authThird: '第三方认证',
+            i18Support: 'i18n国际化支持',
+            zeroPWA: '零配置PWA支持',
+            backgroundSupport: '后台支持',
+            visualDataAnalysis: '可视化数据分析',
+            marketingAnalysis: '营销分析',
+            emailSupport: '邮件支持',
+            communitySupport: '社区支持',
+            drizzleOrm: 'DrizzleORM支持',
+            resendEmail: 'Resend邮件支持',
+            googleAuth: 'Google认证',
+            bagelPay: 'BagelPay支付',
+            creemPay: 'Creem支付',
+        },
+        faq: {
+            title: '常见问题',
+            description: '关于NuxtPro的常见问题解答',
+            items: [
+                {
+                    question: '1. 这个产品是什么？',
+                    answer: '这个产品是一个全面的模板，旨在帮助SaaS公司实时监控其MRR、流失率和其他关键指标。'
+                },
+                {
+                    question: '2. 如何使用这个产品？',
+                    answer: '要使用这个产品，只需注册一个账户，连接您的支付平台，然后通过直观的模板开始跟踪您的指标。'
+                },
+                {
+                    question: '3. 免费版和付费版有什么区别？',
+                    answer: '免费版提供基本功能，而付费版提供高级功能，如无限项目、更多存储空间和优先支持。'
+                },
+                {
+                    question: '4. 是否支持自定义域名？',
+                    answer: '自定义域名仅在专业版和高级版计划中提供。'
+                },
+                {
+                    question: '5. 如何获得帮助？',
+                    answer: '我们提供多种支持选项，包括社区论坛、电子邮件支持和优先支持（取决于您的计划）。'
+                }
+            ]
         },
         testimonials: {
-            title: '客户评价'
+            title: '用户评价',
+            description: '看看我们的用户怎么说',
+            items: [
+                {
+                    name: '张三',
+                    role: '创业者',
+                    content: 'NuxtPro帮助我快速启动了我的SaaS业务，国际化支持特别棒！',
+                    avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+                },
+                {
+                    name: '李四',
+                    role: '独立开发者',
+                    content: '集成的支付和认证功能节省了我大量的开发时间，强烈推荐！',
+                    avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+                },
+                {
+                    name: '王五',
+                    role: 'CTO',
+                    content: 'SEO优化和PWA支持让我们的应用在搜索引擎和移动设备上表现出色。',
+                    avatar: 'https://randomuser.me/api/portraits/men/67.jpg'
+                }
+            ]
         },
-        faqs:{
-            question1: 'NuxtPro是什么？',
-            answer1: 'NuxtPro是一款基于Nuxt3的企业级SaaS出海模板，预集成Stripe/Cream支付、谷歌登录、多语言路由和SEO工具。开发者可快速构建支持服务端渲染(SSR)或静态生成(SSG)的全球化Web应用，开箱即用。',
-            question2: 'NuxtPro如何运作？',
-            answer2: 'NuxtPro采用"配置优先"原则：1、自动生成多语言路由（如/zh/home, /ja/home）;2、预构建认证模块（谷歌OAuth&JWT）;3、Stripe/Cream SDK插件式支付流程;4、Nuxt3钩子注入SEO友好元标签。',
-            question3: '如何创建NuxtPro项目？',
-            answer3: '您可以通过克隆https://github.com/PennyJoly/NuxtPro.git来创建NuxtPro项目。',
-            question4: '如何本地运行NuxtPro？',
-            answer4: '您可以通过pnpm install和pnpm run dev来本地运行NuxtPro。',
-            question5: '如何部署NuxtPro？',
-            answer5: '您可以通过pnpm run build:prod和pnpm start:prod来部署NuxtPro。',
-            question6: 'NuxtPro免费套餐与付费套餐有什么区别？',
-            answer6: '免费套餐提供基本功能，而付费套餐提供高级功能、多平台集成和额外分析工具。',
-            question7: 'NuxtPro与其他类似产品有什么区别？',
-            answer7: 'NuxtPro提供SSR/SSG支持，开箱即用以及更详细的数据分析及智能营销工具。',
-            question8: '我怎样付款？',
-            answer8: '您可以通过Stripe/Cream进行付款。',
+        footer: {
+            description: '基于Nuxt3的企业级SaaS出海模板，预集成Stripe/Cream支付、谷歌登录、多语言路由和SEO工具。快速构建SSR的全球化Web应用，开箱即用',
+            copyRight: '版权所有 © 2025 NuxtPro 保留所有权利',
+            github: 'GitHub',
+            twitter: 'Twitter',
+            discord: 'Discord',
+            wechat: '微信',
+            columns: [
+                {
+                    title: '产品',
+                    links: [
+                        { name: '功能特性', href: '#features' },
+                        { name: '价格方案', href: '#pricing' },
+                        { name: '技术博客', href: '/blog' },
+                        { name: '产品路线', href: '/roadmap' },
+                    ]
+                },
+                {
+                    title: '支持',
+                    links: [
+                        { name: '帮助中心', href: '#' },
+                        { name: '联系我们', href: '#' },
+                        { name: '隐私政策', href: '/privacy' },
+                        { name: '服务条款', href: '/terms' },
+                    ]
+                },
+                {
+                    title: '公司',
+                    links: [
+                        { name: '关于我们', href: '#' },
+                        { name: '加入我们', href: '#' },
+                        { name: '许可协议', href: '/license' },
+                    ]
+                }
+            ]
         },
-        cta:{
-            title: '准备好以最短时间构建发布你的出海SAAS了吗？',
-            description: 'NuxtPro让您的出海之旅启程仅在几天之间。',
-            button: '立即开始您的免费试用！'
-        },
-        friend:{
-            title: '友情链接'
-        },
-        common:{
-            selectLanguage: '选择语言',
-        },
-        bottomPopup:{
-            title: '限时优惠：在NuxtPro服务上节省高达60%！🎁',
-            description: '独家优惠⚡：月度订阅可节省 10%，或年度订阅可节省60%！',
-            tempTitle: '限时优惠：在NuxtPro服务上节省高达50%！🎁',
-            tempDescription: '独家优惠⚡：即刻购买即可节省 10%成本，缩短40%研发时间⌛!',
-            button: '立即订阅'
-        },
-        seo:{
-            title: 'NuxtPro:开源的Nuxt3 SaaS一站式出海模板 | 多语言、支付和友好SEO（Nuxt3）',
-            description: 'NuxtPro是一款基于Nuxt3的开源企业级SaaS模板，预集成全球支付网关（Stripe/Cream）、谷歌OAuth、多语言路由和SEO优化工具。为开发人员提供SSR/SSG支持，开箱即用。',
+        waitlistSuccessModal: {
+            title: '加入成功！',
+            message: '感谢您对NuxtPro的认可与支持，您将第一时间收到NuxtPro的最新消息及折扣优惠！Enjoy it!',
+            closeButton: '关闭'
         }
     },
-    blog: {
-        title: '博客列表',
-        description: "来自NuxtPro的最新消息和更新",
-        list:{
-            filterAll: "全部",
-            filterCompany: "公司",
-            filterProduct: "产品",
-            filterNews: "新闻",
-            noPostsFound: "未找到该分类下的文章。",
-            readMore: "阅读更多",
-            subtitle: "来自NuxtPro的最新消息和更新"
+    auth: {
+      selectLoginMethod: '授权登录',
+      selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.'
+     },
+      ocrAnalysis: {
+        title: 'OCR分析',
+        subtitle: '从图像和文档中提取文本',
+        uploadButton: '上传文件',
+        steps: {
+          title: '处理步骤',
+          upload: '上传文件',
+          analysis: '光学分析',
+          edit: '文档编辑',
+          export: '预览导出'
         },
-        detail:{
-            backLink: "返回博客列表",
-            publishedOn: "发布于",
-            byAuthor: "作者",
-            categories: "分类",
-            tags: "标签",
-            notFoundTitle: "未找到文章",
-            notFoundMessage: "请检查URL是否正确，或返回博客列表。"
-        }
-    },
-    footer:{
-        menu: "菜单",
-        legal:"法律政策",
-        resources: "资源",
-        privacy: "隐私政策",
-        home: "首页",
-        features: "功能",
-        pricing: "定价",
-        blog: "博客",
-        faq: "FAQ",
-        testimonials: "客户评价",
-        documentation: "文档",
-        license:"许可证",
-        friendsList: "友情链接",
-        about: "关于我们",
-        contact: "联系我们",
-        terms: "条款",
-        roadmap: "路线图",
-    },
-    license: {
-        title: "许可证政策",
-        subtitle: "管理 NuxtPro 商业版样板文件使用的具体条款",
-        date: "2025/04/28",
-        section1: {
-          heading: "NuxtPro 商业版许可证",
-          subheading: "个人、团队或组织许可证",
-          p1: "1、NuxtPro 商业版授予您持续的、非排他性的许可，以使用 SaaS 商业版中包含的软件组件和模板。",
-          p2: "2、该许可证允许单个个人、团队或组织（被许可方）使用，未经明确许可，不得转让给其他个人、团队或组织。"
-        },
-        section2: {
-          heading: "您可以：",
-          item1: "1、使用 NuxtPro 商业版创建无限量的最终产品。",
-          item2: "2、使用 NuxtPro 商业版为无限量的客户创建项目。",
-          item3: "3、根据本许可证修改 NuxtPro 商业版组件以创建衍生作品。",
-          item4: "4、使用 NuxtPro 商业版构建和运行最终用户与您的最终产品交互的 SaaS 应用程序。"
-        },
-        section3: {
-          heading: "您不可以：",
-          item1: "1、重新分发 NuxtPro 商业版的组件或模板（即使已修改），除非它们是最终产品的一部分。",
-          item2: "2、未经明确许可，与团队或组织以外的任何人共享您对 NuxtPro 商业版的访问权限。",
-          item3: "3、使用 NuxtPro 商业版创建与 NuxtPro 商业版竞争的产品或提供与 NuxtPro 商业版业务冲突的 SaaS 商业版套件。"
-        },
-        section4: {
-          heading: "使用示例",
-          subheading1: "允许使用的示例：",
-          item1a: "1、创建个人、团队或组织的网站或应用程序。",
-          item1b: "2、为客户构建商业 SaaS 应用程序或 Web 应用程序。",
-          subheading2: "禁止使用的示例：",
-          item2a: "1、创建 NuxtPro 商业版的存储库并共享或出售它。",
-          item2b: "2、制作衍生产品（例如商业版）并将其出售或免费提供。"
-        },
-        section5: {
-          heading: "执行与责任",
-          p1: "1、如果发生严重违反本协议的情况，NuxtPro 保留撤销许可证的权利。",
-          p2: "2、NuxtPro 的责任仅限于退还许可证费用。",
-          p3: "3、本协议受美国法律管辖。"
-        },
-        section6: {
-          heading: "联系我们",
-          p1: "如果您对本许可证政策有任何疑问，请联系我们。"
-        }
-    },
-    privacy: {
-        title: "隐私政策",
-        subtitle: "我们致力于保护您的隐私和个人数据",
-        date: "最后更新日期: 2025/04/28",
-        introduction: {
-          heading: "引言",
-          p1: "欢迎阅读我们的隐私政策。本文档解释了当您使用我们的服务时，我们如何收集、使用和保护您的个人信息。"
-        },
-        infoCollect: {
-          heading: "我们收集的信息",
-          p1: "我们可能收集以下类型的信息：",
-          item1: {
-            title: "个人信息",
-            content: "您在注册或联系我们时提供的姓名、电子邮件地址和联系方式。"
+        features: {
+          title: 'OCR功能',
+          document: {
+            title: '文档处理',
+            description: '处理各种文档格式，包括PDF、DOCX和图像'
           },
-          item2: {
-            title: "使用数据",
-            content: "关于您如何与我们的网站互动的信息，包括访问的页面和停留时间。"
+          accuracy: {
+            title: '高精度',
+            description: '行业领先的OCR精度，采用先进的AI算法'
           },
-          item3: {
-            title: "设备信息",
-            content: "有关您用于访问我们服务的设备的详细信息，例如 IP 地址、浏览器类型和操作系统。"
+          export: {
+            title: '多种导出选项',
+            description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
           }
         },
-        infoUse: {
-          heading: "我们如何使用您的信息",
-          p1: "我们将您的信息用于以下目的：",
-          item1: "提供和维护我们的服务",
-          item2: "通知您有关我们服务的变更",
-          item3: "提供客户支持",
-          item4: "收集分析或有价值的信息以改进我们的服务",
-          item5: "监控我们服务的使用情况",
-          item6: "检测、预防和解决技术问题"
+        upload: {
+          title: '上传文档',
+          dragDrop: '拖拽文件到此处',
+          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          uploading: '正在上传',
+          analyzing: '正在分析', // 新增的翻译键
+          uploadComplete: '上传完成',
+          uploadedFile: '已上传文件',
+          requiredPoints: '所需积分',
+          points: '积分',
+          reupload: '重新上传',
+          startProcessing: '开始处理'
         },
-        dataSecurity: {
-          heading: "数据安全",
-          p1: "我们采取适当的安全措施来保护您的个人信息免遭未经授权的访问、更改、披露或破坏。"
+        recent: {
+          title: '最近OCR处理',
+          table: {
+            name: '名称',
+            date: '日期',
+            status: '状态',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到OCR处理记录'
         },
-        thirdParty: {
-          heading: "第三方服务",
-          p1: "我们可能雇用第三方公司和个人来促进我们的服务、代表我们提供服务或协助我们分析我们的服务是如何被使用的。"
-        },
-        changes: {
-          heading: "本隐私政策的变更",
-          p1: "我们可能会不时更新我们的隐私政策。我们将通过在此页面上发布新的隐私政策来通知您任何更改。"
-        },
-        contact: {
-          heading: "联系我们",
-          p1: "如果您对本隐私政策有任何疑问，请联系我们。"
+        status: {
+          completed: '已完成',
+          processing: '处理中',
+          failed: '失败'
         }
-    },
-    terms: {
-        title: "服务条款",
-        subtitle: "管理我们服务使用的条款和条件",
-        date: "2025/04/28",
-        introduction: {
-          heading: "引言",
-          p1: "本服务条款（'条款'）管辖您对我们网站和服务的使用。通过访问或使用我们的服务，即表示您同意受这些条款的约束。"
+      },
+      translation: {
+        title: '翻译',
+        subtitle: '在多种语言之间翻译文本',
+        translateButton: '翻译',
+        features: {
+          title: '翻译功能',
+          multiLanguage: {
+            title: '多语言支持',
+            description: '支持100多种语言和方言'
+          },
+          document: {
+            title: '文档翻译',
+            description: '翻译整个文档并保留格式'
+          },
+          accuracy: {
+            title: '精准翻译',
+            description: '神经机器翻译，结果更自然准确'
+          }
         },
-        useOfServices: {
-          heading: "服务使用",
-          p1: "我们的服务按'原样'和可用'提供，不作任何明示或暗示的保证。我们不保证我们的服务会不间断、安全或无错误。"
+        source: {
+          title: '原文',
+          placeholder: '输入要翻译的文字...'
         },
-        userAccounts: {
-          heading: "用户账户",
-          p1: "当您在我们这里创建账户时，您必须提供准确和完整的信息。您有责任保护您的账户以及在您账户下发生的所有活动。"
+        result: {
+          title: '翻译结果',
+          translating: '翻译中...',
+          translated: '已翻译'
         },
-        intellectualProperty: {
-          heading: "知识产权",
-          p1: "我们的网站及其原始内容、特性和功能归我们所有，并受国际版权、商标和其他知识产权法律的保护。"
+        recent: {
+          title: '最近翻译',
+          table: {
+            source: '原文',
+            target: '目标语言',
+            date: '日期',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到翻译记录'
         },
-        userContent: {
-          heading: "用户内容",
-          p1: "您保留您在我们服务上或通过我们服务提交、发布或展示的任何内容的所有权利。通过提交内容，您授予我们全球性的、非排他性的、免版税的许可，以使用、复制、修改和分发您的内容。"
-        },
-        prohibitedActivities: {
-          heading: "禁止的活动",
-          intro: "您同意不：",
-          item1: "以任何违反适用法律或法规的方式使用我们的服务",
-          item2: "从事任何限制或抑制任何人使用或享受我们服务的行为",
-          item3: "试图未经授权访问我们的服务器或网络",
-          item4: "使用我们的服务分发恶意软件或其他有害代码"
-        },
-        termination: {
-          heading: "终止",
-          p1: "我们可能出于任何原因，立即终止或暂停您的账户和对我们服务的访问，恕不另行通知或承担责任。"
-        },
-        limitationOfLiability: {
-          heading: "责任限制",
-          p1: "在任何情况下，我们均不对因您使用或无法使用我们的服务而导致的任何间接、偶然、特殊、后果性或惩罚性损害承担责任。"
-        },
-        changes: {
-          heading: "条款变更",
-          p1: "我们保留随时修改这些条款的权利。如果我们进行更改，我们将通过在此页面上发布更新后的条款来提供通知。"
-        },
-        contact: {
-          heading: "联系我们",
-          p1: "如果您对这些条款有任何疑问，请联系我们。"
+        languages: {
+          en: '英语',
+          zh: '中文',
+          ja: '日语',
+          ko: '韩语'
         }
-    },
+      },
+      tools: {
+        title: '工具',
+        subtitle: '各种文档处理实用工具',
+        features: {
+          title: '可用工具'
+        },
+        pdfConverter: {
+          title: 'PDF转换器',
+          description: '将图像转换为PDF文件',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          fileName: '文件名',
+          fileNamePlaceholder: '输入文件名',
+          quality: '质量',
+          qualityHigh: '高',
+          qualityMedium: '中',
+          qualityLow: '低',
+          convertButton: '转换为PDF'
+        },
+        imageCompressor: {
+          title: '图像压缩器',
+          description: '在保持质量的同时减小图像文件大小',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          compression: '压缩级别',
+          format: '输出格式',
+          compressButton: '压缩图像'
+        },
+        imageCropper: {
+          title: '图像裁剪器',
+          description: '将图像裁剪为所需尺寸'
+        },
+        imageRotator: {
+          title: '图像旋转器',
+          description: '旋转图像以校正方向'
+        },
+        batchProcessor: {
+          title: '批量处理器',
+          description: '一次处理多个文件'
+        },
+        fileDownloader: {
+          title: '文件下载器',
+          description: '从URL下载文件'
+        },
+        status: {
+          completed: '已完成',
+          processing: '处理中',
+          failed: '失败'
+        }
+      },
+      profile: {
+        name: '姓名',
+        email: '邮箱',
+        bio: '个人简介',
+        updateProfile: '更新资料',
+        social: {
+          title: '社交媒体',
+          linkedin: 'LinkedIn',
+          twitter: 'Twitter',
+          github: 'GitHub',
+          website: '个人网站'
+        },
+        errors: {
+          invalidUrl: '请输入有效的URL',
+          invalidImageType: '请选择有效的图像文件 (jpg, jpeg, png)',
+          imageTooLarge: '图像文件太大，请选择小于5MB的文件'
+        }
+      },
+      account: {
+        changePassword: '更改密码',
+        currentPassword: '当前密码',
+        newPassword: '新密码',
+        confirmPassword: '确认新密码',
+        updatePassword: '更新密码',
+        deleteAccount: '删除账户',
+        deleteAccountDescription: '一旦您删除账户，将无法恢复。请确认。'
+      },
+      billing: {
+        free: '免费',
+        pro: '专业版',
+        max: '高级版',
+        ultra: '旗舰版'
+      },
+      settings: {
+        language: '语言',
+        selectLanguage: '选择语言',
+        emailNotifications: '邮件通知',
+        newsletter: '新闻通讯',
+        productUpdates: '产品更新',
+        securityAlerts: '安全警报'
+      },
+      ocrAnalysis: {
+        title: 'OCR分析',
+        subtitle: '从图像和文档中提取文本',
+        uploadButton: '上传文件',
+        steps: {
+          title: '处理步骤',
+          upload: '上传文件',
+          analysis: '光学分析',
+          edit: '文档编辑',
+          export: '预览导出'
+        },
+        features: {
+          title: 'OCR功能',
+          document: {
+            title: '文档处理',
+            description: '处理各种文档格式，包括PDF、DOCX和图像'
+          },
+          accuracy: {
+            title: '高精度',
+            description: '行业领先的OCR精度，采用先进的AI算法'
+          },
+          export: {
+            title: '多种导出选项',
+            description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
+          }
+        },
+        upload: {
+          title: '上传文档',
+          dragDrop: '拖拽文件到此处',
+          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          uploading: '正在上传',
+          analyzing: '正在分析', // 新增的翻译键
+          uploadComplete: '上传完成',
+          uploadedFile: '已上传文件',
+          requiredPoints: '所需积分',
+          points: '积分',
+          reupload: '重新上传',
+          startProcessing: '开始处理'
+        },
+        recent: {
+          title: '最近OCR处理',
+          table: {
+            name: '名称',
+            date: '日期',
+            status: '状态',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到OCR处理记录'
+        },
+        status: {
+          completed: '已完成',
+          processing: '处理中',
+          failed: '失败'
+        }
+      },
+      translation: {
+        title: '翻译',
+        subtitle: '在多种语言之间翻译文本',
+        translateButton: '翻译',
+        features: {
+          title: '翻译功能',
+          multiLanguage: {
+            title: '多语言支持',
+            description: '支持100多种语言和方言'
+          },
+          document: {
+            title: '文档翻译',
+            description: '翻译整个文档并保留格式'
+          },
+          accuracy: {
+            title: '精准翻译',
+            description: '神经机器翻译，结果更自然准确'
+          }
+        },
+        source: {
+          title: '原文',
+          placeholder: '输入要翻译的文字...'
+        },
+        result: {
+          title: '翻译结果',
+          translating: '翻译中...',
+          translated: '已翻译'
+        },
+        recent: {
+          title: '最近翻译',
+          table: {
+            source: '原文',
+            target: '目标语言',
+            date: '日期',
+            actions: '操作'
+          },
+          actions: {
+            view: '查看',
+            download: '下载'
+          },
+          empty: '未找到翻译记录'
+        },
+        languages: {
+          en: '英语',
+          zh: '中文',
+          ja: '日语',
+          ko: '韩语'
+        }
+      },
+      tools: {
+        title: '工具',
+        subtitle: '各种文档处理实用工具',
+        features: {
+          title: '可用工具'
+        },
+        pdfConverter: {
+          title: 'PDF转换器',
+          description: '将图像转换为PDF文件',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          fileName: '文件名',
+          fileNamePlaceholder: '输入文件名',
+          quality: '质量',
+          qualityHigh: '高',
+          qualityMedium: '中',
+          qualityLow: '低',
+          convertButton: '转换为PDF'
+        },
+        imageCompressor: {
+          title: '图像压缩器',
+          description: '在保持质量的同时减小图像文件大小',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          compression: '压缩级别',
+          format: '输出格式',
+          compressButton: '压缩图像'
+        },
+        imageCropper: {
+          title: '图像裁剪器',
+          description: '将图像裁剪为所需尺寸'
+        },
+        imageRotator: {
+          title: '图像旋转器',
+          description: '旋转图像以校正方向'
+        },
+        batchProcessor: {
+          title: '批量处理器',
+          description: '一次处理多个文件'
+        },
+        fileDownloader: {
+          title: '文件下载器',
+          description: '从URL下载文件'
+        },
+        status: {
+          completed: '已完成',
+          processing: '处理中',
+          failed: '失败'
+        }
+      },
+      profile: {
+        name: '姓名',
+        email: '邮箱',
+        bio: '个人简介',
+        updateProfile: '更新资料',
+        social: {
+          title: '社交媒体',
+          linkedin: 'LinkedIn',
+          twitter: 'Twitter',
+          github: 'GitHub',
+          website: '个人网站'
+        },
+        errors: {
+          invalidUrl: '请输入有效的URL',
+          invalidImageType: '请选择有效的图像文件 (jpg, jpeg, png)',
+          imageTooLarge: '图像文件太大，请选择小于5MB的文件'
+        }
+      },
+      account: {
+        changePassword: '更改密码',
+        currentPassword: '当前密码',
+        newPassword: '新密码',
+        confirmPassword: '确认新密码',
+        updatePassword: '更新密码',
+        deleteAccount: '删除账户',
+        deleteAccountDescription: '一旦您删除账户，将无法恢复。请确认。'
+      },
+      billing: {
+        free: '免费',
+        pro: '专业版',
+        max: '高级版',
+        ultra: '旗舰版'
+      },
+      settings: {
+        language: '语言',
+        selectLanguage: '选择语言',
+        emailNotifications: '邮件通知',
+        newsletter: '新闻通讯',
+        productUpdates: '产品更新',
+        securityAlerts: '安全警报'
+      },
     roadmap: {
         title: "NuxtPro 的发展规划",
         description: "探索我们的开发计划、即将推出的功能，并分享您对未来增强功能的建议。",
@@ -451,127 +737,27 @@ export default {
                 { 
                   title: '项目搭建，启动研发',
                   description: '搭建NuxtJs3项目，启动研发',
+                  date:'2025/02' 
+                },
+                { 
+                  title: 'Nuxt3核心功能开发',
+                  description: 'Nuxt3核心功能开发，包括首页、博客、文档、价格页、登录页、控制台、国际化、SEO、PWA、支付等',
                   date:'2025/03' 
                 },
                 { 
-                  title: '暂定名称',
-                  description: '围绕产品功能，初步暂定NuxtTemplate名称',
-                  date:'2025/03' 
-                },
-                { 
-                  title: '集成Stripe支付',
-                  description: '接入stripe支付，完成网页发起支付流程',
-                  date:'2025/03' 
-                },
-                { 
-                  title: '自定义Stripe的WebHook回调',
-                  description: '自定义Stripe的WebHook回调，完成支付后流程处理',
-                  date:'2025/03' 
-                },
-                { 
-                  title: '集成Creem支付',
-                  description: '接入creem支付，完成网页发起支付流程',
-                  date:'2025/03' 
-                },
-                { 
-                  title: '自定义Creem的WebHook回调',
-                  description: '自定义Creem的WebHook回调，完成支付后流程处理',
-                  date:'2025/03' 
-                },
-                { 
-                  title: '集成Google Auth',
-                  description: '接入Google Auth，完成网页发起登录授权流程',
-                  date:'2025/03' 
-                },
-                { 
-                  title: '集成i18n国际化支持',
-                  description: '完成i18n国际化支持，完成以英文、中文、日文的多语言路由',
+                  title: '第一版产品发布',
+                  description: '第一版产品发布，包括首页、博客、文档、价格页、登录页、控制台、国际化、SEO、PWA、支付等',
                   date:'2025/04' 
-                },
-                { 
-                  title: '集成Resend邮件服务',
-                  description: '接入Resend邮件服务，完成邮件发送功能',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '添加邮件模板',
-                  description: '结合i18n国际化，实现自定义邮件模板研发，智能区分环境发送邮件功能',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '集成PWA',
-                  description: '接入零配置PWA',
-                  date:'2025/04' 
-                },
-                { 
-                 title: '集成Logto',
-                 description: '将原有自有构建Google Auth替换为Logto，实现智能登录授权',
-                 date:'2025/04' 
-                },
-                { 
-                  title: '集成plausible',
-                  description: '接入plausible，实现智能可视化数据分析',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '集成prisma',
-                  description: '实现基础crud数据库操作功能',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '完成基础功能',
-                  description: '初步完成NuxtTemplate基础功能，落地页模板基本完成',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '确定产品名称',
-                  description: '正式确定产品名称：NuxtPro',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '围绕NuxtPro进行SEO布局',
-                  description: '围绕NuxtPro进行SEO布局，完成SEO优化',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '研发NuxtPro后台管理系统',
-                  description: '研发NuxtPro后台管理系统，实现基础crud数据库操作功能',
-                  date:'2025/04' 
-                },
-                { 
-                  title: 'RBAC权限管理',
-                  description: '完成NuxtPro基础RBAC权限管理功能',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '博客展示',
-                  description: '完成NuxtPro前端博客展示，页面排版布局',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '完成法律条款',
-                  description: '完成法律条款，包括隐私政策、服务条款、许可证政策',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '完成定价方案',
-                  description: '完成定价方案策略',
-                  date:'2025/04' 
-                },
-                { 
-                  title: '完成Readmap',
-                  description: '完成产品路线图，包括产品功能、产品迭代规划',
-                  date:'2025/05' 
                 }
             ],
-            inProgress:[
+            inProgress: [
                 { 
-                  title: '博客后台管理',
-                  description: '管理博客内容，包括文章、分类、标签等',
+                  title: 'AI集成',
+                  description: '在NuxtPro后台管理系统中，实现AI集成功能',
                   date:'2025/05/01' 
-                }, 
+                },
                 { 
-                  title: '智能营销',
+                  title: 'AI营销分析获客',
                   description: '在NuxtPro后台管理系统中，实现智能营销分析获客功能',
                   date:'2025/05/01' 
                 },
@@ -633,14 +819,22 @@ export default {
           },
           export: {
             title: '多种导出选项',
-            description: '将结果导出为各种格式，包括TXT、DOCX和PDF'
+            description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
           }
         },
         upload: {
           title: '上传文档',
           dragDrop: '拖拽文件到此处',
           supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-          browseFiles: '浏览文件'
+          browseFiles: '浏览图像',
+          uploading: '正在上传',
+          analyzing: '正在分析', // 新增的翻译键
+          uploadComplete: '上传完成',
+          uploadedFile: '已上传文件',
+          requiredPoints: '所需积分',
+          points: '积分',
+          reupload: '重新上传',
+          startProcessing: '开始处理'
         },
         recent: {
           title: '最近OCR处理',
@@ -662,125 +856,4 @@ export default {
           failed: '失败'
         }
       },
-      translation: {
-        title: '翻译',
-        subtitle: '在多种语言之间翻译文本',
-        translateButton: '翻译',
-        features: {
-          title: '翻译功能',
-          multiLanguage: {
-            title: '多语言支持',
-            description: '支持100多种语言和方言'
-          },
-          document: {
-            title: '文档翻译',
-            description: '翻译整个文档并保留格式'
-          },
-          accuracy: {
-            title: '精准翻译',
-            description: '神经机器翻译，结果更自然准确'
-          }
-        },
-        source: {
-          title: '源文本',
-          placeholder: '输入要翻译的文本...'
-        },
-        result: {
-          title: '翻译结果',
-          translating: '翻译中...',
-          translated: '已翻译'
-        },
-        recent: {
-          title: '最近翻译',
-          table: {
-            source: '源语言',
-            target: '目标语言',
-            date: '日期',
-            actions: '操作'
-          },
-          actions: {
-            view: '查看',
-            download: '下载'
-          },
-          empty: '未找到翻译记录'
-        },
-        languages: {
-          en: '英语',
-          zh: '中文',
-          ja: '日语',
-          ko: '韩语'
-        }
-      },
-      tools: {
-        title: '工具',
-        subtitle: '各种文档处理实用工具',
-        features: {
-          title: '可用工具'
-        },
-        pdfConverter: {
-          title: 'PDF转换器',
-          description: '将图像转换为PDF文档',
-          input: '输入',
-          dragDrop: '拖拽图像到此处',
-          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          output: '输出设置',
-          fileName: '文件名',
-          fileNamePlaceholder: '输入文件名',
-          quality: '质量',
-          qualityHigh: '高',
-          qualityMedium: '中',
-          qualityLow: '低',
-          convertButton: '转换为PDF'
-        },
-        imageCompressor: {
-          title: '图像压缩器',
-          description: '在保持质量的同时减小图像文件大小',
-          input: '输入',
-          dragDrop: '拖拽图像到此处',
-          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          output: '输出设置',
-          compression: '压缩级别',
-          format: '输出格式',
-          compressButton: '压缩图像'
-        },
-        imageCropper: {
-          title: '图像裁剪器',
-          description: '将图像裁剪为所需尺寸'
-        },
-        imageRotator: {
-          title: '图像旋转器',
-          description: '旋转图像以校正方向'
-        },
-        batchProcessor: {
-          title: '批量处理器',
-          description: '一次处理多个文件'
-        },
-        fileDownloader: {
-          title: '文件下载器',
-          description: '从URL下载文件'
-        },
-        selectTool: '选择工具',
-        selectToolDescription: '从上面的列表中选择一个工具开始使用',
-        recent: {
-          title: '最近工具使用',
-          table: {
-            tool: '工具',
-            date: '日期',
-            status: '状态',
-            actions: '操作'
-          },
-          actions: {
-            view: '查看',
-            download: '下载'
-          },
-          empty: '未找到工具使用记录'
-        },
-        status: {
-          completed: '已完成',
-          processing: '处理中',
-          failed: '失败'
-        }
-      }
 }
