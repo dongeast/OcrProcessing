@@ -1,15 +1,11 @@
-# Cloudflare Pages 项目配置文件
-# 仅包含 Pages 项目支持的配置项
-
 name = "ocr-processing-d1"
-# 添加兼容性日期
-compatibility_date = "2025-11-16"
 
 # 指定 Pages 构建输出目录
 pages_build_output_dir = "dist"
 
 # D1数据库配置
-# 本地开发环境D1数据库配置
+# 生产环境配置示例
+# 需要替换为您的实际Cloudflare账户ID和数据库ID
 [[ d1_databases ]]
 binding = "DB"
 database_name = "your-production-db"
@@ -21,25 +17,22 @@ database_id = "your-production-db-id"
 [dev]
 port = 8787
 local_protocol = "http"
-# 注意：persist 字段在 Pages 项目中不被支持，已移除
 
 # 环境变量配置 - 本地开发
 [vars]
 NODE_ENV = "development"
 DATABASE_TYPE = "d1"
+PAYMENT_METHOD = "1"
 
 # 生产环境配置
 [env.production]
-# 明确添加vars以避免继承问题
-vars = { NODE_ENV = "production" }
+vars = { 
+  NODE_ENV = "production",
+  DATABASE_TYPE = "d1",
+  PAYMENT_METHOD = "1"
+}
 
-# 生产环境D1数据库配置
-# 注意：其他生产环境配置（如routes、zone_id等）应在Cloudflare Pages控制台中设置
 [[ env.production.d1_databases ]]
 binding = "DB"
 database_name = "ocr-processing"
 database_id = "9402999b-a7b0-446d-9552-838b9f5de8bb"
-
-# 构建命令注意事项：
-# Cloudflare Pages会自动检测项目类型并使用适当的构建命令
-# 如需自定义构建命令，请在Cloudflare Pages控制台的构建设置中配置
