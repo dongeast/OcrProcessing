@@ -1,3 +1,8 @@
+console.log('===== ENV DEBUG =====')
+console.log('NODE_ENV:', process.env.NODE_ENV)
+console.log('NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:', process.env.NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+console.log('=====================')
+
 export default defineNuxtConfig({
   app:{
     head:{
