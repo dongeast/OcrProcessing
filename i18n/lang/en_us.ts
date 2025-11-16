@@ -318,6 +318,31 @@ export default {
           reupload: 'Re-upload',
           startProcessing: 'Start Processing'
         },
+        analysis: {
+          title: 'OCR Analysis',
+          reset: 'Reset',
+          reprocess: 'Re-process'
+        },
+        editor: {
+          title: 'MD Editing',
+          edit: 'Edit',
+          preview: 'Preview',
+          split: 'Split Screen',
+          placeholder: '# Document Title\n\nEnter your document content here...',
+          defaultTitle: 'OCR Recognition Results',
+          defaultContent: 'This is the content recognized from your document.\n\nYou can freely edit and format the text.',
+          save: 'Save Document',
+          saved: 'Document saved successfully',
+          reset: 'Reset'
+        },
+        preview: {
+          title: 'Document Preview',
+          exportPDF: 'Export PDF',
+          exportTXT: 'Export TXT',
+          exportMD: 'Export MD',
+          exportDOCX: 'Export DOCX',
+          exporting: 'Exporting as {format} format...'
+        },
         recent: {
           title: 'Recent OCR Processing',
           table: {

@@ -652,43 +652,68 @@ export default {
         },
         ocrAnalysis: {
             title: 'OCR分析',
-            subtitle: '從圖像和文件中提取文字',
+            subtitle: '從圖像和文件中提取文本',
             uploadButton: '上傳文件',
             steps: {
               title: '處理步驟',
               upload: '上傳文件',
               analysis: '光學分析',
-              edit: '文件編輯',
+              edit: '文檔編輯',
               export: '預覽導出'
             },
             features: {
-                title: 'OCR功能',
-                document: {
-                    title: '文件處理',
-                    description: '處理各種文件格式，包括PDF、DOCX和圖像'
-                },
-                accuracy: {
-                    title: '高精度',
-                    description: '行業領先的OCR精度，採用先進的AI算法'
-                },
-                export: {
-                    title: '多種導出選項',
-                    description: '將結果導出為各種格式，包括TXT、DOCX和PDF'
-                }
+              title: 'OCR功能',
+              document: {
+                title: '文檔處理',
+                description: '處理各種文檔格式，包括PDF、DOCX和圖像'
+              },
+              accuracy: {
+                title: '高精度',
+                description: '行業領先的OCR精度，採用先進的AI算法'
+              },
+              export: {
+                title: '多種導出選項',
+                description: '將結果導出為多種格式，包括TXT、DOCX和PDF'
+              }
             },
             upload: {
-                title: '上傳文件',
-                dragDrop: '拖拽文件到此處',
-                supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-                browseFiles: '瀏覽圖像',
-                uploading: '正在上傳',
-                analyzing: '正在分析',
-                uploadComplete: '上傳完成',
-                uploadedFile: '已上傳文件',
-                requiredPoints: '所需積分',
-                points: '積分',
-                reupload: '重新上傳',
-                startProcessing: '開始處理'
+              title: '上傳文檔',
+              dragDrop: '拖拽文件到此處',
+              supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+              browseFiles: '瀏覽圖像',
+              uploading: '正在上傳',
+              analyzing: '正在分析',
+              uploadComplete: '上傳完成',
+              uploadedFile: '已上傳文件',
+              requiredPoints: '所需積分',
+              points: '積分',
+              reupload: '重新上傳',
+              startProcessing: '開始處理'
+            },
+            analysis: {
+              title: 'OCR分析',
+              reset: '重置',
+              reprocess: '重新處理'
+            },
+            editor: {
+              title: 'MD編輯',
+              edit: '編輯',
+              preview: '預覽',
+              split: '分屏',
+              placeholder: '# 文檔標題\n\n在這裡輸入您的文檔內容...',
+              defaultTitle: 'OCR識別結果',
+              defaultContent: '這是從您的文檔中識別出的內容。\n\n您可以自由編輯、格式化文本。',
+              save: '保存文檔',
+              saved: '文檔已保存',
+              reset: '重置'
+            },
+            preview: {
+                title: '文檔預覽',
+                exportPDF: '導出PDF',
+                exportTXT: '導出TXT',
+                exportMD: '導出MD',
+                exportDOCX: '導出DOCX',
+                exporting: '正在導出為{format}格式...'
             },
             recent: {
                 title: '最近OCR處理',
@@ -770,7 +795,7 @@ export default {
                 description: '將圖像轉換為PDF文件',
                 input: '輸入',
                 dragDrop: '拖拽圖像到此處',
-                supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+                supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
                 browseFiles: '瀏覽圖像',
                 output: '輸出設置',
                 fileName: '文件名',

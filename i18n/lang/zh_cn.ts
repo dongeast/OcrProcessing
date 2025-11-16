@@ -291,67 +291,92 @@ export default {
     auth: {
       selectLoginMethod: '授权登录',
       selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.'
-     },
-      ocrAnalysis: {
-        title: 'OCR分析',
-        subtitle: '从图像和文档中提取文本',
-        uploadButton: '上传文件',
-        steps: {
-          title: '处理步骤',
-          upload: '上传文件',
-          analysis: '光学分析',
-          edit: '文档编辑',
-          export: '预览导出'
+    },
+    ocrAnalysis: {
+      title: 'OCR分析',
+      subtitle: '从图像和文档中提取文本',
+      uploadButton: '上传文件',
+      steps: {
+        title: '处理步骤',
+        upload: '上传文件',
+        analysis: '光学分析',
+        edit: '文档编辑',
+        export: '预览导出'
+      },
+      features: {
+        title: 'OCR功能',
+        document: {
+          title: '文档处理',
+          description: '处理各种文档格式，包括PDF、DOCX和图像'
         },
-        features: {
-          title: 'OCR功能',
-          document: {
-            title: '文档处理',
-            description: '处理各种文档格式，包括PDF、DOCX和图像'
-          },
-          accuracy: {
-            title: '高精度',
-            description: '行业领先的OCR精度，采用先进的AI算法'
-          },
-          export: {
-            title: '多种导出选项',
-            description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
-          }
+        accuracy: {
+          title: '高精度',
+          description: '行业领先的OCR精度，采用先进的AI算法'
         },
-        upload: {
-          title: '上传文档',
-          dragDrop: '拖拽文件到此处',
-          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          uploading: '正在上传',
-          analyzing: '正在分析', // 新增的翻译键
-          uploadComplete: '上传完成',
-          uploadedFile: '已上传文件',
-          requiredPoints: '所需积分',
-          points: '积分',
-          reupload: '重新上传',
-          startProcessing: '开始处理'
-        },
-        recent: {
-          title: '最近OCR处理',
-          table: {
-            name: '名称',
-            date: '日期',
-            status: '状态',
-            actions: '操作'
-          },
-          actions: {
-            view: '查看',
-            download: '下载'
-          },
-          empty: '未找到OCR处理记录'
-        },
-        status: {
-          completed: '已完成',
-          processing: '处理中',
-          failed: '失败'
+        export: {
+          title: '多种导出选项',
+          description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
         }
       },
+      upload: {
+        title: '上传文档',
+        dragDrop: '拖拽文件到此处',
+        supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+        browseFiles: '浏览图像',
+        uploading: '正在上传',
+        analyzing: '正在分析',
+        uploadComplete: '上传完成',
+        uploadedFile: '已上传文件',
+        requiredPoints: '所需积分',
+        points: '积分',
+        reupload: '重新上传',
+        startProcessing: '开始处理'
+      },
+      analysis: {
+        title: 'OCR分析',
+        reset: '重置',
+        reprocess: '重新处理'
+      },
+      editor: {
+        title: 'MD编辑',
+        edit: '编辑',
+        preview: '预览',
+        split: '分屏',
+        placeholder: '# 文档标题\n\n在这里输入您的文档内容...',
+        defaultTitle: 'OCR识别结果',
+        defaultContent: '这是从您的文档中识别出的内容。\n\n您可以自由编辑、格式化文本。',
+        save: '保存文档',
+        saved: '文档已保存',
+        reset: '重置'
+      },
+      preview: {
+        title: '文档预览',
+        exportPDF: '导出PDF',
+        exportTXT: '导出TXT',
+        exportMD: '导出MD',
+        exportDOCX: '导出DOCX',
+        exporting: '正在导出为{format}格式...'
+      },
+      recent: {
+        title: '最近OCR处理',
+        table: {
+          name: '名称',
+          date: '日期',
+          status: '状态',
+          actions: '操作'
+        },
+        actions: {
+          view: '查看',
+          download: '下载'
+        },
+        empty: '未找到OCR处理记录'
+      },
+      status: {
+        completed: '已完成',
+        processing: '处理中',
+        failed: '失败'
+      }
+    },
       translation: {
         title: '翻译',
         subtitle: '在多种语言之间翻译文本',
@@ -412,213 +437,7 @@ export default {
           description: '将图像转换为PDF文件',
           input: '输入',
           dragDrop: '拖拽图像到此处',
-          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          output: '输出设置',
-          fileName: '文件名',
-          fileNamePlaceholder: '输入文件名',
-          quality: '质量',
-          qualityHigh: '高',
-          qualityMedium: '中',
-          qualityLow: '低',
-          convertButton: '转换为PDF'
-        },
-        imageCompressor: {
-          title: '图像压缩器',
-          description: '在保持质量的同时减小图像文件大小',
-          input: '输入',
-          dragDrop: '拖拽图像到此处',
-          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          output: '输出设置',
-          compression: '压缩级别',
-          format: '输出格式',
-          compressButton: '压缩图像'
-        },
-        imageCropper: {
-          title: '图像裁剪器',
-          description: '将图像裁剪为所需尺寸'
-        },
-        imageRotator: {
-          title: '图像旋转器',
-          description: '旋转图像以校正方向'
-        },
-        batchProcessor: {
-          title: '批量处理器',
-          description: '一次处理多个文件'
-        },
-        fileDownloader: {
-          title: '文件下载器',
-          description: '从URL下载文件'
-        },
-        status: {
-          completed: '已完成',
-          processing: '处理中',
-          failed: '失败'
-        }
-      },
-      profile: {
-        name: '姓名',
-        email: '邮箱',
-        bio: '个人简介',
-        updateProfile: '更新资料',
-        social: {
-          title: '社交媒体',
-          linkedin: 'LinkedIn',
-          twitter: 'Twitter',
-          github: 'GitHub',
-          website: '个人网站'
-        },
-        errors: {
-          invalidUrl: '请输入有效的URL',
-          invalidImageType: '请选择有效的图像文件 (jpg, jpeg, png)',
-          imageTooLarge: '图像文件太大，请选择小于5MB的文件'
-        }
-      },
-      account: {
-        changePassword: '更改密码',
-        currentPassword: '当前密码',
-        newPassword: '新密码',
-        confirmPassword: '确认新密码',
-        updatePassword: '更新密码',
-        deleteAccount: '删除账户',
-        deleteAccountDescription: '一旦您删除账户，将无法恢复。请确认。'
-      },
-      billing: {
-        free: '免费',
-        pro: '专业版',
-        max: '高级版',
-        ultra: '旗舰版'
-      },
-      settings: {
-        language: '语言',
-        selectLanguage: '选择语言',
-        emailNotifications: '邮件通知',
-        newsletter: '新闻通讯',
-        productUpdates: '产品更新',
-        securityAlerts: '安全警报'
-      },
-      ocrAnalysis: {
-        title: 'OCR分析',
-        subtitle: '从图像和文档中提取文本',
-        uploadButton: '上传文件',
-        steps: {
-          title: '处理步骤',
-          upload: '上传文件',
-          analysis: '光学分析',
-          edit: '文档编辑',
-          export: '预览导出'
-        },
-        features: {
-          title: 'OCR功能',
-          document: {
-            title: '文档处理',
-            description: '处理各种文档格式，包括PDF、DOCX和图像'
-          },
-          accuracy: {
-            title: '高精度',
-            description: '行业领先的OCR精度，采用先进的AI算法'
-          },
-          export: {
-            title: '多种导出选项',
-            description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
-          }
-        },
-        upload: {
-          title: '上传文档',
-          dragDrop: '拖拽文件到此处',
           supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          uploading: '正在上传',
-          analyzing: '正在分析', // 新增的翻译键
-          uploadComplete: '上传完成',
-          uploadedFile: '已上传文件',
-          requiredPoints: '所需积分',
-          points: '积分',
-          reupload: '重新上传',
-          startProcessing: '开始处理'
-        },
-        recent: {
-          title: '最近OCR处理',
-          table: {
-            name: '名称',
-            date: '日期',
-            status: '状态',
-            actions: '操作'
-          },
-          actions: {
-            view: '查看',
-            download: '下载'
-          },
-          empty: '未找到OCR处理记录'
-        },
-        status: {
-          completed: '已完成',
-          processing: '处理中',
-          failed: '失败'
-        }
-      },
-      translation: {
-        title: '翻译',
-        subtitle: '在多种语言之间翻译文本',
-        translateButton: '翻译',
-        features: {
-          title: '翻译功能',
-          multiLanguage: {
-            title: '多语言支持',
-            description: '支持100多种语言和方言'
-          },
-          document: {
-            title: '文档翻译',
-            description: '翻译整个文档并保留格式'
-          },
-          accuracy: {
-            title: '精准翻译',
-            description: '神经机器翻译，结果更自然准确'
-          }
-        },
-        source: {
-          title: '原文',
-          placeholder: '输入要翻译的文字...'
-        },
-        result: {
-          title: '翻译结果',
-          translating: '翻译中...',
-          translated: '已翻译'
-        },
-        recent: {
-          title: '最近翻译',
-          table: {
-            source: '原文',
-            target: '目标语言',
-            date: '日期',
-            actions: '操作'
-          },
-          actions: {
-            view: '查看',
-            download: '下载'
-          },
-          empty: '未找到翻译记录'
-        },
-        languages: {
-          en: '英语',
-          zh: '中文',
-          ja: '日语',
-          ko: '韩语'
-        }
-      },
-      tools: {
-        title: '工具',
-        subtitle: '各种文档处理实用工具',
-        features: {
-          title: '可用工具'
-        },
-        pdfConverter: {
-          title: 'PDF转换器',
-          description: '将图像转换为PDF文件',
-          input: '输入',
-          dragDrop: '拖拽图像到此处',
-          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
           browseFiles: '浏览图像',
           output: '输出设置',
           fileName: '文件名',
@@ -792,68 +611,150 @@ export default {
       notFoundMessage: '我们无法找到您正在寻找的页面。',
       goHomeButton: '返回主页'
     },
-    auth: {
-      selectLoginMethod: '授权登录',
-      selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.'
-     },
-      ocrAnalysis: {
-        title: 'OCR分析',
-        subtitle: '从图像和文档中提取文本',
-        uploadButton: '上传文件',
-        steps: {
-          title: '处理步骤',
-          upload: '上传文件',
-          analysis: '光学分析',
-          edit: '文档编辑',
-          export: '预览导出'
-        },
+      translation: {
+        title: '翻译',
+        subtitle: '在多种语言之间翻译文本',
+        translateButton: '翻译',
         features: {
-          title: 'OCR功能',
+          title: '翻译功能',
+          multiLanguage: {
+            title: '多语言支持',
+            description: '支持100多种语言和方言'
+          },
           document: {
-            title: '文档处理',
-            description: '处理各种文档格式，包括PDF、DOCX和图像'
+            title: '文档翻译',
+            description: '翻译整个文档并保留格式'
           },
           accuracy: {
-            title: '高精度',
-            description: '行业领先的OCR精度，采用先进的AI算法'
-          },
-          export: {
-            title: '多种导出选项',
-            description: '将结果导出为多种格式，包括TXT、DOCX和PDF'
+            title: '精准翻译',
+            description: '神经机器翻译，结果更自然准确'
           }
         },
-        upload: {
-          title: '上传文档',
-          dragDrop: '拖拽文件到此处',
-          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
-          browseFiles: '浏览图像',
-          uploading: '正在上传',
-          analyzing: '正在分析', // 新增的翻译键
-          uploadComplete: '上传完成',
-          uploadedFile: '已上传文件',
-          requiredPoints: '所需积分',
-          points: '积分',
-          reupload: '重新上传',
-          startProcessing: '开始处理'
+        source: {
+          title: '原文',
+          placeholder: '输入要翻译的文字...'
+        },
+        result: {
+          title: '翻译结果',
+          translating: '翻译中...',
+          translated: '已翻译'
         },
         recent: {
-          title: '最近OCR处理',
+          title: '最近翻译',
           table: {
-            name: '名称',
+            source: '原文',
+            target: '目标语言',
             date: '日期',
-            status: '状态',
             actions: '操作'
           },
           actions: {
             view: '查看',
             download: '下载'
           },
-          empty: '未找到OCR处理记录'
+          empty: '未找到翻译记录'
+        },
+        languages: {
+          en: '英语',
+          zh: '中文',
+          ja: '日语',
+          ko: '韩语'
+        }
+      },
+      tools: {
+        title: '工具',
+        subtitle: '各种文档处理实用工具',
+        features: {
+          title: '可用工具'
+        },
+        pdfConverter: {
+          title: 'PDF转换器',
+          description: '将图像转换为PDF文件',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          fileName: '文件名',
+          fileNamePlaceholder: '输入文件名',
+          quality: '质量',
+          qualityHigh: '高',
+          qualityMedium: '中',
+          qualityLow: '低',
+          convertButton: '转换为PDF'
+        },
+        imageCompressor: {
+          title: '图像压缩器',
+          description: '在保持质量的同时减小图像文件大小',
+          input: '输入',
+          dragDrop: '拖拽图像到此处',
+          supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+          browseFiles: '浏览图像',
+          output: '输出设置',
+          compression: '压缩级别',
+          format: '输出格式',
+          compressButton: '压缩图像'
+        },
+        imageCropper: {
+          title: '图像裁剪器',
+          description: '将图像裁剪为所需尺寸'
+        },
+        imageRotator: {
+          title: '图像旋转器',
+          description: '旋转图像以校正方向'
+        },
+        batchProcessor: {
+          title: '批量处理器',
+          description: '一次处理多个文件'
+        },
+        fileDownloader: {
+          title: '文件下载器',
+          description: '从URL下载文件'
         },
         status: {
           completed: '已完成',
           processing: '处理中',
           failed: '失败'
         }
+      },
+      profile: {
+        name: '姓名',
+        email: '邮箱',
+        bio: '个人简介',
+        updateProfile: '更新资料',
+        social: {
+          title: '社交媒体',
+          linkedin: 'LinkedIn',
+          twitter: 'Twitter',
+          github: 'GitHub',
+          website: '个人网站'
+        },
+        errors: {
+          invalidUrl: '请输入有效的URL',
+          invalidImageType: '请选择有效的图像文件 (jpg, jpeg, png)',
+          imageTooLarge: '图像文件太大，请选择小于5MB的文件'
+        }
+      },
+      account: {
+        changePassword: '更改密码',
+        currentPassword: '当前密码',
+        newPassword: '新密码',
+        confirmPassword: '确认新密码',
+        updatePassword: '更新密码',
+        deleteAccount: '删除账户',
+        deleteAccountDescription: '一旦您删除账户，将无法恢复。请确认。'
+      },
+      billing: {
+        free: '免费',
+        pro: '专业版',
+        max: '高级版',
+        ultra: '旗舰版'
+      },
+      settings: {
+        language: '语言',
+        selectLanguage: '选择语言',
+        emailNotifications: '邮件通知',
+        newsletter: '新闻通讯',
+        productUpdates: '产品更新',
+        securityAlerts: '安全警报'
       },
 }

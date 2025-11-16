@@ -112,94 +112,278 @@
     <div class="rounded-lg bg-card border p-6 shadow-sm">
       <h2 class="text-xl font-semibold mb-4">{{ getStepTitle() }}</h2>
       
+      <!-- 节点4：文档预览与导出 -->
+      <div v-if="selectedStep === 4" class="mb-4">
+        <div class="border rounded-lg overflow-hidden">
+          <!-- 功能栏 -->
+          <div class="flex justify-end items-center border-b bg-muted p-4">
+            <div class="flex space-x-2">
+              <button 
+                @click="exportDocument('pdf')"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.preview.exportPDF') }}
+              </button>
+              <button 
+                @click="exportDocument('txt')"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.preview.exportTXT') }}
+              </button>
+              <button 
+                @click="exportDocument('md')"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.preview.exportMD') }}
+              </button>
+              <button 
+                @click="exportDocument('docx')"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.preview.exportDOCX') }}
+              </button>
+            </div>
+          </div>
+          
+          <!-- 文档预览区域 -->
+          <div class="p-4 prose max-w-none" v-html="renderedMarkdown"></div>
+        </div>
+      </div>
+      
+      <!-- 节点3：MD文档编辑与预览 -->
+      <div v-else-if="selectedStep === 3" class="mb-4">
+        <div class="border rounded-lg overflow-hidden">
+          <!-- 功能栏 -->
+          <div class="flex justify-end items-center border-b bg-muted p-4">
+            <div class="flex space-x-2">
+              <button 
+                @click="resetUpload"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.editor.reset') }}
+              </button>
+              <button 
+                @click="saveDocument"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.editor.save') }}
+              </button>
+            </div>
+          </div>
+          
+          <div class="flex border-b bg-muted">
+            <button 
+              @click="mdEditMode = 'edit'"
+              class="px-4 py-2 font-medium text-sm"
+              :class="mdEditMode === 'edit' ? 'bg-background border-b-2 border-primary' : 'text-muted-foreground'"
+            >
+              {{ t('center.ocrAnalysis.editor.edit') }}
+            </button>
+            <button 
+              @click="mdEditMode = 'preview'"
+              class="px-4 py-2 font-medium text-sm"
+              :class="mdEditMode === 'preview' ? 'bg-background border-b-2 border-primary' : 'text-muted-foreground'"
+            >
+              {{ t('center.ocrAnalysis.editor.preview') }}
+            </button>
+            <button 
+              @click="mdEditMode = 'split'"
+              class="px-4 py-2 font-medium text-sm"
+              :class="mdEditMode === 'split' ? 'bg-background border-b-2 border-primary' : 'text-muted-foreground'"
+            >
+              {{ t('center.ocrAnalysis.editor.split') }}
+            </button>
+          </div>
+          
+          <div class="flex flex-col md:flex-row">
+            <!-- 编辑器模式 -->
+            <div 
+              v-if="mdEditMode === 'edit'" 
+              class="w-full p-4"
+            >
+              <textarea
+                v-model="mdContent"
+                class="w-full h-96 p-2 border rounded font-mono text-sm"
+                :placeholder="t('center.ocrAnalysis.editor.placeholder')"
+              ></textarea>
+            </div>
+            
+            <!-- 预览模式 -->
+            <div 
+              v-else-if="mdEditMode === 'preview'" 
+              class="w-full p-4 prose max-w-none"
+              v-html="renderedMarkdown"
+            ></div>
+            
+            <!-- 分屏模式 -->
+            <template v-else-if="mdEditMode === 'split'">
+              <div class="w-full md:w-1/2 p-4 border-r">
+                <textarea
+                  v-model="mdContent"
+                  class="w-full h-96 p-2 border rounded font-mono text-sm"
+                  :placeholder="t('center.ocrAnalysis.editor.placeholder')"
+                ></textarea>
+              </div>
+              <div 
+                class="w-full md:w-1/2 p-4 prose max-w-none"
+                v-html="renderedMarkdown"
+              ></div>
+            </template>
+          </div>
+        </div>
+      </div>
+      
       <!-- 节点2：OCR分析 - 图片预览走马灯 -->
-      <div v-if="selectedStep === 2 && ocrProgress >= 100" class="mb-4" @click.stop>
-        <!-- 图片预览走马灯 -->
-        <div class="carousel-container">
-          <div class="carousel-slide">
-            <img 
-              :src="previewImage" 
-              :alt="uploadedFile?.name || 'Preview'" 
-              class="mx-auto max-h-96 object-contain"
-              @error="handleImageError"
-            />
+      <div v-else-if="selectedStep === 2 && ocrProgress >= 100" class="mb-4" @click.stop>
+        <div class="border rounded-lg overflow-hidden">
+          <!-- 功能栏 -->
+          <div class="flex justify-end items-center border-b bg-muted p-4">
+            <div class="flex space-x-2">
+              <!-- 保留重新处理按钮，移除重置按钮 -->
+              <button 
+                @click="startProcessing"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.analysis.reprocess') }}
+              </button>
+            </div>
           </div>
-          <div class="carousel-controls mt-4 flex justify-center space-x-2">
-            <button 
-              @click.stop="prevImage" 
-              class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
-              :disabled="currentImageIndex === 0"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-            </button>
-            <button 
-              @click.stop="nextImage" 
-              class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
-              :disabled="currentImageIndex === previewImages.length - 1"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-          <div class="carousel-indicators mt-2 flex justify-center space-x-1">
-            <button 
-              v-for="(image, index) in previewImages" 
-              :key="index"
-              @click.stop="goToImage(index)"
-              class="h-2 w-2 rounded-full"
-              :class="index === currentImageIndex ? 'bg-primary' : 'bg-gray-300'"
-            ></button>
+          
+          <!-- 图片预览走马灯 -->
+          <div class="carousel-container p-4">
+            <div class="carousel-slide">
+              <img 
+                :src="previewImage" 
+                :alt="uploadedFile?.name || 'Preview'" 
+                class="mx-auto max-h-96 object-contain"
+                @error="handleImageError"
+              />
+            </div>
+            <div class="carousel-controls mt-4 flex justify-center space-x-2">
+              <button 
+                @click.stop="prevImage" 
+                class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+                :disabled="currentImageIndex === 0"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <button 
+                @click.stop="nextImage" 
+                class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+                :disabled="currentImageIndex === previewImages.length - 1"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+            <div class="carousel-indicators mt-2 flex justify-center space-x-1">
+              <button 
+                v-for="(image, index) in previewImages" 
+                :key="index"
+                @click.stop="goToImage(index)"
+                class="h-2 w-2 rounded-full"
+                :class="index === currentImageIndex ? 'bg-primary' : 'bg-gray-300'"
+              ></button>
+            </div>
           </div>
         </div>
       </div>
       
       <!-- OCR处理状态 (仅在OCR处理中显示) -->
       <div v-else-if="selectedStep === 2 && ocrProgress < 100" class="mb-4">
-        <div class="flex justify-between text-sm text-muted-foreground mb-1">
-          <span>{{ t('center.ocrAnalysis.upload.analyzing') }}...</span>
-          <span>{{ ocrProgress }}%</span>
-        </div>
-        <div class="w-full bg-muted rounded-full h-2">
-          <div 
-            class="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
-            :style="{ width: ocrProgress + '%' }"
-          ></div>
+        <div class="border rounded-lg overflow-hidden">
+          <!-- 功能栏 -->
+          <div class="flex justify-end items-center border-b bg-muted p-4">
+            <div class="flex space-x-2">
+              <!-- 保留重置按钮 -->
+              <button 
+                @click="resetUpload"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.analysis.reset') }}
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-8">
+            <div class="flex justify-between text-sm text-muted-foreground mb-1">
+              <span>{{ t('center.ocrAnalysis.upload.analyzing') }}...</span>
+              <span>{{ ocrProgress }}%</span>
+            </div>
+            <div class="w-full bg-muted rounded-full h-2">
+              <div 
+                class="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
+                :style="{ width: ocrProgress + '%' }"
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
       
       <!-- 上传进度条 (仅在有文件上传时显示) -->
       <div v-else-if="uploadProgress > 0 && uploadProgress < 100 && selectedStep === 1" class="mb-4">
-        <div class="flex justify-between text-sm text-muted-foreground mb-1">
-          <span>{{ t('center.ocrAnalysis.upload.uploading') }}...</span>
-          <span>{{ uploadProgress }}%</span>
-        </div>
-        <div class="w-full bg-muted rounded-full h-2">
-          <div 
-            class="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
-            :style="{ width: uploadProgress + '%' }"
-          ></div>
+        <div class="border rounded-lg overflow-hidden">
+          <!-- 功能栏 -->
+          <div class="flex justify-end items-center border-b bg-muted p-4">
+            <div class="flex space-x-2">
+              <button 
+                @click="resetUpload"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.upload.reupload') }}
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-8">
+            <div class="flex justify-between text-sm text-muted-foreground mb-1">
+              <span>{{ t('center.ocrAnalysis.upload.uploading') }}...</span>
+              <span>{{ uploadProgress }}%</span>
+            </div>
+            <div class="w-full bg-muted rounded-full h-2">
+              <div 
+                class="bg-primary h-2 rounded-full transition-all duration-300 ease-out" 
+                :style="{ width: uploadProgress + '%' }"
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
       
       <!-- 上传完成提示和文件信息 (仅在上传完成时显示) -->
       <div v-else-if="uploadProgress === 100 && uploadedFile && selectedStep === 1" class="mb-4">
-        <div class="p-3 bg-green-50 border border-green-200 rounded-lg mb-4">
-          <div class="flex items-center text-green-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-            </svg>
-            <span>{{ t('center.ocrAnalysis.upload.uploadComplete') }}</span>
+        <div class="border rounded-lg overflow-hidden">
+          <!-- 功能栏 -->
+          <div class="flex justify-end items-center border-b bg-muted p-4">
+            <div class="flex space-x-2">
+              <button 
+                @click="resetUpload"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.upload.reupload') }}
+              </button>
+              <button 
+                @click="startProcessing"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.upload.startProcessing') }}
+              </button>
+            </div>
           </div>
-        </div>
-        
-        <!-- 已上传文件信息 -->
-        <div class="border rounded-lg overflow-hidden mb-4">
-          <div class="bg-muted px-4 py-2 border-b">
-            <h3 class="font-medium">{{ t('center.ocrAnalysis.upload.uploadedFile') }}</h3>
+          
+          <div class="p-3 bg-green-50 border border-green-200">
+            <div class="flex items-center text-green-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{{ t('center.ocrAnalysis.upload.uploadComplete') }}</span>
+            </div>
           </div>
+          
+          <!-- 已上传文件信息 -->
           <div class="p-4">
             <div class="flex items-start">
               <div class="rounded bg-muted p-3 mr-4">
@@ -217,22 +401,6 @@
               </div>
             </div>
           </div>
-        </div>
-        
-        <!-- 操作按钮 -->
-        <div class="flex justify-end space-x-3">
-          <button 
-            @click="resetUpload"
-            class="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-muted"
-          >
-            {{ t('center.ocrAnalysis.upload.reupload') }}
-          </button>
-          <button 
-            @click="startProcessing"
-            class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            {{ t('center.ocrAnalysis.upload.startProcessing') }}
-          </button>
         </div>
       </div>
       
@@ -396,6 +564,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { marked } from 'marked'
 
 // Props定义
 interface Props {
@@ -439,6 +608,10 @@ const previewImages = ref<string[]>([
 ])
 const currentImageIndex = ref(0)
 
+// MD编辑器相关
+const mdContent = ref(`# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`)
+const mdEditMode = ref<'edit' | 'preview' | 'split'>('split')
+
 // 选中步骤的方法
 const selectStep = (step: number) => {
   // 只允许选中已完成或当前步骤
@@ -463,6 +636,17 @@ const getStepTitle = () => {
   }
 }
 
+// 渲染Markdown内容
+const renderedMarkdown = computed(() => {
+  // 配置marked选项
+  marked.setOptions({
+    breaks: true,
+    gfm: true
+  })
+  
+  return marked.parse(mdContent.value)
+})
+
 // 监听当前步骤变化，自动更新选中节点
 watch(currentStep, (newStep) => {
   selectedStep.value = newStep
@@ -470,6 +654,29 @@ watch(currentStep, (newStep) => {
   // 当进入步骤2时，开始模拟OCR处理进度
   if (newStep === 2) {
     simulateOCRProcessing()
+  }
+  
+  // 当进入步骤3时，初始化MD内容
+  if (newStep === 3) {
+    mdContent.value = `# ${t('center.ocrAnalysis.editor.defaultTitle')}
+
+${t('center.ocrAnalysis.editor.defaultContent')}
+
+## 示例
+
+这是一个**粗体**文本和一个*斜体*文本。
+
+1. 有序列表项1
+2. 有序列表项2
+
+- 无序列表项1
+- 无序列表项2
+
+> 这是一个引用块
+
+\`\`\`javascript
+console.log('Hello World');
+\`\`\``
   }
 })
 
@@ -552,6 +759,29 @@ watch(() => props.currentLocale, () => {
       return { ...item, status: t('center.ocrAnalysis.status.completed') }
     }
   })
+  
+  // 更新MD内容以反映语言变化
+  if (currentStep.value === 3) {
+    mdContent.value = `# ${t('center.ocrAnalysis.editor.defaultTitle')}
+
+${t('center.ocrAnalysis.editor.defaultContent')}
+
+## 示例
+
+这是一个**粗体**文本和一个*斜体*文本。
+
+1. 有序列表项1
+2. 有序列表项2
+
+- 无序列表项1
+- 无序列表项2
+
+> 这是一个引用块
+
+\`\`\`javascript
+console.log('Hello World');
+\`\`\``
+  }
 })
 
 // 类型定义
@@ -699,6 +929,22 @@ const handleImageError = (event: Event) => {
   const imgElement = event.target as HTMLImageElement
   imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRTRFNkU3Ii8+CjxwYXRoIGQ9Ik0yNi41IDQ0LjVDMjYuNSA0Ni40MzkgMjguMDYxIDQ4IDMwIDQ4QzMyLjQ4NTMgNDggMzQuNSA0Ni40MzkgMzQuNSA0NC41QzM0LjUgNDIuNTYxIDMyLjQ4NTMgNDEgMzAgNDFDMjguMDYxIDQxIDI2LjUgNDIuNTYxIDI2LjUgNDQuNVoiIHN0cm9rZT0iI0IwQjRCNCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0yMiAyMkwyNiAyNk0yNiAyMkwyMiAyNk0yNCAyNEwzMiAyNE0yOCAxNkwyOCAzMCIgc3Ryb2tlPSIjQjBCNEI0IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K'
 }
+
+// 保存文档
+const saveDocument = () => {
+  console.log('Saving document:', mdContent.value)
+  // 进入第4步（预览和导出）
+  currentStep.value = 4
+  selectedStep.value = 4
+  // 不再显示提示
+}
+
+// 导出文档
+const exportDocument = (format: string) => {
+  console.log(`Exporting document as ${format}:`, mdContent.value)
+  // 这里可以添加实际的导出逻辑
+  alert(t('center.ocrAnalysis.preview.exporting', { format: format.toUpperCase() }))
+}
 </script>
 
 <style scoped>
@@ -718,5 +964,122 @@ const handleImageError = (event: Event) => {
   100% {
     background-position: 20px 0;
   }
+}
+
+/* Markdown预览样式 */
+:deep(.prose) {
+  max-width: none;
+}
+
+:deep(.prose h1) {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+}
+
+:deep(.prose h2) {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+}
+
+:deep(.prose h3) {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+:deep(.prose p) {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+:deep(.prose ul),
+:deep(.prose ol) {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+:deep(.prose li) {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+:deep(.prose pre) {
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+:deep(.prose code) {
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 6px;
+  padding: 0.2em 0.4em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 85%;
+}
+
+:deep(.prose pre code) {
+  background-color: transparent;
+  padding: 0;
+  font-size: 100%;
+}
+
+:deep(.prose blockquote) {
+  border-left: 0.25em solid #dfe2e5;
+  padding: 0 1em;
+  margin: 0;
+  color: #6a737d;
+}
+
+:deep(.prose a) {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+:deep(.prose a:hover) {
+  text-decoration: underline;
+}
+
+:deep(.prose img) {
+  max-width: 100%;
+  height: auto;
+}
+
+:deep(.prose hr) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid #e1e4e8;
+}
+
+:deep(.prose table) {
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-collapse: collapse;
+}
+
+:deep(.prose th),
+:deep(.prose td) {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+:deep(.prose th) {
+  background-color: #f6f8fa;
+  font-weight: 600;
 }
 </style>

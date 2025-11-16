@@ -651,13 +651,13 @@ export default {
         securityAlerts: 'セキュリティアラート'
       },
       ocrAnalysis: {
-        title: 'OCR解析',
-        subtitle: '画像や文書からテキストを抽出する',
+        title: 'OCR分析',
+        subtitle: '画像や文書からテキストを抽出',
         uploadButton: 'ファイルをアップロード',
         steps: {
           title: '処理ステップ',
-          upload: 'ファイルアップロード',
-          analysis: '光学解析',
+          upload: 'ファイルをアップロード',
+          analysis: 'OCR分析',
           edit: '文書編集',
           export: 'プレビューとエクスポート'
         },
@@ -669,7 +669,7 @@ export default {
           },
           accuracy: {
             title: '高精度',
-            description: '最先端のAIアルゴリズムによる業界トップクラスのOCR精度'
+            description: '最先端のAIアルゴリズムによる業界をリードするOCR精度'
           },
           export: {
             title: '複数のエクスポートオプション',
@@ -680,7 +680,7 @@ export default {
           title: '文書をアップロード',
           dragDrop: 'ここにファイルをドラッグ＆ドロップ',
           supportedFormats: 'JPG、PNG、PDF、TIFF、BMPをサポート',
-          browseFiles: '画像を参照',
+          browseFiles: 'ファイルを選択',
           uploading: 'アップロード中',
           analyzing: '分析中',
           uploadComplete: 'アップロード完了',
@@ -688,7 +688,32 @@ export default {
           requiredPoints: '必要ポイント',
           points: 'ポイント',
           reupload: '再アップロード',
-          startProcessing: '処理開始'
+          startProcessing: '処理を開始'
+        },
+        analysis: {
+          title: 'OCR分析',
+          reset: 'リセット',
+          reprocess: '再処理'
+        },
+        editor: {
+          title: 'MD編集',
+          edit: '編集',
+          preview: 'プレビュー',
+          split: '分割画面',
+          placeholder: '# 文書タイトル\n\nここに文書の内容を入力してください...',
+          defaultTitle: 'OCR認識結果',
+          defaultContent: 'これは文書から認識された内容です。\n\nテキストを自由に編集・フォーマットできます。',
+          save: '文書を保存',
+          saved: '文書が保存されました',
+          reset: 'リセット'
+        },
+        preview: {
+          title: '文書プレビュー',
+          exportPDF: 'PDFでエクスポート',
+          exportTXT: 'TXTでエクスポート',
+          exportMD: 'MDでエクスポート',
+          exportDOCX: 'DOCXでエクスポート',
+          exporting: '{format}形式でエクスポート中...'
         },
         recent: {
           title: '最近のOCR処理',
@@ -770,7 +795,7 @@ export default {
           description: '画像をPDF文書に変換',
           input: '入力',
           dragDrop: 'ここに画像をドラッグ＆ドロップ',
-          supportedFormats: 'JPG、PNG、TIFF、BMPをサポート',
+          supportedFormats: 'JPG、PNG、PDF、TIFF、BMPをサポート',
           browseFiles: '画像を参照',
           output: '出力設定',
           fileName: 'ファイル名',

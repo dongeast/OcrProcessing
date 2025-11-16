@@ -657,7 +657,7 @@ export default {
         steps: {
           title: '처리 단계',
           upload: '파일 업로드',
-          analysis: '광학 분석',
+          analysis: 'OCR 분석',
           edit: '문서 편집',
           export: '미리보기 및 내보내기'
         },
@@ -665,22 +665,22 @@ export default {
           title: 'OCR 기능',
           document: {
             title: '문서 처리',
-            description: 'PDF, DOCX 및 이미지를 포함한 다양한 문서 형식 처리'
+            description: 'PDF, DOCX 및 이미지 등 다양한 문서 형식 처리'
           },
           accuracy: {
-            title: '고정확도',
-            description: '고급 AI 알고리즘을 사용한 업계 선도적인 OCR 정확도'
+            title: '고정밀도',
+            description: '고급 AI 알고리즘을 사용한 업계 선도적인 OCR 정밀도'
           },
           export: {
             title: '다양한 내보내기 옵션',
-            description: 'TXT, DOCX 및 PDF를 포함한 다양한 형식으로 결과 내보내기'
+            description: 'TXT, DOCX, PDF 등 다양한 형식으로 결과 내보내기'
           }
         },
         upload: {
           title: '문서 업로드',
           dragDrop: '여기에 파일을 드래그 앤 드롭',
           supportedFormats: 'JPG, PNG, PDF, TIFF, BMP 지원',
-          browseFiles: '이미지 탐색',
+          browseFiles: '파일 선택',
           uploading: '업로드 중',
           analyzing: '분석 중',
           uploadComplete: '업로드 완료',
@@ -689,6 +689,31 @@ export default {
           points: '포인트',
           reupload: '재업로드',
           startProcessing: '처리 시작'
+        },
+        analysis: {
+          title: 'OCR 분석',
+          reset: '초기화',
+          reprocess: '재처리'
+        },
+        editor: {
+          title: 'MD 편집',
+          edit: '편집',
+          preview: '미리보기',
+          split: '분할 화면',
+          placeholder: '# 문서 제목\n\n여기에 문서 내용을 입력하세요...',
+          defaultTitle: 'OCR 인식 결과',
+          defaultContent: '이것은 문서에서 인식된 내용입니다.\n\n텍스트를 자유롭게 편집하고 형식을 지정할 수 있습니다.',
+          save: '문서 저장',
+          saved: '문서가 저장되었습니다',
+          reset: '초기화'
+        },
+        preview: {
+          title: '문서 미리보기',
+          exportPDF: 'PDF 내보내기',
+          exportTXT: 'TXT 내보내기',
+          exportMD: 'MD 내보내기',
+          exportDOCX: 'DOCX 내보내기',
+          exporting: '{format} 형식으로 내보내는 중...'
         },
         recent: {
           title: '최근 OCR 처리',
