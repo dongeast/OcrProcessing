@@ -1,14 +1,17 @@
 name = "ocr-processing-d1"
 
+# 指定 Pages 构建输出目录
+pages_build_output_dir = "dist"
+
 # D1数据库配置
 # 生产环境配置示例
 # 需要替换为您的实际Cloudflare账户ID和数据库ID
-d1_databases = [
-  # 本地开发环境
-  { binding = "DB", database_name = "test-db", database_id = "test-db-id", preview_database_id = "test-db-id" },
-  # 生产环境 (在部署时使用)
-  # { binding = "DB", database_name = "your-production-db", database_id = "your-production-db-id" }
-]
+[[ d1_databases ]]
+binding = "DB"
+database_name = "your-production-db"
+database_id = "your-production-db-id"
+# 本地开发环境配置（如果需要）
+# preview_database_id = "test-db-id"
 
 # 本地开发服务器配置
 [dev]
@@ -22,21 +25,26 @@ persist = true
 NODE_ENV = "development"
 DATABASE_TYPE = "d1"
 
+# 不使用 workers.dev 子域名（适用于 Pages 项目）
+workers_dev = false
+
 # 生产环境变量 (部署时配置)
 # 这些将在Cloudflare Pages控制台中设置
-# 1. DATABASE_TYPE = d1
-# 2. DB绑定指向您的D1数据库
+# DATABASE_TYPE = "d1"
+# DB绑定指向您的D1数据库
 
 # 部署配置示例
-# [env.production]
-# workers_dev = false
-# routes = ["your-domain.com/*"]
-# d1_databases = [
-#   { binding = "DB", database_name = "your-production-db", database_id = "your-production-db-id" }
-# ]
+[env.production]
+workers_dev = false
+routes = ["ocrprocessing.com/*"]
+zone_id = "your-zone-id" # 添加 zone_id，需要替换为你的实际 Zone ID
+[[ env.production.d1_databases ]]
+binding = "DB"
+database_name = "ocr-processing"
+database_id = "9402999b-a7b0-446d-9552-838b9f5de8bb"
 
 # 部署前执行的命令示例
-# [build]
-# command = "npm run build"
-# upload.format = "service-worker"
-# directory = ".output/server"
+[build]
+command = "npx nuxi generate"
+upload.format = "service-worker"
+directory = "dist"
