@@ -301,7 +301,7 @@ const selectedStep = ref(2) // 默认选中当前步骤
 const selectStep = (step: number) => {
   // 只允许选中已完成或当前步骤
   if (step <= currentStep.value) {
-    selectedStep.value = selectedStep.value === step ? 0 : step
+    selectedStep.value = step
   }
 }
 
