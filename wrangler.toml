@@ -26,11 +26,7 @@ PAYMENT_METHOD = "1"
 
 # 生产环境配置
 [env.production]
-vars = { 
-  NODE_ENV = "production",
-  DATABASE_TYPE = "d1",
-  PAYMENT_METHOD = "1"
-}
+vars = { NODE_ENV = "production", DATABASE_TYPE = "d1", PAYMENT_METHOD = "1" }
 
 [[ env.production.d1_databases ]]
 binding = "DB"
