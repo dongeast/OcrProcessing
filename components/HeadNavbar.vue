@@ -59,7 +59,7 @@
               </button>
               <button
                 v-else
-                @click="goToCenter"  
+                @click="openLoginModal"
                 class="text-gray-700 hover:text-gray-900 font-medium text-sm"
               >
               {{ $t('home.loginButton') }}

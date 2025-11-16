@@ -145,6 +145,10 @@ export default {
             description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 5 minutes.',
         }
     },
+    auth: {
+      selectLoginMethod: 'Sign in to your account',
+      selectLoginMethodDescription: 'Choose your preferred sign-in method to continue to NuxtPro'
+    },
     center: {
       menu: {
         dashboard: 'Dashboard',
