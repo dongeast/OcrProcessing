@@ -2,6 +2,8 @@
 # 仅包含 Pages 项目支持的配置项
 
 name = "ocr-processing-d1"
+# 添加兼容性日期
+compatibility_date = "2025-11-16"
 
 # 指定 Pages 构建输出目录
 pages_build_output_dir = "dist"
@@ -19,13 +21,17 @@ database_id = "your-production-db-id"
 [dev]
 port = 8787
 local_protocol = "http"
-# 启用本地模拟Cloudflare Pages环境
-persist = true
+# 注意：persist 字段在 Pages 项目中不被支持，已移除
 
 # 环境变量配置 - 本地开发
 [vars]
 NODE_ENV = "development"
 DATABASE_TYPE = "d1"
+
+# 生产环境配置
+[env.production]
+# 明确添加vars以避免继承问题
+vars = { NODE_ENV = "production" }
 
 # 生产环境D1数据库配置
 # 注意：其他生产环境配置（如routes、zone_id等）应在Cloudflare Pages控制台中设置
