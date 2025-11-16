@@ -19,14 +19,34 @@ port = 8787
 local_protocol = "http"
 
 # 环境变量配置 - 本地开发
+# 注意：敏感信息（如API密钥）不应放在配置文件中，应通过Cloudflare控制台配置
 [vars]
 NODE_ENV = "development"
 DATABASE_TYPE = "d1"
 PAYMENT_METHOD = "1"
+GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE = ""
+NUXT_PUBLIC_BASE_URL = ""
+NUXT_PUBLIC_PLAUSIBLE_DOMAIN = ""
+NUXT_PUBLIC_PLAUSIBLE_API_HOST = ""
+NUXT_PUBLIC_CREEM_URL = ""
+NUXT_PUBLIC_BAGELPAY_URL = ""
+NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = ""
 
 # 生产环境配置
 [env.production]
-vars = { NODE_ENV = "production", DATABASE_TYPE = "d1", PAYMENT_METHOD = "1" }
+# 注意：所有敏感环境变量应通过Cloudflare Pages控制台配置，不要在配置文件中硬编码
+vars = { 
+  NODE_ENV = "production", 
+  DATABASE_TYPE = "d1", 
+  PAYMENT_METHOD = "1",
+  GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE = "",
+  NUXT_PUBLIC_BASE_URL = "",
+  NUXT_PUBLIC_PLAUSIBLE_DOMAIN = "",
+  NUXT_PUBLIC_PLAUSIBLE_API_HOST = "",
+  NUXT_PUBLIC_CREEM_URL = "",
+  NUXT_PUBLIC_BAGELPAY_URL = "",
+  NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = ""
+}
 
 [[ env.production.d1_databases ]]
 binding = "DB"
