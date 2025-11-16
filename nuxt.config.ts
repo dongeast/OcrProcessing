@@ -1,6 +1,20 @@
-console.log('===== ENV DEBUG =====')
+// 打印所有环境变量用于调试
+console.log('=====================')
+console.log('Environment Variables:')
+console.log('=====================')
 console.log('NODE_ENV:', process.env.NODE_ENV)
+console.log('PAYMENT_METHOD:', process.env.PAYMENT_METHOD)
+console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY)
+console.log('NUXT_STRIPE_SECRET_KEY:', process.env.NUXT_STRIPE_SECRET_KEY)
 console.log('NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:', process.env.NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+console.log('NUXT_STRIPE_WEBHOOK_SECRET:', process.env.NUXT_STRIPE_WEBHOOK_SECRET)
+console.log('DATABASE_TYPE:', process.env.DATABASE_TYPE)
+console.log('DATABASE_URL:', process.env.DATABASE_URL)
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
+console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET)
+console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID)
+console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET)
+console.log('GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE:', process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE)
 console.log('=====================')
 
 export default defineNuxtConfig({
