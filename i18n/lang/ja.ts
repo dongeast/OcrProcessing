@@ -687,6 +687,8 @@ export default {
           uploadedFile: 'アップロードされたファイル',
           requiredPoints: '必要ポイント',
           points: 'ポイント',
+          pageCount: 'ページ数',
+          pages: 'ページ',
           reupload: '再アップロード',
           startProcessing: '処理を開始'
         },

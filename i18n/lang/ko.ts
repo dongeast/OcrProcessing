@@ -687,6 +687,8 @@ export default {
           uploadedFile: '업로드된 파일',
           requiredPoints: '필요 포인트',
           points: '포인트',
+          pageCount: '페이지 수',
+          pages: '페이지',
           reupload: '재업로드',
           startProcessing: '처리 시작'
         },

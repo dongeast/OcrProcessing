@@ -687,6 +687,8 @@ export default {
               uploadedFile: '已上傳文件',
               requiredPoints: '所需積分',
               points: '積分',
+              pageCount: '頁數',
+              pages: '頁',
               reupload: '重新上傳',
               startProcessing: '開始處理'
             },

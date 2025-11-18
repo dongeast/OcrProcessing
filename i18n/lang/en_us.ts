@@ -315,6 +315,8 @@ export default {
           uploadedFile: 'Uploaded File',
           requiredPoints: 'Required Points',
           points: 'points',
+          pageCount: 'Page Count',
+          pages: 'pages',
           reupload: 'Re-upload',
           startProcessing: 'Start Processing'
         },

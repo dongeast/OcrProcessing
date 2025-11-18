@@ -251,27 +251,29 @@
           
           <!-- 图片预览走马灯 -->
           <div class="carousel-container p-4">
-            <div class="carousel-slide">
-              <img 
-                :src="previewImage" 
-                :alt="uploadedFile?.name || 'Preview'" 
-                class="mx-auto max-h-96 object-contain"
-                @error="handleImageError"
-              />
-            </div>
-            <div class="carousel-controls mt-4 flex justify-center space-x-2">
+            <div class="flex items-center">
               <button 
                 @click.stop="prevImage" 
-                class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+                class="rounded-full bg-gray-200 p-2 hover:bg-gray-300 mr-4"
                 :disabled="currentImageIndex === 0"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
               </button>
+              
+              <div class="carousel-slide flex-1">
+                <img 
+                  :src="previewImage" 
+                  :alt="uploadedFile?.name || 'Preview'" 
+                  class="mx-auto w-full h-auto object-contain"
+                  @error="handleImageError"
+                />
+              </div>
+              
               <button 
                 @click.stop="nextImage" 
-                class="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+                class="rounded-full bg-gray-200 p-2 hover:bg-gray-300 ml-4"
                 :disabled="currentImageIndex === previewImages.length - 1"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -279,7 +281,8 @@
                 </svg>
               </button>
             </div>
-            <div class="carousel-indicators mt-2 flex justify-center space-x-1">
+            
+            <div class="carousel-indicators mt-4 flex justify-center space-x-1">
               <button 
                 v-for="(image, index) in previewImages" 
                 :key="index"
@@ -394,9 +397,13 @@
               <div class="flex-1">
                 <p class="font-medium">{{ uploadedFile.name }}</p>
                 <p class="text-sm text-muted-foreground">{{ formatFileSize(uploadedFile.size) }}</p>
+                <div v-if="pdfPageCount > 0" class="mt-2 flex items-center text-sm">
+                  <span class="text-muted-foreground mr-2">{{ t('center.ocrAnalysis.upload.pageCount') }}:</span>
+                  <span class="font-medium">{{ pdfPageCount }} {{ t('center.ocrAnalysis.upload.pages') }}</span>
+                </div>
                 <div class="mt-2 flex items-center text-sm">
                   <span class="text-muted-foreground mr-2">{{ t('center.ocrAnalysis.upload.requiredPoints') }}:</span>
-                  <span class="font-medium">5 {{ t('center.ocrAnalysis.upload.points') }}</span>
+                  <span class="font-medium">{{ pdfPageCount }} {{ t('center.ocrAnalysis.upload.points') }}</span>
                 </div>
               </div>
             </div>
@@ -475,89 +482,6 @@
         </div>
       </div>
     </div>
-
-    <!-- 最近OCR处理记录 -->
-    <div class="rounded-lg bg-card border shadow-sm overflow-hidden">
-      <div class="p-5 border-b">
-        <h3 class="font-semibold">{{ t('center.ocrAnalysis.recent.title') }}</h3>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b hover:bg-muted/50 transition-colors">
-              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                {{ t('center.ocrAnalysis.recent.table.name') }}
-              </th>
-              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                {{ t('center.ocrAnalysis.recent.table.date') }}
-              </th>
-              <th class="whitespace-nowrap py-4 px-4 text-left font-medium text-muted-foreground">
-                {{ t('center.ocrAnalysis.recent.table.status') }}
-              </th>
-              <th class="whitespace-nowrap py-4 px-4 text-right font-medium text-muted-foreground">
-                {{ t('center.ocrAnalysis.recent.table.actions') }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr 
-              v-for="item in recentItems" 
-              :key="item.id"
-              class="border-b hover:bg-muted/50 transition-colors"
-            >
-              <td class="whitespace-nowrap py-4 px-4">
-                <div class="flex items-center">
-                  <div class="rounded bg-muted p-2 mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="font-medium">{{ item.name }}</p>
-                  </div>
-                </div>
-              </td>
-              <td class="whitespace-nowrap py-4 px-4 text-muted-foreground">
-                {{ item.date }}
-              </td>
-              <td class="whitespace-nowrap py-4 px-4">
-                <span :class="['inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', getStatusClass(item.status)]">
-                  {{ item.status }}
-                </span>
-              </td>
-              <td class="whitespace-nowrap py-4 px-4 text-right">
-                <div class="flex justify-end items-center space-x-2">
-                  <button 
-                    @click="viewItem(item.id)"
-                    class="p-1 text-muted-foreground hover:text-primary rounded-full hover:bg-primary/10 transition-colors"
-                    :aria-label="t('center.ocrAnalysis.recent.actions.view')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  </button>
-                  <button 
-                    @click="downloadItem(item.id)"
-                    class="p-1 text-muted-foreground hover:text-primary rounded-full hover:bg-primary/10 transition-colors"
-                    :aria-label="t('center.ocrAnalysis.recent.actions.download')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="recentItems.length === 0">
-              <td colspan="4" class="py-8 px-4 text-center text-muted-foreground">
-                {{ t('center.ocrAnalysis.recent.empty') }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -565,6 +489,7 @@
 import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { marked } from 'marked'
+import { isPdfFile, getPdfPageCount } from '../../utils/pdfUtils'
 
 // Props定义
 interface Props {
@@ -599,6 +524,17 @@ const ocrProgress = ref(0)
 
 // 已上传文件
 const uploadedFile = ref<File | null>(null)
+
+// PDF页数
+const pdfPageCount = ref<number>(0)
+
+// 上传到R2后的文件信息
+const uploadedFileInfo = ref<{
+  fileId: string
+  filename: string
+  contentType: string
+  size: number
+} | null>(null)
 
 // 图片预览相关
 const previewImages = ref<string[]>([
@@ -824,13 +760,27 @@ const handleFileSelect = (e: Event) => {
   }
 }
 
-// 模拟上传过程
-const simulateUpload = (file: File) => {
+
+// 模拟上传过程（保留作为备选方案）
+const simulateUpload = async (file: File) => {
   // 保存文件到已上传文件
   uploadedFile.value = file
   
   console.log('File selected:', file)
   uploadProgress.value = 0
+  
+  // 如果是PDF文件，获取页数
+  if (isPdfFile(file)) {
+    try {
+      pdfPageCount.value = await getPdfPageCount(file)
+      console.log('PDF page count:', pdfPageCount.value)
+    } catch (error) {
+      console.error('Error getting PDF page count:', error)
+      pdfPageCount.value = 0
+    }
+  } else {
+    pdfPageCount.value = 0
+  }
   
   const interval = setInterval(() => {
     uploadProgress.value += 10
@@ -857,6 +807,7 @@ const simulateOCRProcessing = () => {
 // 重置上传状态
 const resetUpload = () => {
   uploadedFile.value = null
+  uploadedFileInfo.value = null
   uploadProgress.value = 0
   // 重置步骤为第1步
   currentStep.value = 1
@@ -888,12 +839,27 @@ const formatFileSize = (bytes: number): string => {
 }
 
 // 开始处理
-const startProcessing = () => {
+const startProcessing = async () => {
   console.log('Start processing file:', uploadedFile.value)
   // 将步骤更新为第2步（OCR分析）
   currentStep.value = 2
   // 重置图片索引
   currentImageIndex.value = 0
+  
+  // 如果有上传的文件，则生成预览图像
+  if (uploadedFile.value) {
+    try {
+      // 提高scale值以获得更清晰的图片
+      previewImages.value = await getPdfPageImages(uploadedFile.value, 5)
+    } catch (error) {
+      console.error('Error generating preview images:', error)
+      // 使用默认预览图像
+      previewImages.value = [
+        'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+      ]
+    }
+  }
+  
   // 这里可以添加实际的处理逻辑
 }
 
