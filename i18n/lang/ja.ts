@@ -695,7 +695,9 @@ export default {
         analysis: {
           title: 'OCR分析',
           reset: 'リセット',
-          reprocess: '再処理'
+          reprocess: '再処理',
+          reprocessCurrent: '現在のページを再処理',
+          reprocessAll: 'すべてのページを再処理'
         },
         editor: {
           title: 'MD編集',

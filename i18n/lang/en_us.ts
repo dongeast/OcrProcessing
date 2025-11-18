@@ -323,7 +323,9 @@ export default {
         analysis: {
           title: 'OCR Analysis',
           reset: 'Reset',
-          reprocess: 'Re-process'
+          reprocess: 'Re-process',
+          reprocessCurrent: 'Re-process Current Page',
+          reprocessAll: 'Re-process All Pages'
         },
         editor: {
           title: 'MD Editing',

@@ -695,7 +695,9 @@ export default {
             analysis: {
               title: 'OCR分析',
               reset: '重置',
-              reprocess: '重新處理'
+              reprocess: '重新處理',
+              reprocessCurrent: '重新處理本頁',
+              reprocessAll: '全部重新處理'
             },
             editor: {
               title: 'MD編輯',

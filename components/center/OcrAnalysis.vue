@@ -241,10 +241,16 @@
             <div class="flex space-x-2">
               <!-- 保留重新处理按钮，移除重置按钮 -->
               <button 
-                @click="startProcessing"
+                @click="reprocessCurrentPage"
                 class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
               >
-                {{ t('center.ocrAnalysis.analysis.reprocess') }}
+                {{ t('center.ocrAnalysis.analysis.reprocessCurrent') }}
+              </button>
+              <button 
+                @click="reprocessAllPages"
+                class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {{ t('center.ocrAnalysis.analysis.reprocessAll') }}
               </button>
             </div>
           </div>
@@ -266,7 +272,7 @@
                 <img 
                   :src="previewImage" 
                   :alt="uploadedFile?.name || 'Preview'" 
-                  class="mx-auto w-full h-auto object-contain"
+                  class="mx-auto max-w-[80%] h-auto object-contain"
                   @error="handleImageError"
                 />
               </div>
@@ -861,6 +867,18 @@ const startProcessing = async () => {
   }
   
   // 这里可以添加实际的处理逻辑
+}
+
+// 重新处理当前页面
+const reprocessCurrentPage = () => {
+  console.log('Reprocessing current page:', currentImageIndex.value + 1)
+  // 这里可以添加实际的重新处理当前页面的逻辑
+}
+
+// 重新处理所有页面
+const reprocessAllPages = () => {
+  console.log('Reprocessing all pages')
+  // 这里可以添加实际的重新处理所有页面的逻辑
 }
 
 const viewItem = (id: string) => {

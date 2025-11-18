@@ -695,7 +695,9 @@ export default {
         analysis: {
           title: 'OCR 분석',
           reset: '초기화',
-          reprocess: '재처리'
+          reprocess: '재처리',
+          reprocessCurrent: '현재 페이지 재처리',
+          reprocessAll: '모든 페이지 재처리'
         },
         editor: {
           title: 'MD 편집',
