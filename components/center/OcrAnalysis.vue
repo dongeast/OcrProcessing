@@ -203,7 +203,7 @@
             >
               <textarea
                 v-model="mdContent"
-                class="w-full h-96 p-2 border rounded font-mono text-sm"
+                class="w-full h-[calc(100vh-200px)] p-2 border rounded font-mono text-sm"
                 :placeholder="t('center.ocrAnalysis.editor.placeholder')"
               ></textarea>
             </div>
@@ -220,7 +220,7 @@
               <div class="w-full md:w-1/2 p-4 border-r">
                 <textarea
                   v-model="mdContent"
-                  class="w-full h-96 p-2 border rounded font-mono text-sm"
+                  class="w-full h-[calc(100vh-200px)] p-2 border rounded font-mono text-sm"
                   :placeholder="t('center.ocrAnalysis.editor.placeholder')"
                 ></textarea>
               </div>
@@ -495,7 +495,7 @@
 import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { marked } from 'marked'
-import { isPdfFile, getPdfPageCount } from '../../utils/pdfUtils'
+import { isPdfFile, getPdfPageCount, getPdfPageImages } from '../../utils/pdfUtils'
 
 // Props定义
 interface Props {
@@ -598,28 +598,6 @@ watch(currentStep, (newStep) => {
     simulateOCRProcessing()
   }
   
-  // 当进入步骤3时，初始化MD内容
-  if (newStep === 3) {
-    mdContent.value = `# ${t('center.ocrAnalysis.editor.defaultTitle')}
-
-${t('center.ocrAnalysis.editor.defaultContent')}
-
-## 示例
-
-这是一个**粗体**文本和一个*斜体*文本。
-
-1. 有序列表项1
-2. 有序列表项2
-
-- 无序列表项1
-- 无序列表项2
-
-> 这是一个引用块
-
-\`\`\`javascript
-console.log('Hello World');
-\`\`\``
-  }
 })
 
 // 计算进度条宽度
@@ -701,29 +679,6 @@ watch(() => props.currentLocale, () => {
       return { ...item, status: t('center.ocrAnalysis.status.completed') }
     }
   })
-  
-  // 更新MD内容以反映语言变化
-  if (currentStep.value === 3) {
-    mdContent.value = `# ${t('center.ocrAnalysis.editor.defaultTitle')}
-
-${t('center.ocrAnalysis.editor.defaultContent')}
-
-## 示例
-
-这是一个**粗体**文本和一个*斜体*文本。
-
-1. 有序列表项1
-2. 有序列表项2
-
-- 无序列表项1
-- 无序列表项2
-
-> 这是一个引用块
-
-\`\`\`javascript
-console.log('Hello World');
-\`\`\``
-  }
 })
 
 // 类型定义
@@ -782,10 +737,10 @@ const simulateUpload = async (file: File) => {
       console.log('PDF page count:', pdfPageCount.value)
     } catch (error) {
       console.error('Error getting PDF page count:', error)
-      pdfPageCount.value = 0
+      pdfPageCount.value = 1 // 否则为单页
     }
   } else {
-    pdfPageCount.value = 0
+    pdfPageCount.value = 1 // 否则为单页
   }
   
   const interval = setInterval(() => {
@@ -799,15 +754,15 @@ const simulateUpload = async (file: File) => {
 
 // 模拟OCR处理过程
 const simulateOCRProcessing = () => {
-  ocrProgress.value = 0
-  const interval = setInterval(() => {
-    ocrProgress.value += 5
-    if (ocrProgress.value >= 100) {
-      clearInterval(interval)
-      // OCR处理完成后进入下一步
-      currentStep.value = 3
-    }
-  }, 100)
+  // ocrProgress.value = 0
+  // const interval = setInterval(() => {
+  //   ocrProgress.value += 5
+  //   if (ocrProgress.value >= 100) {
+  //     clearInterval(interval)
+  //     // OCR处理完成后进入下一步
+  //     currentStep.value = 3
+  //   }
+  // }, 100)
 }
 
 // 重置上传状态
@@ -851,12 +806,26 @@ const startProcessing = async () => {
   currentStep.value = 2
   // 重置图片索引
   currentImageIndex.value = 0
+  // 重置OCR进度
+  ocrProgress.value = 0
   
   // 如果有上传的文件，则生成预览图像
   if (uploadedFile.value) {
     try {
-      // 提高scale值以获得更清晰的图片
-      previewImages.value = await getPdfPageImages(uploadedFile.value, 5)
+      // 检查文件类型，如果是PDF则生成预览图像，否则直接使用图片
+      if (isPdfFile(uploadedFile.value)) {
+        // 提高scale值以获得更清晰的图片
+        previewImages.value = await getPdfPageImages(uploadedFile.value, 15)
+      } else {
+        // 对于图片文件，直接读取文件内容
+        const imageBase64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = () => resolve(reader.result as string)
+          reader.onerror = reject
+          reader.readAsDataURL(uploadedFile.value!)
+        })
+        previewImages.value = [imageBase64]
+      }
     } catch (error) {
       console.error('Error generating preview images:', error)
       // 使用默认预览图像
@@ -866,7 +835,92 @@ const startProcessing = async () => {
     }
   }
   
-  // 这里可以添加实际的处理逻辑
+  // 更新进度 - 完成图像预览生成
+  ocrProgress.value = 20
+  
+  // 使用deepseekOCR工具类对图片逐个识别
+  try {
+    // 导入DeepSeekOCR类
+    const DeepSeekOCR = (await import('../../utils/deepseekOCR')).default;
+    const ocr = new DeepSeekOCR();
+    
+    // 导入图像标注工具
+    const { annotateImageWithOCR } = await import('../../utils/imgUtils');
+    
+    // 定义提示词，帮助OCR更好地识别内容
+    const prompt = "<|grounding|>Convert the document to markdown.";
+    
+    // 存储每页的OCR结果
+    const pageResults: string[] = [];
+    
+    // 对每个预览图像进行OCR识别
+    const totalImages = previewImages.value.length;
+    for (let i = 0; i < totalImages; i++) {
+      const imageBase64 = previewImages.value[i].split(',')[1]; // 获取base64数据部分
+      console.log(`Processing image ${i + 1}/${totalImages}`);
+      
+      try {
+        const result = await ocr.recognize(imageBase64, prompt);
+        console.log(`OCR result for image ${i + 1}:`, result.content);
+        
+        // 保存每页的OCR结果
+        pageResults[i] = result.content;
+        
+        // 更新进度 - OCR识别完成
+        const ocrProgressPercentage = 20 + Math.floor((i + 1) / totalImages * 40);
+        ocrProgress.value = ocrProgressPercentage;
+        
+        try {
+          // 生成标注图片
+          console.log(`Generating annotated image for image ${i + 1}`);
+          const annotatedImage = await annotateImageWithOCR(previewImages.value[i], result.content);
+          console.log(`Annotated image generated for image ${i + 1}:`, annotatedImage.substring(0, 100) + '...');
+          
+          // 使用生成的标注图片替换原来数组中的对应图片
+          previewImages.value[i] = annotatedImage;
+          console.log(`Successfully replaced image ${i + 1} with annotated version`);
+        } catch (annotationError) {
+          console.error(`Error generating annotated image for image ${i + 1}:`, annotationError);
+          // 如果标注失败，保留原始图片
+        }
+        
+        // 更新进度 - 图像标注完成
+        const annotationProgressPercentage = 60 + Math.floor((i + 1) / totalImages * 40);
+        ocrProgress.value = annotationProgressPercentage;
+      } catch (ocrError) {
+        console.error(`Error recognizing image ${i + 1}:`, ocrError);
+        // 即使某页OCR失败，也保留一个空的结果占位
+        pageResults[i] = "";
+      }
+    }
+    
+    // 将所有页面的OCR结果拼接成一个完整的文档
+    // 使用横线分隔不同页面的内容
+    const fullDocument = pageResults
+      .map(result => result ? result.trim() : '') // 处理可能为undefined的情况
+      .filter(result => result.length > 0) // 过滤掉空页面
+      .join('\n\n---\n\n'); // 使用横线分隔页面
+    
+    // 将拼接后的完整文档设置为mdContent
+    mdContent.value = fullDocument && fullDocument.trim().length > 0 
+      ? fullDocument 
+      : `# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`;
+    
+    // OCR处理完成后进入下一步
+    ocrProgress.value = 100;
+    setTimeout(() => {
+      currentStep.value = 3;
+    }, 500);
+  } catch (error) {
+    console.error('Failed to initialize OCR:', error);
+    // 即使OCR失败，也进入下一步让用户可以编辑内容
+    ocrProgress.value = 100;
+    // 设置默认内容
+    mdContent.value = `# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`;
+    setTimeout(() => {
+      currentStep.value = 3;
+    }, 500);
+  }
 }
 
 // 重新处理当前页面

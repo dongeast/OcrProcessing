@@ -15,6 +15,7 @@ console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET)
 console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID)
 console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET)
 console.log('GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE:', process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE)
+console.log('DEEPSEEK_OCR_API_KEY:', process.env.DEEPSEEK_OCR_API_KEY)
 console.log('=====================')
 
 export default defineNuxtConfig({
@@ -76,10 +77,12 @@ export default defineNuxtConfig({
   },
   //配置robots爬虫抓取协议
   robots: {
-    UserAgent: '*',
-    Disallow: '/private',
-    Allow: '/',
-    Sitemap: 'https://nuxtpro.com/sitemap.xml'
+    rules: {
+      UserAgent: '*',
+      Disallow: '/private',
+      Allow: '/'
+    },
+    sitemap: 'https://nuxtpro.com/sitemap.xml'
   },
   i18n: {
     strategy: 'prefix_except_default',
@@ -152,12 +155,6 @@ export default defineNuxtConfig({
     // Server
     name: 'jackson',
     environment: process.env.NODE_ENV || 'development',
-    sitemap: {
-      defaults: {
-        changefreq: 'daily',
-        priority: 0.8
-      }
-    },
     stripe: {
       key: process.env.NUXT_STRIPE_SECRET_KEY,
       options: {},
@@ -174,6 +171,12 @@ export default defineNuxtConfig({
     },
     // ipinfo 获取Ip信息
     ipinfoToken: process.env.IPINFO_TOKEN,
+    // DeepSeek OCR 配置
+    deepseekOcr: {
+      apiKey: process.env.DEEPSEEK_OCR_API_KEY,
+      baseUrl: process.env.DEEPSEEK_OCR_BASE_URL || "https://api.ppinfra.com/openai",
+      model: process.env.DEEPSEEK_OCR_MODEL || "deepseek/deepseek-ocr"
+    },
     //public中定义的属性既可以在服务端，也可以在客户端获取到
     public: {
       env: process.env.NUXT_PUBLIC_ENV || 'development',
@@ -200,6 +203,11 @@ export default defineNuxtConfig({
       bagelPay:{
         url: process.env.NUXT_PUBLIC_BAGELPAY_URL
       },
+      // DeepSeek OCR 公共配置（如果需要在客户端使用）
+      deepseekOcr: {
+        baseUrl: process.env.DEEPSEEK_OCR_BASE_URL || "https://api.ppinfra.com/openai",
+        model: process.env.DEEPSEEK_OCR_MODEL || "deepseek/deepseek-ocr"
+      }
     },
   },
   devServer: {
