@@ -496,6 +496,7 @@ import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { marked } from 'marked'
 import { isPdfFile, getPdfPageCount, getPdfPageImages } from '../../utils/pdfUtils'
+import { processMdWithPositionTags } from '../../utils/mdUtils'
 
 // Props定义
 interface Props {
@@ -553,6 +554,7 @@ const currentImageIndex = ref(0)
 // MD编辑器相关
 const mdContent = ref(`# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`)
 const mdEditMode = ref<'edit' | 'preview' | 'split'>('split')
+const processedMdContent = ref('') // 添加处理后的MD内容
 
 // 选中步骤的方法
 const selectStep = (step: number) => {
@@ -863,13 +865,33 @@ const startProcessing = async () => {
         const result = await ocr.recognize(imageBase64, prompt);
         console.log(`OCR result for image ${i + 1}:`, result.content);
         
+        // 打印识别结果的前500个字符以检查标签格式
+        console.log(`First 500 chars of OCR result:`, result.content.substring(0, 500));
+        
         // 保存每页的OCR结果
-        pageResults[i] = result.content;
+        // pageResults[i] = result.content;
         
         // 更新进度 - OCR识别完成
         const ocrProgressPercentage = 20 + Math.floor((i + 1) / totalImages * 40);
         ocrProgress.value = ocrProgressPercentage;
         
+        // 处理MD内容，替换定位标签
+        try {
+          if (previewImages.value.length > 0) {
+            // 使用第一张图片作为示例进行处理
+            pageResults[i] = await processMdWithPositionTags(
+              previewImages.value[i], 
+              result.content
+            )
+          } else {
+            pageResults[i] = result.content
+          }
+        } catch (error) {
+          console.error('Error processing MD with position tags:', error)
+          pageResults[i] = result.content
+        }
+        console.log(`Processed MD for image ${i + 1}:`, pageResults[i].substring(0, 100) + '...');
+
         try {
           // 生成标注图片
           console.log(`Generating annotated image for image ${i + 1}`);
@@ -887,6 +909,7 @@ const startProcessing = async () => {
         // 更新进度 - 图像标注完成
         const annotationProgressPercentage = 60 + Math.floor((i + 1) / totalImages * 40);
         ocrProgress.value = annotationProgressPercentage;
+
       } catch (ocrError) {
         console.error(`Error recognizing image ${i + 1}:`, ocrError);
         // 即使某页OCR失败，也保留一个空的结果占位

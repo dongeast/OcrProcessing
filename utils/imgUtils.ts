@@ -34,8 +34,8 @@ function convertOCRCoordinates(
   height: number,
   imgWidth: number,
   imgHeight: number,
-  originalWidth: number = 1000,
-  originalHeight: number = 1000
+  originalWidth: number = 999,
+  originalHeight: number = 999
 ): BoundingBox {
   // 根据deepseek-ocr的坐标系统进行转换
   // 使用独立的x和y缩放因子，参考Python版本实现
