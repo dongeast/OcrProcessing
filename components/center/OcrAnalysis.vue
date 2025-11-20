@@ -247,10 +247,10 @@
                 {{ t('center.ocrAnalysis.analysis.reprocessCurrent') }}
               </button>
               <button 
-                @click="reprocessAllPages"
+                @click="saveOcrResult"
                 class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
               >
-                {{ t('center.ocrAnalysis.analysis.reprocessAll') }}
+                {{ t('center.ocrAnalysis.analysis.saveResult') }}
               </button>
             </div>
           </div>
@@ -693,6 +693,8 @@ interface RecentItem {
 
 // 引用
 const fileInputRef = ref<HTMLInputElement | null>(null)
+const originalImages = ref<string[]>([])
+const pageResults = ref<string[]>([])
 
 // 模拟数据
 const recentItems = ref<RecentItem[]>([
@@ -810,6 +812,11 @@ const startProcessing = async () => {
   currentImageIndex.value = 0
   // 重置OCR进度
   ocrProgress.value = 0
+  // 清空页面结果
+  pageResults.value = []
+  
+  // 清空原始图片数组
+  originalImages.value = []
   
   // 如果有上传的文件，则生成预览图像
   if (uploadedFile.value) {
@@ -828,12 +835,17 @@ const startProcessing = async () => {
         })
         previewImages.value = [imageBase64]
       }
+      
+      // 保存原始图像用于重新处理
+      originalImages.value = [...previewImages.value]
     } catch (error) {
       console.error('Error generating preview images:', error)
       // 使用默认预览图像
       previewImages.value = [
         'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
       ]
+      // 保存原始图像用于重新处理
+      originalImages.value = [...previewImages.value]
     }
   }
   
@@ -852,9 +864,6 @@ const startProcessing = async () => {
     // 定义提示词，帮助OCR更好地识别内容
     const prompt = "<|grounding|>Convert the document to markdown.";
     
-    // 存储每页的OCR结果
-    const pageResults: string[] = [];
-    
     // 对每个预览图像进行OCR识别
     const totalImages = previewImages.value.length;
     for (let i = 0; i < totalImages; i++) {
@@ -868,9 +877,6 @@ const startProcessing = async () => {
         // 打印识别结果的前500个字符以检查标签格式
         console.log(`First 500 chars of OCR result:`, result.content.substring(0, 500));
         
-        // 保存每页的OCR结果
-        // pageResults[i] = result.content;
-        
         // 更新进度 - OCR识别完成
         const ocrProgressPercentage = 20 + Math.floor((i + 1) / totalImages * 40);
         ocrProgress.value = ocrProgressPercentage;
@@ -879,18 +885,18 @@ const startProcessing = async () => {
         try {
           if (previewImages.value.length > 0) {
             // 使用第一张图片作为示例进行处理
-            pageResults[i] = await processMdWithPositionTags(
+            pageResults.value[i] = await processMdWithPositionTags(
               previewImages.value[i], 
               result.content
             )
           } else {
-            pageResults[i] = result.content
+            pageResults.value[i] = result.content
           }
         } catch (error) {
           console.error('Error processing MD with position tags:', error)
-          pageResults[i] = result.content
+          pageResults.value[i] = result.content
         }
-        console.log(`Processed MD for image ${i + 1}:`, pageResults[i].substring(0, 100) + '...');
+        console.log(`Processed MD for image ${i + 1}:`, pageResults.value[i].substring(0, 100) + '...');
 
         try {
           // 生成标注图片
@@ -913,13 +919,13 @@ const startProcessing = async () => {
       } catch (ocrError) {
         console.error(`Error recognizing image ${i + 1}:`, ocrError);
         // 即使某页OCR失败，也保留一个空的结果占位
-        pageResults[i] = "";
+        pageResults.value[i] = "";
       }
     }
     
     // 将所有页面的OCR结果拼接成一个完整的文档
     // 使用横线分隔不同页面的内容
-    const fullDocument = pageResults
+    const fullDocument = pageResults.value
       .map(result => result ? result.trim() : '') // 处理可能为undefined的情况
       .filter(result => result.length > 0) // 过滤掉空页面
       .join('\n\n---\n\n'); // 使用横线分隔页面
@@ -929,27 +935,125 @@ const startProcessing = async () => {
       ? fullDocument 
       : `# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`;
     
-    // OCR处理完成后进入下一步
+    // OCR处理完成，但不自动进入下一步
     ocrProgress.value = 100;
-    setTimeout(() => {
-      currentStep.value = 3;
-    }, 500);
   } catch (error) {
     console.error('Failed to initialize OCR:', error);
-    // 即使OCR失败，也进入下一步让用户可以编辑内容
+    // 即使OCR失败，也不自动进入下一步
     ocrProgress.value = 100;
     // 设置默认内容
     mdContent.value = `# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`;
-    setTimeout(() => {
-      currentStep.value = 3;
-    }, 500);
   }
 }
 
+// 保存OCR结果
+const saveOcrResult = () => {
+  console.log('Saving OCR result and moving to next step')
+  // 将所有页面的OCR结果拼接成一个完整的文档
+  // 使用横线分隔不同页面的内容
+  const fullDocument = pageResults.value
+    .map(result => result ? result.trim() : '') // 处理可能为undefined的情况
+    .filter(result => result.length > 0) // 过滤掉空页面
+    .join('\n\n---\n\n'); // 使用横线分隔页面
+  
+  // 将拼接后的完整文档设置为mdContent
+  mdContent.value = fullDocument && fullDocument.trim().length > 0 
+    ? fullDocument 
+    : `# ${t('center.ocrAnalysis.editor.defaultTitle')}\n\n${t('center.ocrAnalysis.editor.defaultContent')}`;
+  
+  // 进入第3步（MD文档编辑与预览）
+  currentStep.value = 3
+  selectedStep.value = 3
+}
+
 // 重新处理当前页面
-const reprocessCurrentPage = () => {
+const reprocessCurrentPage = async () => {
   console.log('Reprocessing current page:', currentImageIndex.value + 1)
-  // 这里可以添加实际的重新处理当前页面的逻辑
+  // 获取当前图片索引
+  const index = currentImageIndex.value
+  
+  try {
+    // 保存当前OCR进度，以便在处理完成后恢复
+    const previousProgress = ocrProgress.value
+    
+    // 设置处理进度为0，表示开始处理
+    ocrProgress.value = 0
+    
+    // 导入DeepSeekOCR类
+    const DeepSeekOCR = (await import('../../utils/deepseekOCR')).default
+    const ocr = new DeepSeekOCR()
+    
+    // 导入图像标注工具
+    const { annotateImageWithOCR } = await import('../../utils/imgUtils')
+    
+    // 导入MD处理工具
+    const { processMdWithPositionTags } = await import('../../utils/mdUtils')
+    
+    // 定义提示词，帮助OCR更好地识别内容
+    const prompt = "<|grounding|>Convert the document to markdown."
+    
+    // 获取原始图片进行OCR处理
+    const originalImageBase64 = originalImages.value[index]
+    
+    if (!originalImageBase64) {
+      console.error('Original image not found for index:', index)
+      ocrProgress.value = 100
+      return
+    }
+    
+    // 更新进度 - 开始OCR识别
+    ocrProgress.value = 30
+    
+    // 对当前图片进行OCR识别
+    const result = await ocr.recognize(originalImageBase64.split(',')[1], prompt)
+    console.log(`OCR result for reprocessed image ${index + 1}:`, result.content)
+    
+    // 更新进度 - OCR识别完成
+    ocrProgress.value = 60
+    
+    // 处理MD内容，替换定位标签
+    let processedMdContent = result.content
+    try {
+      processedMdContent = await processMdWithPositionTags(
+        originalImageBase64,
+        result.content
+      )
+      console.log(`Processed MD for reprocessed image ${index + 1}:`, processedMdContent.substring(0, 100) + '...')
+    } catch (error) {
+      console.error('Error processing MD with position tags:', error)
+    }
+    
+    // 更新pageResults数组中的内容
+    pageResults.value[index] = processedMdContent
+    
+    try {
+      // 生成标注图片
+      console.log(`Generating annotated image for reprocessed image ${index + 1}`)
+      const annotatedImage = await annotateImageWithOCR(originalImageBase64, result.content)
+      console.log(`Annotated image generated for reprocessed image ${index + 1}:`, annotatedImage.substring(0, 100) + '...')
+      
+      // 使用生成的标注图片替换预览图片数组中的对应图片
+      previewImages.value[index] = annotatedImage
+      console.log(`Successfully replaced image ${index + 1} with reprocessed annotated version`)
+    } catch (annotationError) {
+      console.error(`Error generating annotated image for reprocessed image ${index + 1}:`, annotationError)
+      // 如果标注失败，使用原始图片
+      previewImages.value[index] = originalImageBase64
+    }
+    
+    // 更新进度 - 图像标注完成
+    ocrProgress.value = 100
+    
+    // 恢复之前的进度状态
+    setTimeout(() => {
+      ocrProgress.value = previousProgress
+    }, 500)
+    
+  } catch (error) {
+    console.error(`Error reprocessing image ${index + 1}:`, error)
+    // 恢复之前的进度状态
+    ocrProgress.value = 100
+  }
 }
 
 // 重新处理所有页面

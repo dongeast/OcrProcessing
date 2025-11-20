@@ -697,7 +697,8 @@ export default {
           reset: '초기화',
           reprocess: '재처리',
           reprocessCurrent: '현재 페이지 재처리',
-          reprocessAll: '모든 페이지 재처리'
+          reprocessAll: '모든 페이지 재처리',
+          saveResult: '결과 저장'
         },
         editor: {
           title: 'MD 편집',

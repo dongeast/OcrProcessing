@@ -339,7 +339,8 @@ export default {
         reset: '重置',
         reprocess: '重新处理',
         reprocessCurrent: '重新处理本页',
-        reprocessAll: '全部重新处理'
+        reprocessAll: '全部重新处理',
+        saveResult: '保存结果'
       },
       editor: {
         title: 'MD编辑',

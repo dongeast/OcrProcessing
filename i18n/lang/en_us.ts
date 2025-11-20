@@ -325,7 +325,8 @@ export default {
           reset: 'Reset',
           reprocess: 'Re-process',
           reprocessCurrent: 'Re-process Current Page',
-          reprocessAll: 'Re-process All Pages'
+          reprocessAll: 'Re-process All Pages',
+          saveResult: 'Save Result'
         },
         editor: {
           title: 'MD Editing',

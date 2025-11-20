@@ -697,7 +697,8 @@ export default {
               reset: '重置',
               reprocess: '重新處理',
               reprocessCurrent: '重新處理本頁',
-              reprocessAll: '全部重新處理'
+              reprocessAll: '全部重新處理',
+              saveResult: '保存結果'
             },
             editor: {
               title: 'MD編輯',

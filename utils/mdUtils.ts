@@ -55,6 +55,9 @@ function parsePositionTags(mdContent: string): PositionTag[] {
     });
   }
   
+  // 按照在文本中出现的顺序排序
+  positionTags.sort((a, b) => a.startIndex - b.startIndex);
+  
   return positionTags;
 }
 
@@ -182,14 +185,28 @@ export async function processMdWithPositionTags(
     return mdContent;
   }
   
+  // 移除第一个标签之前的内容，因为这是脏数据
+  let cleanedContent = mdContent;
+  if (positionTags.length > 0 && positionTags[0].startIndex > 0) {
+    cleanedContent = mdContent.substring(positionTags[0].startIndex);
+    console.log('Removed content before first tag, new length:', cleanedContent.length);
+  }
+  
+  // 更新标签位置信息
+  const adjustedTags = positionTags.map(tag => ({
+    ...tag,
+    startIndex: tag.startIndex - (mdContent.length - cleanedContent.length),
+    endIndex: tag.endIndex - (mdContent.length - cleanedContent.length)
+  }));
+  
   // 获取图片尺寸
   const dimensions = await getImageDimensions(imageBase64);
   console.log('Image dimensions:', dimensions);
   
   // 从后向前处理标签，避免索引变化影响
-  let processedContent = mdContent;
-  for (let i = positionTags.length - 1; i >= 0; i--) {
-    const tag = positionTags[i];
+  let processedContent = cleanedContent;
+  for (let i = adjustedTags.length - 1; i >= 0; i--) {
+    const tag = adjustedTags[i];
     console.log(`Processing tag ${i}: type=${tag.type}, coords=`, tag.coords);
     
     if (tag.type === 'image' && tag.coords.length === 4) {
@@ -211,25 +228,10 @@ export async function processMdWithPositionTags(
                           processedContent.substring(tag.endIndex);
       }
     } else {
-      // 对于非image类型，直接删除整行
-      const lines = processedContent.split('\n');
-      let charCount = 0;
-      let lineToRemove = -1;
-      
-      for (let j = 0; j < lines.length; j++) {
-        const lineEnd = charCount + lines[j].length + (j < lines.length - 1 ? 1 : 0); // +1 for \n
-        if (charCount <= tag.startIndex && tag.startIndex < lineEnd) {
-          lineToRemove = j;
-          break;
-        }
-        charCount = lineEnd;
-      }
-      
-      if (lineToRemove !== -1) {
-        lines.splice(lineToRemove, 1);
-        processedContent = lines.join('\n');
-        console.log(`Removed line ${lineToRemove} for non-image tag type: ${tag.type}`);
-      }
+      // 对于非image类型，直接删除标签但保留其他文本内容
+      processedContent = processedContent.substring(0, tag.startIndex) +
+                        processedContent.substring(tag.endIndex);
+      console.log(`Removed tag for non-image tag type: ${tag.type}`);
     }
   }
   
