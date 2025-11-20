@@ -1001,10 +1001,236 @@ const saveDocument = () => {
 }
 
 // 导出文档
-const exportDocument = (format: string) => {
+const exportDocument = async (format: string) => {
   console.log(`Exporting document as ${format}:`, mdContent.value)
-  // 这里可以添加实际的导出逻辑
-  alert(t('center.ocrAnalysis.preview.exporting', { format: format.toUpperCase() }))
+
+  try {
+    switch (format.toLowerCase()) {
+      case 'pdf':
+        // 创建PDF版本
+        const pdfWindow = window.open('', '_blank')
+        if (pdfWindow) {
+          pdfWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <title>Document</title>
+                <style>
+                  body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    line-height: 1.6;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    color: #333;
+                  }
+                  h1 {
+                    font-size: 2em;
+                    margin: 0.67em 0;
+                    border-bottom: 1px solid #eaecef;
+                    padding-bottom: 0.3em;
+                  }
+                  h2 {
+                    font-size: 1.5em;
+                    margin: 0.83em 0;
+                    border-bottom: 1px solid #eaecef;
+                    padding-bottom: 0.3em;
+                  }
+                  h3 {
+                    font-size: 1.25em;
+                    margin: 1em 0;
+                  }
+                  p {
+                    margin: 1em 0;
+                  }
+                  pre {
+                    background-color: #f6f8fa;
+                    border-radius: 6px;
+                    padding: 16px;
+                    overflow: auto;
+                    margin: 1em 0;
+                    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+                  }
+                  code {
+                    background-color: rgba(27, 31, 35, 0.05);
+                    border-radius: 6px;
+                    padding: 0.2em 0.4em;
+                    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+                    font-size: 85%;
+                  }
+                  pre code {
+                    background-color: transparent;
+                    padding: 0;
+                    font-size: 100%;
+                  }
+                  blockquote {
+                    border-left: 4px solid #dfe2e5;
+                    padding-left: 1em;
+                    margin: 0;
+                    color: #6a737d;
+                  }
+                  table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin: 1em 0;
+                  }
+                  th, td {
+                    border: 1px solid #dfe2e5;
+                    padding: 6px 13px;
+                  }
+                  th {
+                    background-color: #f6f8fa;
+                    font-weight: 600;
+                  }
+                  a {
+                    color: #0366d6;
+                    text-decoration: none;
+                  }
+                  a:hover {
+                    text-decoration: underline;
+                  }
+                  img {
+                    max-width: 100%;
+                  }
+                  hr {
+                    margin: 1em 0;
+                    border: 0;
+                    border-top: 1px solid #e1e4e8;
+                  }
+                </style>
+              </head>
+              <body>
+                ${renderedMarkdown.value}
+              </body>
+            </html>
+          `)
+          pdfWindow.document.close()
+          pdfWindow.focus()
+          // 给页面一些时间加载后再调用打印
+          setTimeout(() => {
+            pdfWindow.print()
+            // 不要自动关闭窗口，让用户自己决定
+          }, 500)
+        } else {
+          alert(t('center.ocrAnalysis.preview.popupBlocked'))
+        }
+        break
+
+      case 'txt':
+        // 创建纯文本Blob
+        const txtBlob = new Blob([mdContent.value], { type: 'text/plain;charset=utf-8' })
+        const txtUrl = URL.createObjectURL(txtBlob)
+
+        const txtLink = document.createElement('a')
+        txtLink.href = txtUrl
+        txtLink.download = 'document.txt'
+        document.body.appendChild(txtLink)
+        txtLink.click()
+        document.body.removeChild(txtLink)
+
+        // 清理URL对象
+        setTimeout(() => URL.revokeObjectURL(txtUrl), 100)
+        break
+
+      case 'md':
+      case 'markdown':
+        // 创建Markdown Blob
+        const mdBlob = new Blob([mdContent.value], { type: 'text/markdown;charset=utf-8' })
+        const mdUrl = URL.createObjectURL(mdBlob)
+
+        const mdLink = document.createElement('a')
+        mdLink.href = mdUrl
+        mdLink.download = 'document.md'
+        document.body.appendChild(mdLink)
+        mdLink.click()
+        document.body.removeChild(mdLink)
+
+        // 清理URL对象
+        setTimeout(() => URL.revokeObjectURL(mdUrl), 100)
+        break
+
+      case 'docx':
+        // 使用简单的HTML格式作为DOCX的替代方案
+        // 在实际应用中，你可能需要使用专门的库如 docxtemplater 来生成真正的DOCX文件
+        const htmlContent = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office'
+                xmlns:w='urn:schemas-microsoft-com:office:word'
+                xmlns='http://www.w3.org/TR/REC-html40'>
+          <head>
+            <meta charset='utf-8'>
+            <title>Document</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+              }
+              h1 { font-size: 2em; margin: 0.67em 0; }
+              h2 { font-size: 1.5em; margin: 0.83em 0; }
+              h3 { font-size: 1.17em; margin: 1em 0; }
+              p { margin: 1em 0; }
+              pre {
+                background-color: #f4f4f4;
+                padding: 15px;
+                overflow-x: auto;
+                font-family: 'Courier New', Courier, monospace;
+              }
+              code {
+                font-family: 'Courier New', Courier, monospace;
+              }
+              blockquote {
+                border-left: 4px solid #ddd;
+                padding-left: 1em;
+                margin: 1em 0;
+                color: #666;
+              }
+              table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 1em 0;
+              }
+              th, td {
+                border: 1px solid #ddd;
+                padding: 8px 12px;
+              }
+              th {
+                background-color: #f4f4f4;
+                font-weight: 600;
+              }
+            </style>
+          </head>
+          <body>
+            ${renderedMarkdown.value}
+          </body>
+          </html>
+        `
+
+        const docxBlob = new Blob([htmlContent], { type: 'application/msword;charset=utf-8' })
+        const docxUrl = URL.createObjectURL(docxBlob)
+
+        const docxLink = document.createElement('a')
+        docxLink.href = docxUrl
+        docxLink.download = 'document.doc'
+        document.body.appendChild(docxLink)
+        docxLink.click()
+        document.body.removeChild(docxLink)
+
+        // 清理URL对象
+        setTimeout(() => URL.revokeObjectURL(docxUrl), 100)
+        break
+
+      default:
+        alert(t('center.ocrAnalysis.preview.unsupportedFormat', { format: format.toUpperCase() }))
+    }
+
+    // 显示导出成功消息
+    alert(t('center.ocrAnalysis.preview.exportSuccess', { format: format.toUpperCase() }))
+  } catch (error) {
+    console.error('Export error:', error)
+    alert(t('center.ocrAnalysis.preview.exportError', { format: format.toUpperCase() }))
+  }
 }
 </script>
 

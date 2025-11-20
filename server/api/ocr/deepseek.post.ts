@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
 
     // 初始化OpenAI客户端
     const openai = new OpenAI({
-      baseURL: config.public.deepseekOcr?.baseUrl || "https://api.ppinfra.com/openai",
+      baseURL: config.public.deepseekOcr?.baseUrl,
       apiKey: apiKey,
     })
 
@@ -57,8 +57,8 @@ export default defineEventHandler(async (event) => {
         },
       ],
       model: config.public.deepseekOcr?.model || "deepseek/deepseek-ocr",
-      tempature: 1,
-      top_p: 1,
+      tempature: 0,
+      top_p: 0.7,
       max_tokens: 4096,
       min_p: 0,
       top_k: 50,
