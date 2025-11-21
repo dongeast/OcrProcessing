@@ -180,5 +180,24 @@ export default {
   auth: {
     selectLoginMethod: 'Sign in to your account',
     selectLoginMethodDescription: 'Choose your preferred sign-in method to continue to Ocr Processing'
-  }
+  },
+  footer: {
+      menu: "Menu",
+      legal:"Legal Policies",
+      resources: "Resources",
+      privacy: "Privacy Policy",
+      home: "Home",
+      features: "Features",
+      pricing: "Pricing",
+      blog: "Blog",
+      faq: "FAQ",
+      testimonials: "Customer Reviews",
+      documentation: "Documentation",
+      license:"License",
+      friendsList: "Friend Links",
+      about: "About Us",
+      contact: "Contact Us",
+      terms: "Terms",
+      roadmap: "Roadmap",
+  },
 }
