@@ -90,7 +90,7 @@ export default {
     },
     home: {
         title: 'Ocr Processing',
-        description: '基于Nuxt3的企业级SaaS出海模板，预集成Stripe/Cream支付、谷歌登录、多语言路由和SEO工具。快速构建SSR的全球化Web应用，开箱即用',
+        description: '基于 Deepseek-OCR 大模型的先进OCR处理平台。以无与伦比的准确率将扫描文档、PDF和图像转换为可编辑文本。支持多种语言和文件格式。',
         startLink: '立即开始免费体验~',
         thirdPartyLink: '前往Github~',
         loginButton: '登录',

@@ -424,60 +424,60 @@
               <img src="../assets/imgs/head/Q56a-E7a_400x400.jpg" alt="John Smith" class="w-12 h-12 rounded-full object-cover">
               <div>
                 <h4 class="font-semibold">John Smith</h4>
-                <p class="text-gray-600">CEO at TechStart</p>
+                <p class="text-gray-600">CTO, TechGlobal</p>
               </div>
             </div>
-            <p class="text-gray-600">"This Boilerplate has completely transformed how we track our MRR. The insights are invaluable."</p>
+            <p class="text-gray-600">"The recognition accuracy of deepseek-ocr is impressive! It has increased our document processing efficiency by 300%. This AI-driven OCR truly transforms our workflow."</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow">
             <div class="flex items-center gap-4 mb-4">
               <img src="../assets/imgs/head/_0jm4JCN_400x400.jpg" alt="Sarah Johnson" class="w-12 h-12 rounded-full object-cover">
               <div>
                 <h4 class="font-semibold">Sarah Johnson</h4>
-                <p class="text-gray-600">CTO at CloudScale</p>
+                <p class="text-gray-600">Data Scientist, DataInsights</p>
               </div>
             </div>
-            <p class="text-gray-600">"The integration was seamless, and the insights we get are game-changing for our business."</p>
+            <p class="text-gray-600">"Compared to other OCR tools, deepseek-ocr excels in complex layouts and handwritten text recognition. Both accuracy and processing speed exceeded our expectations."</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow">
             <div class="flex items-center gap-4 mb-4">
               <img src="../assets/imgs/head/773JgJ71_400x400.jpg" alt="Mike Chen" class="w-12 h-12 rounded-full object-cover">
               <div>
                 <h4 class="font-semibold">Mike Chen</h4>
-                <p class="text-gray-600">Founder at DevTools</p>
+                <p class="text-gray-600">Founder, DocuFlow</p>
               </div>
             </div>
-            <p class="text-gray-600">"Best investment we've made for tracking our revenue metrics. Highly recommended!"</p>
+            <p class="text-gray-600">"The solution with deepseek-ocr is our best choice for handling multi-format documents. The conversion quality from scanned images to editable text is unparalleled."</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow">
             <div class="flex items-center gap-4 mb-4">
-              <img src="../assets/imgs/head/UFStG2aG_400x400.jpg" alt="Mike Chen" class="w-12 h-12 rounded-full object-cover">
+              <img src="../assets/imgs/head/UFStG2aG_400x400.jpg" alt="Alex Wang" class="w-12 h-12 rounded-full object-cover">
               <div>
-                <h4 class="font-semibold">Alen Wu</h4>
-                <p class="text-gray-600">Programming enthusiast</p>
+                <h4 class="font-semibold">Alex Wang</h4>
+                <p class="text-gray-600">AI Researcher</p>
               </div>
             </div>
-            <p class="text-gray-600">" Wow! NuxtPro is so user-friendly for a novice who has never used Nuxt! Easy to use, complete documentation, Kevin's service response is fast and thoughtful."</p>
+            <p class="text-gray-600">"作为AI研究员，我对deepseek-ocr的表现印象深刻。它在多语言支持和复杂版面分析方面的能力远超传统OCR工具。"</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow">
             <div class="flex items-center gap-4 mb-4">
-              <img src="../assets/imgs/head/X_lkYpoR_400x400.jpg" alt="Mike Chen" class="w-12 h-12 rounded-full object-cover">
+              <img src="../assets/imgs/head/X_lkYpoR_400x400.jpg" alt="Emily Parker" class="w-12 h-12 rounded-full object-cover">
               <div>
-                <h4 class="font-semibold">John Smith</h4>
-                <p class="text-gray-600">Web Developer</p>
+                <h4 class="font-semibold">Emily Parker</h4>
+                <p class="text-gray-600">Archivist</p>
               </div>
             </div>
-            <p class="text-gray-600">"After using the NuxtPro Boilerplate, I saved at least 30% of my development time! Efficient and stable!"</p>
+            <p class="text-gray-600">"私たちのアーカイブには膨大な歴史文書がありますが、このシステムによりすべての文書がデジタル化されました。deepseek-ocrは、劣化した文書でも正確に認識してくれます。"</p>
           </div>
           <div class="bg-white p-6 rounded-xl shadow">
             <div class="flex items-center gap-4 mb-4">
-              <img src="../assets/imgs/head/66Z_Ppre_400x400.jpg" alt="Mike Chen" class="w-12 h-12 rounded-full object-cover">
+              <img src="../assets/imgs/head/66Z_Ppre_400x400.jpg" alt="David Wilson" class="w-12 h-12 rounded-full object-cover">
               <div>
-                <h4 class="font-semibold">Tim Worker</h4>
+                <h4 class="font-semibold">David Wilson</h4>
                 <p class="text-gray-600">Product Manager</p>
               </div>
             </div>
-            <p class="text-gray-600">"Great Boilerplate i have ever seen~"</p>
+            <p class="text-gray-600">"Cette plateforme OCR prend en charge de nombreux formats de fichiers et conserve la mise en page d'origine après conversion. Le modèle deepseek-ocr a considérablement amélioré nos capacités de traitement de documents."</p>
           </div>
         </div>
       </div>

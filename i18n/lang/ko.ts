@@ -1,7 +1,7 @@
 export default {
     home: {
         title: 'Ocr Processing',
-        description: 'Nuxt3 기반 엔터프라이즈급 SaaS 출해 템플릿으로, Stripe/Cream 결제, Google 로그인, 다국어 라우팅 및 SEO 도구를 미리 통합했습니다. SSR 글로벌 웹 애플리케이션을 빠르게 구축하고 즉시 사용할 수 있습니다.',
+        description: 'Deepseek-OCR AI 모델 기반의 고급 OCR 처리 플랫폼. 스캔된 문서, PDF 및 이미지를 뛰어난 정확도로 편집 가능한 텍스트로 변환합니다. 여러 언어와 파일 형식을 지원합니다.',
         startLink: '무료 체험 시작하기',
         thirdPartyLink: 'Github 바로가기',
         loginButton: '로그인',

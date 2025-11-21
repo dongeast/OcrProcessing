@@ -1,7 +1,7 @@
 export default {
     home: {
         title: 'Ocr Processing',
-        description: '​Open-source Nuxt3 SaaS template, pre-integrated with global payment gateways (Stripe/Cream), Google OAuth, i18n routing, and SEO optimization tools. Designed for developers launching multilingual web apps, it offers SSR/SSG support and production-grade security out of the box.',
+        description: 'Advanced OCR processing platform powered by Deepseek-OCR AI model. Convert scanned documents, PDFs, and images into editable text with unmatched accuracy. Supports multiple languages and file formats.',
         startLink: 'Start Free Trial~',
         thirdPartyLink: 'Github →',
         loginButton: 'Login',

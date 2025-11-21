@@ -2,7 +2,7 @@ export default {
     welcome: 'こんにちは',
     home: {
         title: 'Ocr Processing',
-        description: 'オープンソースのNuxt3向けSaaSテンプレートで、Stripe/Creamをはじめとするグローバル決済ゲートウェイ、Google OAuth、多言語ルーティング（i18n）、SEO最適化ツールを事前に統合。多言語Webアプリを立ち上げる開発者向けに設計されており、SSR/SSGのサポートと本番環境レベルのセキュリティを標準で提供します。',
+        description: 'Deepseek-OCR AIモデル搭載の高度なOCR処理プラットフォーム。スキャンされた文書、PDF、画像を高い精度で編集可能なテキストに変換。複数の言語とファイル形式をサポート。',
         startLink: '無料トライアルを開始',
         thirdPartyLink: 'Github →',
         loginButton: 'ログイン',

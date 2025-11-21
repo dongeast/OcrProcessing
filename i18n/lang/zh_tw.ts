@@ -1,7 +1,7 @@
 export default {
     home: {
         title: 'Ocr Processing',
-        description: '基於Nuxt3的企業級SaaS出海模板，預集成Stripe/Cream支付、谷歌登錄、多語言路由和SEO工具。快速構建SSR的全球化Web應用，開箱即用',
+        description: '基於 Deepseek-OCR 大模型的先進OCR處理平台。以無與倫比的準確率將掃描文件、PDF和圖像轉換為可編輯文本。支持多種語言和文件格式。',
         startLink: '立即開始免費體驗~',
         thirdPartyLink: '前往Github~',
         loginButton: '登錄',
@@ -816,7 +816,7 @@ export default {
                 description: '在保持質量的同時減小圖像文件大小',
                 input: '輸入',
                 dragDrop: '拖拽圖像到此處',
-                supportedFormats: '支持JPG、PNG、TIFF、BMP格式',
+                supportedFormats: '支持JPG、PNG、PDF、TIFF、BMP格式',
                 browseFiles: '瀏覽圖像',
                 output: '輸出設置',
                 compression: '壓縮級別',
