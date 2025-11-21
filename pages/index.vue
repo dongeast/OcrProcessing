@@ -24,32 +24,64 @@
           </div>
           <div class="relative">
             <div class="bg-white p-3 rounded-xl shadow-lg">
-              <img src="../assets/imgs/back/template2.png" alt="NuxtPro Template Preview" class="w-full h-auto rounded-md">
-              <div class="bg-white p-6 rounded-lg mt-6 border border-gray-100">
-                <h3 class="text-lg font-semibold mb-3 text-gray-800">{{ $t('home.waitlist.cardTitle') }}</h3>
-                <form @submit.prevent="joinWaitlist" class="flex flex-col sm:flex-row gap-3">
-                  <input 
-                    type="email" 
-                    v-model="waitlistEmail" 
-                    :placeholder="$t('home.waitlist.placeholder')" 
-                    required 
-                    class="flex-grow px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-500 shadow-sm"
-                  >
-                  <button 
-                    type="submit" 
-                    class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-sm whitespace-nowrap"
-                  >
-                    {{ $t('home.waitlist.button') }}
-                  </button>
-                </form>
+              <!-- DeepSeek OCR Logo -->
+              <div class="flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-700 rounded-lg p-8 h-64">
+                <div class="text-center">
+                  <div class="flex justify-center mb-4">
+                    <!-- DeepSeek Logo -->
+                    <div class="bg-white p-4 rounded-lg">
+                      <img src="~/assets/logo/deepseek-color.svg" alt="DeepSeek OCR Logo" class="w-20 h-20 flex-shrink-0 mx-auto" />
+                    </div>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white">{{ $t('home.hero.deepSeekTitle') }}</h3>
+                  <p class="text-purple-200 mt-2">{{ $t('home.hero.deepSeekSubtitle') }}</p>
+                </div>
               </div>
-              <p class="text-sm text-gray-500 mt-3 text-center">
-                <i18n-t keypath="home.waitlist.joinCountMessage" tag="span">
-                  <template #count>
-                    <strong class="text-purple-600 font-bold text-base">{{ dynamicJoinCount }}</strong>
-                  </template>
-                </i18n-t>
-              </p>
+              
+              <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg mt-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-semibold text-gray-800">{{ $t('home.hero.poweredBy') }}</h3>
+                </div>
+                
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <p class="ml-2 text-gray-600">{{ $t('home.hero.feature1') }}</p>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <p class="ml-2 text-gray-600">{{ $t('home.hero.feature2') }}</p>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <p class="ml-2 text-gray-600">{{ $t('home.hero.feature3') }}</p>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <p class="ml-2 text-gray-600">{{ $t('home.hero.feature4') }}</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -729,37 +761,38 @@ useHead({
 
 const faqs = ref([
   {
-    question: '1. What is this product?',
-    answer: 'This product is a comprehensive template designed to help SaaS companies monitor their MRR, churn rate, and other key metrics in real-time.'
+    question: '1. What is DeepSeek OCR and how does it differ from traditional OCR technologies?',
+    answer: 'DeepSeek OCR is an advanced optical character recognition system powered by a large AI model with 3 billion parameters. Unlike traditional OCR systems that rely on template matching and rule-based approaches, DeepSeek OCR uses deep learning algorithms to understand complex document layouts, recognize handwritten text, and process multilingual documents with exceptional accuracy rates of 95% or higher.'
   },
   {
-    question: '2. How do I use this product?',
-    answer: 'To use this product, simply sign up for an account, connect your payment platforms, and start tracking your metrics through the intuitive template.'
+    question: '2. Which file formats does your OCR service support?',
+    answer: 'Our OCR service supports a wide range of file formats including PDF documents, scanned images (JPEG, PNG, TIFF, BMP), and various office document formats. We can extract text from single-page and multi-page documents while preserving the original layout structure and formatting.'
   },
   {
-    question: '3. What are the differences between the free and paid plans?',
-    answer: 'The free plan offers basic features for a single platform integration, while the paid plans provide advanced features, multi-platform integrations, and additional analytics tools.'
+    question: '3. How accurate is the text recognition provided by DeepSeek OCR?',
+    answer: 'DeepSeek OCR achieves over 95% accuracy on standard printed documents and approximately 90% accuracy on handwritten texts. The accuracy may vary depending on factors such as image quality, font complexity, and document layout. Our dynamic chunking visual encoding technology significantly improves recognition accuracy for complex layouts.'
   },
   {
-    question: '4. What advantages does this product have over similar products?',
-    answer: 'This product offers real-time metrics, seamless multi-platform integration, and advanced analytics tools, making it a superior choice for SaaS businesses.'
+    question: '4. Can DeepSeek OCR handle documents in multiple languages?',
+    answer: 'Yes, DeepSeek OCR supports recognition of documents in multiple languages including English, Chinese, Japanese, Korean, and many European languages. The model has been specifically trained to handle mixed-language documents effectively, making it ideal for international business applications.'
   },
   {
-    question: '5. How can I make payments?',
-    answer: 'Payments can be made through various platforms such as Stripe, Paddle, and LemonSqueezy, ensuring a secure and convenient transaction process.'
+    question: '5. How fast is the document processing with DeepSeek OCR?',
+    answer: 'Document processing speed depends on the complexity and size of the document. Simple single-page documents are typically processed within seconds, while complex multi-page documents may take a few minutes. Our system is optimized for high throughput and can handle batch processing efficiently.'
   },
   {
-    question: '6. Is there a refund policy?',
-    answer: 'Yes, we offer a refund policy within the first 30 days of your subscription if you are not satisfied with the product.'
+    question: '6. Is my data secure when using your OCR service?',
+    answer: 'Absolutely. We prioritize data security and privacy. All documents are processed securely, and we do not store your documents on our servers after processing. Our infrastructure follows industry-standard security practices, including encrypted data transmission and secure API access.'
   },
   {
-    question: '7. What are the differences between the free and paid plans?',
-    answer: 'The free plan offers basic features for a single platform integration, while the paid plans provide advanced features, multi-platform integrations, and additional analytics tools.'
+    question: '7. What output formats are available for the recognized text?',
+    answer: 'We offer multiple output formats to suit different needs, including plain text (TXT), structured data (JSON), Microsoft Word documents (DOCX), and PDF with searchable text. You can also access the recognition results programmatically through our API for integration with your own applications.'
   },
   {
-    question: '8. How can I make payments?',  
-  
-}]);
+    question: '8. How can I integrate DeepSeek OCR into my own application or workflow?',
+    answer: 'We provide comprehensive API documentation and SDKs for popular programming languages that make integration straightforward. With just a few lines of code, you can add advanced OCR capabilities to your applications. We also offer webhook support for automated processing workflows.'
+  }
+]);
 
 const isOpen = ref(Array(faqs.value.length).fill(false));
 

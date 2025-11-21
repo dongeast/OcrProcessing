@@ -100,8 +100,17 @@ export default {
             button: '立即加入！',
             joinCountMessage: '🔥 刚刚，第 {count} 位早期用户加入了等待名单！',
             modalTitle: '加入成功！',
-            modalMessage: '感谢您对Ocr Processing的认可与支持，您将第一时间收到Ocr Processing的最新消息及折扣优惠！Enjoy it!',
+            modalMessage: '感谢您对Ocr Processing的认可与支持，您将第一时间收到Ocr Processing的最新消息及折扣优惠！Enjoy it！',
             modalCloseButton: '关闭',
+        },
+        hero: {
+            deepSeekTitle: 'DeepSeek OCR',
+            deepSeekSubtitle: '先进的AI驱动文字识别',
+            poweredBy: '由 DeepSeek OCR 驱动',
+            feature1: '先进的AI模型，提供卓越的OCR识别精度',
+            feature2: '支持多种语言和复杂版式',
+            feature3: '将文档转换为可编辑文本，准确率高达95%以上',
+            feature4: '几秒钟内处理PDF、扫描图像和文档'
         },
         nav: {
             features: '功能特性',
@@ -111,12 +120,6 @@ export default {
             roadmap: '产品路线',
             waitlist: '加入等待列表',
             login: '登录',
-        },
-        hero: {
-            title: '基于Nuxt3的企业级SaaS出海模板',
-            description: '快速构建全球化Web应用，开箱即用',
-            startButton: '立即开始免费体验',
-            githubButton: '前往Github',
         },
         features: {
             title: '功能特性',
@@ -201,24 +204,36 @@ export default {
             description: '关于Ocr Processing的常见问题解答',
             items: [
                 {
-                    question: '1. 这个产品是什么？',
-                    answer: '这个产品是一个全面的模板，旨在帮助SaaS公司实时监控其MRR、流失率和其他关键指标。'
+                    question: '1. 什么是DeepSeek OCR？它与传统OCR技术有何不同？',
+                    answer: 'DeepSeek OCR是一种基于30亿参数大模型的先进光学字符识别系统。与依赖模板匹配和基于规则方法的传统OCR系统不同，DeepSeek OCR使用深度学习算法来理解复杂的文档布局、识别手写文本，并以超过95%的卓越准确率处理多语言文档。'
                 },
                 {
-                    question: '2. 如何使用这个产品？',
-                    answer: '要使用这个产品，只需注册一个账户，连接您的支付平台，然后通过直观的模板开始跟踪您的指标。'
+                    question: '2. 你们的OCR服务支持哪些文件格式？',
+                    answer: '我们的OCR服务支持多种文件格式，包括PDF文档、扫描图像（JPEG、PNG、TIFF、BMP）以及各种办公文档格式。我们可以从单页和多页文档中提取文本，同时保留原始布局结构和格式。'
                 },
                 {
-                    question: '3. 免费版和付费版有什么区别？',
-                    answer: '免费版提供基本功能，而付费版提供高级功能，如无限项目、更多存储空间和优先支持。'
+                    question: '3. DeepSeek OCR提供的文本识别准确率如何？',
+                    answer: 'DeepSeek OCR在标准打印文档上的准确率超过95%，在手写文本上的准确率约为90%。准确率可能会受到图像质量、字体复杂性和文档布局等因素的影响。我们的动态分块视觉编码技术显著提高了复杂布局的识别准确率。'
                 },
                 {
-                    question: '4. 是否支持自定义域名？',
-                    answer: '自定义域名仅在专业版和高级版计划中提供。'
+                    question: '4. DeepSeek OCR能否处理多语言文档？',
+                    answer: '可以，DeepSeek OCR支持识别多种语言的文档，包括英语、中文、日语、韩语和许多欧洲语言。该模型经过专门训练，能够有效处理混合语言文档，非常适合国际商务应用。'
                 },
                 {
-                    question: '5. 如何获得帮助？',
-                    answer: '我们提供多种支持选项，包括社区论坛、电子邮件支持和优先支持（取决于您的计划）。'
+                    question: '5. 使用DeepSeek OCR处理文档的速度如何？',
+                    answer: '文档处理速度取决于文档的复杂性和大小。简单的单页文档通常在几秒钟内处理完毕，而复杂的多页文档可能需要几分钟。我们的系统经过优化，具有高吞吐量，能够高效处理批量处理任务。'
+                },
+                {
+                    question: '6. 使用你们的OCR服务时，我的数据安全吗？',
+                    answer: '绝对安全。我们将数据安全和隐私放在首位。所有文档都经过安全处理，处理完成后我们不会在服务器上存储您的文档。我们的基础设施遵循行业标准的安全实践，包括加密数据传输和安全的API访问。'
+                },
+                {
+                    question: '7. 识别出的文本有哪些输出格式？',
+                    answer: '我们提供多种输出格式以满足不同需求，包括纯文本（TXT）、结构化数据（JSON）、Microsoft Word文档（DOCX）和带可搜索文本的PDF。您还可以通过我们的API以编程方式访问识别结果，以便与您自己的应用程序集成。'
+                },
+                {
+                    question: '8. 如何将DeepSeek OCR集成到我自己的应用程序或工作流程中？',
+                    answer: '我们提供全面的API文档和主流编程语言的SDK，使集成变得简单直接。只需几行代码，您就可以为应用程序添加先进的OCR功能。我们还提供webhook支持，用于自动化处理工作流程。'
                 }
             ]
         },
@@ -286,7 +301,12 @@ export default {
             title: '加入成功！',
             message: '感谢您对Ocr Processing的认可与支持，您将第一时间收到Ocr Processing的最新消息及折扣优惠！Enjoy it!',
             closeButton: '关闭'
-        }
+        },
+        cta:{
+            title: '准备好以最高效的方式开始你的光学探索工作了吗？',
+            description: '加入成千上万的开发者和企业，借助先进的3B参数模型和动态分块视觉编码，实现卓越的准确性。',
+            button: '立即开始您的免费试用！'
+        },
     },
     auth: {
       selectLoginMethod: '授权登录',
