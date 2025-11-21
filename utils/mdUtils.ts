@@ -27,7 +27,7 @@ function parsePositionTags(mdContent: string): PositionTag[] {
   const positionTags: PositionTag[] = [];
   // 匹配形如 <|ref|>text<|/ref|><|det|>[[88, 72, 745, 94]]<|/det|> 的模式
   // 支持标签在同一行或不同行的情况
-  const tagRegex = /<\|ref\|>(?<type>title|sub_title|text|image|image_caption)<\|\/ref\|><\|det\|>\[\[(?<x1>\d+),\s*(?<y1>\d+),\s*(?<x2>\d+),\s*(?<y2>\d+)\]\]<\|\/det\|>/g;
+  const tagRegex = /<\|ref\|>(?<type>title|sub_title|table|text|image|image_caption)<\|\/ref\|><\|det\|>\[\[(?<x1>\d+),\s*(?<y1>\d+),\s*(?<x2>\d+),\s*(?<y2>\d+)\]\]<\|\/det\|>/g;
   
   let match;
   while ((match = tagRegex.exec(mdContent)) !== null) {
