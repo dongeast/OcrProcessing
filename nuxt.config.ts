@@ -57,7 +57,7 @@ export default defineNuxtConfig({
   //配置公共seo数据
   site: {
     url: 'https://ocrprocessing.com',
-    name: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
+    name: 'Ocr Processing | Deepseek OCR',
     description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 1 hour.',
     defaultLocale: 'en',
     enabled: true,
@@ -69,7 +69,7 @@ export default defineNuxtConfig({
   schemaOrg: {
     identity: {
       type: 'Organization',
-      name: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
+      name: 'Ocr Processing | Deepseek OCR',
       url: 'https://ocrprocessing.com',
       logo: 'https://ocrprocessing.com/ocr-logo.svg'
     },
@@ -101,7 +101,7 @@ export default defineNuxtConfig({
   },
   llms: {
     domain: 'https://ocrprocessing.com',
-    title: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
+    title: 'Ocr Processing | Deepseek OCR',
     description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 3 days.',
     sections: [
       {

@@ -65,7 +65,7 @@ useHead({
   ]
 })
 
-const metaTitle = 'Terms of Service | OpenSource Nuxt SaaS Boilerplate | Ocr Processing'
+const metaTitle = 'Terms of Service | Ocr Processing | Deepseek OCR'
 const metaDescription = 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 5 minutes.'
 
 

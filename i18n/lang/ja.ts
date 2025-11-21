@@ -527,7 +527,7 @@ export default {
     },
     auth: {
       selectLoginMethod: 'ログインを許可',
-      selectLoginMethodDescription: 'Ocr Processingの出海旅を始めましょう。速く、速く、速く。',
+      selectLoginMethodDescription: '今すぐOcr Processingでの光の旅を始めましょう。',
     },
     center: {
       menu: {

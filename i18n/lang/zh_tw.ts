@@ -528,7 +528,7 @@ export default {
     },
     auth: {
       selectLoginMethod: '授權登錄',
-      selectLoginMethodDescription: '即刻開啟屬於你在Ocr Processing的出海之旅.',
+      selectLoginMethodDescription: '即刻開啟屬於你在Ocr Processing的尋光之旅.',
     },
     center: {
         menu: {

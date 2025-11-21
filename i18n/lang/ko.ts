@@ -528,7 +528,7 @@ export default {
     },
     auth: {
       selectLoginMethod: '로그인 허용',
-      selectLoginMethodDescription: 'Ocr Processing의 출해 여정을 시작하세요. 빠르게, 더 빠르게.',
+      selectLoginMethodDescription: '지금 Ocr Processing의 빛나는 여정을 시작하세요.',
     },
     center: {
         menu: {

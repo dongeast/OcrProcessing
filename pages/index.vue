@@ -722,7 +722,7 @@ useHead({
 })
 
 useHead({
-  title: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
+  title: 'Ocr Processing | Deepseek OCR',
   meta: [
     {
       name: 'description',

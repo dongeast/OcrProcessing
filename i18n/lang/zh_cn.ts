@@ -331,7 +331,7 @@ export default {
     },
     auth: {
       selectLoginMethod: '授权登录',
-      selectLoginMethodDescription: '即刻开启属于你在Ocr Processing的出海之旅.'
+      selectLoginMethodDescription: '即刻开启属于你在Ocr Processing的寻光之旅.'
     },
     footer: {
       legal:"法律政策",
