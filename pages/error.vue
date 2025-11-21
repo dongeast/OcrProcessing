@@ -2,7 +2,7 @@
   <div class="min-h-screen flex flex-col bg-gradient-to-r from-purple-50 to-blue-50">
     <HeadNavbar />
 
-    <main class="flex-grow flex items-center justify-center text-center px-4">
+    <main class="flex-grow flex items-center justify-center text-center px-4 pt-12 md:pt-20">
       <div class="max-w-xl">
         <h1 class="text-8xl md:text-9xl font-bold text-purple-600 mb-4 animate-pulse">404</h1>
         <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-6">

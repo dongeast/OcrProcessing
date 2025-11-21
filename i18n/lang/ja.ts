@@ -522,7 +522,7 @@ export default {
     },
     error: {
       notFoundTitle: 'ページが見つかりません',
-      notFoundMessage: 'お探しのページは見つかりませんでした。',
+      notFoundMessage: 'お探しのページが見つかりませんでした。',
       goHomeButton: 'ホームに戻る'
     },
     auth: {
@@ -869,5 +869,5 @@ export default {
           failed: '失敗'
         }
       }
-    }
+    },
 }

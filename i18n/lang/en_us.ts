@@ -170,7 +170,7 @@ export default {
       button: 'Sign up to subscribe Now!'
     },
     seo: {
-      title: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
+      title: 'Ocr Processing | Deepseek OCR',
       description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 5 minutes.',
     }
   },
@@ -196,5 +196,10 @@ export default {
       contact: "Contact Us",
       terms: "Terms",
       roadmap: "Roadmap",
+  },
+  error: {
+    notFoundTitle: "Oops! Page Not Found",
+    notFoundMessage: "Looks like the page you're searching for decided to take a vacation. Let's get you back home.",
+    goHomeButton: "Go Back Home"
   },
 }

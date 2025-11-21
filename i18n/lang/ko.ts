@@ -870,5 +870,5 @@ export default {
           failed: '실패'
         }
       }
-    }
+    },
 }
