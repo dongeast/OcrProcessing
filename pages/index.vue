@@ -95,7 +95,7 @@
         <div class="grid md:grid-cols-3 gap-8">
           <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/nuxt.svg" alt="NuxtJS" class="w-12 h-12 text-purple-600">
+              <img src="~/assets/logo/deepseek-color.svg" alt="DeepSeek OCR" class="w-12 h-12 text-purple-600">
             </div>
             <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_1') }}</h3>
             <p class="text-gray-600">{{ $t('home.features.subDescription_1') }}</p>
@@ -103,7 +103,9 @@
 
           <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/vue3.svg" alt="Vue3" class="w-12 h-12 text-purple-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
             </div>
             <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_2') }}</h3>
             <p class="text-gray-600">{{ $t('home.features.subDescription_2') }}</p>
@@ -111,7 +113,9 @@
 
           <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/better-auth.ico" alt="better-auth" class="w-12 h-12 text-purple-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
             </div>
             <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_3') }}</h3>
             <p class="text-gray-600">{{ $t('home.features.subDescription_3') }}</p>
@@ -119,7 +123,9 @@
 
           <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/shadcnUI.svg" alt="ShadcnUI" class="w-12 h-12 text-purple-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
             </div>
             <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_4') }}</h3>
             <p class="text-gray-600">{{ $t('home.features.subDescription_4') }}</p>
@@ -127,7 +133,9 @@
 
           <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/tailwindcss.svg" alt="Tailwindcss" class="w-12 h-12 text-purple-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
+              </svg>
             </div>
             <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_5') }}</h3>
             <p class="text-gray-600">{{ $t('home.features.subDescription_5') }}</p>
@@ -135,52 +143,12 @@
 
           <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/drizzle.ico" alt="DrizzleOrm" class="w-12 h-12 text-purple-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002-2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
             </div>
             <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_6') }}</h3>
             <p class="text-gray-600">{{ $t('home.features.subDescription_6') }}</p>
-          </div>
-          <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/stripe.svg" alt="Stripe" class="w-12 h-12 text-purple-600">
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_7') }}</h3>
-            <p class="text-gray-600">{{ $t('home.features.subDescription_7') }}</p>
-          </div>
-          <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/creem.ico" alt="Creem" class="w-12 h-12 text-purple-600">
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_8') }}</h3>
-            <p class="text-gray-600">{{ $t('home.features.subDescription_8') }}</p>
-          </div>
-          <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/resend.ico" alt="Resend" class="w-12 h-12 text-purple-600">
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_9') }}</h3>
-            <p class="text-gray-600">{{ $t('home.features.subDescription_9') }}</p>
-          </div>
-          <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/i18n.svg" alt="i18n" class="w-12 h-12 text-purple-600">
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_10') }}</h3>
-            <p class="text-gray-600">{{ $t('home.features.subDescription_10') }}</p>
-          </div>
-          <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/plausible.webp" alt="plausible" class="w-12 h-12 text-purple-600">
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_11') }}</h3>
-            <p class="text-gray-600">{{ $t('home.features.subDescription_11') }}</p>
-          </div>
-          <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="~/assets/imgs/feature/vite-pwa.ico" alt="vite-pwa" class="w-12 h-12 text-purple-600">
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ $t('home.features.sutTitle_12') }}</h3>
-            <p class="text-gray-600">{{ $t('home.features.subDescription_12') }}</p>
           </div>
         </div>
       </div>

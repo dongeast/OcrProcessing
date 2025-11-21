@@ -83,9 +83,9 @@
 
           <!-- 移动语言切换器到这里 -->
           <div class="hidden sm:block border-l pl-4">
-            <Select v-model="currentLocale" :options="localeOptions" @update:model-value="switchLanguage">
+            <Select v-model="currentLocale" :options="localeOptions" @update:model-value="(value) => switchLanguage(value as string)">
               <SelectTrigger class="w-[140px]">
-                <SelectValue :placeholder="$t('common.selectLanguage')" />
+                <SelectValue :placeholder="$t('home.common.selectLanguage')" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem v-for="locale in localeOptions" :key="locale.value" :value="locale.value">
@@ -121,9 +121,9 @@
         <!-- 移动端语言切换器 -->
         <div class="pt-4 pb-3 border-t border-gray-200">
           <div class="px-4">
-            <Select v-model="currentLocale" :options="localeOptions" @update:model-value="switchLanguage">
+            <Select v-model="currentLocale" :options="localeOptions" @update:model-value="(value) => switchLanguage(value as string)">
               <SelectTrigger class="w-full">
-                <SelectValue :placeholder="$t('common.selectLanguage')" />
+                <SelectValue :placeholder="$t('home.common.selectLanguage')" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem v-for="locale in localeOptions" :key="locale.value" :value="locale.value">
@@ -176,6 +176,8 @@ import { useSwitchLocalePath } from '#imports'
 import { User } from 'lucide-vue-next'
 import Logo from '@/components/Logo.vue'
 
+type LocaleType = 'en-US' | 'zh-CN' | 'zh-TW' | 'JP' | 'KO';
+
 const session  = useSession()
 const user = ref(null);
 const config = useRuntimeConfig();
@@ -187,7 +189,7 @@ const { locale, t } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
 // 先声明 currentLocale
-const currentLocale = useState('locale', () => locale.value)
+const currentLocale = useState<LocaleType>('locale', () => locale.value as LocaleType)
 const activeMenuItem = ref('')
 
 // 跳转到用户中心页面
@@ -196,7 +198,7 @@ const goToCenter = () => {
 }
 
 // 定义语言选项
-const localeOptions = [
+const localeOptions: Array<{value: LocaleType, label: string}> = [
   { value: 'en-US', label: 'English' },
   { value: 'zh-CN', label: '简体中文' },
   { value: 'zh-TW', label: '繁體中文' },
@@ -206,11 +208,14 @@ const localeOptions = [
 
 // 切换语言方法
 const switchLanguage = async (newLocale: string) => {
-  currentLocale.value = newLocale
-  locale.value = newLocale
-  localStorage.setItem('userLocale', newLocale)
+  if (!newLocale) return;
   
-  const path = switchLocalePath(newLocale)
+  const typedLocale = newLocale as LocaleType;
+  currentLocale.value = typedLocale
+  locale.value = typedLocale
+  localStorage.setItem('userLocale', typedLocale)
+  
+  const path = switchLocalePath(typedLocale)
   if (path) {
     await router.push({
       path,
@@ -276,8 +281,9 @@ onMounted(() => {
   // 从 URL 或 localStorage 恢复语言设置
   const savedLocale = localStorage.getItem('userLocale') || currentLocale.value
   if (savedLocale) {
-    currentLocale.value = savedLocale
-    locale.value = savedLocale
+    const typedLocale = savedLocale as LocaleType;
+    currentLocale.value = typedLocale
+    locale.value = typedLocale
   }
 
   // 在外部点击时关闭下拉菜单
@@ -296,8 +302,6 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
 }
 
-
-
 // 点击外部处理程序需要访问下拉菜单元素的 ref
 const dropdownContainer = ref<HTMLElement | null>(null); // 定义 ref
 
@@ -311,22 +315,15 @@ const handleClickOutside = (event: MouseEvent) => {
 // 根据登录状态动态显示菜单项
 const displayMenuItems = computed(() => {
   const menuItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Features', path: '/#features' },
-    { name: 'Pricing', path: '/#pricing' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Testimonials', path: '/#testimonials' },
-    { name: 'FAQ', path: '/#faq' },
-    { name: 'Roadmap', path: '/roadmap' }
-    //{ name: 'Friend', path: '/#friend' }
+    { name: t('home.nav.home'), path: '/' },
+    { name: t('home.nav.features'), path: '/#features' },
+    { name: t('home.nav.pricing'), path: '/#pricing' },
+    { name: t('home.nav.blog'), path: '/blog' },
+    { name: t('home.nav.testimonials'), path: '/#testimonials' },
+    { name: t('home.nav.faq'), path: '/#faq' },
+    { name: t('home.nav.roadmap'), path: '/roadmap' }
   ]
 
-  // 确保 user 存在且有 value 属性
-  // if (user?.value) {
-  //   // 用户已登录，不显示登录菜单项
-  //   return menuItems.filter(item => item.path !== '/login')
-  // }
-  // 用户未登录，添加登录菜单项
   return menuItems;
 })
 
