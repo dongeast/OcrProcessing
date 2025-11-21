@@ -517,9 +517,14 @@
     <!-- FAQ Section -->
     <section class="py-20 mt-16" id="faq">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">FAQ</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">{{ $t('home.faqs.title') }}</h2>
         <div class="space-y-6">
-          <div v-for="(faq, index) in faqs" :key="index" class="bg-white p-6 rounded-xl shadow cursor-pointer" @click="toggle(index)">
+          <div 
+            v-for="(_, index) in Array(8)" 
+            :key="index" 
+            class="bg-white p-6 rounded-xl shadow cursor-pointer" 
+            @click="toggle(index)"
+          >
             <h3 class="font-semibold flex justify-between items-center">
               {{ $t('home.faqs.question' + (index + 1)) }}
               <span>{{ isOpen[index] ? '-' : '+' }}</span>
@@ -759,42 +764,7 @@ useHead({
 })
 
 
-const faqs = ref([
-  {
-    question: '1. What is DeepSeek OCR and how does it differ from traditional OCR technologies?',
-    answer: 'DeepSeek OCR is an advanced optical character recognition system powered by a large AI model with 3 billion parameters. Unlike traditional OCR systems that rely on template matching and rule-based approaches, DeepSeek OCR uses deep learning algorithms to understand complex document layouts, recognize handwritten text, and process multilingual documents with exceptional accuracy rates of 95% or higher.'
-  },
-  {
-    question: '2. Which file formats does your OCR service support?',
-    answer: 'Our OCR service supports a wide range of file formats including PDF documents, scanned images (JPEG, PNG, TIFF, BMP), and various office document formats. We can extract text from single-page and multi-page documents while preserving the original layout structure and formatting.'
-  },
-  {
-    question: '3. How accurate is the text recognition provided by DeepSeek OCR?',
-    answer: 'DeepSeek OCR achieves over 95% accuracy on standard printed documents and approximately 90% accuracy on handwritten texts. The accuracy may vary depending on factors such as image quality, font complexity, and document layout. Our dynamic chunking visual encoding technology significantly improves recognition accuracy for complex layouts.'
-  },
-  {
-    question: '4. Can DeepSeek OCR handle documents in multiple languages?',
-    answer: 'Yes, DeepSeek OCR supports recognition of documents in multiple languages including English, Chinese, Japanese, Korean, and many European languages. The model has been specifically trained to handle mixed-language documents effectively, making it ideal for international business applications.'
-  },
-  {
-    question: '5. How fast is the document processing with DeepSeek OCR?',
-    answer: 'Document processing speed depends on the complexity and size of the document. Simple single-page documents are typically processed within seconds, while complex multi-page documents may take a few minutes. Our system is optimized for high throughput and can handle batch processing efficiently.'
-  },
-  {
-    question: '6. Is my data secure when using your OCR service?',
-    answer: 'Absolutely. We prioritize data security and privacy. All documents are processed securely, and we do not store your documents on our servers after processing. Our infrastructure follows industry-standard security practices, including encrypted data transmission and secure API access.'
-  },
-  {
-    question: '7. What output formats are available for the recognized text?',
-    answer: 'We offer multiple output formats to suit different needs, including plain text (TXT), structured data (JSON), Microsoft Word documents (DOCX), and PDF with searchable text. You can also access the recognition results programmatically through our API for integration with your own applications.'
-  },
-  {
-    question: '8. How can I integrate DeepSeek OCR into my own application or workflow?',
-    answer: 'We provide comprehensive API documentation and SDKs for popular programming languages that make integration straightforward. With just a few lines of code, you can add advanced OCR capabilities to your applications. We also offer webhook support for automated processing workflows.'
-  }
-]);
-
-const isOpen = ref(Array(faqs.value.length).fill(false));
+const isOpen = ref(Array(8).fill(false));
 
 const toggle = (index) => {
   isOpen.value[index] = !isOpen.value[index];
