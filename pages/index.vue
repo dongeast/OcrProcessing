@@ -325,10 +325,11 @@
 
         <div class="grid md:grid-cols-4 gap-8">
            <!-- One-time Purchase Plan  -->
-          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
             <h3 class="text-xl font-semibold mb-4">{{ $t('home.pricing.oneTimePayment') }}</h3>
             <p class="text-4xl font-bold mb-2">$120</p>
-            <ul class="space-y-3 mb-8">
+            <p class="text-green-500 text-sm mb-6" style="height: 20px;">&nbsp;</p>
+            <ul class="space-y-3 mb-8 flex-grow">
               <li class="flex items-center gap-2">
                 <span class="text-green-500">✓</span> {{ $t('home.pricing.permanentAccess') }}
               </li>
@@ -340,24 +341,27 @@
               </li>
             </ul>
              <!-- stripe  此处是stripe的价格 id ，测试时换成自己的stripe价格 id-->
-            <button v-if="paymentMethod == 1" @click="openPayment('price_1QzJqNBwLqowaPCgkQmDoKXg','payment')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.buyButton') }}</span>
-            </button>
-             <!-- creem  此处是creem的价格 id ，测试时换成自己的creem价格 id-->
-            <button v-if="paymentMethod == 3"  @click="openPayment('prod_5t8s9rmvF8iuvVI4DxCJww','')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.buyButton') }}</span>
-            </button>
+            <div class="mt-4">
+              <button v-if="paymentMethod == 1" @click="openPayment('price_1QzJqNBwLqowaPCgkQmDoKXg','payment')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.buyButton') }}</span>
+              </button>
+               <!-- creem  此处是creem的价格 id ，测试时换成自己的creem价格 id-->
+              <button v-if="paymentMethod == 3"  @click="openPayment('prod_5t8s9rmvF8iuvVI4DxCJww','')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.buyButton') }}</span>
+              </button>
+            </div>
           </div>
 
            <!-- Starter Plan  -->
-          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
             <h3 class="text-xl font-semibold mb-4">{{ $t('home.pricing.starterPlan') }}</h3>
             <p class="text-4xl font-bold mb-2">
               {{ isAnnual ? $t('home.pricing.starterPlanYearPrice') : $t('home.pricing.starterPlanMonthPrice') }}
               <span class="text-lg text-gray-500">/{{ isAnnual ? $t('home.pricing.starterYearUnit') : $t('home.pricing.starterMonthUnit') }}</span>
             </p>
-            <p v-if="isAnnual" class="text-green-500 text-sm mb-6">{{ $t('home.pricing.starterPlanYearPriceDiscountText') }}</p>
-            <ul class="space-y-3 mb-8">
+            <p v-if="isAnnual" class="text-green-500 text-sm mb-6" style="height: 20px;">{{ $t('home.pricing.starterPlanYearPriceDiscountText') }}</p>
+            <p v-else class="text-green-500 text-sm mb-6" style="height: 20px;">&nbsp;</p>
+            <ul class="space-y-3 mb-8 flex-grow">
               <li class="flex items-center gap-2">
                 <span class="text-green-500">✓</span> {{ $t('home.pricing.starterPlanPermanentAccess') }}
               </li>
@@ -369,21 +373,23 @@
               </li>
             </ul>
              <!-- stripe  此处是stripe的价格 id ，测试时换成自己的stripe价格 id-->
-            <button v-if="paymentMethod == 1" @click="openPayment(isAnnual ? 'price_1QzJtwBwLqowaPCgxRxhpHLC' : 'price_1QzJqmBwLqowaPCgKHeolkGZ','subscription')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.starterButton') }}</span>
-            </button>
-             <!-- creem  此处是creem的价格 id ，测试时换成自己的creem价格 id-->
-            <button v-if="paymentMethod == 3" @click="openPayment(isAnnual ? 'prod_69GtlTkHl8An5htSR9DAFf' : 'prod_208nDCId85sCF8ElBSqcb0','')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.starterButton') }}</span>
-            </button>
-             <!-- bagelpay 此处是bagelpay的商品id ，测试时换成自己的商品id -->
-            <button v-if="paymentMethod == 5" @click="openPayment(isAnnual ?'prod_1972471388709662722': 'prod_1972471388709662722','onetime')" class="w-full bg-purple-600 text-white py-3 md:py-4 rounded-full relative overflow-hidden group max-w-xs mx-auto mt-auto">
-              <span class="relative group-hover:scale-110 transition-transform duration-300 text-sm md:text-base">{{ $t('home.pricing.buyNow') }}</span>
-            </button>
+            <div class="mt-4">
+              <button v-if="paymentMethod == 1" @click="openPayment(isAnnual ? 'price_1QzJtwBwLqowaPCgxRxhpHLC' : 'price_1QzJqmBwLqowaPCgKHeolkGZ','subscription')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.starterButton') }}</span>
+              </button>
+               <!-- creem  此处是creem的价格 id ，测试时换成自己的creem价格 id-->
+              <button v-if="paymentMethod == 3" @click="openPayment(isAnnual ? 'prod_69GtlTkHl8An5htSR9DAFf' : 'prod_208nDCId85sCF8ElBSqcb0','')" class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.starterButton') }}</span>
+              </button>
+               <!-- bagelpay 此处是bagelpay的商品id ，测试时换成自己的商品id -->
+              <button v-if="paymentMethod == 5" @click="openPayment(isAnnual ?'prod_1972471388709662722': 'prod_1972471388709662722','onetime')" class="w-full bg-purple-600 text-white py-3 md:py-4 rounded-full relative overflow-hidden group max-w-xs mx-auto mt-auto">
+                <span class="relative group-hover:scale-110 transition-transform duration-300 text-sm md:text-base">{{ $t('home.pricing.buyNow') }}</span>
+              </button>
+            </div>
           </div> 
 <!-- 
            Professional Plan  -->
-          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative">
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative flex flex-col">
             <div class="absolute -top-4 right-4">
               <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm">{{ $t('home.pricing.popular') }}</span>
             </div>
@@ -392,8 +398,9 @@
               {{ isAnnual ? $t('home.pricing.professionalPlanYearPrice') : $t('home.pricing.professionalPlanMonthPrice') }}
               <span class="text-lg text-gray-500">/{{ isAnnual ? $t('home.pricing.professionalYearUnit') : $t('home.pricing.professionalMonthUnit') }}</span>
             </p>
-            <p v-if="isAnnual" class="text-green-500 text-sm mb-6">{{ $t('home.pricing.professionalPlanYearPriceDiscountText') }}</p>
-            <ul class="space-y-3 mb-8">
+            <p v-if="isAnnual" class="text-green-500 text-sm mb-6" style="height: 20px;">{{ $t('home.pricing.professionalPlanYearPriceDiscountText') }}</p>
+            <p v-else class="text-green-500 text-sm mb-6" style="height: 20px;">&nbsp;</p>
+            <ul class="space-y-3 mb-8 flex-grow">
               <li class="flex items-center gap-2">
                 <span class="text-green-500">✓</span> {{ $t('home.pricing.professionalPlanPermanentAccess') }}
               </li>
@@ -406,28 +413,31 @@
             </ul>
 
              <!-- stripe  此处是stripe的价格 id ，测试时换成自己的stripe价格 id-->
-            <button v-if="paymentMethod == 1" @click="openPayment(isAnnual ? 'price_1QzJv1BwLqowaPCgXQYb2PP1' : 'price_1QzJr9BwLqowaPCgW6zdg2z7','subscription')" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.professionalButton') }}</span>
-            </button>
-             <!-- creem  此处是creem的价格 id ，测试时换成自己的creem价格 id-->
-            <button v-if="paymentMethod == 3" @click="openPayment(isAnnual ? 'prod_7BOSCT3lmQgFWvcXxpwVzh' : 'prod_1NHRsJYGE5WvGuagE8cBZj','subscription')" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.professionalButton') }}</span>
-            </button>
-             <!-- bagelpay 此处是bagelpay的商品id ，测试时换成自己的商品id -->
-            <button v-if="paymentMethod == 5" @click="openPayment(isAnnual ?'prod_1972471388709662722': 'prod_1972471388709662722','subscription')" class="w-full bg-purple-600 text-white py-3 md:py-4 rounded-full relative overflow-hidden group max-w-xs mx-auto mt-auto">
-              <span class="relative group-hover:scale-110 transition-transform duration-300 text-sm md:text-base">{{ $t('home.pricing.buyNow') }}</span>
-            </button>
+            <div class="mt-4">
+              <button v-if="paymentMethod == 1" @click="openPayment(isAnnual ? 'price_1QzJv1BwLqowaPCgXQYb2PP1' : 'price_1QzJr9BwLqowaPCgW6zdg2z7','subscription')" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.professionalButton') }}</span>
+              </button>
+               <!-- creem  此处是creem的价格 id ，测试时换成自己的creem价格 id-->
+              <button v-if="paymentMethod == 3" @click="openPayment(isAnnual ? 'prod_7BOSCT3lmQgFWvcXxpwVzh' : 'prod_1NHRsJYGE5WvGuagE8cBZj','subscription')" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.professionalButton') }}</span>
+              </button>
+               <!-- bagelpay 此处是bagelpay的商品id ，测试时换成自己的商品id -->
+              <button v-if="paymentMethod == 5" @click="openPayment(isAnnual ?'prod_1972471388709662722': 'prod_1972471388709662722','subscription')" class="w-full bg-purple-600 text-white py-3 md:py-4 rounded-full relative overflow-hidden group max-w-xs mx-auto mt-auto">
+                <span class="relative group-hover:scale-110 transition-transform duration-300 text-sm md:text-base">{{ $t('home.pricing.buyNow') }}</span>
+              </button>
+            </div>
           </div>
 
            <!-- Enterprise Plan  -->
-          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
             <h3 class="text-xl font-semibold mb-4">{{ $t('home.pricing.enterprisePlan') }}</h3>
             <p class="text-4xl font-bold mb-2">
               {{ isAnnual ? $t('home.pricing.enterprisePlanYearPrice') : $t('home.pricing.enterprisePlanMonthPrice') }}
               <span class="text-lg text-gray-500">/{{ isAnnual ? $t('home.pricing.enterpriseYearUnit') : $t('home.pricing.enterpriseMonthUnit') }}</span>
             </p>
-            <p v-if="isAnnual" class="text-green-500 text-sm mb-6">{{ $t('home.pricing.enterprisePlanYearPriceDiscountText') }}</p>
-            <ul class="space-y-3 mb-8">
+            <p v-if="isAnnual" class="text-green-500 text-sm mb-6" style="height: 20px;">{{ $t('home.pricing.enterprisePlanYearPriceDiscountText') }}</p>
+            <p v-else class="text-green-500 text-sm mb-6" style="height: 20px;">&nbsp;</p>
+            <ul class="space-y-3 mb-8 flex-grow">
               <li class="flex items-center gap-2">
                 <span class="text-green-500">✓</span> {{ $t('home.pricing.enterprisePlanPermanentAccess') }}
               </li>
@@ -438,9 +448,11 @@
                 <span class="text-green-500">✓</span> {{ $t('home.pricing.enterprisePlanFreeUpdatesForLife') }}
               </li>
             </ul>
-            <button class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
-              <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.enterpriseButton') }}</span>
-            </button>
+            <div class="mt-4">
+              <button class="w-full bg-black text-white py-3 rounded-full relative overflow-hidden group">
+                <span class="relative group-hover:scale-110 transition-transform duration-300">{{ $t('home.pricing.enterpriseButton') }}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
