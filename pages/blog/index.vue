@@ -93,11 +93,11 @@ const config = useRuntimeConfig();
 
 useHead({
   link: [
-    { rel: 'canonical', href: config.public.baseUrl || 'https://nuxtpro.com' }
+    { rel: 'canonical', href: config.public.baseUrl || 'https://Ocr Processing.com' }
   ]
 })
 
-const metaTitle = 'Blog | OpenSource Nuxt SaaS Boilerplate | NuxtPro'
+const metaTitle = 'Blog | OpenSource Nuxt SaaS Boilerplate | Ocr Processing'
 const metaDescription = 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 5 minutes.'
 
 
@@ -110,7 +110,7 @@ useHead({
     },
     {
       name: 'keywords',
-      content: 'NuxtPro, NuxtJS boilerplate, NuxtJS starter, NuxtJS template, NuxtJS, Vue, Nuxt3,,Open-Source'
+      content: 'Ocr Processing, NuxtJS boilerplate, NuxtJS starter, NuxtJS template, NuxtJS, Vue, Nuxt3,,Open-Source'
       
     }
   ]
@@ -124,12 +124,12 @@ useSeoMeta({
   ogTitle: metaTitle,
   ogDescription: metaDescription,
   ogImage: '/og-image.jpg', // Make sure this image exists in your public folder
-  ogUrl: config.public.baseUrl || 'https://nuxtpro.com',
+  ogUrl: config.public.baseUrl || 'https://Ocr Processing.com',
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterTitle: metaTitle,
   twitterDescription: metaDescription,
-  twitterSite: config.public.baseUrl || 'https://nuxtpro.com',
+  twitterSite: config.public.baseUrl || 'https://Ocr Processing.com',
   twitterImage: '/twitter-image.jpg'
 });
 

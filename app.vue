@@ -5,36 +5,13 @@
 </template>
 
 <script setup lang="ts">
-
 const {name} = useAppConfig() 
 
-//赋予全局标题
+//赋予全局标题和favicon
 useHead({
-  title: name
+  title: name,
+  link: [
+    { rel: 'icon', type: 'image/svg+xml', href: '/ocr-logo.svg' }
+  ]
 });
-
-//使用该方法获取全局属性里的值
-// const config = useRuntimeConfig();
-// const name = config.name;
-// const baseUrl = config.public.baseUrl;
-
-// const title = ref('Hello Nuxt3')
-// console.log(111)
-
-// const testButton = () =>{
-//   console.log(222)
-// }
-
-// if(config.public.isServer){
-//   console.log('server')
-// }else{
-//   console.log('client')
-// }
-
-// if(import.meta.server){
-//   console.log('server11')
-// }else{
-//   console.log('client22')
-// }
-
 </script>

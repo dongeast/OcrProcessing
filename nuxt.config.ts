@@ -21,12 +21,16 @@ console.log('=====================')
 export default defineNuxtConfig({
   app:{
     head:{
-      title:'NuxtPro',
+      title:'Ocr Processing',
       meta:[
         { 
           name: 'google-site-verification', 
           content: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE  // Google Search Console verification code  
         }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/ocr-logo.svg' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
   },
@@ -52,8 +56,8 @@ export default defineNuxtConfig({
   ],
   //配置公共seo数据
   site: {
-    url: 'https://nuxtpro.com',
-    name: 'OpenSource Nuxt SaaS Boilerplate | NuxtPro',
+    url: 'https://ocrprocessing.com',
+    name: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
     description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 1 hour.',
     defaultLocale: 'en',
     enabled: true,
@@ -65,9 +69,9 @@ export default defineNuxtConfig({
   schemaOrg: {
     identity: {
       type: 'Organization',
-      name: 'OpenSource Nuxt SaaS Boilerplate | NuxtPro',
-      url: 'https://nuxtpro.com',
-      logo: 'https://nuxtpro.com/favicon.ico'
+      name: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
+      url: 'https://ocrprocessing.com',
+      logo: 'https://ocrprocessing.com/ocr-logo.svg'
     },
     defaults: true,
     minify: true,
@@ -82,7 +86,7 @@ export default defineNuxtConfig({
       Disallow: '/private',
       Allow: '/'
     },
-    sitemap: 'https://nuxtpro.com/sitemap.xml'
+    sitemap: 'https://ocrprocessing.com/sitemap.xml'
   },
   i18n: {
     strategy: 'prefix_except_default',
@@ -96,43 +100,43 @@ export default defineNuxtConfig({
     }
   },
   llms: {
-    domain: 'https://nuxtpro.com',
-    title: 'OpenSource Nuxt SaaS Boilerplate | NuxtPro',
+    domain: 'https://ocrprocessing.com',
+    title: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
     description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 3 days.',
     sections: [
       {
-        title: 'NuxtPro',
-        description: 'NuxtPro is a open source Nuxt3 SaaS Boilerplate, pre-integrated with global payment gateways (Stripe/Cream), Google OAuth, i18n routing, and SEO optimization tools.',
+        title: 'Ocr Processing',
+        description: 'Ocr Processing is a open source Nuxt3 SaaS Boilerplate, pre-integrated with global payment gateways (Stripe/Cream), Google OAuth, i18n routing, and SEO optimization tools.',
         links: [
           {
-            title: 'NuxtPro `s Features',
+            title: 'Ocr Processing `s Features',
             description: 'Integrate the most popular open source technology stack to make your entrepreneurial journey just a moment.',
-            href: 'https://nuxtpro.com/#features',
+            href: 'https://ocrprocessing.com/#features',
           },
           {
-            title: 'NuxtPro `s pricing',
+            title: 'Ocr Processing `s pricing',
             description: 'Pricing plans for enthusiasts and professionals.',
-            href: 'https://nuxtpro.com/#pricing',
+            href: 'https://ocrprocessing.com/#pricing',
           },
           {
-            title: 'NuxtPro `s blog',
+            title: 'Ocr Processing `s blog',
             description: 'Latest news and updates from our team.',
-            href: 'https://nuxtpro.com/blog',
+            href: 'https://ocrprocessing.com/blog',
           },
           {
-            title: 'NuxtPro `s testimonials',
+            title: 'Ocr Processing `s testimonials',
             description: 'What Our Customers Say?.',
-            href: 'https://nuxtpro.com/#testimonials',
+            href: 'https://ocrprocessing.com/#testimonials',
           },
           {
-            title: 'NuxtPro `s faq',
+            title: 'Ocr Processing `s faq',
             description: 'the most frequently asked questions.',
-            href: 'https://nuxtpro.com/#faq',
+            href: 'https://ocrprocessing.com/#faq',
           },
           {
-            title: 'NuxtPro `s roadmap',
+            title: 'Ocr Processing `s roadmap',
             description: 'Explore our development plans, upcoming features, and share your suggestions for future enhancements.',
-            href: 'https://nuxtpro.com/roadmap',
+            href: 'https://ocrprocessing.com/roadmap',
           }
         ]
       }
@@ -215,7 +219,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ['nuxtpro.com'] // 允许指定域名
+      allowedHosts: ['ocrprocessing.com'] // 允许指定域名
     }
   }
 })

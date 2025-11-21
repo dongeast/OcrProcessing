@@ -1,3 +1,3 @@
 export default defineAppConfig({
-    name: 'NuxtPro'
+    name: 'Ocr Processing'
 })

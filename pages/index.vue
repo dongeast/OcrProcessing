@@ -631,6 +631,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import confetti from 'canvas-confetti'; // Import confetti
 import { $fetch } from 'ofetch'; // 确保导入 $fetch
+import Logo from '@/components/Logo.vue';
 
 const {t} = useI18n()
 const router = useRouter()
@@ -708,7 +709,7 @@ useHead({
 })
 
 useHead({
-  title: 'OpenSource Nuxt SaaS Boilerplate | NuxtPro',
+  title: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
   meta: [
     {
       name: 'description',
@@ -716,9 +717,12 @@ useHead({
     },
     {
       name: 'keywords',
-      content: 'NuxtPro, NuxtJS boilerplate, NuxtJS starter, NuxtJS template, NuxtJS, Vue, Nuxt3,,Open-Source'
+      content: 'Ocr Processing, NuxtJS boilerplate, NuxtJS starter, NuxtJS template, NuxtJS, Vue, Nuxt3,,Open-Source'
       
     }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/svg+xml', href: '/ocr-logo.svg' }
   ]
 })
 

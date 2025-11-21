@@ -1,17 +1,17 @@
 export default {
     home: {
-        title: 'NuxtPro',
+        title: 'Ocr Processing',
         description: '​Open-source Nuxt3 SaaS template, pre-integrated with global payment gateways (Stripe/Cream), Google OAuth, i18n routing, and SEO optimization tools. Designed for developers launching multilingual web apps, it offers SSR/SSG support and production-grade security out of the box.',
         startLink: 'Start Free Trial~',
         thirdPartyLink: 'Github →',
         loginButton: 'Login',
         waitlist:{
-            cardTitle: 'Join the Waitlist,Get the Latest NuxtPro News First AND Discounts!',
+            cardTitle: 'Join the Waitlist,Get the Latest Ocr Processing News First AND Discounts!',
             placeholder: 'Enter your email',
             button: 'Join Waitlist',
             joinCountMessage: '🔥 Early user #{count} just joined the waitlist!',
             modalTitle: 'Join Successed!',
-            modalMessage: 'Thank you for joining, you will receive the latest news and discounts of NuxtPro first! Enjoy it!',
+            modalMessage: 'Thank you for joining, you will receive the latest news and discounts of Ocr Processing first! Enjoy it!',
             modalCloseButton: 'Close',
             invalidEmailMessage: 'Please enter a valid email address.'
         },
@@ -105,26 +105,26 @@ export default {
         },
         faqs:{
             title: 'Frequently Asked Questions',
-            question1: 'What is this NuxtPro?',
-            answer1: 'NuxtPro is an ​open-source enterprise-ready SaaS template built on Nuxt3, pre-integrated with global payment gateways (Stripe/Cream), Google OAuth, i18n routing, and SEO optimization tools. Designed for developers launching multilingual web apps, it offers SSR/SSG support and production-grade security out of the box.',
-            question2: 'How does NuxtPro work?',
-            answer2: 'NuxtPro operates on a ​**"configuration-over-code"** philosophy.1、Auto-generates i18n routes (e.g., /en/home, /es/home);2、Pre-built auth modules (Google OAuth & JWT);3、Plug-and-play payment flows with Stripe/Cream SDKs;4、SEO-friendly meta tags injected via Nuxt3 hooks.',
-            question3: 'How to create NuxtPro Project?',
-            answer3: 'You can git clone https://github.com/PennyJoly/NuxtPro.git',
-            question4: 'How to run NuxtPro project?',
-            answer4: 'You can run NuxtPro project with pnpm install and pnpm run dev',
-            question5: 'How to deploy NuxtPro project?',
-            answer5: 'You can deploy NuxtPro project with pnpm run build:prod and pnpm start:prod',
-            question6: 'What are the differences between the NuxtPro free and paid plans?',
+            question1: 'What is this Ocr Processing?',
+            answer1: 'Ocr Processing is an ​open-source enterprise-ready SaaS template built on Nuxt3, pre-integrated with global payment gateways (Stripe/Cream), Google OAuth, i18n routing, and SEO optimization tools. Designed for developers launching multilingual web apps, it offers SSR/SSG support and production-grade security out of the box.',
+            question2: 'How does Ocr Processing work?',
+            answer2: 'Ocr Processing operates on a ​**"configuration-over-code"** philosophy.1、Auto-generates i18n routes (e.g., /en/home, /es/home);2、Pre-built auth modules (Google OAuth & JWT);3、Plug-and-play payment flows with Stripe/Cream SDKs;4、SEO-friendly meta tags injected via Nuxt3 hooks.',
+            question3: 'How to create Ocr Processing Project?',
+            answer3: 'You can git clone https://github.com/PennyJoly/Ocr Processing.git',
+            question4: 'How to run Ocr Processing project?',
+            answer4: 'You can run Ocr Processing project with pnpm install and pnpm run dev',
+            question5: 'How to deploy Ocr Processing project?',
+            answer5: 'You can deploy Ocr Processing project with pnpm run build:prod and pnpm start:prod',
+            question6: 'What are the differences between the Ocr Processing free and paid plans?',
             answer6: 'The free plan offers basic features for a single platform integration, while the paid plans provide advanced features, multi-platform integrations, and additional analytics tools.',
-            question7: 'What advantages does NuxtPro have over similar products?',
-            answer7: 'NuxtPro offers SSR/SSG support and production-grade security out of the box.',
+            question7: 'What advantages does Ocr Processing have over similar products?',
+            answer7: 'Ocr Processing offers SSR/SSG support and production-grade security out of the box.',
             question8: 'How can I make payments?',
             answer8: 'You can make payments with Stripe/Cream',
         },
         cta:{
             title: 'Ready to launch your SaaS with the shortest time?',
-            description: 'NuxtPro makes your SaaS journey just a moment.',
+            description: 'Ocr Processing makes your SaaS journey just a moment.',
             button: 'Start Your Free Trial'
         },
         friend:{
@@ -134,20 +134,20 @@ export default {
             selectLanguage: 'Select Language',
         },
         bottomPopup:{
-            title: 'Limited-Time Offer: Save Up to 60% on NuxtPro Services!🎁',
-            description: 'Exclusive Offer⚡: Save 10% on monthly or 60% on annual subscriptions! Unlock the full power of NuxtPro - act now before the offer expires!⌛',
-            tempTitle: 'Limited Time Offer: Save up to 50% on NuxtPro services! 🎁',
+            title: 'Limited-Time Offer: Save Up to 60% on Ocr Processing Services!🎁',
+            description: 'Exclusive Offer⚡: Save 10% on monthly or 60% on annual subscriptions! Unlock the full power of Ocr Processing - act now before the offer expires!⌛',
+            tempTitle: 'Limited Time Offer: Save up to 50% on Ocr Processing services! 🎁',
             tempDescription: 'Exclusive Deal⚡: Buy now to save 10% on costs and shorten development time by 40%⌛!',
             button: 'Sign up to subscribe Now!'
         },
         seo:{
-            title: 'OpenSource Nuxt SaaS Boilerplate | NuxtPro',
+            title: 'OpenSource Nuxt SaaS Boilerplate | Ocr Processing',
             description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 5 minutes.',
         }
     },
     auth: {
       selectLoginMethod: 'Sign in to your account',
-      selectLoginMethodDescription: 'Choose your preferred sign-in method to continue to NuxtPro'
+      selectLoginMethodDescription: 'Choose your preferred sign-in method to continue to Ocr Processing'
     },
     center: {
       menu: {

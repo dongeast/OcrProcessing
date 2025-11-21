@@ -1,17 +1,17 @@
 export default {
     home: {
-        title: 'NuxtPro',
+        title: 'Ocr Processing',
         description: '基於Nuxt3的企業級SaaS出海模板，預集成Stripe/Cream支付、谷歌登錄、多語言路由和SEO工具。快速構建SSR的全球化Web應用，開箱即用',
         startLink: '立即開始免費體驗~',
         thirdPartyLink: '前往Github~',
         loginButton: '登錄',
         waitlist:{
-            cardTitle: '加入等待列表,第一時間獲取NuxtPro最新消息及折扣優惠！',
+            cardTitle: '加入等待列表,第一時間獲取Ocr Processing最新消息及折扣優惠！',
             placeholder: '輸入你的郵箱吧~',
             button: '立即加入！',
             joinCountMessage: '🔥 剛剛，第 {count} 位早期用戶加入了等待名單！',
             modalTitle: '加入成功！',
-            modalMessage: '感謝您對NuxtPro的認可與支持，您將第一時間收到NuxtPro的最新消息及折扣優惠！Enjoy it!',
+            modalMessage: '感謝您對Ocr Processing的認可與支持，您將第一時間收到Ocr Processing的最新消息及折扣優惠！Enjoy it!',
             modalCloseButton: '關閉',
             invalidEmailMessage: '請輸入有效的郵箱地址。'
         },
@@ -105,26 +105,26 @@ export default {
             title: '客戶評價'
         },
         faqs:{
-            question1: 'NuxtPro是什麼？',
-            answer1: 'NuxtPro是一款基於Nuxt3的企業級SaaS出海模板，預集成Stripe/Cream支付、谷歌登錄、多語言路由和SEO工具。開發者可快速構建支持服務端渲染(SSR)或靜態生成(SSG)的全球化Web應用，開箱即用。',
-            question2: 'NuxtPro如何運作？',
-            answer2: 'NuxtPro採用"配置優先"原則：1、自動生成多語言路由（如/zh/home, /ja/home）;2、預構建認證模塊（谷歌OAuth&JWT）;3、Stripe/Cream SDK插件式支付流程;4、Nuxt3鉤子注入SEO友好元標籤。',
-            question3: '如何創建NuxtPro項目？',
-            answer3: '您可以通過克隆https://github.com/PennyJoly/NuxtPro.git來創建NuxtPro項目。',
-            question4: '如何本地運行NuxtPro？',
-            answer4: '您可以通過pnpm install和pnpm run dev來本地運行NuxtPro。',
-            question5: '如何部署NuxtPro？',
-            answer5: '您可以通過pnpm run build:prod和pnpm start:prod來部署NuxtPro。',
-            question6: 'NuxtPro免費套餐與付費套餐有什麼區別？',
+            question1: 'Ocr Processing是什麼？',
+            answer1: 'Ocr Processing是一款基於Nuxt3的企業級SaaS出海模板，預集成Stripe/Cream支付、谷歌登錄、多語言路由和SEO工具。開發者可快速構建支持服務端渲染(SSR)或靜態生成(SSG)的全球化Web應用，開箱即用。',
+            question2: 'Ocr Processing如何運作？',
+            answer2: 'Ocr Processing採用"配置優先"原則：1、自動生成多語言路由（如/zh/home, /ja/home）;2、預構建認證模塊（谷歌OAuth&JWT）;3、Stripe/Cream SDK插件式支付流程;4、Nuxt3鉤子注入SEO友好元標籤。',
+            question3: '如何創建Ocr Processing項目？',
+            answer3: '您可以通過克隆https://github.com/PennyJoly/Ocr Processing.git來創建Ocr Processing項目。',
+            question4: '如何本地運行Ocr Processing？',
+            answer4: '您可以通過pnpm install和pnpm run dev來本地運行Ocr Processing。',
+            question5: '如何部署Ocr Processing？',
+            answer5: '您可以通過pnpm run build:prod和pnpm start:prod來部署Ocr Processing。',
+            question6: 'Ocr Processing免費套餐與付費套餐有什麼區別？',
             answer6: '免費套餐提供基本功能，而付費套餐提供高級功能、多平台集成和額外分析工具。',
-            question7: 'NuxtPro與其他類似產品有什麼區別？',
-            answer7: 'NuxtPro提供SSR/SSG支持，開箱即用以及更詳細的數據分析及智能營銷工具。',
+            question7: 'Ocr Processing與其他類似產品有什麼區別？',
+            answer7: 'Ocr Processing提供SSR/SSG支持，開箱即用以及更詳細的數據分析及智能營銷工具。',
             question8: '我怎樣付款？',
             answer8: '您可以通過Stripe/Cream進行付款。',
         },
         cta:{
             title: '準備好以最短時間構建發布你的出海SAAS了嗎？',
-            description: 'NuxtPro讓您的出海之旅啟程僅在幾天之間。',
+            description: 'Ocr Processing讓您的出海之旅啟程僅在幾天之間。',
             button: '立即開始您的免費試用！'
         },
         friend:{
@@ -134,20 +134,20 @@ export default {
             selectLanguage: '選擇語言',
         },
         bottomPopup:{
-            title: '限時優惠：在NuxtPro服務上節省高達60%！🎁',
+            title: '限時優惠：在Ocr Processing服務上節省高達60%！🎁',
             description: '獨家優惠⚡：月度訂閱可節省 10%，或年度訂閱可節省60%！',
-            tempTitle: '限時優惠：在NuxtPro服務上節省高達50%！🎁',
+            tempTitle: '限時優惠：在Ocr Processing服務上節省高達50%！🎁',
             tempDescription: '獨家優惠⚡：即刻購買即可節省 10%成本，縮短40%研發時間⌛!',
             button: '立即訂閱'
         },
         seo:{
-            title: 'NuxtPro:開源的Nuxt3 SaaS一站式出海模板 | 多語言、支付和友好SEO（Nuxt3）',
-            description: 'NuxtPro是一款基於Nuxt3的開源企業級SaaS模板，預集成全球支付網關（Stripe/Cream）、谷歌OAuth、多語言路由和SEO優化工具。為開發人員提供SSR/SSG支持，開箱即用。',
+            title: 'Ocr Processing:開源的Nuxt3 SaaS一站式出海模板 | 多語言、支付和友好SEO（Nuxt3）',
+            description: 'Ocr Processing是一款基於Nuxt3的開源企業級SaaS模板，預集成全球支付網關（Stripe/Cream）、谷歌OAuth、多語言路由和SEO優化工具。為開發人員提供SSR/SSG支持，開箱即用。',
         }
     },
     blog: {
         title: '博客列表',
-        description: "來自NuxtPro的最新消息和更新",
+        description: "來自Ocr Processing的最新消息和更新",
         list:{
             filterAll: "全部",
             filterCompany: "公司",
@@ -155,7 +155,7 @@ export default {
             filterNews: "新聞",
             noPostsFound: "未找到該分類下的文章。",
             readMore: "閱讀更多",
-            subtitle: "來自NuxtPro的最新消息和更新"
+            subtitle: "來自Ocr Processing的最新消息和更新"
         },
         detail:{
             backLink: "返回博客列表",
@@ -188,26 +188,26 @@ export default {
     },
     license: {
         title: "許可證政策",
-        subtitle: "管理 NuxtPro 商業版樣板文件使用的具體條款",
+        subtitle: "管理 Ocr Processing 商業版樣板文件使用的具體條款",
         date: "2025/04/28",
         section1: {
-          heading: "NuxtPro 商業版許可證",
+          heading: "Ocr Processing 商業版許可證",
           subheading: "個人、團隊或組織許可證",
-          p1: "1、NuxtPro 商業版授予您持續的、非排他性的許可，以使用 SaaS 商業版中包含的軟件組件和模板。",
+          p1: "1、Ocr Processing 商業版授予您持續的、非排他性的許可，以使用 SaaS 商業版中包含的軟件組件和模板。",
           p2: "2、該許可證允許單個個人、團隊或組織（被許可方）使用，未經明確許可，不得轉讓給其他個人、團隊或組織。"
         },
         section2: {
           heading: "您可以：",
-          item1: "1、使用 NuxtPro 商業版創建無限量的最終產品。",
-          item2: "2、使用 NuxtPro 商業版為無限量的客戶創建項目。",
-          item3: "3、根據本許可證修改 NuxtPro 商業版組件以創建衍生作品。",
-          item4: "4、使用 NuxtPro 商業版構建和運行最終用戶與您的最終產品交互的 SaaS 應用程序。"
+          item1: "1、使用 Ocr Processing 商業版創建無限量的最終產品。",
+          item2: "2、使用 Ocr Processing 商業版為無限量的客戶創建項目。",
+          item3: "3、根據本許可證修改 Ocr Processing 商業版組件以創建衍生作品。",
+          item4: "4、使用 Ocr Processing 商業版構建和運行最終用戶與您的最終產品交互的 SaaS 應用程序。"
         },
         section3: {
           heading: "您不可以：",
-          item1: "1、重新分發 NuxtPro 商業版的組件或模板（即使已修改），除非它們是最終產品的一部分。",
-          item2: "2、未經明確許可，與團隊或組織以外的任何人共享您對 NuxtPro 商業版的訪問權限。",
-          item3: "3、使用 NuxtPro 商業版創建與 NuxtPro 商業版競爭的產品或提供與 NuxtPro 商業版業務衝突的 SaaS 商業版套件。"
+          item1: "1、重新分發 Ocr Processing 商業版的組件或模板（即使已修改），除非它們是最終產品的一部分。",
+          item2: "2、未經明確許可，與團隊或組織以外的任何人共享您對 Ocr Processing 商業版的訪問權限。",
+          item3: "3、使用 Ocr Processing 商業版創建與 Ocr Processing 商業版競爭的產品或提供與 Ocr Processing 商業版業務衝突的 SaaS 商業版套件。"
         },
         section4: {
           heading: "使用示例",
@@ -215,13 +215,13 @@ export default {
           item1a: "1、創建個人、團隊或組織的網站或應用程序。",
           item1b: "2、為客戶構建商業 SaaS 應用程序或 Web 應用程序。",
           subheading2: "禁止使用的示例：",
-          item2a: "1、創建 NuxtPro 商業版的存儲庫並共享或出售它。",
+          item2a: "1、創建 Ocr Processing 商業版的存儲庫並共享或出售它。",
           item2b: "2、製作衍生產品（例如商業版）並將其出售或免費提供。"
         },
         section5: {
           heading: "執行與責任",
-          p1: "1、如果發生嚴重違反本協議的情況，NuxtPro 保留撤銷許可證的權利。",
-          p2: "2、NuxtPro 的責任僅限於退還許可證費用。",
+          p1: "1、如果發生嚴重違反本協議的情況，Ocr Processing 保留撤銷許可證的權利。",
+          p2: "2、Ocr Processing 的責任僅限於退還許可證費用。",
           p3: "3、本協議受美國法律管轄。"
         },
         section6: {
@@ -330,7 +330,7 @@ export default {
         }
     },
     roadmap: {
-        title: "NuxtPro 的發展規劃",
+        title: "Ocr Processing 的發展規劃",
         description: "探索我們的開發計劃、即將推出的功能，並分享您對未來增強功能的建議。",
         status: {
             completed: "已完成",
@@ -436,27 +436,27 @@ export default {
                 },
                 { 
                   title: '確定產品名稱',
-                  description: '正式確定產品名稱：NuxtPro',
+                  description: '正式確定產品名稱：Ocr Processing',
                   date:'2025/04' 
                 },
                 { 
-                  title: '圍繞NuxtPro進行SEO佈局',
-                  description: '圍繞NuxtPro進行SEO佈局，完成SEO優化',
+                  title: '圍繞Ocr Processing進行SEO佈局',
+                  description: '圍繞Ocr Processing進行SEO佈局，完成SEO優化',
                   date:'2025/04' 
                 },
                 { 
-                  title: '研發NuxtPro後台管理系統',
-                  description: '研發NuxtPro後台管理系統，實現基礎crud數據庫操作功能',
+                  title: '研發Ocr Processing後台管理系統',
+                  description: '研發Ocr Processing後台管理系統，實現基礎crud數據庫操作功能',
                   date:'2025/04' 
                 },
                 { 
                   title: 'RBAC權限管理',
-                  description: '完成NuxtPro基礎RBAC權限管理功能',
+                  description: '完成Ocr Processing基礎RBAC權限管理功能',
                   date:'2025/04' 
                 },
                 { 
                   title: '博客展示',
-                  description: '完成NuxtPro前端博客展示，頁面排版佈局',
+                  description: '完成Ocr Processing前端博客展示，頁面排版佈局',
                   date:'2025/04' 
                 },
                 { 
@@ -483,7 +483,7 @@ export default {
                 }, 
                 { 
                   title: '智能營銷',
-                  description: '在NuxtPro後台管理系統中，實現智能營銷分析獲客功能',
+                  description: '在Ocr Processing後台管理系統中，實現智能營銷分析獲客功能',
                   date:'2025/05/01' 
                 },
                 { 
@@ -519,7 +519,7 @@ export default {
     },
     auth: {
       selectLoginMethod: '授權登錄',
-      selectLoginMethodDescription: '即刻開啟屬於你在NuxtPro的出海之旅.',
+      selectLoginMethodDescription: '即刻開啟屬於你在Ocr Processing的出海之旅.',
     },
     center: {
         menu: {

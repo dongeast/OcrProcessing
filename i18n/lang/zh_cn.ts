@@ -89,18 +89,18 @@ export default {
         },
     },
     home: {
-        title: 'NuxtPro',
+        title: 'Ocr Processing',
         description: '基于Nuxt3的企业级SaaS出海模板，预集成Stripe/Cream支付、谷歌登录、多语言路由和SEO工具。快速构建SSR的全球化Web应用，开箱即用',
         startLink: '立即开始免费体验~',
         thirdPartyLink: '前往Github~',
         loginButton: '登录',
         waitlist:{
-            cardTitle: '加入等待列表,第一时间获取NuxtPro最新消息及折扣优惠！',
+            cardTitle: '加入等待列表,第一时间获取Ocr Processing最新消息及折扣优惠！',
             placeholder: '输入你的邮箱吧~',
             button: '立即加入！',
             joinCountMessage: '🔥 刚刚，第 {count} 位早期用户加入了等待名单！',
             modalTitle: '加入成功！',
-            modalMessage: '感谢您对NuxtPro的认可与支持，您将第一时间收到NuxtPro的最新消息及折扣优惠！Enjoy it!',
+            modalMessage: '感谢您对Ocr Processing的认可与支持，您将第一时间收到Ocr Processing的最新消息及折扣优惠！Enjoy it!',
             modalCloseButton: '关闭',
         },
         nav: {
@@ -198,7 +198,7 @@ export default {
         },
         faq: {
             title: '常见问题',
-            description: '关于NuxtPro的常见问题解答',
+            description: '关于Ocr Processing的常见问题解答',
             items: [
                 {
                     question: '1. 这个产品是什么？',
@@ -229,7 +229,7 @@ export default {
                 {
                     name: '张三',
                     role: '创业者',
-                    content: 'NuxtPro帮助我快速启动了我的SaaS业务，国际化支持特别棒！',
+                    content: 'Ocr Processing帮助我快速启动了我的SaaS业务，国际化支持特别棒！',
                     avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
                 },
                 {
@@ -248,7 +248,7 @@ export default {
         },
         footer: {
             description: '基于Nuxt3的企业级SaaS出海模板，预集成Stripe/Cream支付、谷歌登录、多语言路由和SEO工具。快速构建SSR的全球化Web应用，开箱即用',
-            copyRight: '版权所有 © 2025 NuxtPro 保留所有权利',
+            copyRight: '版权所有 © 2025 Ocr Processing 保留所有权利',
             github: 'GitHub',
             twitter: 'Twitter',
             discord: 'Discord',
@@ -284,13 +284,13 @@ export default {
         },
         waitlistSuccessModal: {
             title: '加入成功！',
-            message: '感谢您对NuxtPro的认可与支持，您将第一时间收到NuxtPro的最新消息及折扣优惠！Enjoy it!',
+            message: '感谢您对Ocr Processing的认可与支持，您将第一时间收到Ocr Processing的最新消息及折扣优惠！Enjoy it!',
             closeButton: '关闭'
         }
     },
     auth: {
       selectLoginMethod: '授权登录',
-      selectLoginMethodDescription: '即刻开启属于你在NuxtPro的出海之旅.'
+      selectLoginMethodDescription: '即刻开启属于你在Ocr Processing的出海之旅.'
     },
     ocrAnalysis: {
       title: 'OCR分析',
@@ -529,7 +529,7 @@ export default {
         securityAlerts: '安全警报'
       },
     roadmap: {
-        title: "NuxtPro 的发展规划",
+        title: "Ocr Processing 的发展规划",
         description: "探索我们的开发计划、即将推出的功能，并分享您对未来增强功能的建议。",
         status: {
             completed: "已完成",
@@ -577,12 +577,12 @@ export default {
             inProgress: [
                 { 
                   title: 'AI集成',
-                  description: '在NuxtPro后台管理系统中，实现AI集成功能',
+                  description: '在Ocr Processing后台管理系统中，实现AI集成功能',
                   date:'2025/05/01' 
                 },
                 { 
                   title: 'AI营销分析获客',
-                  description: '在NuxtPro后台管理系统中，实现智能营销分析获客功能',
+                  description: '在Ocr Processing后台管理系统中，实现智能营销分析获客功能',
                   date:'2025/05/01' 
                 },
                 { 

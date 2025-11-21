@@ -27,24 +27,24 @@ export default defineEventHandler(async (event) => {
 
     // 设置默认值
     const defaultData = {
-      logo_url: 'https://nuxtpro.com/img/icons/favicon.ico',
-      product_name: 'NuxtPro',
+      logo_url: 'https://Ocr Processing.com/img/icons/favicon.ico',
+      product_name: 'Ocr Processing',
       help_url: data.region === 'CN' 
         ? 'https://your-domain.com/zh/help' 
         : 'https://your-domain.com/en/help',
       support_email: 'youremail@gmail.com',
       community_group: data.region === 'CN' 
         ? '微信号：xxxxx' 
-        : 'Telegram: @nuxtpro_support',
+        : 'Telegram: @Ocr Processing_support',
       discount: '8.5',
       referral_bonus: data.region === 'CN' ? '50元' : '$50',
       promotion_end_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
         .toLocaleDateString(data.region === 'CN' ? 'zh-CN' : 'en-US'),
       thanksForPurchase: data.region === 'CN' ? '感谢您购买 ' : 'Thank you for purchasing ',
-      product1_url: 'https://nuxtPro.com/product1',
-      product2_url: 'https://nuxtPro.com/product2',
-      product3_url: 'https://nuxtPro.com/product3',
-      product4_url: 'https://nuxtPro.com/product4',
+      product1_url: 'https://Ocr Processing.com/product1',
+      product2_url: 'https://Ocr Processing.com/product2',
+      product3_url: 'https://Ocr Processing.com/product3',
+      product4_url: 'https://Ocr Processing.com/product4',
       ...data
     }
 

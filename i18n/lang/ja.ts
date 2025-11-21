@@ -1,18 +1,18 @@
 export default {
     welcome: 'こんにちは',
     home: {
-        title: 'NuxtPro',
+        title: 'Ocr Processing',
         description: 'オープンソースのNuxt3向けSaaSテンプレートで、Stripe/Creamをはじめとするグローバル決済ゲートウェイ、Google OAuth、多言語ルーティング（i18n）、SEO最適化ツールを事前に統合。多言語Webアプリを立ち上げる開発者向けに設計されており、SSR/SSGのサポートと本番環境レベルのセキュリティを標準で提供します。',
         startLink: '無料トライアルを開始',
         thirdPartyLink: 'Github →',
         loginButton: 'ログイン',
         waitlist:{
-            cardTitle: '加入待ちリスト,最新のNuxtProニュースを最初に取得 AND 割引オファー！',
+            cardTitle: '加入待ちリスト,最新のOcr Processingニュースを最初に取得 AND 割引オファー！',
             placeholder: 'あなたのメールを入力してください',
             button: '今すぐ加入！',
-            joinCountMessage: '🔥 最新のNuxtProニュースを最初に取得！',
+            joinCountMessage: '🔥 最新のOcr Processingニュースを最初に取得！',
             modalTitle: '加入成功！',
-            modalMessage: '感謝します。NuxtProの最新ニュースと割引オファーを最初に受け取ります！Enjoy it!',
+            modalMessage: '感謝します。Ocr Processingの最新ニュースと割引オファーを最初に受け取ります！Enjoy it!',
             modalCloseButton: '閉じる',
             invalidEmailMessage: '有効なメールアドレスを入力してください。'
         },
@@ -106,27 +106,27 @@ export default {
         },
         faqs:{
             title: 'よくある質問',
-            question1: 'NuxtProとは何ですか？',
-            answer1: 'NuxtProは、Nuxt3を使用した企業向けのSaaS出海テンプレートです。Stripe/Creamの支払い、Google OAuth、多言語ルーティング、SEOツールがプリビルドされています。開発者は、SSRまたはSSGのグローバルWebアプリケーションを迅速に構築できます。',    
-            question2: 'NuxtProはどのように動作しますか？',
-            answer2: 'NuxtProは「設定よりもコード」という哲学に基づいて動作します。1、多言語ルート（例：/en/home、/es/home）を自動生成します。2、事前構築された認証モジュール（Google OAuth & JWT）。3、Stripe/Cream SDKsによるプラグアンドプレイの決済フロー。4、Nuxt3フックを介してSEOフレンドリーなメタタグを注入します。',
-            question3: 'NuxtProプロジェクトを作成するにはどうすればよいですか？',
-            answer3: 'https://github.com/PennyJoly/NuxtPro.git をgit cloneすることができます',
-            question4: 'NuxtProプロジェクトを実行するにはどうすればよいですか？',
-            answer4: 'pnpm installとpnpm run devでNuxtProプロジェクトを実行できます',
-            question5: 'NuxtProプロジェクトをデプロイするにはどうすればよいですか？',
-            answer5: 'pnpm run build:prodとpnpm start:prodでNuxtProプロジェクトをデプロイできます',
-            question6: 'NuxtProの無料プランと有料プランの違いは何ですか？',
+            question1: 'Ocr Processingとは何ですか？',
+            answer1: 'Ocr Processingは、Nuxt3を使用した企業向けのSaaS出海テンプレートです。Stripe/Creamの支払い、Google OAuth、多言語ルーティング、SEOツールがプリビルドされています。開発者は、SSRまたはSSGのグローバルWebアプリケーションを迅速に構築できます。',    
+            question2: 'Ocr Processingはどのように動作しますか？',
+            answer2: 'Ocr Processingは「設定よりもコード」という哲学に基づいて動作します。1、多言語ルート（例：/en/home、/es/home）を自動生成します。2、事前構築された認証モジュール（Google OAuth & JWT）。3、Stripe/Cream SDKsによるプラグアンドプレイの決済フロー。4、Nuxt3フックを介してSEOフレンドリーなメタタグを注入します。',
+            question3: 'Ocr Processingプロジェクトを作成するにはどうすればよいですか？',
+            answer3: 'https://github.com/PennyJoly/Ocr Processing.git をgit cloneすることができます',
+            question4: 'Ocr Processingプロジェクトを実行するにはどうすればよいですか？',
+            answer4: 'pnpm installとpnpm run devでOcr Processingプロジェクトを実行できます',
+            question5: 'Ocr Processingプロジェクトをデプロイするにはどうすればよいですか？',
+            answer5: 'pnpm run build:prodとpnpm start:prodでOcr Processingプロジェクトをデプロイできます',
+            question6: 'Ocr Processingの無料プランと有料プランの違いは何ですか？',
             answer6: '無料プランは単一のプラットフォーム統合の基本機能を提供し、有料プランは高度な機能、マルチプラットフォーム統合、追加の分析ツールを提供します。',
-            question7: 'NuxtProが同様の製品と比べて優れている点は何ですか？',
-            answer7: 'NuxtProは、SSR/SSGのサポートと本番環境グレードのセキュリティを最初から提供します。',
+            question7: 'Ocr Processingが同様の製品と比べて優れている点は何ですか？',
+            answer7: 'Ocr Processingは、SSR/SSGのサポートと本番環境グレードのセキュリティを最初から提供します。',
             question8: '支払いはどのように行えばよいですか？',
             answer8: 'Stripe/Creamで支払いを行うことができます',
           
         },
         cta:{
             title: '最短時間でSaaSを起動する準備はできていますか？',
-            description: 'NuxtProはあなたのSaaSの旅を一瞬で実現します。',
+            description: 'Ocr ProcessingはあなたのSaaSの旅を一瞬で実現します。',
             button: '無料トライアルを開始'
         },
         friend:{
@@ -136,13 +136,13 @@ export default {
             selectLanguage: '言語を選択',
         },
         bottomPopup:{
-            title: '限時優待：NuxtProサービスで最大60%節約！🎁',
+            title: '限時優待：Ocr Processingサービスで最大60%節約！🎁',
             description: '独占優待⚡：月額または年額サブスクリプションで10%節約、または年額サブスクリプションで60%節約！',
             button: '今すぐ購入'
         },
         seo:{
-            title: 'NuxtPro:開源のNuxt3 SaaSオールインワン出海テンプレート | 多言語、支払い、SEO対応（Nuxt3）',
-            description: 'NuxtProは、Nuxt3を使用した開源の企業向けSaaSテンプレートです。Stripe/Creamの支払い、Google OAuth、多言語ルーティング、SEOツールがプリビルドされています。開発者は、SSRまたはSSGのグローバルWebアプリケーションを迅速に構築できます。',
+            title: 'Ocr Processing:開源のNuxt3 SaaSオールインワン出海テンプレート | 多言語、支払い、SEO対応（Nuxt3）',
+            description: 'Ocr Processingは、Nuxt3を使用した開源の企業向けSaaSテンプレートです。Stripe/Creamの支払い、Google OAuth、多言語ルーティング、SEOツールがプリビルドされています。開発者は、SSRまたはSSGのグローバルWebアプリケーションを迅速に構築できます。',
         }
     },
     blog: {
@@ -188,26 +188,26 @@ export default {
     },
     license: {
         title: "ライセンスポリシー",
-        subtitle: "NuxtPro 商用版ボイラープレートの使用に関する具体的な条件",
+        subtitle: "Ocr Processing 商用版ボイラープレートの使用に関する具体的な条件",
         date: "2025/04/28",
         section1: {
-          heading: "NuxtPro 商用版ライセンス",
+          heading: "Ocr Processing 商用版ライセンス",
           subheading: "個人、チーム、または組織ライセンス",
-          p1: "1、NuxtPro 商用版は、SaaS 商用版に含まれるソフトウェアコンポーネントおよびテンプレートを使用するための継続的かつ非独占的なライセンスを付与します。",
+          p1: "1、Ocr Processing 商用版は、SaaS 商用版に含まれるソフトウェアコンポーネントおよびテンプレートを使用するための継続的かつ非独占的なライセンスを付与します。",
           p2: "2、このライセンスは、単一の個人、チーム、または組織（ライセンシー）による使用を許可し、明示的な許可なしに他の個人、チーム、または組織に譲渡することはできません。"
         },
         section2: {
           heading: "許可されること：",
-          item1: "1、NuxtPro 商用版を使用して、無制限の数の最終製品を作成する。",
-          item2: "2、NuxtPro 商用版を使用して、無制限の数のクライアント向けにプロジェクトを作成する。",
-          item3: "3、本ライセンスに基づき、NuxtPro 商用版コンポーネントを変更して派生作品を作成する。",
-          item4: "4、NuxtPro 商用版を使用して、エンドユーザーが最終製品と対話する SaaS アプリケーションを構築および実行する。"
+          item1: "1、Ocr Processing 商用版を使用して、無制限の数の最終製品を作成する。",
+          item2: "2、Ocr Processing 商用版を使用して、無制限の数のクライアント向けにプロジェクトを作成する。",
+          item3: "3、本ライセンスに基づき、Ocr Processing 商用版コンポーネントを変更して派生作品を作成する。",
+          item4: "4、Ocr Processing 商用版を使用して、エンドユーザーが最終製品と対話する SaaS アプリケーションを構築および実行する。"
         },
         section3: {
           heading: "禁止されること：",
-          item1: "1、最終製品の一部である場合を除き、NuxtPro 商用版のコンポーネントまたはテンプレートを（変更された場合でも）再配布する。",
-          item2: "2、明示的な許可なしに、チームまたは組織外の誰かと NuxtPro 商用版へのアクセスを共有する。",
-          item3: "3、NuxtPro 商用版を使用して、NuxtPro 商用版と競合する製品を作成したり、NuxtPro 商用版のビジネスと競合する SaaS 商用版スイートを提供する。"
+          item1: "1、最終製品の一部である場合を除き、Ocr Processing 商用版のコンポーネントまたはテンプレートを（変更された場合でも）再配布する。",
+          item2: "2、明示的な許可なしに、チームまたは組織外の誰かと Ocr Processing 商用版へのアクセスを共有する。",
+          item3: "3、Ocr Processing 商用版を使用して、Ocr Processing 商用版と競合する製品を作成したり、Ocr Processing 商用版のビジネスと競合する SaaS 商用版スイートを提供する。"
         },
         section4: {
           heading: "使用例",
@@ -215,13 +215,13 @@ export default {
           item1a: "1、個人、チーム、または組織向けのウェブサイトまたはアプリケーションを作成する。",
           item1b: "2、クライアント向けに商用 SaaS アプリケーションまたは Web アプリケーションを構築する。",
           subheading2: "禁止される使用例：",
-          item2a: "1、NuxtPro 商用版のリポジトリを作成し、それを共有または販売する。",
+          item2a: "1、Ocr Processing 商用版のリポジトリを作成し、それを共有または販売する。",
           item2b: "2、派生製品（例：商用版）を作成し、それを販売または無料で提供する。"
         },
         section5: {
           heading: "執行と責任",
-          p1: "1、本契約の重大な違反が発生した場合、NuxtPro はライセンスを取り消す権利を留保します。",
-          p2: "2、NuxtPro の責任は、ライセンス料の返金に限定されます。",
+          p1: "1、本契約の重大な違反が発生した場合、Ocr Processing はライセンスを取り消す権利を留保します。",
+          p2: "2、Ocr Processing の責任は、ライセンス料の返金に限定されます。",
           p3: "3、本契約は、アメリカ合衆国の法律に準拠します。"
         },
         section6: {
@@ -330,7 +330,7 @@ export default {
         }
     },
     roadmap: {
-      title: "NuxtProの開発計画",
+      title: "Ocr Processingの開発計画",
       description: "私たちの開発計画、今後の機能を探求し、将来の強化に関するあなたの提案を共有してください。",
       status: {
           completed: "完了",
@@ -436,27 +436,27 @@ export default {
               },
               {
                 title: '製品名の確定',
-                description: '正式に製品名をNuxtProと確定',
+                description: '正式に製品名をOcr Processingと確定',
                 date:'2025/04'
               },
               {
-                title: 'NuxtProを中心としたSEOレイアウト',
-                description: 'NuxtProを中心としたSEOレイアウトを行い、SEO最適化を完了',
+                title: 'Ocr Processingを中心としたSEOレイアウト',
+                description: 'Ocr Processingを中心としたSEOレイアウトを行い、SEO最適化を完了',
                 date:'2025/04'
               },
               {
-                title: 'NuxtProバックエンド管理システムの開発',
-                description: 'NuxtProバックエンド管理システムを開発し、基本的なCRUDデータベース操作機能を実現',
+                title: 'Ocr Processingバックエンド管理システムの開発',
+                description: 'Ocr Processingバックエンド管理システムを開発し、基本的なCRUDデータベース操作機能を実現',
                 date:'2025/04'
               },
               {
                 title: 'RBAC権限管理',
-                description: 'NuxtProの基本的なRBAC権限管理機能を完了',
+                description: 'Ocr Processingの基本的なRBAC権限管理機能を完了',
                 date:'2025/04'
               },
               {
                 title: 'ブログ表示',
-                description: 'NuxtProフロントエンドのブログ表示、ページレイアウトを完了',
+                description: 'Ocr Processingフロントエンドのブログ表示、ページレイアウトを完了',
                 date:'2025/04'
               },
               {
@@ -483,7 +483,7 @@ export default {
               },
               {
                 title: 'スマートマーケティング',
-                description: 'NuxtProバックエンド管理システムで、スマートマーケティング分析による顧客獲得機能を実現',
+                description: 'Ocr Processingバックエンド管理システムで、スマートマーケティング分析による顧客獲得機能を実現',
                 date:'2025/05/01'
               },
               {
@@ -519,7 +519,7 @@ export default {
     },
     auth: {
       selectLoginMethod: 'ログインを許可',
-      selectLoginMethodDescription: 'NuxtProの出海旅を始めましょう。速く、速く、速く。',
+      selectLoginMethodDescription: 'Ocr Processingの出海旅を始めましょう。速く、速く、速く。',
     },
     center: {
       menu: {

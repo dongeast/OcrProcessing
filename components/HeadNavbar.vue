@@ -5,8 +5,7 @@
         <div class="flex">
           <div class="flex-shrink-0 flex items-center">
             <NuxtLink to="/" class="flex items-center">
-              <img src="/assets/imgs/icon/nuxtpro.png" alt="NuxtPro Logo" class="w-12 h-12"/>
-              <h1 class="ml-2 text-xl font-bold">NuxtPro</h1>
+              <Logo />
             </NuxtLink>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -175,6 +174,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useSwitchLocalePath } from '#imports'
 import { User } from 'lucide-vue-next'
+import Logo from '@/components/Logo.vue'
 
 const session  = useSession()
 const user = ref(null);

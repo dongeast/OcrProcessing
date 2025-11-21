@@ -171,8 +171,8 @@ async function handleCheckoutCompleted(payload: any) {
           amount: productPrice,
           currency: productCurrency,
           purchase_date: new Date().toLocaleDateString('zh-CN'),
-          access_url: 'https://nuxtPro.com',
-          promo_code: 'NuxtPro2025WishYouBest'
+          access_url: 'https://Ocr Processing.com',
+          promo_code: 'Ocr Processing2025WishYouBest'
         }
       }
     })
