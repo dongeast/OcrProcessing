@@ -142,9 +142,6 @@ export default {
         friend:{
             title: '파트너 링크'
         },
-        common:{
-            selectLanguage: '언어 선택',
-        },
         bottomPopup:{
             title: '한정 특가: Ocr Processing 서비스에서 최대 60% 할인! 🎁',
             description: '독점 혜택⚡: 월간 구독은 10% 할인, 연간 구독은 60% 할인!',

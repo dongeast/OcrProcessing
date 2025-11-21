@@ -49,9 +49,6 @@ export default {
       waitlist: 'Join Waitlist',
       login: 'Login',
     },
-    common: {
-      selectLanguage: 'Select Language',
-    },
     features: {
       title: 'Features',
       description: 'OCR document recognition tool website features based on DeepSeek OCR large model',

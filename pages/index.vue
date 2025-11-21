@@ -581,13 +581,9 @@
           
           <div class="flex flex-col md:flex-row items-stretch gap-4 relative h-full">
             <div class="flex-1 text-center flex flex-col justify-center">
-              <h3 class="text-2xl md:text-3xl font-bold mb-4">{{ $t('home.bottomPopup.tempTitle') }}</h3>
-              <!-- <h3 class="text-2xl md:text-3xl font-bold mb-4">{{ $t('home.bottomPopup.title') }}</h3> -->
-              <!-- <p class="text-gray-600 text-lg md:text-xl mb-6 md:mb-8">
-                {{ $t('home.bottomPopup.description') }}
-              </p> -->
+              <h3 class="text-2xl md:text-3xl font-bold mb-4">{{ $t('home.bottomPopup.title') }}</h3>
               <p class="text-gray-600 text-lg md:text-xl mb-6 md:mb-8">
-                {{ $t('home.bottomPopup.tempDescription') }}
+                {{ $t('home.bottomPopup.description') }}
               </p>
               <div class="flex justify-center">
                 <button @click="scrollToPricing" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 md:px-12 py-3 md:py-4 rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-base md:text-lg font-semibold">
