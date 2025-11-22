@@ -35,7 +35,6 @@ export default defineNuxtConfig({
     }
   },
   ssr: true,
-  port: process.env.PORT || 3000,
   compatibilityDate: '2024-11-01',  
   devtools: { enabled: true },
 
@@ -219,7 +218,49 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      allowedHosts: ['ocrprocessing.com'] // 允许指定域名
+      // 解决 WebSocket 连接问题
+      hmr: {
+        protocol: 'ws',
+        host: 'localhost',
+        port: 5173
+      },
+      // 允许指定域名
+      allowedHosts: ['ocrprocessing.com']
     }
+  },
+  
+  // 为Cloudflare Workers环境添加特定配置
+  nitro: {
+    preset: 'cloudflare-pages',
+    serveStatic: true,
+    alias: {
+      // 在Cloudflare Workers中不支持的一些Node.js API需要被替换
+      'node-fetch': 'node-fetch-native',
+    },
+    rollupConfig: {
+      external: ['sharp'],
+    },
+    // 明确指定输出目录
+    output: {
+      dir: '.output',
+      serverDir: '.output/server',
+    }
+  },
+  
+  // 禁用在Cloudflare Workers中不兼容的功能
+  features: {
+    inlineStyles: false // 禁用内联样式以避免在Workers中出现问题
+  },
+  
+  // 为Cloudflare Workers添加额外配置
+  experimental: {
+    payloadExtraction: false
+  },
+  
+  sourcemap: false,
+  
+  // 添加构建配置
+  build: {
+    analyze: false
   }
 })
