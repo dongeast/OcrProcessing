@@ -1,11 +1,8 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db, dbType } from '../../server/database/database'
+import { db } from '../../server/database/database';
 // 导入schema的异步获取函数
 import { getSchema } from '../../server/database/schema';
-
-// 根据数据库类型动态设置provider
-const provider = dbType === 'mysql' ? 'mysql' : 'sqlite';
 
 // 创建一个异步函数来初始化auth
 let authInstance: any = null;
@@ -17,25 +14,27 @@ export async function initializeAuth() {
     const resolvedSchema = await getSchema();
     
     // 创建一个简单的对象，包含所需的表，而不是Promise
+    // 注意：Better Auth的Drizzle Adapter期望的是单数形式的键名
     const adapterSchema = {
-      users: resolvedSchema.users,
-      sessions: resolvedSchema.sessions,
-      accounts: resolvedSchema.accounts,
+      user: resolvedSchema.users,
+      session: resolvedSchema.sessions,
+      account: resolvedSchema.accounts,
       verification: resolvedSchema.verification
     };
     
     authInstance = betterAuth({
+      debug: true,
       database: drizzleAdapter(db, {
-        provider: provider,
-        schema: adapterSchema,
-        // 强制禁用RETURNING子句以修复TypeError
-        disableReturning: true
+        provider: "sqlite", // 固定为 sqlite，因为数据库已简化为仅支持 SQLite
+        schema: adapterSchema
       }),
       // 添加受信任的来源
       trustedOrigins: [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "http://192.168.56.1:3000"
+        "https://www.ocrprocessing.com",
+        "https://ocrprocessing.com",
+        "https://ocrprocessing.pages.dev"
       ],
       // 配置google和github社交登录
       socialProviders: {
