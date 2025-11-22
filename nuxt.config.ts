@@ -23,8 +23,8 @@ export default defineNuxtConfig({
     head:{
       title:'Ocr Processing',
       meta:[
-        { 
-          name: 'google-site-verification', 
+        {
+          name: 'google-site-verification',
           content: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE  // Google Search Console verification code  
         }
       ],
@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     }
   },
   ssr: true,
-  compatibilityDate: '2024-11-01',  
+  port: process.env.PORT || 3000,
+  compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
   //指定全局css
@@ -55,7 +56,7 @@ export default defineNuxtConfig({
   ],
   //配置公共seo数据
   site: {
-    url: 'https://ocrprocessing.com',
+    url: 'https://www.ocrprocessing.com',
     name: 'Ocr Processing | Deepseek OCR',
     description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 1 hour.',
     defaultLocale: 'en',
@@ -69,8 +70,8 @@ export default defineNuxtConfig({
     identity: {
       type: 'Organization',
       name: 'Ocr Processing | Deepseek OCR',
-      url: 'https://ocrprocessing.com',
-      logo: 'https://ocrprocessing.com/ocr-logo.svg'
+      url: 'https://www.ocrprocessing.com',
+      logo: 'https://www.ocrprocessing.com/ocr-logo.svg'
     },
     defaults: true,
     minify: true,
@@ -85,7 +86,7 @@ export default defineNuxtConfig({
       Disallow: '/private',
       Allow: '/'
     },
-    sitemap: 'https://ocrprocessing.com/sitemap.xml'
+    sitemap: 'https://www.ocrprocessing.com/sitemap.xml'
   },
   i18n: {
     strategy: 'prefix_except_default',
@@ -99,7 +100,7 @@ export default defineNuxtConfig({
     }
   },
   llms: {
-    domain: 'https://ocrprocessing.com',
+    domain: 'https://www.ocrprocessing.com',
     title: 'Ocr Processing | Deepseek OCR',
     description: 'The NuxtJS boilerplate with all the stuff you need to get your product in front of customers. From idea to production in 3 days.',
     sections: [
@@ -110,32 +111,32 @@ export default defineNuxtConfig({
           {
             title: 'Ocr Processing `s Features',
             description: 'Integrate the most popular open source technology stack to make your entrepreneurial journey just a moment.',
-            href: 'https://ocrprocessing.com/#features',
+            href: 'https://www.ocrprocessing.com/#features',
           },
           {
             title: 'Ocr Processing `s pricing',
             description: 'Pricing plans for enthusiasts and professionals.',
-            href: 'https://ocrprocessing.com/#pricing',
+            href: 'https://www.ocrprocessing.com/#pricing',
           },
           {
             title: 'Ocr Processing `s blog',
             description: 'Latest news and updates from our team.',
-            href: 'https://ocrprocessing.com/blog',
+            href: 'https://www.ocrprocessing.com/blog',
           },
           {
             title: 'Ocr Processing `s testimonials',
             description: 'What Our Customers Say?.',
-            href: 'https://ocrprocessing.com/#testimonials',
+            href: 'https://www.ocrprocessing.com/#testimonials',
           },
           {
             title: 'Ocr Processing `s faq',
             description: 'the most frequently asked questions.',
-            href: 'https://ocrprocessing.com/#faq',
+            href: 'https://www.ocrprocessing.com/#faq',
           },
           {
             title: 'Ocr Processing `s roadmap',
             description: 'Explore our development plans, upcoming features, and share your suggestions for future enhancements.',
-            href: 'https://ocrprocessing.com/roadmap',
+            href: 'https://www.ocrprocessing.com/roadmap',
           }
         ]
       }
@@ -218,49 +219,7 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      // 解决 WebSocket 连接问题
-      hmr: {
-        protocol: 'ws',
-        host: 'localhost',
-        port: 5173
-      },
-      // 允许指定域名
-      allowedHosts: ['ocrprocessing.com']
+      allowedHosts: ['www.ocrprocessing.com'] // 允许指定域名
     }
-  },
-  
-  // 为Cloudflare Workers环境添加特定配置
-  nitro: {
-    preset: 'cloudflare-pages',
-    serveStatic: true,
-    alias: {
-      // 在Cloudflare Workers中不支持的一些Node.js API需要被替换
-      'node-fetch': 'node-fetch-native',
-    },
-    rollupConfig: {
-      external: ['sharp'],
-    },
-    // 明确指定输出目录
-    output: {
-      dir: '.output',
-      serverDir: '.output/server',
-    }
-  },
-  
-  // 禁用在Cloudflare Workers中不兼容的功能
-  features: {
-    inlineStyles: false // 禁用内联样式以避免在Workers中出现问题
-  },
-  
-  // 为Cloudflare Workers添加额外配置
-  experimental: {
-    payloadExtraction: false
-  },
-  
-  sourcemap: false,
-  
-  // 添加构建配置
-  build: {
-    analyze: false
   }
 })
