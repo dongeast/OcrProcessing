@@ -1,6 +1,31 @@
+name = "ocr-processing"
 pages_build_output_dir = "./dist"
+compatibility_date = "2024-09-26"
 
+# 仅在部署到 Cloudflare Pages 时使用 D1 数据库
 [[d1_databases]]
 binding = "DB"
 database_name = "ocr-processing"
 database_id = "9402999b-a7b0-446d-9552-838b9f5de8bb"
+
+[vars]
+PAYMENT_METHOD = ""
+RESEND_API_KEY = ""
+NUXT_STRIPE_SECRET_KEY = ""
+NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = ""
+NUXT_STRIPE_WEBHOOK_SECRET = ""
+NUXT_PUBLIC_BASE_URL = "http://localhost:3000"
+DATABASE_TYPE = "sqlite"
+DATABASE_URL = "file:./local-db.sqlite"
+GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_SECRET = ""
+GITHUB_CLIENT_ID = ""
+GITHUB_CLIENT_SECRET = ""
+GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE = ""
+R2_BUCKET_NAME = ""
+R2_ACCESS_KEY_ID = ""
+R2_SECRET_ACCESS_KEY = ""
+R2_ENDPOINT = ""
+DEEPSEEK_OCR_API_KEY = ""
+DEEPSEEK_OCR_BASE_URL = "https://api.ppinfra.com/openai"
+DEEPSEEK_OCR_MODEL = "deepseek/deepseek-ocr"
