@@ -39,6 +39,9 @@ if (process.env.DATABASE_TYPE === 'sqlite') {
 console.log('=====================')
 
 export default defineNuxtConfig({
+  nitro: {
+    preset: 'cloudflare-pages'
+  },
   app:{
     head:{
       title:'Ocr Processing',
