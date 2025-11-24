@@ -16,6 +16,26 @@ console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID)
 console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET)
 console.log('GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE:', process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE)
 console.log('DEEPSEEK_OCR_API_KEY:', process.env.DEEPSEEK_OCR_API_KEY)
+
+// 数据库连接配置信息
+console.log('=====================')
+console.log('Database Configuration:')
+console.log('=====================')
+if (process.env.DATABASE_TYPE === 'sqlite') {
+  console.log('Database Type: SQLite')
+  console.log('Database File Path:', process.env.DATABASE_URL?.replace('file:', '') || ':memory:')
+} else if (process.env.DATABASE_TYPE === 'd1') {
+  console.log('Database Type: Cloudflare D1')
+  console.log('D1 Binding Name:', process.env.binding || 'DB')
+  console.log('D1 Database Name:', process.env.database_name || 'Not specified')
+  console.log('D1 Database ID:', process.env.database_id || 'Not specified')
+} else {
+  console.log('Database Type: MySQL')
+  console.log('Database Host:', process.env.DATABASE_HOST || 'localhost')
+  console.log('Database Name:', process.env.DATABASE_NAME || 'ocr_processing')
+  console.log('Database User:', process.env.DATABASE_USER || 'root')
+}
+
 console.log('=====================')
 
 export default defineNuxtConfig({
