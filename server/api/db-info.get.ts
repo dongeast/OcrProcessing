@@ -9,10 +9,14 @@ export default defineEventHandler(async (event) => {
     if (!cf?.env?.DB) {
       throw new Error('D1绑定"DB"未找到');
     }
-    drizzleD1(cf.env.DB, { schema });
-    
+    let databaseInstance = drizzleD1(cf.env.DB, { schema });
+    // 对于 SQLite/D1 数据库，我们尝试执行一个简单的查询来测试连接
+    const result = await databaseInstance.select().from({}).execute('SELECT 1 as connected');
+    let connectionStatus = result ? 'connected' : 'disconnected';
+
     return {
       status: 'success',
+      db: connectionStatus,
       timestamp: new Date().toISOString()
     };
   } catch (error: any) {
