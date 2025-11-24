@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from '../../server/database/database';
+import { db, dbType } from '../../server/database/database';
 // 导入schema的异步获取函数
 import { getSchema } from '../../server/database/schema';
 

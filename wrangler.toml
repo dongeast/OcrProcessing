@@ -1,0 +1,4 @@
+[[d1_databases]]
+binding = "DB"
+database_name = "ocr-processing"
+database_id = "9402999b-a7b0-446d-9552-838b9f5de8bb"

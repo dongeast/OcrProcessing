@@ -27,7 +27,7 @@ if (dbType === 'sqlite') {
     // 从全局上下文获取D1绑定
     // 在Cloudflare Pages中，D1绑定通常通过环境变量中的DB绑定访问
     // 或者通过globalThis.context.env.DB访问
-    const d1Binding = process.env.DB || (globalThis as any).context?.env?.DB;
+    const d1Binding = (globalThis as any).context?.env?.DB || process.env.DB;
     if (!d1Binding) {
       throw new Error('D1数据库绑定未找到，请确保已在Cloudflare Pages中正确配置数据库绑定');
     }
