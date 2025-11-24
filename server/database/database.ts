@@ -7,6 +7,7 @@ import { migrate } from 'drizzle-orm/mysql2/migrator';
 import { migrate as migrateSqlite } from 'drizzle-orm/better-sqlite3/migrator';
 import * as schema from './schema';
 import Database from 'better-sqlite3';
+import type { D1Database } from '@cloudflare/workers-types';
 
 // 根据环境变量决定数据库类型
 const dbType = process.env.DATABASE_TYPE || 'mysql';
@@ -31,7 +32,7 @@ if (dbType === 'sqlite') {
     if (!d1Binding) {
       throw new Error('D1数据库绑定未找到，请确保已在Cloudflare Pages中正确配置数据库绑定');
     }
-    db = drizzleD1(d1Binding, { schema });
+    db = drizzleD1(d1Binding as D1Database, { schema });
     console.log('已连接到Cloudflare D1数据库');
   } else {
     // 本地开发环境的D1模拟
@@ -75,6 +76,16 @@ export async function runMigrations() {
     console.error('迁移失败:', error);
     throw error;
   }
+}
+
+// 获取D1数据库实例的函数
+export function getD1DB(event: any) {
+  // Cloudflare环境中获取D1绑定的标准方式
+  const cf = event.context?.cloudflare as { env: { DB: D1Database } } | undefined;
+  if (!cf?.env?.DB) {
+    throw new Error('D1绑定"DB"未找到');
+  }
+  return drizzleD1(cf.env.DB, { schema });
 }
 
 export { db, dbType, isSqlite };
