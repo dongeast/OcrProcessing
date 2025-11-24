@@ -1,4 +1,4 @@
-import { db, dbType, isSqlite } from '~/server/database/database';
+import { db, dbType, isSqlite, getD1DB } from '~/server/database/database';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -6,11 +6,22 @@ export default defineEventHandler(async (event) => {
     let connectionStatus = 'unknown';
     let dbInfo: any = {};
     
+    // 根据数据库类型使用不同的连接方式
+    let databaseInstance = db;
+    if (dbType === 'd1') {
+      // 对于 D1 数据库，我们需要从事件中获取数据库实例
+      try {
+        databaseInstance = getD1DB(event);
+      } catch (error) {
+        console.warn('无法获取D1数据库实例，使用默认实例:', error);
+      }
+    }
+    
     if (dbType === 'sqlite' || dbType === 'd1') {
       // 对于 SQLite 和 D1，尝试执行简单查询
       try {
         // 对于 SQLite/D1 数据库，我们尝试执行一个简单的查询来测试连接
-        const result = await db.select().from({}).execute('SELECT 1 as connected');
+        const result = await databaseInstance.select().from({}).execute('SELECT 1 as connected');
         connectionStatus = result ? 'connected' : 'disconnected';
       } catch (error: any) {
         console.error('SQLite/D1 connection error:', error);
@@ -20,7 +31,7 @@ export default defineEventHandler(async (event) => {
       // 获取数据库信息
       try {
         // 尝试列出所有表
-        const tablesResult = await db.select().from({}).execute(
+        const tablesResult = await databaseInstance.select().from({}).execute(
           "SELECT name FROM sqlite_master WHERE type='table'"
         );
         dbInfo.tables = tablesResult.rows || tablesResult;
@@ -31,7 +42,7 @@ export default defineEventHandler(async (event) => {
     } else {
       // 对于 MySQL
       try {
-        const result = await db.execute('SELECT 1 as connected');
+        const result = await databaseInstance.execute('SELECT 1 as connected');
         connectionStatus = result ? 'connected' : 'disconnected';
       } catch (error: any) {
         console.error('MySQL connection error:', error);
@@ -40,7 +51,7 @@ export default defineEventHandler(async (event) => {
       
       // 获取数据库信息
       try {
-        const tablesResult = await db.execute(
+        const tablesResult = await databaseInstance.execute(
           "SELECT TABLE_NAME as name FROM information_schema.tables WHERE TABLE_SCHEMA = DATABASE()"
         );
         dbInfo.tables = tablesResult.rows || tablesResult;
