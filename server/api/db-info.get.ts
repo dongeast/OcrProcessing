@@ -31,10 +31,33 @@ export default defineEventHandler(async (event) => {
       // 获取数据库信息
       try {
         // 尝试列出所有表
-        const tablesResult = await databaseInstance.select().from({}).execute(
+        const tablesResult: any = await databaseInstance.select().from({}).execute(
           "SELECT name FROM sqlite_master WHERE type='table'"
         );
-        dbInfo.tables = tablesResult.rows || tablesResult;
+        
+        // 安全地处理结果
+        if (tablesResult && typeof tablesResult === 'object') {
+          if (Array.isArray(tablesResult)) {
+            dbInfo.tables = tablesResult;
+          } else if (tablesResult.rows) {
+            dbInfo.tables = tablesResult.rows;
+          } else {
+            // 尝试其他可能的属性
+            const possibleKeys = ['results', 'data', 'table'];
+            for (const key of possibleKeys) {
+              if (key in tablesResult && tablesResult[key] !== undefined) {
+                dbInfo.tables = tablesResult[key];
+                break;
+              }
+            }
+            // 如果都找不到，就使用整个对象
+            if (!dbInfo.tables) {
+              dbInfo.tables = tablesResult;
+            }
+          }
+        } else {
+          dbInfo.tables = tablesResult;
+        }
       } catch (error: any) {
         console.error('SQLite/D1 table query error:', error);
         dbInfo.error = error.message;
@@ -54,10 +77,33 @@ export default defineEventHandler(async (event) => {
       
       // 获取数据库信息
       try {
-        const tablesResult = await databaseInstance.execute(
+        const tablesResult: any = await databaseInstance.execute(
           "SELECT TABLE_NAME as name FROM information_schema.tables WHERE TABLE_SCHEMA = DATABASE()"
         );
-        dbInfo.tables = tablesResult.rows || tablesResult;
+        
+        // 安全地处理结果
+        if (tablesResult && typeof tablesResult === 'object') {
+          if (Array.isArray(tablesResult)) {
+            dbInfo.tables = tablesResult;
+          } else if (tablesResult.rows) {
+            dbInfo.tables = tablesResult.rows;
+          } else {
+            // 尝试其他可能的属性
+            const possibleKeys = ['results', 'data', 'table'];
+            for (const key of possibleKeys) {
+              if (key in tablesResult && tablesResult[key] !== undefined) {
+                dbInfo.tables = tablesResult[key];
+                break;
+              }
+            }
+            // 如果都找不到，就使用整个对象
+            if (!dbInfo.tables) {
+              dbInfo.tables = tablesResult;
+            }
+          }
+        } else {
+          dbInfo.tables = tablesResult;
+        }
       } catch (error: any) {
         console.error('MySQL table query error:', error);
         dbInfo.error = error.message;
@@ -88,8 +134,8 @@ export default defineEventHandler(async (event) => {
       timestamp: new Date().toISOString(),
       // 确保即使在顶层捕获错误时也返回所有信息
       data: {
-        databaseType: dbType,
-        isSqlite: isSqlite,
+        databaseType: dbType || 'unknown',
+        isSqlite: isSqlite || false,
         connectionStatus: 'error',
         databaseInfo: {
           error: error.message,
