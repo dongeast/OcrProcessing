@@ -1,120 +1,44 @@
 import { db, dbType, isSqlite, getD1DB } from '~/server/database/database';
+import { sql } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
+  let str = ''
   try {
     // 测试数据库连接
     let connectionStatus = 'unknown';
     let dbInfo: any = {};
     
+    str = str + dbType + ';'
+
     // 根据数据库类型使用不同的连接方式
     let databaseInstance = db;
     if (dbType === 'd1') {
       // 对于 D1 数据库，我们需要从事件中获取数据库实例
       try {
         databaseInstance = getD1DB(event);
+        console.log('D1 instance:', getD1DB(event))
+        str = str + 'get D1 instance;'
       } catch (error) {
         console.warn('无法获取D1数据库实例，使用默认实例:', error);
       }
     }
     
-    if (dbType === 'sqlite' || dbType === 'd1') {
+    if (dbType === 'd1') {
       // 对于 SQLite 和 D1，尝试执行简单查询
       try {
-        // 使用 Drizzle ORM 的方式执行查询
-        await databaseInstance.select().from({}).execute('SELECT 1 as connected');
+        // 连接测试
+        const connected = await databaseInstance.select({ ok: sql<number>`1` }).from(sql`sqlite_master`).limit(1)
         connectionStatus = 'connected';
+        str = str + 'D1 instance connected;'
       } catch (error: any) {
         console.error('SQLite/D1 connection error:', error);
         connectionStatus = `error: ${error.message}`;
-      }
-      
-      // 获取数据库信息
-      try {
-        // 尝试列出所有表
-        const tablesResult: any = await databaseInstance.select().from({}).execute(
-          "SELECT name FROM sqlite_master WHERE type='table'"
-        );
-        
-        // 安全地处理结果
-        if (tablesResult && typeof tablesResult === 'object') {
-          if (Array.isArray(tablesResult)) {
-            dbInfo.tables = tablesResult;
-          } else if (tablesResult.rows) {
-            dbInfo.tables = tablesResult.rows;
-          } else {
-            // 尝试其他可能的属性
-            const possibleKeys = ['results', 'data', 'table'];
-            for (const key of possibleKeys) {
-              if (key in tablesResult && tablesResult[key] !== undefined) {
-                dbInfo.tables = tablesResult[key];
-                break;
-              }
-            }
-            // 如果都找不到，就使用整个对象
-            if (!dbInfo.tables) {
-              dbInfo.tables = tablesResult;
-            }
-          }
-        } else {
-          dbInfo.tables = tablesResult;
-        }
-      } catch (error: any) {
-        console.error('SQLite/D1 table query error:', error);
-        dbInfo.error = error.message;
-        // 即使出错也返回错误信息
-        dbInfo.errorMessage = error.message;
-        dbInfo.errorStack = process.env.NODE_ENV === 'development' ? error.stack : '隐藏以确保生产环境安全';
-      }
-    } else {
-      // 对于 MySQL
-      try {
-        const result = await databaseInstance.execute('SELECT 1 as connected');
-        connectionStatus = result ? 'connected' : 'disconnected';
-      } catch (error: any) {
-        console.error('MySQL connection error:', error);
-        connectionStatus = `error: ${error.message}`;
-      }
-      
-      // 获取数据库信息
-      try {
-        const tablesResult: any = await databaseInstance.execute(
-          "SELECT TABLE_NAME as name FROM information_schema.tables WHERE TABLE_SCHEMA = DATABASE()"
-        );
-        
-        // 安全地处理结果
-        if (tablesResult && typeof tablesResult === 'object') {
-          if (Array.isArray(tablesResult)) {
-            dbInfo.tables = tablesResult;
-          } else if (tablesResult.rows) {
-            dbInfo.tables = tablesResult.rows;
-          } else {
-            // 尝试其他可能的属性
-            const possibleKeys = ['results', 'data', 'table'];
-            for (const key of possibleKeys) {
-              if (key in tablesResult && tablesResult[key] !== undefined) {
-                dbInfo.tables = tablesResult[key];
-                break;
-              }
-            }
-            // 如果都找不到，就使用整个对象
-            if (!dbInfo.tables) {
-              dbInfo.tables = tablesResult;
-            }
-          }
-        } else {
-          dbInfo.tables = tablesResult;
-        }
-      } catch (error: any) {
-        console.error('MySQL table query error:', error);
-        dbInfo.error = error.message;
-        // 即使出错也返回错误信息
-        dbInfo.errorMessage = error.message;
-        dbInfo.errorStack = process.env.NODE_ENV === 'development' ? error.stack : '隐藏以确保生产环境安全';
       }
     }
     
     return {
       status: 'success',
+      info: str,
       data: {
         databaseType: dbType,
         isSqlite: isSqlite,
@@ -129,6 +53,7 @@ export default defineEventHandler(async (event) => {
     event.node.res.statusCode = 500;
     return {
       status: 'error',
+      info: str,
       message: error.message,
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
       timestamp: new Date().toISOString(),

@@ -25,7 +25,7 @@ export async function initializeAuth() {
     authInstance = betterAuth({
       debug: true,
       database: drizzleAdapter(db, {
-        provider: "sqlite", // 固定为 sqlite，因为数据库已简化为仅支持 SQLite
+        provider: dbType,
         schema: adapterSchema
       }),
       // 添加受信任的来源
