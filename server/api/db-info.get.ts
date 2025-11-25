@@ -1,4 +1,4 @@
-import { db, dbType, isSqlite, getD1DB } from '~/server/database/database';
+import { db, dbType, isSqlite, getD1DBDrizzle } from '~/server/database/database';
 import { sql } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
@@ -11,12 +11,12 @@ export default defineEventHandler(async (event) => {
     str = str + dbType + ';'
 
     // 根据数据库类型使用不同的连接方式
-    let databaseInstance = db;
+    let databaseInstance = getD1DBDrizzle(event);
     if (dbType === 'd1') {
       // 对于 D1 数据库，我们需要从事件中获取数据库实例
       try {
-        databaseInstance = getD1DB(event);
-        console.log('D1 instance:', getD1DB(event))
+        databaseInstance = getD1DBDrizzle(event);
+        console.log('D1 instance:', getD1DBDrizzle(event))
         str = str + 'get D1 instance;'
       } catch (error) {
         console.warn('无法获取D1数据库实例，使用默认实例:', error);

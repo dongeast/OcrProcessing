@@ -10,6 +10,7 @@ const dbType = process.env.DATABASE_TYPE || 'mysql';
 const isSqlite = dbType === 'sqlite' || dbType === 'd1';
 
 let db: any;
+let dbOriginal: any;
 
 // 检测是否在Cloudflare Pages环境中运行
 const isCloudflareEnvironment = typeof process.env.CF_PAGES !== 'undefined' || typeof (globalThis as any).context !== 'undefined';
@@ -20,6 +21,7 @@ if (isCloudflareEnvironment) {
   if (!d1Binding) {
     throw new Error('D1数据库绑定未找到，请确保已在Cloudflare Pages中正确配置数据库绑定');
   }
+  dbOriginal = d1Binding as D1Database;
   db = drizzleD1(d1Binding as D1Database, { schema });
   console.log('已连接到Cloudflare D1数据库');
 }
@@ -49,7 +51,17 @@ export function getD1DB(event: any) {
   if (!cf?.env?.DB) {
     throw new Error('D1绑定"DB"未找到');
   }
+  return cf.env.DB;
+}
+
+// 获取D1数据库实例的函数
+export function getD1DBDrizzle(event: any) {
+  // Cloudflare环境中获取D1绑定的标准方式
+  const cf = event.context?.cloudflare as { env: { DB: D1Database } } | undefined;
+  if (!cf?.env?.DB) {
+    throw new Error('D1绑定"DB"未找到');
+  }
   return drizzleD1(cf.env.DB, { schema });
 }
 
-export { db, dbType, isSqlite };
+export { db, dbOriginal, dbType, isSqlite };

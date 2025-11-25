@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db, dbType } from '../../server/database/database';
+import { db, dbOriginal, dbType } from '../../server/database/database';
 // 导入schema的异步获取函数
 import { getSchema } from '../../server/database/schema';
 
@@ -16,22 +16,25 @@ export async function initializeAuth() {
     // 创建一个简单的对象，包含所需的表，而不是Promise
     // 注意：Better Auth的Drizzle Adapter期望的是单数形式的键名
     const adapterSchema = {
-      user: resolvedSchema.users,
-      session: resolvedSchema.sessions,
-      account: resolvedSchema.accounts,
+      user: resolvedSchema.user,
+      session: resolvedSchema.session,
+      account: resolvedSchema.account,
       verification: resolvedSchema.verification
     };
     
     authInstance = betterAuth({
       debug: true,
-      database: drizzleAdapter(db, {
-        provider: dbType,
+      secret: process.env.BETTER_AUTH_SECRET,
+      baseURL: process.env.BETTER_AUTH_URL,
+      database: drizzleAdapter(dbOriginal, {
+        provider: "sqlite",
         schema: adapterSchema
       }),
       // 添加受信任的来源
       trustedOrigins: [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://127.0.0.1:8788",
         "https://www.ocrprocessing.com",
         "https://ocrprocessing.com",
         "https://ocrprocessing.pages.dev"
@@ -46,7 +49,11 @@ export async function initializeAuth() {
           clientId: process.env.GITHUB_CLIENT_ID as string, 
           clientSecret: process.env.GITHUB_CLIENT_SECRET as string, 
         }
-      }
+      },
+      onError: (err: any) => {
+        console.error('>>> BetterAuth 详细错误:', err)
+        console.error('>>> 原始堆栈:', err.cause || err.stack)
+      },
     });
   }
   return authInstance;

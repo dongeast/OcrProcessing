@@ -16,6 +16,8 @@ console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID)
 console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET)
 console.log('GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE:', process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE)
 console.log('DEEPSEEK_OCR_API_KEY:', process.env.DEEPSEEK_OCR_API_KEY)
+console.log('BETTER_AUTH_SECRET:', process.env.BETTER_AUTH_SECRET)
+console.log('BETTER_AUTH_URL:', process.env.BETTER_AUTH_URL)
 
 // 数据库连接配置信息
 console.log('=====================')
