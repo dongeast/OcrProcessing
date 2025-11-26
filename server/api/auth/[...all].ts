@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   }
 
   /* 2. 初始化 auth（带运行时 DB） */
-  const auth = await initializeAuth(dbBinding)
+  const auth = initializeAuth(dbBinding)
 
   /* 3. 处理请求 */
   return auth.handler(toWebRequest(event))

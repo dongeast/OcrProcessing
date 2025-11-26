@@ -6,11 +6,11 @@ import * as schema from '../../server/database/schema';
 import { drizzle as drizzleD1 } from 'drizzle-orm/d1';
 import type { D1Database } from '@cloudflare/workers-types';
 
-// 创建一个异步函数来初始化auth
+// 直接初始化auth实例
 let authInstance: any = null;
 
-// 异步初始化auth配置
-export async function initializeAuth(dbBinding?: D1Database) {
+// 同步初始化auth配置
+export function initializeAuth(dbBinding?: D1Database) {
   if (!authInstance) {
     // 使用传入的数据库绑定或全局的dbOriginal
     const dbToUse = dbBinding || dbOriginal;
@@ -72,42 +72,5 @@ export function getAuth() {
   return authInstance;
 }
 
-// 为了向后兼容性，提供一个延迟初始化的auth对象
-// 这样其他文件可以继续使用 import { auth } from '~/lib/auth/auth'
-let authPromise: Promise<any> | null = null;
-export const auth = {
-  // 延迟初始化的API方法
-  api: new Proxy({}, {
-    get(_target, prop) {
-      return async (...args: any[]) => {
-        if (!authPromise) {
-          authPromise = initializeAuth();
-        }
-        const instance = await authPromise;
-        return instance.api[prop](...args);
-      };
-    }
-  }),
-  
-  // 其他可能被访问的属性或方法
-  handlers: new Proxy({}, {
-    get(_target, prop) {
-      return async (...args: any[]) => {
-        if (!authPromise) {
-          authPromise = initializeAuth();
-        }
-        const instance = await authPromise;
-        return instance.handlers[prop](...args);
-      };
-    }
-  }),
-  
-  // getSession方法
-  getSession: async (options: any) => {
-    if (!authPromise) {
-      authPromise = initializeAuth();
-    }
-    const instance = await authPromise;
-    return instance.api.getSession(options);
-  }
-};
+// 为了保持向后兼容性，仍然导出auth
+export const auth = initializeAuth();
