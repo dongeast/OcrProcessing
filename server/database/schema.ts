@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
-import 'dotenv/config';
+// 移除dotenv/config导入，避免在全局作用域加载环境变量
 import { sqliteTable, text, integer, primaryKey } from 'drizzle-orm/sqlite-core'
-import { createId } from '@paralleldrive/cuid2'
+// 移除createId导入，避免在全局作用域生成随机值
 
 // 根据环境变量决定数据库类型
 const dbType = process.env.DATABASE_TYPE || 'd1';
@@ -41,30 +41,30 @@ const npWaitlist = sqliteTable('np_waitlist', {
 
 /* ----------  1. user  ---------- */
 const user = sqliteTable('user', {
-  id: text('id').primaryKey().$defaultFn(createId),
+  id: text('id').primaryKey(), // 由应用程序在运行时生成ID
   name: text('name'),
   email: text('email').notNull().unique(),
   emailVerified: integer('email_verified', { mode: 'timestamp' }), // Date | null
   image: text('image'),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date())
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp()),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp())
 });
 
 /* ----------  2. session  ---------- */
 const session = sqliteTable('session', {
-  id: text('id').primaryKey().$defaultFn(createId),
+  id: text('id').primaryKey(), // 由应用程序在运行时生成ID
   userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
   expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
   token: text('token').notNull().unique(),          // v1 新增
   ipAddress: text('ip_address'),
   userAgent: text('user_agent'),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date())
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp()),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp())
 });
 
 /* ----------  3. account  ---------- */
 const account = sqliteTable('account', {
-  id: text('id').primaryKey().$defaultFn(createId),
+  id: text('id').primaryKey(), // 由应用程序在运行时生成ID
   userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
   accountId: text('account_id').notNull(), // provider 返回的 uid
   providerId: text('provider_id').notNull(),
@@ -75,18 +75,18 @@ const account = sqliteTable('account', {
   scope: text('scope'),
   idToken: text('id_token'),
   password: text('password'), // 仅邮箱/密码登录时存哈希
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date())
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp()),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp())
 });
 
 /* ----------  4. verification  ---------- */
 const verification = sqliteTable('verification', {
-  id: text('id').primaryKey().$defaultFn(createId),
+  id: text('id').primaryKey(), // 由应用程序在运行时生成ID
   identifier: text('identifier').notNull(),
   value: text('value').notNull(),
   expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date())
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp()),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull().default(getDefaultTimestamp())
 });
 
 const documents = sqliteTable('documents', {

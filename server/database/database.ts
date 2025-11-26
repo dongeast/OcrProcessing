@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { drizzle as drizzleD1 } from 'drizzle-orm/d1';
 import { migrate } from 'drizzle-orm/mysql2/migrator';
 import { migrate as migrateSqlite } from 'drizzle-orm/better-sqlite3/migrator';
