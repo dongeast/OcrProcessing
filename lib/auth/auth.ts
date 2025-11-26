@@ -1,6 +1,5 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { dbOriginal } from '../../server/database/database';
 // 导入schema
 import * as schema from '../../server/database/schema';
 import { drizzle as drizzleD1 } from 'drizzle-orm/d1';
@@ -10,14 +9,14 @@ import type { D1Database } from '@cloudflare/workers-types';
 let authInstance: any = null;
 
 // 同步初始化auth配置
-export function initializeAuth(dbBinding?: D1Database) {
+export function initializeAuth(dbBinding: D1Database) {
   if (!authInstance) {
-    // 使用传入的数据库绑定或全局的dbOriginal
-    const dbToUse = dbBinding || dbOriginal;
-    
-    if (!dbToUse) {
-      throw new Error('D1数据库绑定未找到 - initializeAuth时未提供数据库绑定且dbOriginal为空');
+    // 只使用传入的数据库绑定，不再依赖全局的dbOriginal
+    if (!dbBinding) {
+      throw new Error('D1数据库绑定未找到 - initializeAuth时必须提供数据库绑定');
     }
+    
+    const dbToUse = dbBinding;
     
     // 创建数据库适配器
     const databaseAdapter = drizzleAdapter(drizzleD1(dbToUse, { schema }), {

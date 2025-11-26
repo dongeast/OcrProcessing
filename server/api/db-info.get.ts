@@ -1,4 +1,4 @@
-import { db, dbType, isSqlite, getD1DBDrizzle } from '~/server/database/database';
+import { dbType, isSqlite, getD1DBDrizzle } from '~/server/database/database';
 import { sql } from 'drizzle-orm'
 
 export default defineEventHandler(async (event) => {
