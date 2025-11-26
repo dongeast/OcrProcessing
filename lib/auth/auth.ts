@@ -72,5 +72,6 @@ export function getAuth() {
   return authInstance;
 }
 
-// 为了保持向后兼容性，仍然导出auth
-export const auth = initializeAuth();
+// 移除全局初始化auth，避免Cloudflare Workers环境中的异步操作错误
+// 请使用getAuth()函数在需要时获取auth实例
+// 确保在处理函数内部调用getAuth()，而不是在全局作用域

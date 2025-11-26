@@ -1,4 +1,4 @@
-import { auth } from '~/lib/auth/auth'
+import { getAuth } from '~/lib/auth/auth'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
@@ -6,6 +6,7 @@ export default defineEventHandler(async (event) => {
   const { productId } = body
 
   // 获取当前用户会话
+  const auth = getAuth()
   const session = await auth.api.getSession({
     headers: event.headers
   })
