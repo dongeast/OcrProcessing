@@ -1,25 +1,23 @@
-import { auth, getAuth } from "~/lib/auth/auth"; 
-import { toWebRequest } from 'h3';
+import { initializeAuth } from '~/lib/auth/auth'
+import { toWebRequest } from 'h3'
+import { getD1DB } from '~/server/database/database'
+import type { D1Database } from '@cloudflare/workers-types';
 
-// 确保auth已经初始化
-let authInitialized = false;
-
-// 立即开始初始化auth
-auth.then(() => {
-  authInitialized = true;
-});
-
-// 定义异步事件处理器
 export default defineEventHandler(async (event) => {
-  // 如果auth还没有初始化，等待它
-  if (!authInitialized) {
-    await auth;
-    authInitialized = true;
+  /* 1. 获取 D1 数据库绑定 */
+  let dbBinding: D1Database;
+  try {
+    dbBinding = getD1DB(event);
+  } catch (error) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'D1 绑定未找到，请检查 wrangler.toml 是否声明 [[d1_databases]]',
+    })
   }
-  
-  // 使用getAuth获取已初始化的auth实例
-  const authInstance = getAuth();
-  
-  // 调用handler处理请求
-  return authInstance.handler(toWebRequest(event)); 
-});
+
+  /* 2. 初始化 auth（带运行时 DB） */
+  const auth = await initializeAuth(dbBinding)
+
+  /* 3. 处理请求 */
+  return auth.handler(toWebRequest(event))
+})

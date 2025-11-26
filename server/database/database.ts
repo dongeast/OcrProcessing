@@ -51,6 +51,7 @@ export function getD1DB(event: any) {
   if (!cf?.env?.DB) {
     throw new Error('D1绑定"DB"未找到');
   }
+  dbOriginal = cf.env.DB;
   return cf.env.DB;
 }
 
@@ -61,6 +62,7 @@ export function getD1DBDrizzle(event: any) {
   if (!cf?.env?.DB) {
     throw new Error('D1绑定"DB"未找到');
   }
+  db = cf.env.DB;
   return drizzleD1(cf.env.DB, { schema });
 }
 

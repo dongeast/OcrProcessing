@@ -1,35 +1,40 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db, dbOriginal, dbType } from '../../server/database/database';
-// 导入schema的异步获取函数
-import { getSchema } from '../../server/database/schema';
+import { dbOriginal } from '../../server/database/database';
+// 导入schema
+import * as schema from '../../server/database/schema';
+import { drizzle as drizzleD1 } from 'drizzle-orm/d1';
+import type { D1Database } from '@cloudflare/workers-types';
 
 // 创建一个异步函数来初始化auth
 let authInstance: any = null;
 
 // 异步初始化auth配置
-export async function initializeAuth() {
+export async function initializeAuth(dbBinding?: D1Database) {
   if (!authInstance) {
-    // 等待schema解析完成
-    const resolvedSchema = await getSchema();
+    // 使用传入的数据库绑定或全局的dbOriginal
+    const dbToUse = dbBinding || dbOriginal;
     
-    // 创建一个简单的对象，包含所需的表，而不是Promise
-    // 注意：Better Auth的Drizzle Adapter期望的是单数形式的键名
-    const adapterSchema = {
-      user: resolvedSchema.user,
-      session: resolvedSchema.session,
-      account: resolvedSchema.account,
-      verification: resolvedSchema.verification
-    };
+    if (!dbToUse) {
+      throw new Error('D1数据库绑定未找到 - initializeAuth时未提供数据库绑定且dbOriginal为空');
+    }
+    
+    // 创建数据库适配器
+    const databaseAdapter = drizzleAdapter(drizzleD1(dbToUse, { schema }), {
+      provider: 'sqlite',
+      schema: {
+        user: schema.user,
+        session: schema.session,
+        account: schema.account,
+        verification: schema.verification
+      },
+    });
     
     authInstance = betterAuth({
       debug: true,
       secret: process.env.BETTER_AUTH_SECRET,
       baseURL: process.env.BETTER_AUTH_URL,
-      database: drizzleAdapter(dbOriginal, {
-        provider: "sqlite",
-        schema: adapterSchema
-      }),
+      database: databaseAdapter,
       // 添加受信任的来源
       trustedOrigins: [
         "http://localhost:3000",
