@@ -15,16 +15,8 @@ let dbOriginal: any;
 // 检测是否在Cloudflare Pages环境中运行
 const isCloudflareEnvironment = typeof process.env.CF_PAGES !== 'undefined' || typeof (globalThis as any).context !== 'undefined';
 
-// 仅支持D1数据库
-if (isCloudflareEnvironment) {
-  const d1Binding = (globalThis as any).context?.env?.DB || process.env.DB;
-  if (!d1Binding) {
-    throw new Error('D1数据库绑定未找到，请确保已在Cloudflare Pages中正确配置数据库绑定');
-  }
-  dbOriginal = d1Binding as D1Database;
-  db = drizzleD1(d1Binding as D1Database, { schema });
-  console.log('已连接到Cloudflare D1数据库');
-}
+// 移除全局数据库初始化，改为在需要时通过函数获取
+// 这样可以避免在Cloudflare Workers全局作用域中执行不允许的操作
 
 // 数据库迁移函数
 export async function runMigrations() {
