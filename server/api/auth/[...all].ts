@@ -1,35 +1,1 @@
-import { toWebRequest } from 'h3';
-// 假设这是你之前使用的 D1 绑定提取函数
-import { getD1Binding } from '~/server/database/database';
-// 假设 initializeAuth 现在是需要 D1 绑定的函数
-import { initializeAuth } from '~/lib/auth/auth';
-
-
-export default defineEventHandler(async (event) => {
-  const request = new Request(getRequestURL(event), {
-    method: getMethod(event),
-    headers: new Headers(getHeaders(event) as any),
-    body: getMethod(event) !== 'GET' ? JSON.stringify(await readBody(event)) : undefined,
-  })
-
-  // 1. 【核心区别】: 获取 D1 绑定
-  let dbBinding;
-  try {
-    // 假设你的 D1 绑定名称是 'DB'
-    dbBinding = getD1Binding(event);
-  } catch (error) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'D1 绑定失败' || error,
-    });
-  }
-  // 2. 【核心区别】: 在每次请求中，传入 D1 绑定来初始化 Auth 实例
-  const authInstance = initializeAuth(dbBinding);
-  // 3. 处理请求
-  const res = await authInstance.handler(request)
-
-  setResponseStatus(event, res.status)
-  setResponseHeaders(event, Object.fromEntries(res.headers))
-
-  return res.text()
-})
+import { toWebRequest } from 'h3';// 假设这是你之前使用的 D1 绑定提取函数import { getD1Binding } from '~/server/database/database';// 假设 initializeAuth 现在是需要 D1 绑定的函数import { initializeAuth } from '~/lib/auth/auth';import { getCookie, getHeader } from 'h3'export default defineEventHandler(async (event) => {  // 1. 还原真实 URL（含 https / host）  const proto = getHeader(event, 'x-forwarded-proto') || 'https'  const host  = getHeader(event, 'x-forwarded-host') || getHeader(event, 'host')  const url   = `${proto}://${host}${event.node.req.url}`  // 1. 读取原始 body 字符串（不是解析后的对象）  let body: string | undefined  if (event.method !== 'GET') {    body = await readRawBody(event) // ✅ 保留原始字符串  }    // 3. 构造 Request（headers 用原生 IncomingMessage 的）  const request = new Request(url, {    method: event.method,    headers: event.node.req.headers as any,    body,    // 关键：禁止自动解析，保持原始字节流    duplex: 'half',  } as any)  // 1. 【核心区别】: 获取 D1 绑定  let dbBinding;  try {    // 假设你的 D1 绑定名称是 'DB'    dbBinding = getD1Binding(event);  } catch (error) {    throw createError({      statusCode: 500,      statusMessage: 'D1 绑定失败' || error,    });  }  const authInstance = initializeAuth(dbBinding);  // 4. 交给 better-auth  const response = await authInstance.handler(request)  // 5. 把响应头 / 状态码写回 Nitro  setResponseStatus(event, response.status)  setResponseHeaders(event, Object.fromEntries(response.headers))  return response.text()})
