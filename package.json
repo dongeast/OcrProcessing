@@ -54,7 +54,8 @@
     "tailwindcss-animate": "^1.0.7",
     "vue": "latest",
     "vue-chartjs": "^5.3.2",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "wrangler": "^4.51.0"
   },
   "devDependencies": {
     "@cloudflare/d1": "^1.4.1",
