@@ -30,7 +30,7 @@
     "@unlok-co/nuxt-stripe": "^4.0.2",
     "@vite-pwa/nuxt": "^0.10.6",
     "bagelpay": "^1.0.6",
-    "better-auth": "^1.2.7",
+    "better-auth": "^1.4.3",
     "better-sqlite3": "^9.6.0",
     "canvas-confetti": "^1.9.3",
     "chart.js": "^4.4.7",
