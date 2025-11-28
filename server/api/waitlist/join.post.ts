@@ -2,7 +2,7 @@
 //import { getDbConnection } from '~/lib/database/database'
 import { Waitlist } from '~/lib/database/entity/waitlist.model' // 导入 Waitlist 实体
 import { QueryFailedError } from 'typeorm'; // 导入 TypeORM 错误类型 (可选，如果需要更精细的错误处理)
-import { getD1DBDrizzle } from '~/server/database/database'
+import { useDrizzleD1 } from '~/server/database/database'
 import { npWaitlist } from '~/server/database/schema'
 
 import { getRequestIP } from 'h3' // Import utility to get IP address
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const ipinfoToken = config.ipinfoToken
 
   // 获取数据库实例
-  const db = getD1DBDrizzle(event);
+  const db = useDrizzleD1(event);
 
   let country: string | null = null; // Initialize country as null
   let ip: string | null = null;

@@ -1,13 +1,28 @@
 import { getAuth } from '~/lib/auth/auth'
+import { getD1Binding } from '~/server/database/database';
+import { initializeAuth } from '~/lib/auth/auth';
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
   const { productId } = body
 
+  // 1. 【核心区别】: 获取 D1 绑定
+  let dbBinding;
+  try {
+    // 假设你的 D1 绑定名称是 'DB'
+    dbBinding = getD1Binding(event);
+  } catch (error) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'D1 绑定失败' || error,
+    });
+  }
+  // 2. 【核心区别】: 在每次请求中，传入 D1 绑定来初始化 Auth 实例
+  const authInstance = initializeAuth(dbBinding);
+
   // 获取当前用户会话
-  const auth = getAuth()
-  const session = await auth.api.getSession({
+  const session = await authInstance.api.getSession({
     headers: event.headers
   })
 
